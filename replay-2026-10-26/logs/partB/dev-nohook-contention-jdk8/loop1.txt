@@ -1,0 +1,59 @@
+# cell=dev-nohook-contention-jdk8 loop=1 start=2026-10-25T14:25:24-0700 rev=deb16a3c3152f0349a587a504dccc997a131a9d7
+# JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home iterations=50 busy_loops=20 jvm_props=
+# hooked_test_classes=none
+# load_before: 14:25  up 26 days,  6:41, 2 users, load averages: 3.38 4.07 6.82
+# command: $JAVA_HOME/bin/java  -cp <classpath: hooked classes, runner, module test-classes, classes, test-classpath.txt, launcher> RepeatMethod org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest rediscoversFileAfterInactiveCursorClosed 50
+# load_with_busy_loops: 14:25  up 26 days,  6:41, 2 users, load averages: 3.38 4.07 6.82
+JVM 1.8.0_172 Java HotSpot(TM) 64-Bit Server VM x86_64
+ITER 1 PASS 4236
+ITER 2 PASS 613
+ITER 3 PASS 623
+ITER 4 PASS 659
+ITER 5 PASS 588
+ITER 6 PASS 591
+ITER 7 PASS 603
+ITER 8 PASS 591
+ITER 9 PASS 585
+ITER 10 PASS 612
+ITER 11 PASS 601
+ITER 12 PASS 589
+ITER 13 PASS 609
+ITER 14 PASS 594
+ITER 15 PASS 586
+ITER 16 PASS 617
+ITER 17 PASS 617
+ITER 18 PASS 584
+ITER 19 PASS 582
+ITER 20 PASS 582
+ITER 21 PASS 595
+ITER 22 PASS 584
+ITER 23 PASS 582
+ITER 24 PASS 595
+ITER 25 PASS 595
+ITER 26 PASS 584
+ITER 27 PASS 586
+ITER 28 PASS 585
+ITER 29 PASS 591
+ITER 30 PASS 599
+ITER 31 PASS 591
+ITER 32 PASS 580
+ITER 33 PASS 588
+ITER 34 PASS 606
+ITER 35 PASS 600
+ITER 36 PASS 573
+ITER 37 PASS 591
+ITER 38 PASS 606
+ITER 39 PASS 588
+ITER 40 PASS 610
+ITER 41 PASS 584
+ITER 42 PASS 579
+ITER 43 PASS 576
+ITER 44 PASS 580
+ITER 45 PASS 577
+ITER 46 PASS 572
+ITER 47 PASS 579
+ITER 48 PASS 584
+ITER 49 PASS 581
+ITER 50 PASS 571
+SUMMARY failed=0/50
+# exit=0 wall_seconds=35 end=2026-10-25T14:26:01-0700

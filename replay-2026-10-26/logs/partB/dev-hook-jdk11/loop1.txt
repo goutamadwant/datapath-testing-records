@@ -1,0 +1,48 @@
+# cell=dev-hook-jdk11 loop=1 start=2026-10-25T14:18:23-0700 rev=deb16a3c3152f0349a587a504dccc997a131a9d7
+# JAVA_HOME=/Users/goutamadwant/Library/Java/JavaVirtualMachines/temurin-11.0.19/Contents/Home iterations=20 busy_loops=0 jvm_props=
+# hooked_test_classes=<work>/partB/classes/dev-hook
+# load_before: 14:18  up 26 days,  6:34, 2 users, load averages: 3.67 6.93 9.21
+# command: $JAVA_HOME/bin/java  -cp <classpath: hooked classes, runner, module test-classes, classes, test-classpath.txt, launcher> RepeatMethod org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest rediscoversFileAfterInactiveCursorClosed 20
+JVM 11.0.19 OpenJDK 64-Bit Server VM x86_64
+REPLAY-HOOK stall45 at deadline-27ms, woke at deadline24ms
+ITER 1 PASS 2638
+REPLAY-HOOK stall45 at deadline-13ms, woke at deadline35ms
+ITER 2 FAIL 3656 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+REPLAY-HOOK stall45 at deadline-17ms, woke at deadline33ms
+ITER 3 FAIL 3616 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+REPLAY-HOOK stall45 at deadline-23ms, woke at deadline27ms
+ITER 4 FAIL 3615 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+REPLAY-HOOK stall45 at deadline-33ms, woke at deadline17ms
+ITER 5 FAIL 3589 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+REPLAY-HOOK stall45 at deadline-28ms, woke at deadline22ms
+ITER 6 FAIL 3602 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+REPLAY-HOOK stall45 at deadline-31ms, woke at deadline19ms
+ITER 7 FAIL 3617 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+REPLAY-HOOK stall45 at deadline-26ms, woke at deadline23ms
+ITER 8 FAIL 3606 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+REPLAY-HOOK stall45 at deadline-26ms, woke at deadline23ms
+ITER 9 FAIL 3623 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+REPLAY-HOOK stall45 at deadline-20ms, woke at deadline29ms
+ITER 10 FAIL 3604 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+REPLAY-HOOK stall45 at deadline-27ms, woke at deadline23ms
+ITER 11 FAIL 3612 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+REPLAY-HOOK stall45 at deadline-23ms, woke at deadline25ms
+ITER 12 FAIL 3616 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+REPLAY-HOOK stall45 at deadline-13ms, woke at deadline39ms
+ITER 13 FAIL 3616 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+REPLAY-HOOK stall45 at deadline-20ms, woke at deadline27ms
+ITER 14 FAIL 3595 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+REPLAY-HOOK stall45 at deadline-23ms, woke at deadline27ms
+ITER 15 FAIL 3601 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+REPLAY-HOOK stall45 at deadline-11ms, woke at deadline38ms
+ITER 16 FAIL 3621 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+REPLAY-HOOK stall45 at deadline-13ms, woke at deadline37ms
+ITER 17 FAIL 3610 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+REPLAY-HOOK stall45 at deadline-18ms, woke at deadline31ms
+ITER 18 FAIL 3604 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+REPLAY-HOOK stall45 at deadline-27ms, woke at deadline23ms
+ITER 19 FAIL 3603 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+REPLAY-HOOK stall45 at deadline-20ms, woke at deadline30ms
+ITER 20 FAIL 3608 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+SUMMARY failed=19/20
+# exit=0 wall_seconds=72 end=2026-10-25T14:19:36-0700

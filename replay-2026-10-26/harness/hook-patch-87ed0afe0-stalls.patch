@@ -1,0 +1,18 @@
+--- a/seatunnel-edge-agent/seatunnel-edge-agent-connector/src/test/java/org/apache/seatunnel/edge/agent/connector/file/FileCollectReaderBehaviorTest.java
++++ b/seatunnel-edge-agent/seatunnel-edge-agent-connector/src/test/java/org/apache/seatunnel/edge/agent/connector/file/FileCollectReaderBehaviorTest.java
+@@ -79,12 +79,15 @@
+ 
+             // Past the idle window: this poll closes the inactive cursor. Discovery runs before
+             // the close within a poll, so the file is not picked up again by the same poll.
++            Thread.sleep(45L); // REPLAY HOOK: stall 45 ms before the close step
+             clock.addAndGet(CLOSE_INACTIVE_MS + 1);
+             Assertions.assertTrue(reader.poll(10).isEmpty());
++            Thread.sleep(700L); // REPLAY HOOK: stall 700 ms after the close
+ 
+             // One glob scan interval later the file is rediscovered and reopened at its end.
+             clock.addAndGet(GLOB_SCAN_INTERVAL_MS);
+             Assertions.assertTrue(reader.poll(10).isEmpty());
++            Thread.sleep(700L); // REPLAY HOOK: stall 700 ms after rediscovery
+ 
+             Files.write(
+                     logFile,

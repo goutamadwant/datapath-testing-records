@@ -1,0 +1,2 @@
+# javac (JDK 8) harness/java/ReplayKillTeardownTest.java sha256=e0049c6c63c15d6fa037ab6b57261139c54fdd9145b29365e0e2dfe5867be259
+# exit=0

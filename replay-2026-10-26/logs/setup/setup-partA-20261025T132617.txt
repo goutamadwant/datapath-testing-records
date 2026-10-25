@@ -1,0 +1,9 @@
+# 2026-10-25T13:26:17-0700 replay.sh --part A runs=5 prepare_only=0 cells=all work=work
+# 2026-10-25T13:26:20-0700 toolchain ok: JDK8=/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home JDK11=/Users/goutamadwant/Library/Java/JavaVirtualMachines/temurin-11.0.19/Contents/Home record=logs/setup/toolchain-partA-20261025T132617.txt
+# 2026-10-25T13:26:20-0700 cloning https://github.com/apache/seatunnel.git (blobless) into work/seatunnel
+Cloning into '/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-26/work/seatunnel'...
+# 2026-10-25T13:26:25-0700 all six pinned commits present in work/seatunnel
+# 2026-10-25T13:26:26-0700 fetched org/apache/maven/wrapper/maven-wrapper/3.1.0/maven-wrapper-3.1.0.jar sha1=32f70e9f2cd92fd7629aba8214d1c9ae58a1e2fd (matches Central)
+# 2026-10-25T13:26:26-0700 fetched org/apache/maven/wrapper/maven-wrapper/3.1.0/maven-wrapper-3.1.0.pom sha1=70fa8386dc3208bbd2d17328c9d904f80bb258c5 (matches Central)
+# 2026-10-25T13:27:15-0700 warm repository built from Maven Central (log logs/partA/warm-repo-build.txt)
+# 2026-10-25T14:16:52-0700 done rc=0

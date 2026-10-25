@@ -1,0 +1,31 @@
+# toolchain record 2026-10-25T14:17:10-0700 part=B
+## host
+Darwin MacBook-Pro.local 27.0.0 Darwin Kernel Version 27.0.0: Tue Aug 11 21:22:49 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T6000 arm64
+Apple M1 Pro 10 17179869184 
+ProductName:		macOS
+ProductVersion:		27.0
+BuildVersion:		26A428
+## load
+14:17  up 26 days,  6:33, 2 users, load averages: 6.06 8.01 9.77
+## JDK 8 (/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home)
+java version "1.8.0_172"
+Java(TM) SE Runtime Environment (build 1.8.0_172-b11)
+Java HotSpot(TM) 64-Bit Server VM (build 25.172-b11, mixed mode)
+Mach-O 64-bit executable x86_64
+## JDK 11 (/Users/goutamadwant/Library/Java/JavaVirtualMachines/temurin-11.0.19/Contents/Home)
+openjdk version "11.0.19" 2023-04-18
+OpenJDK Runtime Environment Temurin-11.0.19+7 (build 11.0.19+7)
+OpenJDK 64-Bit Server VM Temurin-11.0.19+7 (build 11.0.19+7, mixed mode)
+Mach-O 64-bit executable x86_64
+## python
+Python 3.12.7
+## git
+git version 2.55.0
+## curl
+curl 8.9.1 (arm64-apple-darwin20.0.0) libcurl/8.9.1 OpenSSL/3.0.15 zlib/1.2.13 libssh2/1.11.0 nghttp2/1.57.0
+## wget
+wget not installed
+## bash
+5.3.15(1)-release
+## docker
+client 29.9.2 server 29.9.2 linux/arm64

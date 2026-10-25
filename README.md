@@ -1,3 +1,16 @@
+# Datapath-testing records
+
+This repository holds the reconstruction records for the SeaTunnel cases of the article
+(Table 1 and the PR 12472 stall records) and the saved CI records it cites.
+
+| Location | Contents |
+| --- | --- |
+| Repository root: this README (from the next heading on), [`harness/`](harness/), [`logs/`](logs/), [`results.json`](results.json) | The first reconstruction, 2026-10-25: one run per Part A cell. Kept as published. |
+| [`replay-2026-10-26/`](replay-2026-10-26/) | The second reconstruction: a portable replay bundle with one entry point (`replay.sh --part A\|B\|C\|all --runs N`). It clones apache/seatunnel at the pinned commits into `work/`, builds, and runs 5 runs per Part A and Part C cell, one more loop per Part B cell, and explicit teardown assertions. It has its own [README](replay-2026-10-26/README.md), `results.json` (with the sha256 of every log) and `logs/`, and its README compares each cell with the article and with 2026-10-25. |
+| [`ci-evidence/`](ci-evidence/) | Saved GitHub Actions records of apache/seatunnel that the article cites inline: the nightly run list for 2 to 23 October 2026, the job time-limit annotations, the 22 October manual cancellation, the September push/nightly run records and the Windows job excerpt. Run ids and retrieval times are as saved. |
+
+---
+
 # Replay of Table 1 and the PR 12472 stall-injection records (reconstruction, 2026-10-25)
 
 Everything in this directory is a **reconstruction made on 2026-10-25**. The author's original

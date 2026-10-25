@@ -1,0 +1,4 @@
+# javac (JDK 8) four teardown classes from 7ba68325cb7ea1bf1a28f56c4f9c20695d221df3 -> <work>/partC/before-overrides/classes
+Note: /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-26/work/partC/before-overrides/src/SeaTunnelContainer.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+# exit=0

@@ -1,0 +1,10 @@
+# 2026-10-25T13:29:45-0700 replay.sh --part C runs=default prepare_only=1 cells=all work=work
+# 2026-10-25T13:29:47-0700 toolchain ok: JDK8=/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home JDK11=/Users/goutamadwant/Library/Java/JavaVirtualMachines/temurin-11.0.19/Contents/Home record=logs/setup/toolchain-partC-20261025T132945.txt
+# 2026-10-25T13:29:47-0700 all six pinned commits present in work/seatunnel
+# 2026-10-25T13:29:47-0700 worktree work/wt-e2e at 0e4cf52896ee3604a8e7899d7736ffd914ee6ce7
+# 2026-10-25T13:29:50-0700 image tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27 id=sha256:462136d88da3d4fcddd3c43dcfee401d872f4ed3d8c32c6250f65fd85f3474e7
+# 2026-10-25T13:29:51-0700 image tyrantlucifer/spark:3.3.0 id=sha256:3589672d223cedfc5570c1df91e88c598683a3001472d1290e1dc0eab208ce8d
+# 2026-10-25T13:29:51-0700 Zeta image seatunnelhub/openjdk:8u342 not cached: Zeta cell not re-run
+# 2026-10-25T13:29:51-0700 building work/wt-e2e (log logs/partC/build-after-0e4cf5289-jdk8.txt)
+results.json: A 22 runs, B 0 loops, C 0 runs, 59 log files hashed
+# 2026-10-25T13:35:52-0700 done rc=0

@@ -1,0 +1,19 @@
+# 2026-10-25T14:17:09-0700 replay.sh --part B runs=1 prepare_only=0 cells=all work=work
+# 2026-10-25T14:17:10-0700 toolchain ok: JDK8=/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home JDK11=/Users/goutamadwant/Library/Java/JavaVirtualMachines/temurin-11.0.19/Contents/Home record=logs/setup/toolchain-partB-20261025T141709.txt
+# 2026-10-25T14:17:10-0700 all six pinned commits present in work/seatunnel
+# 2026-10-25T14:17:10-0700 work/wt-dev already built
+# 2026-10-25T14:17:10-0700 work/wt-patch already built
+dev-hook-jdk8 loop 1: SUMMARY failed=17/20
+dev-hook-jdk11 loop 1: SUMMARY failed=19/20
+patch-hook-jdk8 loop 1: SUMMARY failed=0/20
+patch-hook-jdk11 loop 1: SUMMARY failed=0/20
+dev-hook-lead45-jdk8 loop 1: SUMMARY failed=18/20
+dev-hook-lead45-jdk11 loop 1: SUMMARY failed=16/20
+dev-hook-lead55-jdk8 loop 1: SUMMARY failed=10/20
+dev-hook-lead55-jdk11 loop 1: SUMMARY failed=11/20
+dev-hook-lead65-jdk8 loop 1: SUMMARY failed=4/20
+dev-hook-lead65-jdk11 loop 1: SUMMARY failed=4/20
+dev-nohook-contention-jdk8 loop 1: SUMMARY failed=0/50
+dev-nohook-contention-jdk11 loop 1: SUMMARY failed=0/50
+results.json: A 120 runs, B 12 loops, C 20 runs, 289 log files hashed
+# 2026-10-25T14:26:38-0700 done rc=0

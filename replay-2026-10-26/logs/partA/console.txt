@@ -1,0 +1,281 @@
+# 2026-10-25T13:26:17-0700 replay.sh --part A runs=5 prepare_only=0 cells=all work=work
+# 2026-10-25T13:26:20-0700 toolchain ok: JDK8=/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home JDK11=/Users/goutamadwant/Library/Java/JavaVirtualMachines/temurin-11.0.19/Contents/Home record=logs/setup/toolchain-partA-20261025T132617.txt
+# 2026-10-25T13:26:20-0700 cloning https://github.com/apache/seatunnel.git (blobless) into work/seatunnel
+# 2026-10-25T13:26:25-0700 all six pinned commits present in work/seatunnel
+# 2026-10-25T13:26:26-0700 fetched org/apache/maven/wrapper/maven-wrapper/3.1.0/maven-wrapper-3.1.0.jar sha1=32f70e9f2cd92fd7629aba8214d1c9ae58a1e2fd (matches Central)
+# 2026-10-25T13:26:26-0700 fetched org/apache/maven/wrapper/maven-wrapper/3.1.0/maven-wrapper-3.1.0.pom sha1=70fa8386dc3208bbd2d17328c9d904f80bb258c5 (matches Central)
+# 2026-10-25T13:27:15-0700 warm repository built from Maven Central (log logs/partA/warm-repo-build.txt)
+jdk8_503x2_before_r1: FAIL rc=1 t=5.4s primary=['503'] wrapper=[]
+jdk8_503x2_after_r1: PASS rc=0 t=22.2s primary=['503', '503', 'serve'] wrapper=[]
+jdk8_reset4_before_r1: FAIL rc=1 t=5.9s primary=['reset', 'reset', 'reset', 'reset'] wrapper=[]
+jdk8_reset4_after_r1: PASS rc=0 t=12.2s primary=['reset', 'reset', 'reset', 'reset', 'serve'] wrapper=[]
+jdk8_429x2_before_r1: FAIL rc=1 t=22.0s primary=['429', '429', 'serve'] wrapper=[]
+jdk8_429x2_after_r1: PASS rc=0 t=22.3s primary=['429', '429', 'serve'] wrapper=[]
+jdk8_truncate1_before_r1: FAIL rc=1 t=6.0s primary=['truncate'] wrapper=[]
+jdk8_truncate1_after_r1: FAIL rc=1 t=6.8s primary=['truncate'] wrapper=[]
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 54550)
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 761, in __init__
+    self.handle()
+  File "/opt/anaconda3/lib/python3.12/http/server.py", line 438, in handle
+    self.handle_one_request()
+  File "/opt/anaconda3/lib/python3.12/http/server.py", line 404, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [Errno 54] Connection reset by peer
+----------------------------------------
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 54577)
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 761, in __init__
+    self.handle()
+  File "/opt/anaconda3/lib/python3.12/http/server.py", line 438, in handle
+    self.handle_one_request()
+  File "/opt/anaconda3/lib/python3.12/http/server.py", line 404, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [Errno 54] Connection reset by peer
+----------------------------------------
+jdk8_wrapper429s_before_r1: FAIL rc=1 t=20.5s primary=[] wrapper=['429', '429', '429', '429', '429']
+jdk8_wrapper429s_after_r1: PASS rc=0 t=46.0s primary=['serve'] wrapper=['429', '429', '429', 'serve']
+jdk8_429x2nobody_before_r1: PASS rc=0 t=89.7s primary=['429nobody', '429nobody', 'serve', 'serve'] wrapper=[]
+jdk8_429x2nobody_after_r1: PASS rc=0 t=22.9s primary=['429nobody', '429nobody', 'serve'] wrapper=[]
+jdk11_503x2_before_r1: FAIL rc=1 t=6.2s primary=['503'] wrapper=[]
+jdk11_503x2_after_r1: PASS rc=0 t=23.8s primary=['503', '503', 'serve'] wrapper=[]
+jdk11_reset4_before_r1: FAIL rc=1 t=6.8s primary=['reset', 'reset', 'reset', 'reset'] wrapper=[]
+jdk11_reset4_after_r1: PASS rc=0 t=10.4s primary=['reset', 'reset', 'reset', 'reset', 'serve'] wrapper=[]
+jdk11_429x2_before_r1: FAIL rc=1 t=22.6s primary=['429', '429', 'serve'] wrapper=[]
+jdk11_429x2_after_r1: PASS rc=0 t=20.9s primary=['429', '429', 'serve'] wrapper=[]
+jdk11_truncate1_before_r1: FAIL rc=1 t=6.1s primary=['truncate'] wrapper=[]
+jdk11_truncate1_after_r1: FAIL rc=1 t=5.4s primary=['truncate'] wrapper=[]
+jdk11_wrapper429s_before_r1: FAIL rc=1 t=20.8s primary=[] wrapper=['429', '429', '429', '429', '429']
+jdk11_wrapper429s_after_r1: PASS rc=0 t=54.2s primary=['serve'] wrapper=['429', '429', '429', 'serve']
+jdk11_429x2nobody_before_r1: PASS rc=0 t=87.0s primary=['429nobody', '429nobody', 'serve', 'serve'] wrapper=[]
+jdk11_429x2nobody_after_r1: PASS rc=0 t=22.5s primary=['429nobody', '429nobody', 'serve'] wrapper=[]
+jdk8_503x2_before_r2: FAIL rc=1 t=6.2s primary=['503'] wrapper=[]
+jdk8_503x2_after_r2: PASS rc=0 t=22.9s primary=['503', '503', 'serve'] wrapper=[]
+jdk8_reset4_before_r2: FAIL rc=1 t=11.2s primary=['reset', 'reset', 'reset', 'reset'] wrapper=[]
+jdk8_reset4_after_r2: PASS rc=0 t=16.1s primary=['reset', 'reset', 'reset', 'reset', 'serve'] wrapper=[]
+jdk8_429x2_before_r2: FAIL rc=1 t=26.6s primary=['429', '429', 'serve'] wrapper=[]
+jdk8_429x2_after_r2: PASS rc=0 t=28.0s primary=['429', '429', 'serve'] wrapper=[]
+jdk8_truncate1_before_r2: FAIL rc=1 t=11.5s primary=['truncate'] wrapper=[]
+jdk8_truncate1_after_r2: FAIL rc=1 t=10.1s primary=['truncate'] wrapper=[]
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 56694)
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 761, in __init__
+    self.handle()
+  File "/opt/anaconda3/lib/python3.12/http/server.py", line 438, in handle
+    self.handle_one_request()
+  File "/opt/anaconda3/lib/python3.12/http/server.py", line 404, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [Errno 54] Connection reset by peer
+----------------------------------------
+jdk8_wrapper429s_before_r2: FAIL rc=1 t=21.6s primary=[] wrapper=['429', '429', '429', '429', '429']
+jdk8_wrapper429s_after_r2: PASS rc=0 t=50.0s primary=['serve'] wrapper=['429', '429', '429', 'serve']
+jdk8_429x2nobody_before_r2: PASS rc=0 t=90.0s primary=['429nobody', '429nobody', 'serve', 'serve'] wrapper=[]
+jdk8_429x2nobody_after_r2: PASS rc=0 t=23.0s primary=['429nobody', '429nobody', 'serve'] wrapper=[]
+jdk11_503x2_before_r2: FAIL rc=1 t=7.5s primary=['503'] wrapper=[]
+jdk11_503x2_after_r2: PASS rc=0 t=21.0s primary=['503', '503', 'serve'] wrapper=[]
+jdk11_reset4_before_r2: FAIL rc=1 t=5.8s primary=['reset', 'reset', 'reset', 'reset'] wrapper=[]
+jdk11_reset4_after_r2: PASS rc=0 t=11.8s primary=['reset', 'reset', 'reset', 'reset', 'serve'] wrapper=[]
+jdk11_429x2_before_r2: FAIL rc=1 t=21.0s primary=['429', '429', 'serve'] wrapper=[]
+jdk11_429x2_after_r2: PASS rc=0 t=20.9s primary=['429', '429', 'serve'] wrapper=[]
+jdk11_truncate1_before_r2: FAIL rc=1 t=5.5s primary=['truncate'] wrapper=[]
+jdk11_truncate1_after_r2: FAIL rc=1 t=5.5s primary=['truncate'] wrapper=[]
+jdk11_wrapper429s_before_r2: FAIL rc=1 t=20.7s primary=[] wrapper=['429', '429', '429', '429', '429']
+jdk11_wrapper429s_after_r2: PASS rc=0 t=48.2s primary=['serve'] wrapper=['429', '429', '429', 'serve']
+jdk11_429x2nobody_before_r2: PASS rc=0 t=86.2s primary=['429nobody', '429nobody', 'serve', 'serve'] wrapper=[]
+jdk11_429x2nobody_after_r2: PASS rc=0 t=20.0s primary=['429nobody', '429nobody', 'serve'] wrapper=[]
+jdk8_503x2_before_r3: FAIL rc=1 t=6.2s primary=['503'] wrapper=[]
+jdk8_503x2_after_r3: PASS rc=0 t=19.7s primary=['503', '503', 'serve'] wrapper=[]
+jdk8_reset4_before_r3: FAIL rc=1 t=5.1s primary=['reset', 'reset', 'reset', 'reset'] wrapper=[]
+jdk8_reset4_after_r3: PASS rc=0 t=10.0s primary=['reset', 'reset', 'reset', 'reset', 'serve'] wrapper=[]
+jdk8_429x2_before_r3: FAIL rc=1 t=20.2s primary=['429', '429', 'serve'] wrapper=[]
+jdk8_429x2_after_r3: PASS rc=0 t=20.1s primary=['429', '429', 'serve'] wrapper=[]
+jdk8_truncate1_before_r3: FAIL rc=1 t=5.2s primary=['truncate'] wrapper=[]
+jdk8_truncate1_after_r3: FAIL rc=1 t=5.1s primary=['truncate'] wrapper=[]
+jdk8_wrapper429s_before_r3: FAIL rc=1 t=20.6s primary=[] wrapper=['429', '429', '429', '429', '429']
+jdk8_wrapper429s_after_r3: PASS rc=0 t=47.6s primary=['serve'] wrapper=['429', '429', '429', 'serve']
+jdk8_429x2nobody_before_r3: PASS rc=0 t=86.1s primary=['429nobody', '429nobody', 'serve', 'serve'] wrapper=[]
+jdk8_429x2nobody_after_r3: PASS rc=0 t=20.6s primary=['429nobody', '429nobody', 'serve'] wrapper=[]
+jdk11_503x2_before_r3: FAIL rc=1 t=5.1s primary=['503'] wrapper=[]
+jdk11_503x2_after_r3: PASS rc=0 t=19.2s primary=['503', '503', 'serve'] wrapper=[]
+jdk11_reset4_before_r3: FAIL rc=1 t=5.0s primary=['reset', 'reset', 'reset', 'reset'] wrapper=[]
+jdk11_reset4_after_r3: PASS rc=0 t=9.3s primary=['reset', 'reset', 'reset', 'reset', 'serve'] wrapper=[]
+jdk11_429x2_before_r3: FAIL rc=1 t=20.0s primary=['429', '429', 'serve'] wrapper=[]
+jdk11_429x2_after_r3: PASS rc=0 t=24.3s primary=['429', '429', 'serve'] wrapper=[]
+jdk11_truncate1_before_r3: FAIL rc=1 t=7.0s primary=['truncate'] wrapper=[]
+jdk11_truncate1_after_r3: FAIL rc=1 t=6.9s primary=['truncate'] wrapper=[]
+jdk11_wrapper429s_before_r3: FAIL rc=1 t=21.0s primary=[] wrapper=['429', '429', '429', '429', '429']
+jdk11_wrapper429s_after_r3: PASS rc=0 t=49.2s primary=['serve'] wrapper=['429', '429', '429', 'serve']
+jdk11_429x2nobody_before_r3: PASS rc=0 t=90.2s primary=['429nobody', '429nobody', 'serve', 'serve'] wrapper=[]
+jdk11_429x2nobody_after_r3: PASS rc=0 t=25.7s primary=['429nobody', '429nobody', 'serve'] wrapper=[]
+jdk8_503x2_before_r4: FAIL rc=1 t=6.2s primary=['503'] wrapper=[]
+jdk8_503x2_after_r4: PASS rc=0 t=24.4s primary=['503', '503', 'serve'] wrapper=[]
+jdk8_reset4_before_r4: FAIL rc=1 t=6.4s primary=['reset', 'reset', 'reset', 'reset'] wrapper=[]
+jdk8_reset4_after_r4: PASS rc=0 t=13.0s primary=['reset', 'reset', 'reset', 'reset', 'serve'] wrapper=[]
+jdk8_429x2_before_r4: FAIL rc=1 t=21.3s primary=['429', '429', 'serve'] wrapper=[]
+jdk8_429x2_after_r4: PASS rc=0 t=27.7s primary=['429', '429', 'serve'] wrapper=[]
+jdk8_truncate1_before_r4: FAIL rc=1 t=9.1s primary=['truncate'] wrapper=[]
+jdk8_truncate1_after_r4: FAIL rc=1 t=12.3s primary=['truncate'] wrapper=[]
+jdk8_wrapper429s_before_r4: FAIL rc=1 t=22.9s primary=[] wrapper=['429', '429', '429', '429', '429']
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 60703)
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 761, in __init__
+    self.handle()
+  File "/opt/anaconda3/lib/python3.12/http/server.py", line 438, in handle
+    self.handle_one_request()
+  File "/opt/anaconda3/lib/python3.12/http/server.py", line 404, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [Errno 54] Connection reset by peer
+----------------------------------------
+jdk8_wrapper429s_after_r4: PASS rc=0 t=54.0s primary=['serve'] wrapper=['429', '429', '429', 'serve']
+jdk8_429x2nobody_before_r4: PASS rc=0 t=91.6s primary=['429nobody', '429nobody', 'serve', 'serve'] wrapper=[]
+jdk8_429x2nobody_after_r4: PASS rc=0 t=26.5s primary=['429nobody', '429nobody', 'serve'] wrapper=[]
+jdk11_503x2_before_r4: FAIL rc=1 t=8.2s primary=['503'] wrapper=[]
+jdk11_503x2_after_r4: PASS rc=0 t=24.1s primary=['503', '503', 'serve'] wrapper=[]
+jdk11_reset4_before_r4: FAIL rc=1 t=6.6s primary=['reset', 'reset', 'reset', 'reset'] wrapper=[]
+jdk11_reset4_after_r4: PASS rc=0 t=12.6s primary=['reset', 'reset', 'reset', 'reset', 'serve'] wrapper=[]
+jdk11_429x2_before_r4: FAIL rc=1 t=22.6s primary=['429', '429', 'serve'] wrapper=[]
+jdk11_429x2_after_r4: PASS rc=0 t=28.2s primary=['429', '429', 'serve'] wrapper=[]
+jdk11_truncate1_before_r4: FAIL rc=1 t=7.3s primary=['truncate'] wrapper=[]
+jdk11_truncate1_after_r4: FAIL rc=1 t=7.0s primary=['truncate'] wrapper=[]
+jdk11_wrapper429s_before_r4: FAIL rc=1 t=20.8s primary=[] wrapper=['429', '429', '429', '429', '429']
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 61884)
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 761, in __init__
+    self.handle()
+  File "/opt/anaconda3/lib/python3.12/http/server.py", line 438, in handle
+    self.handle_one_request()
+  File "/opt/anaconda3/lib/python3.12/http/server.py", line 404, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [Errno 54] Connection reset by peer
+----------------------------------------
+jdk11_wrapper429s_after_r4: PASS rc=0 t=55.1s primary=['serve'] wrapper=['429', '429', '429', 'serve']
+jdk11_429x2nobody_before_r4: PASS rc=0 t=93.0s primary=['429nobody', '429nobody', 'serve', 'serve'] wrapper=[]
+jdk11_429x2nobody_after_r4: PASS rc=0 t=24.6s primary=['429nobody', '429nobody', 'serve'] wrapper=[]
+jdk8_503x2_before_r5: FAIL rc=1 t=11.7s primary=['503'] wrapper=[]
+jdk8_503x2_after_r5: PASS rc=0 t=36.9s primary=['503', '503', 'serve'] wrapper=[]
+jdk8_reset4_before_r5: FAIL rc=1 t=11.4s primary=['reset', 'reset', 'reset', 'reset'] wrapper=[]
+jdk8_reset4_after_r5: PASS rc=0 t=13.8s primary=['reset', 'reset', 'reset', 'reset', 'serve'] wrapper=[]
+jdk8_429x2_before_r5: FAIL rc=1 t=24.8s primary=['429', '429', 'serve'] wrapper=[]
+jdk8_429x2_after_r5: PASS rc=0 t=31.5s primary=['429', '429', 'serve'] wrapper=[]
+jdk8_truncate1_before_r5: FAIL rc=1 t=9.9s primary=['truncate'] wrapper=[]
+jdk8_truncate1_after_r5: FAIL rc=1 t=6.7s primary=['truncate'] wrapper=[]
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 63207)
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 761, in __init__
+    self.handle()
+  File "/opt/anaconda3/lib/python3.12/http/server.py", line 438, in handle
+    self.handle_one_request()
+  File "/opt/anaconda3/lib/python3.12/http/server.py", line 404, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [Errno 54] Connection reset by peer
+----------------------------------------
+jdk8_wrapper429s_before_r5: FAIL rc=1 t=21.3s primary=[] wrapper=['429', '429', '429', '429', '429']
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 63270)
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 761, in __init__
+    self.handle()
+  File "/opt/anaconda3/lib/python3.12/http/server.py", line 438, in handle
+    self.handle_one_request()
+  File "/opt/anaconda3/lib/python3.12/http/server.py", line 404, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [Errno 54] Connection reset by peer
+----------------------------------------
+jdk8_wrapper429s_after_r5: PASS rc=0 t=47.4s primary=['serve'] wrapper=['429', '429', '429', 'serve']
+jdk8_429x2nobody_before_r5: PASS rc=0 t=87.5s primary=['429nobody', '429nobody', 'serve', 'serve'] wrapper=[]
+jdk8_429x2nobody_after_r5: PASS rc=0 t=23.2s primary=['429nobody', '429nobody', 'serve'] wrapper=[]
+jdk11_503x2_before_r5: FAIL rc=1 t=5.8s primary=['503'] wrapper=[]
+jdk11_503x2_after_r5: PASS rc=0 t=22.5s primary=['503', '503', 'serve'] wrapper=[]
+jdk11_reset4_before_r5: FAIL rc=1 t=7.9s primary=['reset', 'reset', 'reset', 'reset'] wrapper=[]
+jdk11_reset4_after_r5: PASS rc=0 t=13.2s primary=['reset', 'reset', 'reset', 'reset', 'serve'] wrapper=[]
+jdk11_429x2_before_r5: FAIL rc=1 t=23.8s primary=['429', '429', 'serve'] wrapper=[]
+jdk11_429x2_after_r5: PASS rc=0 t=23.0s primary=['429', '429', 'serve'] wrapper=[]
+jdk11_truncate1_before_r5: FAIL rc=1 t=7.4s primary=['truncate'] wrapper=[]
+jdk11_truncate1_after_r5: FAIL rc=1 t=5.6s primary=['truncate'] wrapper=[]
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 64225)
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 761, in __init__
+    self.handle()
+  File "/opt/anaconda3/lib/python3.12/http/server.py", line 438, in handle
+    self.handle_one_request()
+  File "/opt/anaconda3/lib/python3.12/http/server.py", line 404, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [Errno 54] Connection reset by peer
+----------------------------------------
+jdk11_wrapper429s_before_r5: FAIL rc=1 t=20.9s primary=[] wrapper=['429', '429', '429', '429', '429']
+jdk11_wrapper429s_after_r5: PASS rc=0 t=44.7s primary=['serve'] wrapper=['429', '429', '429', 'serve']
+jdk11_429x2nobody_before_r5: PASS rc=0 t=84.7s primary=['429nobody', '429nobody', 'serve', 'serve'] wrapper=[]
+jdk11_429x2nobody_after_r5: PASS rc=0 t=19.4s primary=['429nobody', '429nobody', 'serve'] wrapper=[]
+results.json: A 120 runs, B 0 loops, C 20 runs, 264 log files hashed
+# 2026-10-25T14:16:52-0700 done rc=0

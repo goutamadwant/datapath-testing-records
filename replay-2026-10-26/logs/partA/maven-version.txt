@@ -1,0 +1,19 @@
+# ./mvnw -v (wrapper from ae7c919bcb78f03446dbd2b754a2b9882602946a, MAVEN_USER_HOME=work/mvn-home)
+Apache Maven 3.8.4 (9b656c72d54e5bacbed989b64718c159fe39b537)
+Maven home: /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-26/work/mvn-home/wrapper/dists/apache-maven-3.8.4-bin/52ccbt68d252mdldqsfsn03jlf/apache-maven-3.8.4
+Java version: 1.8.0_172, vendor: Oracle Corporation, runtime: /Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: "mac os x", version: "27.0", arch: "x86_64", family: "mac"
+# transport and resolver jars in the wrapper distribution:
+maven-resolver-api-1.6.3.jar
+maven-resolver-connector-basic-1.6.3.jar
+maven-resolver-impl-1.6.3.jar
+maven-resolver-provider-3.8.4.jar
+maven-resolver-spi-1.6.3.jar
+maven-resolver-transport-wagon-1.6.3.jar
+maven-resolver-util-1.6.3.jar
+wagon-file-3.4.3.jar
+wagon-http-3.4.3-shaded.jar
+wagon-provider-api-3.4.3.jar
+# sha256 of the distribution zip:
+ccd67d1ee4fd79339c9b6f95d1e5e1e0e0209a8c1b095d9291e009afa0a492a5  <work>/mvn-home/wrapper/dists/apache-maven-3.8.4-bin/52ccbt68d252mdldqsfsn03jlf/apache-maven-3.8.4-bin.zip

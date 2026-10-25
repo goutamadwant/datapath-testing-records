@@ -1,0 +1,4 @@
+# 2026-10-25T14:17:01-0700 replay.sh --part A runs=default prepare_only=1 cells=all work=work
+# 2026-10-25T14:17:03-0700 toolchain ok: JDK8=/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home JDK11=/Users/goutamadwant/Library/Java/JavaVirtualMachines/temurin-11.0.19/Contents/Home record=logs/setup/toolchain-partA-20261025T141701.txt
+# 2026-10-25T14:17:03-0700 all six pinned commits present in work/seatunnel
+# 2026-10-25T14:17:04-0700 done rc=0

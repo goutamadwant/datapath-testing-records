@@ -1,0 +1,10 @@
+# 2026-10-25T13:27:03-0700 replay.sh --part B runs=default prepare_only=1 cells=all work=work
+# 2026-10-25T13:27:04-0700 toolchain ok: JDK8=/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home JDK11=/Users/goutamadwant/Library/Java/JavaVirtualMachines/temurin-11.0.19/Contents/Home record=logs/setup/toolchain-partB-20261025T132703.txt
+# 2026-10-25T13:27:05-0700 all six pinned commits present in work/seatunnel
+# 2026-10-25T13:27:05-0700 fetched org/junit/platform/junit-platform-launcher/1.9.0/junit-platform-launcher-1.9.0.jar sha1=367a24bb63baca99a181ea921da8e21af0656e7c (matches Central)
+# 2026-10-25T13:27:05-0700 worktree work/wt-dev at deb16a3c3152f0349a587a504dccc997a131a9d7
+# 2026-10-25T13:27:15-0700 worktree work/wt-patch at 87ed0afe0f783eda1b1f3ac6f0ac9fadedcb4f98
+# 2026-10-25T13:27:18-0700 building work/wt-dev (log logs/partB/build-dev-deb16a3c3-jdk8.txt)
+# 2026-10-25T13:28:33-0700 building work/wt-patch (log logs/partB/build-patch-87ed0afe0-jdk8.txt)
+results.json: A 9 runs, B 0 loops, C 0 runs, 29 log files hashed
+# 2026-10-25T13:29:38-0700 done rc=0
