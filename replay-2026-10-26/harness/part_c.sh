@@ -16,6 +16,12 @@ WT="$W/wt-e2e"
 MODDIR="$WT/seatunnel-e2e/seatunnel-connector-v2-e2e/connector-fake-e2e"
 LAUNCHER="$W/lib/junit-platform-launcher-1.9.0.jar"
 RUNS="${1:-5}"; shift
+# Safety: SeaTunnel's end-to-end teardown deletes the contents of /tmp/seatunnel_mnt on the host.
+# Refuse to run if that path already exists, so no unrelated host data can be removed.
+if [ -e /tmp/seatunnel_mnt ]; then
+  echo "refusing to run: /tmp/seatunnel_mnt exists on this host; the SeaTunnel teardown would delete its contents. Remove or rename it first." >&2
+  exit 2
+fi
 CELLS="$*"; [ -z "$CELLS" ] && CELLS="flink-before flink-after spark-before spark-after"
 JOB_TIMEOUT_SEC=150
 TEARDOWN_BOUND_SEC=60
