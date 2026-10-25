@@ -1,5 +1,5 @@
-== JAVA_HOME=<home>
-+ ./mvnw -B -s ./harness/settings-empty.xml -Dmaven.repo.local=<scratch>/partA/warm-repo -f pom.xml dependency:resolve
+== JAVA_HOME=/Users/goutamadwant/Library/Java/JavaVirtualMachines/temurin-11.0.19/Contents/Home
++ ./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/settings-empty.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo -f pom.xml dependency:resolve
 [INFO] Scanning for projects...
 [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-clean-plugin/2.5/maven-clean-plugin-2.5.pom (3.9 kB at 5.0 kB/s)
 [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/22/maven-plugins-22.pom (13 kB at 66 kB/s)
@@ -313,7 +313,7 @@
 [INFO] Finished at: 2026-10-25T00:16:25-07:00
 [INFO] ------------------------------------------------------------------------
 == JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home
-+ ./mvnw -B -s ./harness/settings-empty.xml -Dmaven.repo.local=<scratch>/partA/warm-repo -f pom.xml dependency:resolve
++ ./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/settings-empty.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo -f pom.xml dependency:resolve
 [INFO] Scanning for projects...
 [INFO] 
 [INFO] -------------------------< replay.local:tiny >--------------------------

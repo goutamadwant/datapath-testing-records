@@ -7,7 +7,7 @@
 set -u
 HERE="$(cd "$(dirname "$0")" && pwd)"
 LOGS="$HERE/../logs/partC"
-RT=<repo>/runtime/replay
+RT=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay
 WT=$RT/wt-e2e
 JDK8=/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home
 MODDIR=$WT/seatunnel-e2e/seatunnel-connector-v2-e2e/connector-fake-e2e

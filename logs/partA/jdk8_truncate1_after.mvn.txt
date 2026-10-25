@@ -1,8 +1,8 @@
 # run_id=jdk8_truncate1_after order=8 start=2026-10-25T00:19:22-0700
-# cwd=<scratch>/partA/runs/jdk8_truncate1_after/proj
+# cwd=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_truncate1_after/proj
 # JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home
-# server: /opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault truncate1 --log ./logs/partA/jdk8_truncate1_after.server.jsonl --port-file <scratch>/partA/runs/jdk8_truncate1_after.port
-# command: ./mvnw -B -s <scratch>/partA/runs/jdk8_truncate1_after/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk8_truncate1_after/repo -f pom.xml dependency:resolve
+# server: /opt/anaconda3/bin/python3 -I /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/fault_mirror.py --root /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo --fault truncate1 --log /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_truncate1_after.server.jsonl --port-file /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_truncate1_after.port
+# command: ./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_truncate1_after/settings.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_truncate1_after/repo -f pom.xml dependency:resolve
 [INFO] Scanning for projects...
 [INFO] Downloading from faultmirror: http://127.0.0.1:59691/maven2/org/apache/maven/plugins/maven-clean-plugin/2.5/maven-clean-plugin-2.5.pom
 [INFO] Downloaded from faultmirror: http://127.0.0.1:59691/maven2/org/apache/maven/plugins/maven-clean-plugin/2.5/maven-clean-plugin-2.5.pom (3.9 kB at 13 kB/s)

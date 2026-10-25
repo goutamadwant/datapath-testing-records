@@ -1,1 +1,1 @@
-{"event": "start", "fault": "503x2", "port": 60123, "root": "<scratch>/partA/warm-repo", "t_rel_s": 0.016, "wall": "2026-10-25T00:21:10.160"}
+{"event": "start", "fault": "503x2", "port": 60123, "root": "/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo", "t_rel_s": 0.016, "wall": "2026-10-25T00:21:10.160"}

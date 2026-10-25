@@ -17,13 +17,13 @@ import time
 HERE = os.path.dirname(os.path.abspath(__file__))
 EXP = os.path.dirname(HERE)
 LOGS = os.path.join(EXP, "logs", "partA")
-RT = "<repo>/runtime/replay"
+RT = "/Users/goutamadwant/Documents/ResearchPaper/runtime/replay"
 REPO = os.path.join(RT, "seatunnel")
 WARM = os.path.join(RT, "partA", "warm-repo")
 RUNS = os.path.join(RT, "partA", "runs")
 JDKS = {
     "jdk8": "/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home",
-    "jdk11": "<home>",
+    "jdk11": "/Users/goutamadwant/Library/Java/JavaVirtualMachines/temurin-11.0.19/Contents/Home",
 }
 CONFIGS = {
     "before": ("a1084015eeb390a6c7f53d3ce7391217e427e4d9",

@@ -1,8 +1,8 @@
 # run_id=jdk11_503x2_after order=12 start=2026-10-25T00:21:09-0700
-# cwd=<scratch>/partA/runs/jdk11_503x2_after/proj
-# JAVA_HOME=<home>
-# server: /opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault 503x2 --log ./logs/partA/jdk11_503x2_after.server.jsonl --port-file <scratch>/partA/runs/jdk11_503x2_after.port
-# command: ./mvnw -B -s <scratch>/partA/runs/jdk11_503x2_after/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk11_503x2_after/repo -f pom.xml dependency:resolve
+# cwd=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_503x2_after/proj
+# JAVA_HOME=/Users/goutamadwant/Library/Java/JavaVirtualMachines/temurin-11.0.19/Contents/Home
+# server: /opt/anaconda3/bin/python3 -I /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/fault_mirror.py --root /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo --fault 503x2 --log /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_503x2_after.server.jsonl --port-file /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_503x2_after.port
+# command: ./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_503x2_after/settings.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_503x2_after/repo -f pom.xml dependency:resolve
 [INFO] Scanning for projects...
 [INFO] Downloading from faultmirror: http://127.0.0.1:59148/maven2/org/apache/maven/plugins/maven-clean-plugin/2.5/maven-clean-plugin-2.5.pom
 [WARNING] Failed to retrieve plugin descriptor for org.apache.maven.plugins:maven-clean-plugin:2.5: Plugin org.apache.maven.plugins:maven-clean-plugin:2.5 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.apache.maven.plugins:maven-clean-plugin:jar:2.5
@@ -40,7 +40,7 @@
 [INFO] Total time:  1.195 s
 [INFO] Finished at: 2026-10-25T00:21:15-07:00
 [INFO] ------------------------------------------------------------------------
-[ERROR] No plugin found for prefix 'dependency' in the current project and in the plugin groups [org.apache.maven.plugins, org.codehaus.mojo] available from the repositories [local (<scratch>/partA/runs/jdk11_503x2_after/repo), faultmirror (http://127.0.0.1:59148/maven2)] -> [Help 1]
+[ERROR] No plugin found for prefix 'dependency' in the current project and in the plugin groups [org.apache.maven.plugins, org.codehaus.mojo] available from the repositories [local (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_503x2_after/repo), faultmirror (http://127.0.0.1:59148/maven2)] -> [Help 1]
 [ERROR] 
 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
 [ERROR] Re-run Maven using the -X switch to enable full debug logging.

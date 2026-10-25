@@ -1,12 +1,10 @@
-# 2026-10-25T00:39:39-0700 cwd=<scratch>/wt-e2e JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home rev=0e4cf52896ee3604a8e7899d7736ffd914ee6ce7
+# 2026-10-25T00:39:39-0700 cwd=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home rev=0e4cf52896ee3604a8e7899d7736ffd914ee6ce7
 # git status (local-only changes):
 ?? seatunnel-e2e/seatunnel-connector-v2-e2e/connector-fake-e2e/src/test/java/org/apache/seatunnel/e2e/connector/fake/ReplayKillTeardownTest.java
 # command: ./mvnw -B -T 1C -pl seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter,seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter,seatunnel-connectors-v2/connector-fake,seatunnel-connectors-v2/connector-assert,seatunnel-transforms-v2,seatunnel-e2e/seatunnel-connector-v2-e2e/connector-fake-e2e -am package dependency:build-classpath -DskipUT=true -DskipIT=true -DskipTests -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dmdep.outputFile=target/test-classpath.txt -Dmdep.includeScope=test --no-snapshot-updates
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-100 58727  100 58727    0     0   345k      0 --:--:-- --:--:-- --:--:--  347k
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 58727  100 58727    0     0   345k      0 --:--:-- --:--:-- --:--:--  347k
 [INFO] Scanning for projects...
 [INFO] ------------------------------------------------------------------------
 [INFO] Reactor Build Order:
@@ -103,7 +101,7 @@
 [INFO] No site descriptor found: nothing to attach.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/target/test-classpath.txt'.
 [INFO] 
 [INFO] 
 [INFO] ---------------< org.apache.seatunnel:seatunnel-config >----------------
@@ -234,11 +232,11 @@
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-translation ---
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-config ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-core/target/test-classpath.txt'.
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-config/target/test-classpath.txt'.
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/target/test-classpath.txt'.
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-translation/target/test-classpath.txt'.
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-formats/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-config/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-formats/target/test-classpath.txt'.
 [INFO] 
 [INFO] 
 [INFO] --------------< org.apache.seatunnel:seatunnel-engine-ui >--------------
@@ -319,7 +317,7 @@
 [INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-engine-storage:pom:3.0.0-SNAPSHOT...
 [INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-engine-serializer:pom:3.0.0-SNAPSHOT...
 [INFO] Installing node version v16.13.2
-[INFO] Unpacking <home> into <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-ui/node/tmp
+[INFO] Unpacking /Users/goutamadwant/.m2/repository/com/github/eirslett/node/16.13.2/node-16.13.2-darwin-x64.tar.gz into /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-ui/node/tmp
 [INFO] 
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-engine-serializer ---
@@ -330,8 +328,8 @@
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-engine-serializer ---
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-engine-storage ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/target/test-classpath.txt'.
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/target/test-classpath.txt'.
 [INFO] 
 [INFO] 
 [INFO] ---------------< org.apache.seatunnel:imap-storage-api >----------------
@@ -340,7 +338,7 @@
 [INFO] Building SeaTunnel : Engine : Serializer : Api 3.0.0-SNAPSHOT    [13/65]
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO] --------------------------------[ jar ]---------------------------------
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-config/seatunnel-config-base/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-config/seatunnel-config-base/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] 
 [INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-config-base ---
@@ -372,7 +370,7 @@
 [INFO] No sources to compile
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-config-base ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-config/seatunnel-config-base/src/test/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-config/seatunnel-config-base/src/test/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-config-base ---
@@ -383,8 +381,8 @@
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ serializer-api ---
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ imap-storage-api ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/serializer-api/src/main/resources
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-api/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/serializer-api/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-api/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] 
@@ -400,17 +398,17 @@
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-config-base ---
 [INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ imap-storage-api ---
 [INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ serializer-api ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-config/seatunnel-config-base/target/seatunnel-config-base-3.0.0-SNAPSHOT.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-config/seatunnel-config-base/target/seatunnel-config-base-3.0.0-SNAPSHOT.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-config-base ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-shade-plugin:3.5.1:shade (default) @ seatunnel-config-base ---
-[INFO] Copying node binary from <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-ui/node/tmp/node-v16.13.2-darwin-x64/bin/node to <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-ui/node/node
+[INFO] Copying node binary from /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-ui/node/tmp/node-v16.13.2-darwin-x64/bin/node to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-ui/node/node
 [INFO] Changes detected - recompiling the module!
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 3 source files to <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-api/target/classes
-[INFO] Compiling 1 source file to <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/serializer-api/target/classes
+[INFO] Compiling 3 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-api/target/classes
+[INFO] Compiling 1 source file to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/serializer-api/target/classes
 [INFO] Including com.typesafe:config:jar:1.3.3 in the shaded jar.
 [INFO] Including io.prometheus:simpleclient:jar:0.16.0 in the shaded jar.
 [INFO] Including io.prometheus:simpleclient_tracer_otel:jar:0.16.0 in the shaded jar.
@@ -428,14 +426,14 @@
 [INFO] Minimizing jar org.apache.seatunnel:seatunnel-config-base:jar:3.0.0-SNAPSHOT
 [INFO] Installed node locally.
 [INFO] Installing npm version 8.1.2
-[INFO] Unpacking <home> into <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-ui/node/node_modules
+[INFO] Unpacking /Users/goutamadwant/.m2/repository/com/github/eirslett/npm/8.1.2/npm-8.1.2.tar.gz into /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-ui/node/node_modules
 [INFO] Installed npm locally.
 [INFO] 
 [INFO] --- frontend-maven-plugin:1.10.3:npm (npm install) @ seatunnel-engine-ui ---
-[INFO] Running 'npm install' in <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-ui
+[INFO] Running 'npm install' in /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-ui
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ serializer-api ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/serializer-api/src/test/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/serializer-api/src/test/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ serializer-api ---
@@ -445,7 +443,7 @@
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ serializer-api ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/serializer-api/target/serializer-api-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/serializer-api/target/serializer-api-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ serializer-api ---
 [INFO] Skipping because packaging 'jar' is not pom.
@@ -453,8 +451,8 @@
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ serializer-api ---
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ imap-storage-api ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/serializer-api/target/test-classpath.txt'.
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-api/src/test/resources
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/serializer-api/target/test-classpath.txt'.
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-api/src/test/resources
 [INFO] 
 [INFO] --------------< org.apache.seatunnel:serializer-protobuf >--------------
 [INFO] Building SeaTunnel : Engine : Serializer : Protobuf 3.0.0-SNAPSHOT [14/65]
@@ -468,13 +466,13 @@
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ imap-storage-api ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-api/target/imap-storage-api-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-api/target/imap-storage-api-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ imap-storage-api ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ imap-storage-api ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-api/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-api/target/test-classpath.txt'.
 [INFO] 
 [INFO] -------------< org.apache.seatunnel:imap-storage-plugins >--------------
 [INFO] Building SeaTunnel : Engine : Storage : IMap Storage Plugins : 3.0.0-SNAPSHOT [15/65]
@@ -522,9 +520,9 @@
 [WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
 [INFO] Minimized 424 -> 334 (78%)
 [INFO] Replacing original artifact with shaded artifact.
-[INFO] Replacing <scratch>/wt-e2e/seatunnel-config/seatunnel-config-base/target/seatunnel-config-base-3.0.0-SNAPSHOT.jar with <scratch>/wt-e2e/seatunnel-config/seatunnel-config-base/target/seatunnel-config-base-3.0.0-SNAPSHOT-shaded.jar
+[INFO] Replacing /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-config/seatunnel-config-base/target/seatunnel-config-base-3.0.0-SNAPSHOT.jar with /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-config/seatunnel-config-base/target/seatunnel-config-base-3.0.0-SNAPSHOT-shaded.jar
 [INFO] Replacing original source artifact with shaded source artifact.
-[INFO] Replacing <scratch>/wt-e2e/seatunnel-config/seatunnel-config-base/target/seatunnel-config-base-3.0.0-SNAPSHOT-sources.jar with <scratch>/wt-e2e/seatunnel-config/seatunnel-config-base/target/seatunnel-config-base-3.0.0-SNAPSHOT-shaded-sources.jar
+[INFO] Replacing /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-config/seatunnel-config-base/target/seatunnel-config-base-3.0.0-SNAPSHOT-sources.jar with /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-config/seatunnel-config-base/target/seatunnel-config-base-3.0.0-SNAPSHOT-shaded-sources.jar
 [INFO] 
 [INFO] 
 [INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ imap-storage-plugins ---
@@ -532,7 +530,7 @@
 [INFO] Generating flattened POM of project org.apache.seatunnel:imap-storage-plugins:pom:3.0.0-SNAPSHOT...
 [INFO] 
 [INFO] --- build-helper-maven-plugin:3.2.0:attach-artifact (compile) @ seatunnel-config-base ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/serializer-protobuf/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/serializer-protobuf/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] 
 [INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ serializer-protobuf ---
@@ -542,10 +540,10 @@
 [INFO] No site descriptor found: nothing to attach.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ imap-storage-plugins ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-plugins/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-plugins/target/test-classpath.txt'.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-config-base ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-config/seatunnel-config-base/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-config/seatunnel-config-base/target/test-classpath.txt'.
 [INFO] 
 [INFO] ------------< org.apache.seatunnel:seatunnel-config-shade >-------------
 [INFO] Building SeaTunnel : Config : Shade 3.0.0-SNAPSHOT               [16/65]
@@ -555,7 +553,7 @@
 [INFO] 
 [INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ seatunnel-config-shade ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 1 source file to <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/serializer-protobuf/target/classes
+[INFO] Compiling 1 source file to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/serializer-protobuf/target/classes
 [INFO] 
 [INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ seatunnel-config-shade ---
 [INFO] 
@@ -567,7 +565,7 @@
 [INFO] Copying 3 resources from 1 bundle.
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-config-shade ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-config/seatunnel-config-shade/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-config/seatunnel-config-shade/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] 
 [INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-config-shade ---
@@ -575,15 +573,15 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-config-shade ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 10 source files to <scratch>/wt-e2e/seatunnel-config/seatunnel-config-shade/target/classes
+[INFO] Compiling 10 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-config/seatunnel-config-shade/target/classes
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ serializer-protobuf ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/serializer-protobuf/src/test/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/serializer-protobuf/src/test/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ serializer-protobuf ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 1 source file to <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/serializer-protobuf/target/test-classes
+[INFO] Compiling 1 source file to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/serializer-protobuf/target/test-classes
 [INFO] npm WARN EBADENGINE Unsupported engine {
 [INFO] npm WARN EBADENGINE   package: '@typescript-eslint/eslint-plugin@7.18.0',
 [INFO] npm WARN EBADENGINE   required: { node: '^18.18.0 || >=20.0.0' },
@@ -769,13 +767,13 @@
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ serializer-protobuf ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/serializer-protobuf/target/serializer-protobuf-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/serializer-protobuf/target/serializer-protobuf-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ serializer-protobuf ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ serializer-protobuf ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/serializer-protobuf/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/serializer-protobuf/target/test-classpath.txt'.
 [INFO] 
 [INFO] 
 [INFO] ---------------< org.apache.seatunnel:imap-storage-file >---------------
@@ -798,7 +796,7 @@
 [WARNING] The artifact org.slf4j:slf4j-log4j12:jar:1.7.36 has been relocated to org.slf4j:slf4j-reload4j:jar:1.7.36
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ checkpoint-storage-api ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-api/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-api/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] 
 [INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ checkpoint-storage-api ---
@@ -806,7 +804,7 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ checkpoint-storage-api ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 7 source files to <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-api/target/classes
+[INFO] Compiling 7 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-api/target/classes
 [INFO] 
 [INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ imap-storage-file ---
 [INFO] 
@@ -820,7 +818,7 @@
 [INFO] Copying 3 resources from 1 bundle.
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ imap-storage-file ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-plugins/imap-storage-file/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-plugins/imap-storage-file/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] 
 [INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ imap-storage-file ---
@@ -828,11 +826,11 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ imap-storage-file ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 32 source files to <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-plugins/imap-storage-file/target/classes
+[INFO] Compiling 32 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-plugins/imap-storage-file/target/classes
 [INFO] npm WARN deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ checkpoint-storage-api ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-api/src/test/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-api/src/test/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ checkpoint-storage-api ---
@@ -842,13 +840,13 @@
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ checkpoint-storage-api ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-api/target/checkpoint-storage-api-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-api/target/checkpoint-storage-api-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ checkpoint-storage-api ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ checkpoint-storage-api ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-api/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-api/target/test-classpath.txt'.
 [INFO] 
 [INFO] ----------< org.apache.seatunnel:checkpoint-storage-plugins >-----------
 [INFO] Building SeaTunnel : Engine : Storage : Checkpoint Storage Plugins : 3.0.0-SNAPSHOT [19/65]
@@ -871,7 +869,7 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-config-shade ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 7 source files to <scratch>/wt-e2e/seatunnel-config/seatunnel-config-shade/target/test-classes
+[INFO] Compiling 7 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-config/seatunnel-config-shade/target/test-classes
 [INFO] 
 [INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ checkpoint-storage-plugins ---
 [INFO] Generating flattened POM of project org.apache.seatunnel:checkpoint-storage-plugins:pom:3.0.0-SNAPSHOT...
@@ -880,7 +878,7 @@
 [INFO] No site descriptor found: nothing to attach.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ checkpoint-storage-plugins ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/target/test-classpath.txt'.
 [INFO] 
 [INFO] 
 [INFO] ---------< org.apache.seatunnel:checkpoint-storage-local-file >---------
@@ -902,7 +900,7 @@
 [INFO] Copying 3 resources from 1 bundle.
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ checkpoint-storage-local-file ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/checkpoint-storage-local-file/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/checkpoint-storage-local-file/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] 
 [INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ checkpoint-storage-local-file ---
@@ -910,7 +908,7 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ checkpoint-storage-local-file ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 2 source files to <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/checkpoint-storage-local-file/target/classes
+[INFO] Compiling 2 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/checkpoint-storage-local-file/target/classes
 [INFO] Downloading from maven-default-http-blocker: http://0.0.0.0/net/minidev/json-smart/maven-metadata.xml
 [INFO] npm WARN deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
 [WARNING] Could not transfer metadata net.minidev:json-smart/maven-metadata.xml from/to maven-default-http-blocker (http://0.0.0.0/): transfer failed for http://0.0.0.0/net/minidev/json-smart/maven-metadata.xml
@@ -927,7 +925,7 @@
 [INFO] Copying 3 resources from 1 bundle.
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ checkpoint-storage-hdfs ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/checkpoint-storage-hdfs/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/checkpoint-storage-hdfs/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] 
 [INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ checkpoint-storage-hdfs ---
@@ -935,13 +933,13 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ checkpoint-storage-hdfs ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 11 source files to <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/checkpoint-storage-hdfs/target/classes
+[INFO] Compiling 11 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/checkpoint-storage-hdfs/target/classes
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-config-shade ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-config-shade ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-config/seatunnel-config-shade/target/seatunnel-config-shade-3.0.0-SNAPSHOT.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-config/seatunnel-config-shade/target/seatunnel-config-shade-3.0.0-SNAPSHOT.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-config-shade ---
 [INFO] Skipping because packaging 'jar' is not pom.
@@ -949,7 +947,7 @@
 [INFO] --- build-helper-maven-plugin:3.2.0:attach-artifact (compile) @ seatunnel-config-shade ---
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-config-shade ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-config/seatunnel-config-shade/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-config/seatunnel-config-shade/target/test-classpath.txt'.
 [INFO] 
 [INFO] ---------------< org.apache.seatunnel:seatunnel-common >----------------
 [INFO] Building SeaTunnel : Common 3.0.0-SNAPSHOT                       [22/65]
@@ -973,10 +971,10 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ checkpoint-storage-local-file ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 1 source file to <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/checkpoint-storage-local-file/target/test-classes
+[INFO] Compiling 1 source file to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/checkpoint-storage-local-file/target/test-classes
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-common ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-common/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-common/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] 
 [INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-common ---
@@ -984,7 +982,7 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-common ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 44 source files to <scratch>/wt-e2e/seatunnel-common/target/classes
+[INFO] Compiling 44 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-common/target/classes
 [INFO] npm WARN deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
 [INFO] npm WARN deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
 [INFO] 
@@ -992,42 +990,42 @@
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ checkpoint-storage-local-file ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/checkpoint-storage-local-file/target/checkpoint-storage-local-file-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/checkpoint-storage-local-file/target/checkpoint-storage-local-file-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ checkpoint-storage-local-file ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ checkpoint-storage-local-file ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/checkpoint-storage-local-file/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/checkpoint-storage-local-file/target/test-classpath.txt'.
 [INFO] npm WARN deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ imap-storage-file ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-plugins/imap-storage-file/src/test/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-plugins/imap-storage-file/src/test/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ imap-storage-file ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 8 source files to <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-plugins/imap-storage-file/target/test-classes
+[INFO] Compiling 8 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-plugins/imap-storage-file/target/test-classes
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ checkpoint-storage-hdfs ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/checkpoint-storage-hdfs/src/test/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/checkpoint-storage-hdfs/src/test/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ checkpoint-storage-hdfs ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 6 source files to <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/checkpoint-storage-hdfs/target/test-classes
+[INFO] Compiling 6 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/checkpoint-storage-hdfs/target/test-classes
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ checkpoint-storage-hdfs ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ checkpoint-storage-hdfs ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/checkpoint-storage-hdfs/target/checkpoint-storage-hdfs-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/checkpoint-storage-hdfs/target/checkpoint-storage-hdfs-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ checkpoint-storage-hdfs ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ checkpoint-storage-hdfs ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/checkpoint-storage-hdfs/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/checkpoint-storage-hdfs/target/test-classpath.txt'.
 [INFO] 
 [INFO] added 726 packages, and audited 727 packages in 31s
 [INFO] 
@@ -1045,7 +1043,7 @@
 [INFO] Run `npm audit` for details.
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-engine-ui ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-ui/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-ui/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] 
 [INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-engine-ui ---
@@ -1055,7 +1053,7 @@
 [INFO] No sources to compile
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-engine-ui ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-ui/src/test/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-ui/src/test/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-engine-ui ---
@@ -1070,28 +1068,28 @@
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ imap-storage-file ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-ui/target/seatunnel-engine-ui-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-ui/target/seatunnel-engine-ui-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-engine-ui ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- frontend-maven-plugin:1.10.3:npm (npm run build) @ seatunnel-engine-ui ---
-[INFO] Running 'npm run build' in <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-ui
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-plugins/imap-storage-file/target/imap-storage-file-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Running 'npm run build' in /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-ui
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-plugins/imap-storage-file/target/imap-storage-file-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ imap-storage-file ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ imap-storage-file ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-plugins/imap-storage-file/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-plugins/imap-storage-file/target/test-classpath.txt'.
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-common ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-common/src/test/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-common/src/test/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-common ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 19 source files to <scratch>/wt-e2e/seatunnel-common/target/test-classes
+[INFO] Compiling 19 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-common/target/test-classes
 [INFO] 
 [INFO] > seatunnel-engine-ui@0.0.0 build
 [INFO] > run-p type-check "build-only {@}" --
@@ -1109,13 +1107,13 @@
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-common ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-common/target/seatunnel-common-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-common/target/seatunnel-common-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-common ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-common ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-common/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-common/target/test-classpath.txt'.
 [INFO] 
 [INFO] -----------------< org.apache.seatunnel:seatunnel-api >-----------------
 [INFO] Building SeaTunnel : Api 3.0.0-SNAPSHOT                          [23/65]
@@ -1133,7 +1131,7 @@
 [INFO] Copying 3 resources from 1 bundle.
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-api ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-api/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-api/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] 
 [INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-api ---
@@ -1141,11 +1139,11 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-api ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 273 source files to <scratch>/wt-e2e/seatunnel-api/target/classes
+[INFO] Compiling 273 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-api/target/classes
 [INFO] NODE_ENV=production is not supported in the .env file. Only NODE_ENV=development is supported to create a development build of your project. If you need to set process.env.NODE_ENV, you can set it in the Vite config instead.
 [INFO] vite v5.4.9 building for production...
 [INFO] 
-[INFO] (!) outDir <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-server/src/main/resources/ui is not inside project root and will not be emptied.
+[INFO] (!) outDir /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-server/src/main/resources/ui is not inside project root and will not be emptied.
 [INFO] Use --emptyOutDir to override.
 [INFO] 
 [INFO] transforming...
@@ -1155,7 +1153,7 @@
 [INFO] Browserslist: caniuse-lite is outdated. Please run:
 [INFO]   npx update-browserslist-db@latest
 [INFO]   Why you should do it regularly: https://github.com/browserslist/update-db#readme
-[INFO] DEPRECATION WARNING on line 22, column 10 of file://<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-ui/src/assets/style.scss: 
+[INFO] DEPRECATION WARNING on line 22, column 10 of file:///Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-ui/src/assets/style.scss: 
 [INFO] Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
 [INFO] 
 [INFO] More info and automated migrator: https://sass-lang.com/d/import
@@ -1177,7 +1175,7 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-api ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 37 source files to <scratch>/wt-e2e/seatunnel-api/target/test-classes
+[INFO] Compiling 37 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-api/target/test-classes
 [INFO] ✓ 5045 modules transformed.
 [INFO] rendering chunks...
 [INFO] computing gzip size...
@@ -1208,19 +1206,19 @@
 [INFO] - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-engine-ui ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-ui/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-ui/target/test-classpath.txt'.
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-api ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-api ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-api/target/seatunnel-api-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-api/target/seatunnel-api-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-api ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-api ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-api/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-api/target/test-classpath.txt'.
 [INFO] 
 [INFO] 
 [INFO] 
@@ -1356,12 +1354,12 @@
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-translation-base ---
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-format-csv ---
 [INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-connectors-v2:pom:3.0.0-SNAPSHOT...
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-base/src/main/resources
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-formats/seatunnel-format-csv/src/main/resources
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-formats/seatunnel-format-json/src/main/resources
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-plugin-discovery/src/main/resources
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-config/seatunnel-config-sql/src/main/resources
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-formats/seatunnel-format-text/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-base/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-formats/seatunnel-format-csv/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-formats/seatunnel-format-json/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-plugin-discovery/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-config/seatunnel-config-sql/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-formats/seatunnel-format-text/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
@@ -1409,12 +1407,12 @@
 [INFO] Changes detected - recompiling the module!
 [INFO] Changes detected - recompiling the module!
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 7 source files to <scratch>/wt-e2e/seatunnel-formats/seatunnel-format-text/target/classes
-[INFO] Compiling 7 source files to <scratch>/wt-e2e/seatunnel-formats/seatunnel-format-csv/target/classes
-[INFO] Compiling 6 source files to <scratch>/wt-e2e/seatunnel-plugin-discovery/target/classes
-[INFO] Compiling 10 source files to <scratch>/wt-e2e/seatunnel-config/seatunnel-config-sql/target/classes
-[INFO] Compiling 14 source files to <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-base/target/classes
-[INFO] Compiling 21 source files to <scratch>/wt-e2e/seatunnel-formats/seatunnel-format-json/target/classes
+[INFO] Compiling 7 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-formats/seatunnel-format-text/target/classes
+[INFO] Compiling 7 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-formats/seatunnel-format-csv/target/classes
+[INFO] Compiling 6 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-plugin-discovery/target/classes
+[INFO] Compiling 10 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-config/seatunnel-config-sql/target/classes
+[INFO] Compiling 14 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-base/target/classes
+[INFO] Compiling 21 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-formats/seatunnel-format-json/target/classes
 [INFO] Including io.prometheus:simpleclient:jar:0.16.0 in the shaded jar.
 [INFO] Including io.prometheus:simpleclient_tracer_otel:jar:0.16.0 in the shaded jar.
 [INFO] Including io.prometheus:simpleclient_tracer_common:jar:0.16.0 in the shaded jar.
@@ -1428,7 +1426,7 @@
 [INFO] Excluding org.apache.logging.log4j:log4j-core:jar:2.17.1 from the shaded jar.
 [INFO] Excluding org.slf4j:jcl-over-slf4j:jar:1.7.36 from the shaded jar.
 [INFO] Excluding org.apache.logging.log4j:log4j-1.2-api:jar:2.17.1 from the shaded jar.
-[INFO] Dependency-reduced POM written at: <scratch>/wt-e2e/seatunnel-connectors-v2/dependency-reduced-pom.xml
+[INFO] Dependency-reduced POM written at: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/dependency-reduced-pom.xml
 [WARNING] simpleclient-0.16.0.jar, simpleclient_common-0.16.0.jar, simpleclient_hotspot-0.16.0.jar, simpleclient_httpserver-0.16.0.jar, simpleclient_tracer_common-0.16.0.jar, simpleclient_tracer_otel-0.16.0.jar, simpleclient_tracer_otel_agent-0.16.0.jar define 1 overlapping resource: 
 [WARNING]   - META-INF/MANIFEST.MF
 [WARNING] maven-shade-plugin has detected that some files are
@@ -1481,7 +1479,7 @@
 [INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ connector-file ---
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ connector-common ---
 [INFO] Generating flattened POM of project org.apache.seatunnel:connector-file:pom:3.0.0-SNAPSHOT...
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-connectors-v2/connector-common/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-common/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] 
 [INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ connector-common ---
@@ -1506,9 +1504,9 @@
 [INFO] Excluding org.apache.logging.log4j:log4j-core:jar:2.17.1 from the shaded jar.
 [INFO] Excluding org.slf4j:jcl-over-slf4j:jar:1.7.36 from the shaded jar.
 [INFO] Excluding org.apache.logging.log4j:log4j-1.2-api:jar:2.17.1 from the shaded jar.
-[INFO] Dependency-reduced POM written at: <scratch>/wt-e2e/seatunnel-connectors-v2/connector-file/dependency-reduced-pom.xml
+[INFO] Dependency-reduced POM written at: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-file/dependency-reduced-pom.xml
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 43 source files to <scratch>/wt-e2e/seatunnel-connectors-v2/connector-common/target/classes
+[INFO] Compiling 43 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-common/target/classes
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-engine-common ---
 [INFO] Copying 5 resources from src/main/resources to target/classes
@@ -1534,15 +1532,15 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-engine-common ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 62 source files to <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-common/target/classes
+[INFO] Compiling 62 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-common/target/classes
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-translation-base ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-base/src/test/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-base/src/test/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-translation-base ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 1 source file to <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-base/target/test-classes
+[INFO] Compiling 1 source file to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-base/target/test-classes
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-plugin-discovery ---
 [INFO] Copying 2 resources from src/test/resources to target/test-classes
@@ -1550,19 +1548,19 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-plugin-discovery ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 2 source files to <scratch>/wt-e2e/seatunnel-plugin-discovery/target/test-classes
+[INFO] Compiling 2 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-plugin-discovery/target/test-classes
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-translation-base ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-translation-base ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-base/target/seatunnel-translation-base-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-base/target/seatunnel-translation-base-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-translation-base ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-translation-base ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-base/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-base/target/test-classpath.txt'.
 [INFO] 
 [INFO] 
 [INFO] ----------< org.apache.seatunnel:seatunnel-translation-flink >----------
@@ -1605,14 +1603,14 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-format-csv ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 2 source files to <scratch>/wt-e2e/seatunnel-formats/seatunnel-format-csv/target/test-classes
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-plugin-discovery/target/seatunnel-plugin-discovery-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Compiling 2 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-formats/seatunnel-format-csv/target/test-classes
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-plugin-discovery/target/seatunnel-plugin-discovery-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-plugin-discovery ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-plugin-discovery ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-plugin-discovery/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-plugin-discovery/target/test-classpath.txt'.
 [INFO] 
 [INFO] 
 [INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-translation-spark ---
@@ -1629,8 +1627,8 @@
 [INFO] No site descriptor found: nothing to attach.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-translation-spark ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-flink/target/test-classpath.txt'.
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-spark/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-flink/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-spark/target/test-classpath.txt'.
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-config-sql ---
 [INFO] Copying 1 resource from src/test/resources to target/test-classes
@@ -1638,10 +1636,10 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-config-sql ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 1 source file to <scratch>/wt-e2e/seatunnel-config/seatunnel-config-sql/target/test-classes
+[INFO] Compiling 1 source file to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-config/seatunnel-config-sql/target/test-classes
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-format-text ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-formats/seatunnel-format-text/src/test/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-formats/seatunnel-format-text/src/test/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-format-text ---
@@ -1651,38 +1649,38 @@
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-format-csv ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 2 source files to <scratch>/wt-e2e/seatunnel-formats/seatunnel-format-text/target/test-classes
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-formats/seatunnel-format-csv/target/seatunnel-format-csv-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Compiling 2 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-formats/seatunnel-format-text/target/test-classes
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-formats/seatunnel-format-csv/target/seatunnel-format-csv-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-format-csv ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-format-csv ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-formats/seatunnel-format-csv/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-formats/seatunnel-format-csv/target/test-classpath.txt'.
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-config-sql ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-config-sql ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-config/seatunnel-config-sql/target/seatunnel-config-sql-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-config/seatunnel-config-sql/target/seatunnel-config-sql-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-config-sql ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-config-sql ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-config/seatunnel-config-sql/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-config/seatunnel-config-sql/target/test-classpath.txt'.
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-format-text ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-format-text ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-formats/seatunnel-format-text/target/seatunnel-format-text-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-formats/seatunnel-format-text/target/seatunnel-format-text-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-format-text ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-format-text ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-formats/seatunnel-format-text/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-formats/seatunnel-format-text/target/test-classpath.txt'.
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-format-json ---
 [INFO] Copying 8 resources from src/test/resources to target/test-classes
@@ -1690,27 +1688,27 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-format-json ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 6 source files to <scratch>/wt-e2e/seatunnel-formats/seatunnel-format-json/target/test-classes
+[INFO] Compiling 6 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-formats/seatunnel-format-json/target/test-classes
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ connector-common ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-connectors-v2/connector-common/src/test/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-common/src/test/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ connector-common ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 5 source files to <scratch>/wt-e2e/seatunnel-connectors-v2/connector-common/target/test-classes
+[INFO] Compiling 5 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-common/target/test-classes
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-format-json ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-format-json ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-formats/seatunnel-format-json/target/seatunnel-format-json-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-formats/seatunnel-format-json/target/seatunnel-format-json-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-format-json ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-format-json ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-formats/seatunnel-format-json/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-formats/seatunnel-format-json/target/test-classpath.txt'.
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-engine-common ---
 [INFO] Copying 8 resources from src/test/resources to target/test-classes
@@ -1718,13 +1716,13 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-engine-common ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 7 source files to <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-common/target/test-classes
+[INFO] Compiling 7 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-common/target/test-classes
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ connector-common ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ connector-common ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-connectors-v2/connector-common/target/connector-common-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-common/target/connector-common-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ connector-common ---
 [INFO] Skipping because packaging 'jar' is not pom.
@@ -1733,7 +1731,7 @@
 [INFO] Shading has been skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:test-jar (default) @ connector-common ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-connectors-v2/connector-common/target/connector-common-3.0.0-SNAPSHOT-2.12.15-tests.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-common/target/connector-common-3.0.0-SNAPSHOT-2.12.15-tests.jar
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ connector-common ---
 [INFO] Skipping plugin execution
@@ -1798,9 +1796,9 @@
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ connector-fake ---
 [INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ seatunnel-transforms-v2 ---
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ connector-console ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-connectors-v2/connector-console/src/main/resources
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-connectors-v2/connector-fake/src/main/resources
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-connectors-v2/connector-assert/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-console/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-fake/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-assert/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
@@ -1831,9 +1829,9 @@
 [INFO] Changes detected - recompiling the module!
 [INFO] Changes detected - recompiling the module!
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 16 source files to <scratch>/wt-e2e/seatunnel-connectors-v2/connector-assert/target/classes
-[INFO] Compiling 4 source files to <scratch>/wt-e2e/seatunnel-connectors-v2/connector-console/target/classes
-[INFO] Compiling 14 source files to <scratch>/wt-e2e/seatunnel-connectors-v2/connector-fake/target/classes
+[INFO] Compiling 16 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-assert/target/classes
+[INFO] Compiling 4 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-console/target/classes
+[INFO] Compiling 14 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-fake/target/classes
 [INFO] 
 [INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ connector-file-base ---
 [INFO] 
@@ -1855,10 +1853,10 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-transforms-v2 ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 228 source files to <scratch>/wt-e2e/seatunnel-transforms-v2/target/classes
+[INFO] Compiling 228 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-transforms-v2/target/classes
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ connector-file-base ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-connectors-v2/connector-file/connector-file-base/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-file/connector-file-base/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] 
 [INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ connector-file-base ---
@@ -1866,33 +1864,33 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ connector-file-base ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 94 source files to <scratch>/wt-e2e/seatunnel-connectors-v2/connector-file/connector-file-base/target/classes
+[INFO] Compiling 94 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-file/connector-file-base/target/classes
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-engine-common ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-engine-common ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-common/target/seatunnel-engine-common-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-common/target/seatunnel-engine-common-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-engine-common ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-engine-common ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-common/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-common/target/test-classpath.txt'.
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ connector-console ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-connectors-v2/connector-console/src/test/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-console/src/test/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ connector-console ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 2 source files to <scratch>/wt-e2e/seatunnel-connectors-v2/connector-console/target/test-classes
+[INFO] Compiling 2 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-console/target/test-classes
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ connector-console ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ connector-console ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-connectors-v2/connector-console/target/connector-console-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-console/target/connector-console-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ connector-console ---
 [INFO] Skipping because packaging 'jar' is not pom.
@@ -1912,7 +1910,7 @@
 [INFO] Excluding org.apache.logging.log4j:log4j-core:jar:2.17.1 from the shaded jar.
 [INFO] Excluding org.slf4j:jcl-over-slf4j:jar:1.7.36 from the shaded jar.
 [INFO] Excluding org.apache.logging.log4j:log4j-1.2-api:jar:2.17.1 from the shaded jar.
-[INFO] Dependency-reduced POM written at: <scratch>/wt-e2e/seatunnel-connectors-v2/connector-console/dependency-reduced-pom.xml
+[INFO] Dependency-reduced POM written at: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-console/dependency-reduced-pom.xml
 [WARNING] connector-common-3.0.0-SNAPSHOT-2.12.15.jar, connector-console-3.0.0-SNAPSHOT-2.12.15.jar, simpleclient-0.16.0.jar, simpleclient_common-0.16.0.jar, simpleclient_hotspot-0.16.0.jar, simpleclient_httpserver-0.16.0.jar, simpleclient_tracer_common-0.16.0.jar, simpleclient_tracer_otel-0.16.0.jar, simpleclient_tracer_otel_agent-0.16.0.jar define 1 overlapping resource: 
 [WARNING]   - META-INF/MANIFEST.MF
 [WARNING] connector-common-3.0.0-SNAPSHOT-2.12.15.jar, connector-console-3.0.0-SNAPSHOT-2.12.15.jar define 3 overlapping resources: 
@@ -1927,18 +1925,18 @@
 [WARNING] mvn dependency:tree -Ddetail=true and the above output.
 [WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
 [INFO] Replacing original artifact with shaded artifact.
-[INFO] Replacing <scratch>/wt-e2e/seatunnel-connectors-v2/connector-console/target/connector-console-3.0.0-SNAPSHOT-2.12.15.jar with <scratch>/wt-e2e/seatunnel-connectors-v2/connector-console/target/connector-console-3.0.0-SNAPSHOT-shaded.jar
+[INFO] Replacing /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-console/target/connector-console-3.0.0-SNAPSHOT-2.12.15.jar with /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-console/target/connector-console-3.0.0-SNAPSHOT-shaded.jar
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ connector-console ---
 [INFO] Skipping plugin execution
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ connector-assert ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-connectors-v2/connector-assert/src/test/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-assert/src/test/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ connector-assert ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 4 source files to <scratch>/wt-e2e/seatunnel-connectors-v2/connector-assert/target/test-classes
+[INFO] Compiling 4 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-assert/target/test-classes
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ connector-fake ---
 [INFO] Copying 8 resources from src/test/resources to target/test-classes
@@ -1946,13 +1944,13 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ connector-fake ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 4 source files to <scratch>/wt-e2e/seatunnel-connectors-v2/connector-fake/target/test-classes
+[INFO] Compiling 4 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-fake/target/test-classes
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ connector-assert ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ connector-assert ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-connectors-v2/connector-assert/target/connector-assert-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-assert/target/connector-assert-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ connector-assert ---
 [INFO] Skipping because packaging 'jar' is not pom.
@@ -1973,7 +1971,7 @@
 [INFO] Excluding org.apache.logging.log4j:log4j-core:jar:2.17.1 from the shaded jar.
 [INFO] Excluding org.slf4j:jcl-over-slf4j:jar:1.7.36 from the shaded jar.
 [INFO] Excluding org.apache.logging.log4j:log4j-1.2-api:jar:2.17.1 from the shaded jar.
-[INFO] Dependency-reduced POM written at: <scratch>/wt-e2e/seatunnel-connectors-v2/connector-assert/dependency-reduced-pom.xml
+[INFO] Dependency-reduced POM written at: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-assert/dependency-reduced-pom.xml
 [WARNING] connector-assert-3.0.0-SNAPSHOT-2.12.15.jar, connector-common-3.0.0-SNAPSHOT-2.12.15.jar, seatunnel-format-json-3.0.0-SNAPSHOT-2.12.15.jar define 3 overlapping resources: 
 [WARNING]   - META-INF/DEPENDENCIES
 [WARNING]   - META-INF/LICENSE
@@ -1988,7 +1986,7 @@
 [WARNING] mvn dependency:tree -Ddetail=true and the above output.
 [WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
 [INFO] Replacing original artifact with shaded artifact.
-[INFO] Replacing <scratch>/wt-e2e/seatunnel-connectors-v2/connector-assert/target/connector-assert-3.0.0-SNAPSHOT-2.12.15.jar with <scratch>/wt-e2e/seatunnel-connectors-v2/connector-assert/target/connector-assert-3.0.0-SNAPSHOT-shaded.jar
+[INFO] Replacing /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-assert/target/connector-assert-3.0.0-SNAPSHOT-2.12.15.jar with /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-assert/target/connector-assert-3.0.0-SNAPSHOT-shaded.jar
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ connector-assert ---
 [INFO] Skipping plugin execution
@@ -1997,7 +1995,7 @@
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ connector-fake ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-connectors-v2/connector-fake/target/connector-fake-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-fake/target/connector-fake-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ connector-fake ---
 [INFO] Skipping because packaging 'jar' is not pom.
@@ -2018,7 +2016,7 @@
 [INFO] Excluding org.apache.logging.log4j:log4j-core:jar:2.17.1 from the shaded jar.
 [INFO] Excluding org.slf4j:jcl-over-slf4j:jar:1.7.36 from the shaded jar.
 [INFO] Excluding org.apache.logging.log4j:log4j-1.2-api:jar:2.17.1 from the shaded jar.
-[INFO] Dependency-reduced POM written at: <scratch>/wt-e2e/seatunnel-connectors-v2/connector-fake/dependency-reduced-pom.xml
+[INFO] Dependency-reduced POM written at: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-fake/dependency-reduced-pom.xml
 [WARNING] connector-common-3.0.0-SNAPSHOT-2.12.15.jar, connector-fake-3.0.0-SNAPSHOT-2.12.15.jar, seatunnel-format-json-3.0.0-SNAPSHOT-2.12.15.jar, simpleclient-0.16.0.jar, simpleclient_common-0.16.0.jar, simpleclient_hotspot-0.16.0.jar, simpleclient_httpserver-0.16.0.jar, simpleclient_tracer_common-0.16.0.jar, simpleclient_tracer_otel-0.16.0.jar, simpleclient_tracer_otel_agent-0.16.0.jar define 1 overlapping resource: 
 [WARNING]   - META-INF/MANIFEST.MF
 [WARNING] connector-common-3.0.0-SNAPSHOT-2.12.15.jar, connector-fake-3.0.0-SNAPSHOT-2.12.15.jar, seatunnel-format-json-3.0.0-SNAPSHOT-2.12.15.jar define 3 overlapping resources: 
@@ -2033,7 +2031,7 @@
 [WARNING] mvn dependency:tree -Ddetail=true and the above output.
 [WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
 [INFO] Replacing original artifact with shaded artifact.
-[INFO] Replacing <scratch>/wt-e2e/seatunnel-connectors-v2/connector-fake/target/connector-fake-3.0.0-SNAPSHOT-2.12.15.jar with <scratch>/wt-e2e/seatunnel-connectors-v2/connector-fake/target/connector-fake-3.0.0-SNAPSHOT-shaded.jar
+[INFO] Replacing /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-fake/target/connector-fake-3.0.0-SNAPSHOT-2.12.15.jar with /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-fake/target/connector-fake-3.0.0-SNAPSHOT-shaded.jar
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ connector-fake ---
 [INFO] Skipping plugin execution
@@ -2044,21 +2042,21 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ connector-file-base ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 53 source files to <scratch>/wt-e2e/seatunnel-connectors-v2/connector-file/connector-file-base/target/test-classes
+[INFO] Compiling 53 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-file/connector-file-base/target/test-classes
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-transforms-v2 ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-transforms-v2/src/test/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-transforms-v2/src/test/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-transforms-v2 ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 106 source files to <scratch>/wt-e2e/seatunnel-transforms-v2/target/test-classes
+[INFO] Compiling 106 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-transforms-v2/target/test-classes
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ connector-file-base ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ connector-file-base ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-connectors-v2/connector-file/connector-file-base/target/connector-file-base-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-file/connector-file-base/target/connector-file-base-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ connector-file-base ---
 [INFO] Skipping because packaging 'jar' is not pom.
@@ -2085,7 +2083,7 @@
 [INFO] Copying 3 resources from 1 bundle.
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ connector-file-local ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-connectors-v2/connector-file/connector-file-local/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-file/connector-file-local/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] 
 [INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ connector-file-local ---
@@ -2093,7 +2091,7 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ connector-file-local ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 12 source files to <scratch>/wt-e2e/seatunnel-connectors-v2/connector-file/connector-file-local/target/classes
+[INFO] Compiling 12 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-file/connector-file-local/target/classes
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ connector-file-local ---
 [INFO] Copying 5 resources from src/test/resources to target/test-classes
@@ -2101,13 +2099,13 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ connector-file-local ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 5 source files to <scratch>/wt-e2e/seatunnel-connectors-v2/connector-file/connector-file-local/target/test-classes
+[INFO] Compiling 5 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-file/connector-file-local/target/test-classes
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-transforms-v2 ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-transforms-v2 ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-transforms-v2/target/seatunnel-transforms-v2.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-transforms-v2/target/seatunnel-transforms-v2.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-transforms-v2 ---
 [INFO] Skipping because packaging 'jar' is not pom.
@@ -2191,13 +2189,13 @@
 [INFO] Excluding org.apache.logging.log4j:log4j-core:jar:2.17.1 from the shaded jar.
 [INFO] Excluding org.slf4j:jcl-over-slf4j:jar:1.7.36 from the shaded jar.
 [INFO] Excluding org.apache.logging.log4j:log4j-1.2-api:jar:2.17.1 from the shaded jar.
-[INFO] Dependency-reduced POM written at: <scratch>/wt-e2e/seatunnel-transforms-v2/dependency-reduced-pom.xml
+[INFO] Dependency-reduced POM written at: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-transforms-v2/dependency-reduced-pom.xml
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ connector-file-local ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ connector-file-local ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-connectors-v2/connector-file/connector-file-local/target/connector-file-local-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-file/connector-file-local/target/connector-file-local-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ connector-file-local ---
 [INFO] Skipping because packaging 'jar' is not pom.
@@ -2321,7 +2319,7 @@
 [INFO] Excluding org.apache.logging.log4j:log4j-core:jar:2.17.1 from the shaded jar.
 [INFO] Excluding org.slf4j:jcl-over-slf4j:jar:1.7.36 from the shaded jar.
 [INFO] Excluding org.apache.logging.log4j:log4j-1.2-api:jar:2.17.1 from the shaded jar.
-[INFO] Dependency-reduced POM written at: <scratch>/wt-e2e/seatunnel-connectors-v2/connector-file/connector-file-local/dependency-reduced-pom.xml
+[INFO] Dependency-reduced POM written at: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-file/connector-file-local/dependency-reduced-pom.xml
 [WARNING] Discovered module-info.class. Shading will break its strong encapsulation.
 [WARNING] connector-common-3.0.0-SNAPSHOT-2.12.15.jar, httpclient-4.5.13.jar, httpcore-4.4.16.jar, seatunnel-format-json-3.0.0-SNAPSHOT-2.12.15.jar, seatunnel-shade-calcite-1.38.0-3.0.0.jar, seatunnel-shade-guava-27.0-jre-3.0.0.jar, seatunnel-shade-janino-3.1.12-3.0.0.jar, seatunnel-shade-scala-compiler-2.12-3.0.0.jar, seatunnel-transforms-v2.jar define 1 overlapping resource: 
 [WARNING]   - META-INF/DEPENDENCIES
@@ -2450,10 +2448,10 @@
 [WARNING] mvn dependency:tree -Ddetail=true and the above output.
 [WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
 [INFO] Replacing original artifact with shaded artifact.
-[INFO] Replacing <scratch>/wt-e2e/seatunnel-transforms-v2/target/seatunnel-transforms-v2.jar with <scratch>/wt-e2e/seatunnel-transforms-v2/target/seatunnel-transforms-v2-3.0.0-SNAPSHOT-shaded.jar
+[INFO] Replacing /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-transforms-v2/target/seatunnel-transforms-v2.jar with /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-transforms-v2/target/seatunnel-transforms-v2-3.0.0-SNAPSHOT-shaded.jar
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-transforms-v2 ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-transforms-v2/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-transforms-v2/target/test-classpath.txt'.
 [INFO] 
 [INFO] -------------< org.apache.seatunnel:seatunnel-e2e-common >--------------
 [INFO] Building SeaTunnel : E2E : Common 3.0.0-SNAPSHOT                 [42/65]
@@ -2471,7 +2469,7 @@
 [INFO] Copying 3 resources from 1 bundle.
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-e2e-common ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-e2e/seatunnel-e2e-common/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-e2e/seatunnel-e2e-common/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] 
 [INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-e2e-common ---
@@ -2486,7 +2484,7 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-e2e-common ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 70 source files to <scratch>/wt-e2e/seatunnel-e2e/seatunnel-e2e-common/target/test-classes
+[INFO] Compiling 70 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-e2e/seatunnel-e2e-common/target/test-classes
 [WARNING] Discovered module-info.class. Shading will break its strong encapsulation.
 [WARNING] parquet-avro-1.12.3.jar, parquet-column-1.12.3.jar define 110 overlapping classes: 
 [WARNING]   - shaded.parquet.it.unimi.dsi.fastutil.HashCommon
@@ -2554,7 +2552,7 @@
 [WARNING] mvn dependency:tree -Ddetail=true and the above output.
 [WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
 [INFO] Replacing original artifact with shaded artifact.
-[INFO] Replacing <scratch>/wt-e2e/seatunnel-connectors-v2/connector-file/connector-file-local/target/connector-file-local-3.0.0-SNAPSHOT-2.12.15.jar with <scratch>/wt-e2e/seatunnel-connectors-v2/connector-file/connector-file-local/target/connector-file-local-3.0.0-SNAPSHOT-shaded.jar
+[INFO] Replacing /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-file/connector-file-local/target/connector-file-local-3.0.0-SNAPSHOT-2.12.15.jar with /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-connectors-v2/connector-file/connector-file-local/target/connector-file-local-3.0.0-SNAPSHOT-shaded.jar
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ connector-file-local ---
 [INFO] Skipping plugin execution
@@ -2563,13 +2561,13 @@
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ seatunnel-e2e-common ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-e2e/seatunnel-e2e-common/target/seatunnel-e2e-common-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-e2e/seatunnel-e2e-common/target/seatunnel-e2e-common-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-e2e-common ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-jar-plugin:2.4:test-jar (default) @ seatunnel-e2e-common ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-e2e/seatunnel-e2e-common/target/seatunnel-e2e-common-3.0.0-SNAPSHOT-2.12.15-tests.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-e2e/seatunnel-e2e-common/target/seatunnel-e2e-common-3.0.0-SNAPSHOT-2.12.15-tests.jar
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-e2e-common ---
 [INFO] Skipping plugin execution
@@ -2598,7 +2596,7 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-core-starter ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 31 source files to <scratch>/wt-e2e/seatunnel-core/seatunnel-core-starter/target/classes
+[INFO] Compiling 31 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-core-starter/target/classes
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-core-starter ---
 [INFO] Copying 18 resources from src/test/resources to target/test-classes
@@ -2606,19 +2604,19 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-core-starter ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 10 source files to <scratch>/wt-e2e/seatunnel-core/seatunnel-core-starter/target/test-classes
+[INFO] Compiling 10 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-core-starter/target/test-classes
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-core-starter ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-core-starter ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-core/seatunnel-core-starter/target/seatunnel-core-starter-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-core-starter/target/seatunnel-core-starter-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-core-starter ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-core-starter ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-core/seatunnel-core-starter/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-core-starter/target/test-classpath.txt'.
 [INFO] 
 [INFO] 
 [INFO] 
@@ -2722,30 +2720,30 @@
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-translation-flink-common ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 70 source files to <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-core/target/classes
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-common/src/main/resources
+[INFO] Compiling 70 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-core/target/classes
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-common/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] 
 [INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-translation-flink-common ---
 [INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-translation-flink-common:jar:3.0.0-SNAPSHOT...
-[INFO] Copying slf4j-api-1.7.36.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/target/logging-e2e/slf4j-api-1.7.36.jar
-[INFO] Copying slf4j-api-1.7.36.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/target/logging-e2e/slf4j-api-1.7.36.jar
+[INFO] Copying slf4j-api-1.7.36.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/target/logging-e2e/slf4j-api-1.7.36.jar
+[INFO] Copying slf4j-api-1.7.36.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/target/logging-e2e/slf4j-api-1.7.36.jar
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-translation-flink-common ---
-[INFO] Copying jcl-over-slf4j-1.7.36.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/target/logging-e2e/jcl-over-slf4j-1.7.36.jar
-[INFO] Copying jcl-over-slf4j-1.7.36.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/target/logging-e2e/jcl-over-slf4j-1.7.36.jar
-[INFO] Copying log4j-slf4j-impl-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/target/logging-e2e/log4j-slf4j-impl-2.17.1.jar
-[INFO] Copying log4j-slf4j-impl-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/target/logging-e2e/log4j-slf4j-impl-2.17.1.jar
-[INFO] Copying log4j-api-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/target/logging-e2e/log4j-api-2.17.1.jar
-[INFO] Copying log4j-api-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/target/logging-e2e/log4j-api-2.17.1.jar
-[INFO] Copying log4j-core-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/target/logging-e2e/log4j-core-2.17.1.jar
-[INFO] Copying log4j-core-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/target/logging-e2e/log4j-core-2.17.1.jar
+[INFO] Copying jcl-over-slf4j-1.7.36.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/target/logging-e2e/jcl-over-slf4j-1.7.36.jar
+[INFO] Copying jcl-over-slf4j-1.7.36.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/target/logging-e2e/jcl-over-slf4j-1.7.36.jar
+[INFO] Copying log4j-slf4j-impl-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/target/logging-e2e/log4j-slf4j-impl-2.17.1.jar
+[INFO] Copying log4j-slf4j-impl-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/target/logging-e2e/log4j-slf4j-impl-2.17.1.jar
+[INFO] Copying log4j-api-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/target/logging-e2e/log4j-api-2.17.1.jar
+[INFO] Copying log4j-api-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/target/logging-e2e/log4j-api-2.17.1.jar
+[INFO] Copying log4j-core-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/target/logging-e2e/log4j-core-2.17.1.jar
+[INFO] Copying log4j-core-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/target/logging-e2e/log4j-core-2.17.1.jar
 [INFO] 
 [INFO] 
 [INFO] --- maven-shade-plugin:3.5.1:shade (default) @ seatunnel-flink-starter ---
 [INFO] --- maven-shade-plugin:3.5.1:shade (default) @ seatunnel-spark-starter ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 28 source files to <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-common/target/classes
+[INFO] Compiling 28 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-common/target/classes
 [INFO] Including org.apache.seatunnel:seatunnel-core-starter:jar:3.0.0-SNAPSHOT in the shaded jar.
 [INFO] Including org.apache.seatunnel:seatunnel-api:jar:3.0.0-SNAPSHOT in the shaded jar.
 [INFO] Including org.apache.seatunnel:seatunnel-common:jar:3.0.0-SNAPSHOT in the shaded jar.
@@ -2842,7 +2840,7 @@
 [INFO] Including com.typesafe:config:jar:1.3.3 in the shaded jar.
 [INFO] Including com.github.jsqlparser:jsqlparser:jar:4.9 in the shaded jar.
 [INFO] Including org.apache.seatunnel:seatunnel-plugin-discovery:jar:3.0.0-SNAPSHOT in the shaded jar.
-[INFO] Dependency-reduced POM written at: <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/dependency-reduced-pom.xml
+[INFO] Dependency-reduced POM written at: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/dependency-reduced-pom.xml
 [INFO] Including org.apache.commons:commons-compress:jar:1.20 in the shaded jar.
 [INFO] Including com.beust:jcommander:jar:1.81 in the shaded jar.
 [INFO] Including com.google.guava:guava:jar:27.0-jre in the shaded jar.
@@ -2867,10 +2865,10 @@
 [INFO] Excluding org.apache.logging.log4j:log4j-api:jar:2.17.1 from the shaded jar.
 [INFO] Excluding org.apache.logging.log4j:log4j-core:jar:2.17.1 from the shaded jar.
 [INFO] Excluding org.slf4j:jcl-over-slf4j:jar:1.7.36 from the shaded jar.
-[INFO] Dependency-reduced POM written at: <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/dependency-reduced-pom.xml
+[INFO] Dependency-reduced POM written at: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/dependency-reduced-pom.xml
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-translation-spark-common ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-common/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-common/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] 
 [INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-translation-spark-common ---
@@ -2878,17 +2876,17 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-translation-spark-common ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 11 source files to <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-common/target/classes
+[INFO] Compiling 11 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-common/target/classes
 [WARNING] Discovered module-info.class. Shading will break its strong encapsulation.
 [WARNING] Discovered module-info.class. Shading will break its strong encapsulation.
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-translation-flink-common ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-common/src/test/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-common/src/test/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-translation-flink-common ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 3 source files to <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-common/target/test-classes
+[INFO] Compiling 3 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-common/target/test-classes
 [WARNING] jackson-core-2.15.4.jar, seatunnel-shade-jackson-2.15.4-3.0.0.jar define 1 overlapping resource: 
 [WARNING]   - META-INF/thirdparty-LICENSE
 [WARNING] seatunnel-config-base-3.0.0-SNAPSHOT.jar, simpleclient_tracer_otel-0.16.0.jar define 2 overlapping resources: 
@@ -3033,7 +3031,7 @@
 [INFO] Replacing original artifact with shaded artifact.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-spark-starter ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/target/test-classpath.txt'.
 [WARNING] jackson-core-2.15.4.jar, seatunnel-shade-jackson-2.15.4-3.0.0.jar define 1 overlapping resource: 
 [WARNING]   - META-INF/thirdparty-LICENSE
 [WARNING] seatunnel-config-base-3.0.0-SNAPSHOT.jar, simpleclient_tracer_otel-0.16.0.jar define 2 overlapping resources: 
@@ -3178,27 +3176,27 @@
 [INFO] Replacing original artifact with shaded artifact.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-flink-starter ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/target/test-classpath.txt'.
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-translation-spark-common ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-common/src/test/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-common/src/test/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-translation-spark-common ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 2 source files to <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-common/target/test-classes
+[INFO] Compiling 2 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-common/target/test-classes
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-translation-flink-common ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-translation-flink-common ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-common/target/seatunnel-translation-flink-common-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-common/target/seatunnel-translation-flink-common-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-translation-flink-common ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-translation-flink-common ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-common/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-common/target/test-classpath.txt'.
 [INFO] 
 [INFO] 
 [INFO] 
@@ -3246,18 +3244,18 @@
 [INFO] Copying 3 resources from 1 bundle.
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-engine-core ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-core/src/test/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-core/src/test/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-engine-core ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 7 source files to <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-core/target/test-classes
+[INFO] Compiling 7 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-core/target/test-classes
 [INFO] 
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-translation-flink-15 ---
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-translation-flink-13 ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-13/src/main/resources
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-15/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-13/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-15/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] 
@@ -3268,7 +3266,7 @@
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-translation-flink-20 ---
 [INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-translation-flink-13:jar:3.0.0-SNAPSHOT...
 [INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-translation-flink-15:jar:3.0.0-SNAPSHOT...
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-20/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-20/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] 
 [INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-translation-flink-20 ---
@@ -3282,27 +3280,27 @@
 [INFO] No sources to compile
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-translation-flink-15 ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-15/src/test/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-15/src/test/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-translation-flink-15 ---
 [INFO] Changes detected - recompiling the module!
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 4 source files to <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-13/target/classes
-[INFO] Compiling 7 source files to <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-20/target/classes
+[INFO] Compiling 4 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-13/target/classes
+[INFO] Compiling 7 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-20/target/classes
 [INFO] No sources to compile
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-translation-flink-15 ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-translation-flink-15 ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-15/target/seatunnel-translation-flink-15-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-15/target/seatunnel-translation-flink-15-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-translation-flink-15 ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-translation-flink-15 ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-15/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-15/target/test-classpath.txt'.
 [INFO] 
 [INFO] --------< org.apache.seatunnel:seatunnel-flink-starter-common >---------
 [INFO] Building SeaTunnel : Core : Flink Starter : Common 3.0.0-SNAPSHOT [52/65]
@@ -3320,7 +3318,7 @@
 [INFO] Copying 3 resources from 1 bundle.
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-flink-starter-common ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] 
 [INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-flink-starter-common ---
@@ -3328,19 +3326,19 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-flink-starter-common ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 20 source files to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/target/classes
+[INFO] Compiling 20 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/target/classes
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-translation-spark-common ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-translation-spark-common ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-common/target/seatunnel-translation-spark-common-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-common/target/seatunnel-translation-spark-common-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-translation-spark-common ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-translation-spark-common ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-common/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-common/target/test-classpath.txt'.
 [INFO] 
 [INFO] --------< org.apache.seatunnel:seatunnel-translation-spark-2.4 >--------
 [INFO] Building SeaTunnel : Translation : Spark : 2.4 3.0.0-SNAPSHOT    [53/65]
@@ -3380,7 +3378,7 @@
 [INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ seatunnel-translation-spark-2.4 ---
 [INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 27 source files to <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-3.3/target/classes
+[INFO] Compiling 27 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-3.3/target/classes
 [INFO] Copying 3 resources from 1 bundle.
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-translation-spark-2.4 ---
@@ -3392,12 +3390,12 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-translation-spark-2.4 ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 19 source files to <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-2.4/target/classes
+[INFO] Compiling 19 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-2.4/target/classes
 [INFO] 
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-translation-flink-13 ---
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-engine-core ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-13/src/test/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-13/src/test/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-translation-flink-13 ---
@@ -3410,8 +3408,8 @@
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-translation-flink-13 ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-13/target/seatunnel-translation-flink-13-3.0.0-SNAPSHOT-2.12.15.jar
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-core/target/seatunnel-engine-core-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-13/target/seatunnel-translation-flink-13-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-core/target/seatunnel-engine-core-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-translation-flink-13 ---
 [INFO] 
@@ -3422,8 +3420,8 @@
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-translation-flink-13 ---
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-engine-core ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-core/target/test-classpath.txt'.
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-13/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-core/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-13/target/test-classpath.txt'.
 [INFO] 
 [INFO] ------------< org.apache.seatunnel:seatunnel-engine-server >------------
 [INFO] Building SeaTunnel : Engine : Server 3.0.0-SNAPSHOT              [55/65]
@@ -3441,7 +3439,7 @@
 [INFO] Copying 3 resources from 1 bundle.
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-translation-flink-20 ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-20/src/test/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-20/src/test/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-translation-flink-20 ---
@@ -3458,7 +3456,7 @@
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-translation-flink-20 ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-20/target/seatunnel-translation-flink-20-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-20/target/seatunnel-translation-flink-20-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-engine-server ---
 [INFO] 
@@ -3466,20 +3464,20 @@
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-translation-flink-20 ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-20/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-20/target/test-classpath.txt'.
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 390 source files to <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-server/target/classes
+[INFO] Compiling 390 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-server/target/classes
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-translation-spark-3.3 ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-3.3/src/test/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-3.3/src/test/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-translation-spark-3.3 ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 3 source files to <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-3.3/target/test-classes
+[INFO] Compiling 3 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-3.3/target/test-classes
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-translation-spark-2.4 ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-2.4/src/test/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-2.4/src/test/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-translation-spark-2.4 ---
@@ -3489,13 +3487,13 @@
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-translation-spark-2.4 ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-2.4/target/seatunnel-translation-spark-2.4-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-2.4/target/seatunnel-translation-spark-2.4-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-translation-spark-2.4 ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-translation-spark-2.4 ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-2.4/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-2.4/target/test-classpath.txt'.
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-flink-starter-common ---
 [INFO] Copying 2 resources from src/test/resources to target/test-classes
@@ -3503,19 +3501,19 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-flink-starter-common ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 3 source files to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/target/test-classes
+[INFO] Compiling 3 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/target/test-classes
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-translation-spark-3.3 ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-translation-spark-3.3 ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-3.3/target/seatunnel-translation-spark-3.3-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-3.3/target/seatunnel-translation-spark-3.3-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-translation-spark-3.3 ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-translation-spark-3.3 ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-3.3/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-3.3/target/test-classpath.txt'.
 [INFO] 
 [INFO] --------< org.apache.seatunnel:seatunnel-spark-starter-common >---------
 [INFO] Building SeaTunnel : Core : Spark Starter : Common 3.0.0-SNAPSHOT [56/65]
@@ -3533,7 +3531,7 @@
 [INFO] Copying 3 resources from 1 bundle.
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-spark-starter-common ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] 
 [INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-spark-starter-common ---
@@ -3541,23 +3539,23 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-spark-starter-common ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 11 source files to <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/target/classes
+[INFO] Compiling 11 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/target/classes
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-flink-starter-common ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-flink-starter-common ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/target/seatunnel-flink-starter-common.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/target/seatunnel-flink-starter-common.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-flink-starter-common ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:copy-dependencies (copy-starter-logging-package-for-e2e) @ seatunnel-flink-starter-common ---
-[INFO] Copying slf4j-api-1.7.36.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/target/logging-e2e/slf4j-api-1.7.36.jar
-[INFO] Copying jcl-over-slf4j-1.7.36.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/target/logging-e2e/jcl-over-slf4j-1.7.36.jar
-[INFO] Copying log4j-slf4j-impl-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/target/logging-e2e/log4j-slf4j-impl-2.17.1.jar
-[INFO] Copying log4j-api-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/target/logging-e2e/log4j-api-2.17.1.jar
-[INFO] Copying log4j-core-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/target/logging-e2e/log4j-core-2.17.1.jar
+[INFO] Copying slf4j-api-1.7.36.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/target/logging-e2e/slf4j-api-1.7.36.jar
+[INFO] Copying jcl-over-slf4j-1.7.36.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/target/logging-e2e/jcl-over-slf4j-1.7.36.jar
+[INFO] Copying log4j-slf4j-impl-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/target/logging-e2e/log4j-slf4j-impl-2.17.1.jar
+[INFO] Copying log4j-api-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/target/logging-e2e/log4j-api-2.17.1.jar
+[INFO] Copying log4j-core-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/target/logging-e2e/log4j-core-2.17.1.jar
 [INFO] 
 [INFO] --- maven-shade-plugin:3.5.1:shade (default) @ seatunnel-flink-starter-common ---
 [INFO] Including org.apache.commons:commons-lang3:jar:3.18.0 in the shaded jar.
@@ -3621,7 +3619,7 @@
 [INFO] Excluding org.apache.logging.log4j:log4j-api:jar:2.17.1 from the shaded jar.
 [INFO] Excluding org.apache.logging.log4j:log4j-core:jar:2.17.1 from the shaded jar.
 [INFO] Excluding org.apache.logging.log4j:log4j-1.2-api:jar:2.17.1 from the shaded jar.
-[INFO] Dependency-reduced POM written at: <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/dependency-reduced-pom.xml
+[INFO] Dependency-reduced POM written at: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/dependency-reduced-pom.xml
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-spark-starter-common ---
 [INFO] Copying 2 resources from src/test/resources to target/test-classes
@@ -3629,24 +3627,24 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-spark-starter-common ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 3 source files to <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/target/test-classes
+[INFO] Compiling 3 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/target/test-classes
 [WARNING] Discovered module-info.class. Shading will break its strong encapsulation.
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-spark-starter-common ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-spark-starter-common ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/target/seatunnel-spark-starter-common.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/target/seatunnel-spark-starter-common.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-spark-starter-common ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:copy-dependencies (copy-starter-logging-package-for-e2e) @ seatunnel-spark-starter-common ---
-[INFO] Copying slf4j-api-1.7.36.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/target/logging-e2e/slf4j-api-1.7.36.jar
-[INFO] Copying jcl-over-slf4j-1.7.36.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/target/logging-e2e/jcl-over-slf4j-1.7.36.jar
-[INFO] Copying log4j-slf4j-impl-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/target/logging-e2e/log4j-slf4j-impl-2.17.1.jar
-[INFO] Copying log4j-api-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/target/logging-e2e/log4j-api-2.17.1.jar
-[INFO] Copying log4j-core-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/target/logging-e2e/log4j-core-2.17.1.jar
+[INFO] Copying slf4j-api-1.7.36.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/target/logging-e2e/slf4j-api-1.7.36.jar
+[INFO] Copying jcl-over-slf4j-1.7.36.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/target/logging-e2e/jcl-over-slf4j-1.7.36.jar
+[INFO] Copying log4j-slf4j-impl-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/target/logging-e2e/log4j-slf4j-impl-2.17.1.jar
+[INFO] Copying log4j-api-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/target/logging-e2e/log4j-api-2.17.1.jar
+[INFO] Copying log4j-core-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/target/logging-e2e/log4j-core-2.17.1.jar
 [INFO] 
 [INFO] --- maven-shade-plugin:3.5.1:shade (default) @ seatunnel-spark-starter-common ---
 [INFO] Including com.fasterxml.jackson.core:jackson-core:jar:2.15.4 in the shaded jar.
@@ -3707,7 +3705,7 @@
 [INFO] Excluding org.apache.logging.log4j:log4j-api:jar:2.17.1 from the shaded jar.
 [INFO] Excluding org.apache.logging.log4j:log4j-core:jar:2.17.1 from the shaded jar.
 [INFO] Excluding org.slf4j:jcl-over-slf4j:jar:1.7.36 from the shaded jar.
-[INFO] Dependency-reduced POM written at: <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/dependency-reduced-pom.xml
+[INFO] Dependency-reduced POM written at: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/dependency-reduced-pom.xml
 [WARNING] Discovered module-info.class. Shading will break its strong encapsulation.
 [WARNING] jackson-core-2.15.4.jar, seatunnel-shade-jackson-2.15.4-3.0.0.jar define 1 overlapping resource: 
 [WARNING]   - META-INF/thirdparty-LICENSE
@@ -3851,10 +3849,10 @@
 [WARNING] mvn dependency:tree -Ddetail=true and the above output.
 [WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
 [INFO] Replacing original artifact with shaded artifact.
-[INFO] Replacing <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/target/seatunnel-flink-starter-common.jar with <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/target/seatunnel-flink-starter-common-3.0.0-SNAPSHOT-shaded.jar
+[INFO] Replacing /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/target/seatunnel-flink-starter-common.jar with /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/target/seatunnel-flink-starter-common-3.0.0-SNAPSHOT-shaded.jar
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-flink-starter-common ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/target/test-classpath.txt'.
 [INFO] 
 [INFO] 
 [INFO] 
@@ -3906,9 +3904,9 @@
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-flink-15-starter ---
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-flink-13-starter ---
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-flink-20-starter ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/src/main/resources
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter/src/main/resources
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
@@ -3937,9 +3935,9 @@
 [INFO] Changes detected - recompiling the module!
 [INFO] Changes detected - recompiling the module!
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 2 source files to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter/target/test-classes
-[INFO] Compiling 5 source files to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/target/classes
-[INFO] Compiling 3 source files to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/target/classes
+[INFO] Compiling 2 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter/target/test-classes
+[INFO] Compiling 5 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/target/classes
+[INFO] Compiling 3 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/target/classes
 [WARNING] jackson-core-2.15.4.jar, seatunnel-shade-jackson-2.15.4-3.0.0.jar define 1 overlapping resource: 
 [WARNING]   - META-INF/thirdparty-LICENSE
 [WARNING] seatunnel-config-base-3.0.0-SNAPSHOT.jar, simpleclient_tracer_otel-0.16.0.jar define 2 overlapping resources: 
@@ -4076,10 +4074,10 @@
 [WARNING] mvn dependency:tree -Ddetail=true and the above output.
 [WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
 [INFO] Replacing original artifact with shaded artifact.
-[INFO] Replacing <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/target/seatunnel-spark-starter-common.jar with <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/target/seatunnel-spark-starter-common-3.0.0-SNAPSHOT-shaded.jar
+[INFO] Replacing /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/target/seatunnel-spark-starter-common.jar with /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/target/seatunnel-spark-starter-common-3.0.0-SNAPSHOT-shaded.jar
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-spark-starter-common ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/target/test-classpath.txt'.
 [INFO] 
 [INFO] 
 [INFO] -----------< org.apache.seatunnel:seatunnel-spark-2-starter >-----------
@@ -4114,7 +4112,7 @@
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-spark-2-starter ---
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-spark-3-starter ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] Copying 1 resource from src/main/resources to target/classes
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
@@ -4130,7 +4128,7 @@
 [INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-spark-2-starter ---
 [INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-spark-3-starter ---
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-flink-20-starter ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/src/test/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/src/test/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-flink-20-starter ---
@@ -4148,16 +4146,16 @@
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-spark-3-starter ---
 [INFO] Changes detected - recompiling the module!
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 3 source files to <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/target/classes
-[INFO] Compiling 3 source files to <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter/target/test-classes
+[INFO] Compiling 3 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/target/classes
+[INFO] Compiling 3 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter/target/test-classes
 [INFO] Tests are skipped.
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-flink-20-starter ---
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-flink-15-starter ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter/target/seatunnel-flink-15-starter.jar
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/target/seatunnel-flink-20-starter.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter/target/seatunnel-flink-15-starter.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/target/seatunnel-flink-20-starter.jar
 [INFO] 
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-flink-20-starter ---
@@ -4168,16 +4166,16 @@
 [INFO] --- maven-dependency-plugin:3.1.1:copy-dependencies (copy-starter-logging-package-for-e2e) @ seatunnel-flink-15-starter ---
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:copy-dependencies (copy-starter-logging-package-for-e2e) @ seatunnel-flink-20-starter ---
-[INFO] Copying slf4j-api-1.7.36.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter/target/logging-e2e/slf4j-api-1.7.36.jar
-[INFO] Copying slf4j-api-1.7.36.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/target/logging-e2e/slf4j-api-1.7.36.jar
-[INFO] Copying jcl-over-slf4j-1.7.36.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/target/logging-e2e/jcl-over-slf4j-1.7.36.jar
-[INFO] Copying jcl-over-slf4j-1.7.36.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter/target/logging-e2e/jcl-over-slf4j-1.7.36.jar
-[INFO] Copying log4j-slf4j-impl-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/target/logging-e2e/log4j-slf4j-impl-2.17.1.jar
-[INFO] Copying log4j-slf4j-impl-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter/target/logging-e2e/log4j-slf4j-impl-2.17.1.jar
-[INFO] Copying log4j-api-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/target/logging-e2e/log4j-api-2.17.1.jar
-[INFO] Copying log4j-api-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter/target/logging-e2e/log4j-api-2.17.1.jar
-[INFO] Copying log4j-core-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/target/logging-e2e/log4j-core-2.17.1.jar
-[INFO] Copying log4j-core-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter/target/logging-e2e/log4j-core-2.17.1.jar
+[INFO] Copying slf4j-api-1.7.36.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter/target/logging-e2e/slf4j-api-1.7.36.jar
+[INFO] Copying slf4j-api-1.7.36.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/target/logging-e2e/slf4j-api-1.7.36.jar
+[INFO] Copying jcl-over-slf4j-1.7.36.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/target/logging-e2e/jcl-over-slf4j-1.7.36.jar
+[INFO] Copying jcl-over-slf4j-1.7.36.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter/target/logging-e2e/jcl-over-slf4j-1.7.36.jar
+[INFO] Copying log4j-slf4j-impl-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/target/logging-e2e/log4j-slf4j-impl-2.17.1.jar
+[INFO] Copying log4j-slf4j-impl-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter/target/logging-e2e/log4j-slf4j-impl-2.17.1.jar
+[INFO] Copying log4j-api-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/target/logging-e2e/log4j-api-2.17.1.jar
+[INFO] Copying log4j-api-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter/target/logging-e2e/log4j-api-2.17.1.jar
+[INFO] Copying log4j-core-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/target/logging-e2e/log4j-core-2.17.1.jar
+[INFO] Copying log4j-core-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter/target/logging-e2e/log4j-core-2.17.1.jar
 [INFO] 
 [INFO] --- maven-shade-plugin:3.5.1:shade (default) @ seatunnel-flink-20-starter ---
 [INFO] 
@@ -4301,7 +4299,7 @@
 [INFO] Including org.codehaus.mojo:animal-sniffer-annotations:jar:1.17 in the shaded jar.
 [INFO] Including org.slf4j:jcl-over-slf4j:jar:1.7.36 in the shaded jar.
 [INFO] Including io.prometheus:simpleclient:jar:0.16.0 in the shaded jar.
-[INFO] Dependency-reduced POM written at: <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/dependency-reduced-pom.xml
+[INFO] Dependency-reduced POM written at: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/dependency-reduced-pom.xml
 [INFO] Including io.prometheus:simpleclient_tracer_otel:jar:0.16.0 in the shaded jar.
 [INFO] Including io.prometheus:simpleclient_tracer_common:jar:0.16.0 in the shaded jar.
 [INFO] Including io.prometheus:simpleclient_tracer_otel_agent:jar:0.16.0 in the shaded jar.
@@ -4313,10 +4311,10 @@
 [INFO] Excluding org.apache.logging.log4j:log4j-api:jar:2.17.1 from the shaded jar.
 [INFO] Excluding org.apache.logging.log4j:log4j-core:jar:2.17.1 from the shaded jar.
 [INFO] Excluding org.apache.logging.log4j:log4j-1.2-api:jar:2.17.1 from the shaded jar.
-[INFO] Dependency-reduced POM written at: <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter/dependency-reduced-pom.xml
+[INFO] Dependency-reduced POM written at: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter/dependency-reduced-pom.xml
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-flink-13-starter ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/src/test/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/src/test/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-flink-13-starter ---
@@ -4326,17 +4324,17 @@
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-flink-13-starter ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/target/seatunnel-flink-13-starter.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/target/seatunnel-flink-13-starter.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-flink-13-starter ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:copy-dependencies (copy-starter-logging-package-for-e2e) @ seatunnel-flink-13-starter ---
-[INFO] Copying slf4j-api-1.7.36.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/target/logging-e2e/slf4j-api-1.7.36.jar
-[INFO] Copying jcl-over-slf4j-1.7.36.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/target/logging-e2e/jcl-over-slf4j-1.7.36.jar
-[INFO] Copying log4j-slf4j-impl-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/target/logging-e2e/log4j-slf4j-impl-2.17.1.jar
-[INFO] Copying log4j-api-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/target/logging-e2e/log4j-api-2.17.1.jar
-[INFO] Copying log4j-core-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/target/logging-e2e/log4j-core-2.17.1.jar
+[INFO] Copying slf4j-api-1.7.36.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/target/logging-e2e/slf4j-api-1.7.36.jar
+[INFO] Copying jcl-over-slf4j-1.7.36.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/target/logging-e2e/jcl-over-slf4j-1.7.36.jar
+[INFO] Copying log4j-slf4j-impl-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/target/logging-e2e/log4j-slf4j-impl-2.17.1.jar
+[INFO] Copying log4j-api-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/target/logging-e2e/log4j-api-2.17.1.jar
+[INFO] Copying log4j-core-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/target/logging-e2e/log4j-core-2.17.1.jar
 [INFO] 
 [INFO] --- maven-shade-plugin:3.5.1:shade (default) @ seatunnel-flink-13-starter ---
 [INFO] Including org.apache.seatunnel:seatunnel-flink-starter-common:jar:3.0.0-SNAPSHOT in the shaded jar.
@@ -4403,23 +4401,23 @@
 [INFO] Excluding org.apache.logging.log4j:log4j-api:jar:2.17.1 from the shaded jar.
 [INFO] Excluding org.apache.logging.log4j:log4j-core:jar:2.17.1 from the shaded jar.
 [INFO] Excluding org.apache.logging.log4j:log4j-1.2-api:jar:2.17.1 from the shaded jar.
-[INFO] Dependency-reduced POM written at: <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/dependency-reduced-pom.xml
+[INFO] Dependency-reduced POM written at: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/dependency-reduced-pom.xml
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-spark-3-starter ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-spark-3-starter ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter/target/seatunnel-spark-3-starter.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter/target/seatunnel-spark-3-starter.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-spark-3-starter ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:copy-dependencies (copy-starter-logging-package-for-e2e) @ seatunnel-spark-3-starter ---
-[INFO] Copying slf4j-api-1.7.36.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter/target/logging-e2e/slf4j-api-1.7.36.jar
-[INFO] Copying jcl-over-slf4j-1.7.36.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter/target/logging-e2e/jcl-over-slf4j-1.7.36.jar
-[INFO] Copying log4j-slf4j-impl-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter/target/logging-e2e/log4j-slf4j-impl-2.17.1.jar
-[INFO] Copying log4j-api-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter/target/logging-e2e/log4j-api-2.17.1.jar
-[INFO] Copying log4j-core-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter/target/logging-e2e/log4j-core-2.17.1.jar
+[INFO] Copying slf4j-api-1.7.36.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter/target/logging-e2e/slf4j-api-1.7.36.jar
+[INFO] Copying jcl-over-slf4j-1.7.36.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter/target/logging-e2e/jcl-over-slf4j-1.7.36.jar
+[INFO] Copying log4j-slf4j-impl-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter/target/logging-e2e/log4j-slf4j-impl-2.17.1.jar
+[INFO] Copying log4j-api-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter/target/logging-e2e/log4j-api-2.17.1.jar
+[INFO] Copying log4j-core-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter/target/logging-e2e/log4j-core-2.17.1.jar
 [INFO] 
 [INFO] --- maven-shade-plugin:3.5.1:shade (default) @ seatunnel-spark-3-starter ---
 [INFO] Including com.fasterxml.jackson.core:jackson-core:jar:2.15.4 in the shaded jar.
@@ -4484,7 +4482,7 @@
 [INFO] Excluding org.apache.logging.log4j:log4j-api:jar:2.17.1 from the shaded jar.
 [INFO] Excluding org.apache.logging.log4j:log4j-core:jar:2.17.1 from the shaded jar.
 [INFO] Excluding org.slf4j:jcl-over-slf4j:jar:1.7.36 from the shaded jar.
-[INFO] Dependency-reduced POM written at: <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter/dependency-reduced-pom.xml
+[INFO] Dependency-reduced POM written at: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter/dependency-reduced-pom.xml
 [WARNING] Discovered module-info.class. Shading will break its strong encapsulation.
 [WARNING] Discovered module-info.class. Shading will break its strong encapsulation.
 [WARNING] Discovered module-info.class. Shading will break its strong encapsulation.
@@ -5912,14 +5910,14 @@
 [WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
 [INFO] Replacing original artifact with shaded artifact.
 [INFO] Replacing original artifact with shaded artifact.
-[INFO] Replacing <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter/target/seatunnel-flink-15-starter.jar with <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter/target/seatunnel-flink-15-starter-3.0.0-SNAPSHOT-shaded.jar
-[INFO] Replacing <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/target/seatunnel-flink-20-starter.jar with <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/target/seatunnel-flink-20-starter-3.0.0-SNAPSHOT-shaded.jar
+[INFO] Replacing /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter/target/seatunnel-flink-15-starter.jar with /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter/target/seatunnel-flink-15-starter-3.0.0-SNAPSHOT-shaded.jar
+[INFO] Replacing /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/target/seatunnel-flink-20-starter.jar with /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/target/seatunnel-flink-20-starter-3.0.0-SNAPSHOT-shaded.jar
 [INFO] 
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-flink-15-starter ---
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-flink-20-starter ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter/target/test-classpath.txt'.
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/target/test-classpath.txt'.
 [WARNING] Discovered module-info.class. Shading will break its strong encapsulation.
 [WARNING] eclipse-collections-api-11.1.0.jar, seatunnel-flink-starter-common.jar, seatunnel-shade-arrow-15.0.1-3.0.0.jar define 1540 overlapping classes: 
 [INFO] 
@@ -6009,7 +6007,7 @@
 [WARNING]   - org.apache.seatunnel.translation.flink.metric.FlinkMetricContext
 [WARNING]   - org.apache.seatunnel.translation.flink.sink.FlinkSinkWriterContext
 [WARNING] arrow-format-15.0.1.jar, seatunnel-flink-starter-common.jar define 105 overlapping classes and resources: 
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/src/test/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/src/test/resources
 [WARNING]   - META-INF/maven/org.apache.arrow/arrow-format/pom.properties
 [WARNING]   - META-INF/maven/org.apache.arrow/arrow-format/pom.xml
 [WARNING]   - org.apache.arrow.flatbuf.Binary
@@ -6079,7 +6077,7 @@
 [WARNING]   - io.prometheus.client.exporter.common.TextFormat$1
 [WARNING] eclipse-collections-11.1.0.jar, seatunnel-flink-starter-common.jar, seatunnel-shade-arrow-15.0.1-3.0.0.jar define 3940 overlapping classes: 
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 4 source files to <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/target/test-classes
+[INFO] Compiling 4 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/target/test-classes
 [WARNING]   - org.eclipse.collections.impl.AbstractRichIterable
 [WARNING]   - org.eclipse.collections.impl.Counter
 [WARNING]   - org.eclipse.collections.impl.EmptyIterator
@@ -6633,10 +6631,10 @@
 [WARNING] mvn dependency:tree -Ddetail=true and the above output.
 [WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
 [INFO] Replacing original artifact with shaded artifact.
-[INFO] Replacing <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/target/seatunnel-flink-13-starter.jar with <scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/target/seatunnel-flink-13-starter-3.0.0-SNAPSHOT-shaded.jar
+[INFO] Replacing /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/target/seatunnel-flink-13-starter.jar with /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/target/seatunnel-flink-13-starter-3.0.0-SNAPSHOT-shaded.jar
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-flink-13-starter ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/target/test-classpath.txt'.
 [WARNING] jsr305-3.0.0.jar, seatunnel-spark-starter-common.jar define 31 overlapping resources: 
 [WARNING]   - javax/annotation/CheckForNull.java
 [WARNING]   - javax/annotation/CheckForSigned.java
@@ -7290,26 +7288,26 @@
 [WARNING] mvn dependency:tree -Ddetail=true and the above output.
 [WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
 [INFO] Replacing original artifact with shaded artifact.
-[INFO] Replacing <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter/target/seatunnel-spark-3-starter.jar with <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter/target/seatunnel-spark-3-starter-3.0.0-SNAPSHOT-shaded.jar
+[INFO] Replacing /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter/target/seatunnel-spark-3-starter.jar with /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter/target/seatunnel-spark-3-starter-3.0.0-SNAPSHOT-shaded.jar
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-spark-3-starter ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter/target/test-classpath.txt'.
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-spark-2-starter ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-spark-2-starter ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/target/seatunnel-spark-2-starter.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/target/seatunnel-spark-2-starter.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-spark-2-starter ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:copy-dependencies (copy-starter-logging-package-for-e2e) @ seatunnel-spark-2-starter ---
-[INFO] Copying slf4j-api-1.7.36.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/target/logging-e2e/slf4j-api-1.7.36.jar
-[INFO] Copying jcl-over-slf4j-1.7.36.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/target/logging-e2e/jcl-over-slf4j-1.7.36.jar
-[INFO] Copying log4j-slf4j-impl-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/target/logging-e2e/log4j-slf4j-impl-2.17.1.jar
-[INFO] Copying log4j-api-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/target/logging-e2e/log4j-api-2.17.1.jar
-[INFO] Copying log4j-core-2.17.1.jar to <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/target/logging-e2e/log4j-core-2.17.1.jar
+[INFO] Copying slf4j-api-1.7.36.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/target/logging-e2e/slf4j-api-1.7.36.jar
+[INFO] Copying jcl-over-slf4j-1.7.36.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/target/logging-e2e/jcl-over-slf4j-1.7.36.jar
+[INFO] Copying log4j-slf4j-impl-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/target/logging-e2e/log4j-slf4j-impl-2.17.1.jar
+[INFO] Copying log4j-api-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/target/logging-e2e/log4j-api-2.17.1.jar
+[INFO] Copying log4j-core-2.17.1.jar to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/target/logging-e2e/log4j-core-2.17.1.jar
 [INFO] 
 [INFO] --- maven-shade-plugin:3.5.1:shade (default) @ seatunnel-spark-2-starter ---
 [INFO] Including commons-codec:commons-codec:jar:1.13 in the shaded jar.
@@ -7376,7 +7374,7 @@
 [INFO] Excluding org.apache.logging.log4j:log4j-api:jar:2.17.1 from the shaded jar.
 [INFO] Excluding org.apache.logging.log4j:log4j-core:jar:2.17.1 from the shaded jar.
 [INFO] Excluding org.slf4j:jcl-over-slf4j:jar:1.7.36 from the shaded jar.
-[INFO] Dependency-reduced POM written at: <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/dependency-reduced-pom.xml
+[INFO] Dependency-reduced POM written at: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/dependency-reduced-pom.xml
 [WARNING] Discovered module-info.class. Shading will break its strong encapsulation.
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-engine-server ---
@@ -7385,7 +7383,7 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-engine-server ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 117 source files to <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-server/target/test-classes
+[INFO] Compiling 117 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-server/target/test-classes
 [WARNING] seatunnel-config-base-3.0.0-SNAPSHOT.jar, seatunnel-spark-starter-common.jar, simpleclient_tracer_otel-0.16.0.jar define 2 overlapping resources: 
 [WARNING]   - META-INF/maven/io.prometheus/simpleclient_tracer_otel/pom.properties
 [WARNING]   - META-INF/maven/io.prometheus/simpleclient_tracer_otel/pom.xml
@@ -8053,22 +8051,22 @@
 [WARNING] mvn dependency:tree -Ddetail=true and the above output.
 [WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
 [INFO] Replacing original artifact with shaded artifact.
-[INFO] Replacing <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/target/seatunnel-spark-2-starter.jar with <scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/target/seatunnel-spark-2-starter-3.0.0-SNAPSHOT-shaded.jar
+[INFO] Replacing /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/target/seatunnel-spark-2-starter.jar with /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/target/seatunnel-spark-2-starter-3.0.0-SNAPSHOT-shaded.jar
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-spark-2-starter ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/target/test-classpath.txt'.
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-engine-server ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-engine-server ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-server/target/seatunnel-engine-server-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-server/target/seatunnel-engine-server-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-engine-server ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-engine-server ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-server/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-server/target/test-classpath.txt'.
 [INFO] 
 [INFO] ------------< org.apache.seatunnel:seatunnel-engine-client >------------
 [INFO] Building SeaTunnel : Engine : Client 3.0.0-SNAPSHOT              [62/65]
@@ -8086,7 +8084,7 @@
 [INFO] Copying 3 resources from 1 bundle.
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-engine-client ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-client/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-client/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] 
 [INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-engine-client ---
@@ -8094,7 +8092,7 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-engine-client ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 10 source files to <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-client/target/classes
+[INFO] Compiling 10 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-client/target/classes
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-engine-client ---
 [INFO] Copying 17 resources from src/test/resources to target/test-classes
@@ -8102,19 +8100,19 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-engine-client ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 8 source files to <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-client/target/test-classes
+[INFO] Compiling 8 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-client/target/test-classes
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-engine-client ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-engine-client ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-client/target/seatunnel-engine-client-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-client/target/seatunnel-engine-client-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-engine-client ---
 [INFO] Skipping because packaging 'jar' is not pom.
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-engine-client ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-client/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-engine/seatunnel-engine-client/target/test-classpath.txt'.
 [INFO] 
 [INFO] ---------------< org.apache.seatunnel:seatunnel-starter >---------------
 [INFO] Building SeaTunnel : Core : Starter 3.0.0-SNAPSHOT               [63/65]
@@ -8140,7 +8138,7 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-starter ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 14 source files to <scratch>/wt-e2e/seatunnel-core/seatunnel-starter/target/classes
+[INFO] Compiling 14 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-starter/target/classes
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-starter ---
 [INFO] Copying 17 resources from src/test/resources to target/test-classes
@@ -8148,13 +8146,13 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-starter ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 11 source files to <scratch>/wt-e2e/seatunnel-core/seatunnel-starter/target/test-classes
+[INFO] Compiling 11 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-starter/target/test-classes
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-starter ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-starter ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-core/seatunnel-starter/target/seatunnel-starter.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-starter/target/seatunnel-starter.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-starter ---
 [INFO] Skipping because packaging 'jar' is not pom.
@@ -8252,7 +8250,7 @@
 [INFO] Including io.prometheus:simpleclient_hotspot:jar:0.16.0 in the shaded jar.
 [INFO] Including io.prometheus:simpleclient_httpserver:jar:0.16.0 in the shaded jar.
 [INFO] Including io.prometheus:simpleclient_common:jar:0.16.0 in the shaded jar.
-[INFO] Dependency-reduced POM written at: <scratch>/wt-e2e/seatunnel-core/seatunnel-starter/dependency-reduced-pom.xml
+[INFO] Dependency-reduced POM written at: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-starter/dependency-reduced-pom.xml
 [WARNING] Discovered module-info.class. Shading will break its strong encapsulation.
 [WARNING] arrow-format-15.0.1.jar, arrow-memory-core-15.0.1.jar, arrow-memory-netty-15.0.1.jar, arrow-vector-15.0.1.jar, checkpoint-storage-api-3.0.0-SNAPSHOT-2.12.15.jar, checkpoint-storage-hdfs-3.0.0-SNAPSHOT-2.12.15.jar, checkpoint-storage-local-file-3.0.0-SNAPSHOT-2.12.15.jar, hazelcast-5.1.jar, httpclient-4.5.13.jar, httpcore-4.4.16.jar, imap-storage-api-3.0.0-SNAPSHOT-2.12.15.jar, imap-storage-file-3.0.0-SNAPSHOT-2.12.15.jar, jackson-annotations-2.15.4.jar, jackson-core-2.15.4.jar, jackson-databind-2.15.4.jar, jackson-dataformat-properties-2.15.4.jar, jackson-dataformat-yaml-2.15.4.jar, jackson-datatype-jdk8-2.15.4.jar, jackson-datatype-jsr310-2.15.4.jar, log4j-1.2-api-2.17.1.jar, log4j-api-2.17.1.jar, log4j-core-2.17.1.jar, log4j-slf4j-impl-2.17.1.jar, seatunnel-api-3.0.0-SNAPSHOT-2.12.15.jar, seatunnel-common-3.0.0-SNAPSHOT-2.12.15.jar, seatunnel-config-base-3.0.0-SNAPSHOT.jar, seatunnel-config-shade-3.0.0-SNAPSHOT.jar, seatunnel-config-sql-3.0.0-SNAPSHOT-2.12.15.jar, seatunnel-core-starter-3.0.0-SNAPSHOT-2.12.15.jar, seatunnel-engine-client-3.0.0-SNAPSHOT-2.12.15.jar, seatunnel-engine-common-3.0.0-SNAPSHOT-2.12.15.jar, seatunnel-engine-core-3.0.0-SNAPSHOT-2.12.15.jar, seatunnel-engine-server-3.0.0-SNAPSHOT-2.12.15.jar, seatunnel-engine-ui-3.0.0-SNAPSHOT-2.12.15.jar, seatunnel-plugin-discovery-3.0.0-SNAPSHOT-2.12.15.jar, seatunnel-shade-arrow-15.0.1-3.0.0.jar, seatunnel-shade-commons-lang3-3.18.0-3.0.0.jar, seatunnel-shade-guava-27.0-jre-3.0.0.jar, seatunnel-shade-hazelcast-5.1-3.0.0.jar, seatunnel-shade-jackson-2.15.4-3.0.0.jar, seatunnel-shade-jetty-9.4.56.v20240826-3.0.0.jar, seatunnel-starter.jar, serializer-api-3.0.0-SNAPSHOT-2.12.15.jar, serializer-protobuf-3.0.0-SNAPSHOT-2.12.15.jar define 1 overlapping resource: 
 [WARNING]   - META-INF/NOTICE
@@ -8445,10 +8443,10 @@
 [WARNING] mvn dependency:tree -Ddetail=true and the above output.
 [WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
 [INFO] Replacing original artifact with shaded artifact.
-[INFO] Replacing <scratch>/wt-e2e/seatunnel-core/seatunnel-starter/target/seatunnel-starter.jar with <scratch>/wt-e2e/seatunnel-core/seatunnel-starter/target/seatunnel-starter-3.0.0-SNAPSHOT-shaded.jar
+[INFO] Replacing /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-starter/target/seatunnel-starter.jar with /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-starter/target/seatunnel-starter-3.0.0-SNAPSHOT-shaded.jar
 [INFO] 
 [INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-starter ---
-[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-core/seatunnel-starter/target/test-classpath.txt'.
+[INFO] Wrote classpath file '/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-core/seatunnel-starter/target/test-classpath.txt'.
 [INFO] 
 [INFO] ----------< org.apache.seatunnel:seatunnel-connector-v2-e2e >-----------
 [INFO] Building SeaTunnel : E2E : Connector V2 : 3.0.0-SNAPSHOT         [64/65]
@@ -8490,7 +8488,7 @@
 [INFO] Copying 3 resources from 1 bundle.
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ connector-fake-e2e ---
-[INFO] skip non existing resourceDirectory <scratch>/wt-e2e/seatunnel-e2e/seatunnel-connector-v2-e2e/connector-fake-e2e/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-e2e/seatunnel-connector-v2-e2e/connector-fake-e2e/src/main/resources
 [INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
 [INFO] 
 [INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ connector-fake-e2e ---
@@ -8505,13 +8503,13 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ connector-fake-e2e ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 8 source files to <scratch>/wt-e2e/seatunnel-e2e/seatunnel-connector-v2-e2e/connector-fake-e2e/target/test-classes
+[INFO] Compiling 8 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-e2e/seatunnel-connector-v2-e2e/connector-fake-e2e/target/test-classes
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ connector-fake-e2e ---
 [INFO] Tests are skipped.
 [INFO] 
 [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ connector-fake-e2e ---
-[INFO] Building jar: <scratch>/wt-e2e/seatunnel-e2e/seatunnel-connector-v2-e2e/connector-fake-e2e/target/connector-fake-e2e-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-e2e/seatunnel-connector-v2-e2e/connector-fake-e2e/target/connector-fake-e2e-3.0.0-SNAPSHOT-2.12.15.jar
 [INFO] 
 [INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ connector-fake-e2e ---
 [INFO] Skipping because packaging 'jar' is not pom.

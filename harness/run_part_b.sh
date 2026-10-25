@@ -9,9 +9,9 @@
 set -u
 HERE="$(cd "$(dirname "$0")" && pwd)"
 LOGS="$HERE/../logs/partB"
-RT=<repo>/runtime/replay
+RT=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay
 JDK8=/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home
-JDK11=<home>
+JDK11=/Users/goutamadwant/Library/Java/JavaVirtualMachines/temurin-11.0.19/Contents/Home
 MOD=seatunnel-edge-agent/seatunnel-edge-agent-connector
 T=src/test/java/org/apache/seatunnel/edge/agent/connector/file/FileCollectReaderBehaviorTest.java
 CLS=org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest

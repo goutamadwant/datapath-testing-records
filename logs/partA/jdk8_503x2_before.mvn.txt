@@ -1,8 +1,8 @@
 # run_id=jdk8_503x2_before order=1 start=2026-10-25T00:17:46-0700
-# cwd=<scratch>/partA/runs/jdk8_503x2_before/proj
+# cwd=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_503x2_before/proj
 # JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home
-# server: /opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault 503x2 --log ./logs/partA/jdk8_503x2_before.server.jsonl --port-file <scratch>/partA/runs/jdk8_503x2_before.port
-# command: ./mvnw -B -s <scratch>/partA/runs/jdk8_503x2_before/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk8_503x2_before/repo -f pom.xml dependency:resolve
+# server: /opt/anaconda3/bin/python3 -I /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/fault_mirror.py --root /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo --fault 503x2 --log /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_503x2_before.server.jsonl --port-file /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_503x2_before.port
+# command: ./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_503x2_before/settings.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_503x2_before/repo -f pom.xml dependency:resolve
 [INFO] Scanning for projects...
 [INFO] Downloading from faultmirror: http://127.0.0.1:59255/maven2/org/apache/maven/plugins/maven-clean-plugin/2.5/maven-clean-plugin-2.5.pom
 [INFO] Downloaded from faultmirror: http://127.0.0.1:59255/maven2/org/apache/maven/plugins/maven-clean-plugin/2.5/maven-clean-plugin-2.5.pom (3.9 kB at 40 kB/s)

@@ -25,20 +25,20 @@
     "junit-4.13.2.pom": 1
    },
    "error": "[ERROR] Failed to execute goal on project tiny: Could not resolve dependencies for project replay.local:tiny:jar:1.0: Failed to collect dependencies at junit:junit:jar:4.13.2: Failed to read artifact descriptor for junit:junit:jar:4.13.2: Could not transfer artifact junit:junit:pom:4.13.2 from/to faultmirror (http://127.0.0.1:59255/maven2): transfer failed for http://127.0.0.1:59255/maven2/junit/junit/4.13.2/junit-4.13.2.pom, status: 503 Service Unavailable -> [Help 1]",
-   "command": "./mvnw -B -s <scratch>/partA/runs/jdk8_503x2_before/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk8_503x2_before/repo -f pom.xml dependency:resolve",
-   "server_command": "/opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault 503x2 --log ./logs/partA/jdk8_503x2_before.server.jsonl --port-file <scratch>/partA/runs/jdk8_503x2_before.port",
+   "command": "./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_503x2_before/settings.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_503x2_before/repo -f pom.xml dependency:resolve",
+   "server_command": "/opt/anaconda3/bin/python3 -I /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/fault_mirror.py --root /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo --fault 503x2 --log /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_503x2_before.server.jsonl --port-file /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_503x2_before.port",
    "article": {
     "before": "fails on the first 503",
     "after": "succeeds on the third request"
    },
    "logs": [
     {
-     "path": "./logs/partA/jdk8_503x2_before.mvn.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_503x2_before.mvn.txt",
      "sha256": "dd4c0c1f18677049ded9dc17182c9f46751949ac9e85d14934e9d5c556aeb3c6",
      "bytes": 13568
     },
     {
-     "path": "./logs/partA/jdk8_503x2_before.server.jsonl",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_503x2_before.server.jsonl",
      "sha256": "d2dd18bd39140e3007e3d63682e14996b59f29445a605f1810374a799661fea8",
      "bytes": 18419
     }
@@ -72,20 +72,20 @@
     "junit-3.8.1.jar": 3
    },
    "error": null,
-   "command": "./mvnw -B -s <scratch>/partA/runs/jdk8_503x2_after/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk8_503x2_after/repo -f pom.xml dependency:resolve",
-   "server_command": "/opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault 503x2 --log ./logs/partA/jdk8_503x2_after.server.jsonl --port-file <scratch>/partA/runs/jdk8_503x2_after.port",
+   "command": "./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_503x2_after/settings.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_503x2_after/repo -f pom.xml dependency:resolve",
+   "server_command": "/opt/anaconda3/bin/python3 -I /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/fault_mirror.py --root /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo --fault 503x2 --log /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_503x2_after.server.jsonl --port-file /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_503x2_after.port",
    "article": {
     "before": "fails on the first 503",
     "after": "succeeds on the third request"
    },
    "logs": [
     {
-     "path": "./logs/partA/jdk8_503x2_after.mvn.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_503x2_after.mvn.txt",
      "sha256": "35822025d44ab10612ef21490f984b40a67c758c7c75a31d87d81bb19a37728c",
      "bytes": 85533
     },
     {
-     "path": "./logs/partA/jdk8_503x2_after.server.jsonl",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_503x2_after.server.jsonl",
      "sha256": "cb13c5513e18504231550ef8c5eebbb34fdbd83b1ecea12e2d6d21bef29dc959",
      "bytes": 140496
     }
@@ -116,20 +116,20 @@
     "junit-4.13.2.pom": 4
    },
    "error": "[ERROR] Failed to execute goal on project tiny: Could not resolve dependencies for project replay.local:tiny:jar:1.0: Failed to collect dependencies at junit:junit:jar:4.13.2: Failed to read artifact descriptor for junit:junit:jar:4.13.2: Could not transfer artifact junit:junit:pom:4.13.2 from/to faultmirror (http://127.0.0.1:59358/maven2): transfer failed for http://127.0.0.1:59358/maven2/junit/junit/4.13.2/junit-4.13.2.pom: Connection reset -> [Help 1]",
-   "command": "./mvnw -B -s <scratch>/partA/runs/jdk8_reset4_before/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk8_reset4_before/repo -f pom.xml dependency:resolve",
-   "server_command": "/opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault reset4 --log ./logs/partA/jdk8_reset4_before.server.jsonl --port-file <scratch>/partA/runs/jdk8_reset4_before.port",
+   "command": "./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_reset4_before/settings.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_reset4_before/repo -f pom.xml dependency:resolve",
+   "server_command": "/opt/anaconda3/bin/python3 -I /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/fault_mirror.py --root /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo --fault reset4 --log /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_reset4_before.server.jsonl --port-file /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_reset4_before.port",
    "article": {
     "before": "fails after four attempts",
     "after": "succeeds on the fifth"
    },
    "logs": [
     {
-     "path": "./logs/partA/jdk8_reset4_before.mvn.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_reset4_before.mvn.txt",
      "sha256": "baf8ed428d4e806048fcfa3632931defb32b253af9c6519e450b0bc633c4f5ec",
      "bytes": 13560
     },
     {
-     "path": "./logs/partA/jdk8_reset4_before.server.jsonl",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_reset4_before.server.jsonl",
      "sha256": "a6d226fc38640cb2a7cb91cf8a895ec4a88071bcc2492f0a39919cab384bb368",
      "bytes": 19029
     }
@@ -165,20 +165,20 @@
     "junit-3.8.1.jar": 5
    },
    "error": null,
-   "command": "./mvnw -B -s <scratch>/partA/runs/jdk8_reset4_after/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk8_reset4_after/repo -f pom.xml dependency:resolve",
-   "server_command": "/opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault reset4 --log ./logs/partA/jdk8_reset4_after.server.jsonl --port-file <scratch>/partA/runs/jdk8_reset4_after.port",
+   "command": "./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_reset4_after/settings.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_reset4_after/repo -f pom.xml dependency:resolve",
+   "server_command": "/opt/anaconda3/bin/python3 -I /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/fault_mirror.py --root /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo --fault reset4 --log /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_reset4_after.server.jsonl --port-file /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_reset4_after.port",
    "article": {
     "before": "fails after four attempts",
     "after": "succeeds on the fifth"
    },
    "logs": [
     {
-     "path": "./logs/partA/jdk8_reset4_after.mvn.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_reset4_after.mvn.txt",
      "sha256": "b8351971d8301e49cf1077a9201c4f1403749bd07f4e61adc615f8761d679b2d",
      "bytes": 85540
     },
     {
-     "path": "./logs/partA/jdk8_reset4_after.server.jsonl",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_reset4_after.server.jsonl",
      "sha256": "68ebdc13d51e093b884cc7320c1122ecc141c9a54690c65e95eae18941045059",
      "bytes": 142045
     }
@@ -208,20 +208,20 @@
     "junit-4.13.2.pom": 3
    },
    "error": "[ERROR] Failed to execute goal on project tiny: Could not resolve dependencies for project replay.local:tiny:jar:1.0: Failed to collect dependencies at junit:junit:jar:4.13.2: Failed to read artifact descriptor for junit:junit:jar:4.13.2: Could not transfer artifact junit:junit:pom:4.13.2 from/to faultmirror (http://127.0.0.1:59434/maven2): GET request of: junit/junit/4.13.2/junit-4.13.2.pom from faultmirror failed: Attempted read from closed stream. -> [Help 1]",
-   "command": "./mvnw -B -s <scratch>/partA/runs/jdk8_429x2_before/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk8_429x2_before/repo -f pom.xml dependency:resolve",
-   "server_command": "/opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault 429x2 --log ./logs/partA/jdk8_429x2_before.server.jsonl --port-file <scratch>/partA/runs/jdk8_429x2_before.port",
+   "command": "./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_429x2_before/settings.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_429x2_before/repo -f pom.xml dependency:resolve",
+   "server_command": "/opt/anaconda3/bin/python3 -I /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/fault_mirror.py --root /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo --fault 429x2 --log /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_429x2_before.server.jsonl --port-file /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_429x2_before.port",
    "article": {
     "before": "succeeds, the transport already backs off on 429",
     "after": "succeeds"
    },
    "logs": [
     {
-     "path": "./logs/partA/jdk8_429x2_before.mvn.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_429x2_before.mvn.txt",
      "sha256": "eafaa1684ce58d787c1ea9c372bca7883574188643dc6d6e9a24af88896e03bb",
      "bytes": 13564
     },
     {
-     "path": "./logs/partA/jdk8_429x2_before.server.jsonl",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_429x2_before.server.jsonl",
      "sha256": "98a9b029bd1688aae7821326f09458857734d89548284b019dad2d11b664c606",
      "bytes": 18821
     }
@@ -255,20 +255,20 @@
     "junit-3.8.1.jar": 3
    },
    "error": null,
-   "command": "./mvnw -B -s <scratch>/partA/runs/jdk8_429x2_after/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk8_429x2_after/repo -f pom.xml dependency:resolve",
-   "server_command": "/opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault 429x2 --log ./logs/partA/jdk8_429x2_after.server.jsonl --port-file <scratch>/partA/runs/jdk8_429x2_after.port",
+   "command": "./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_429x2_after/settings.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_429x2_after/repo -f pom.xml dependency:resolve",
+   "server_command": "/opt/anaconda3/bin/python3 -I /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/fault_mirror.py --root /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo --fault 429x2 --log /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_429x2_after.server.jsonl --port-file /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_429x2_after.port",
    "article": {
     "before": "succeeds, the transport already backs off on 429",
     "after": "succeeds"
    },
    "logs": [
     {
-     "path": "./logs/partA/jdk8_429x2_after.mvn.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_429x2_after.mvn.txt",
      "sha256": "b3e3f2f73d6d5e8055aeb1438e5459b6843df4d88326b4d9cb4ff60aa39653c6",
      "bytes": 85510
     },
     {
-     "path": "./logs/partA/jdk8_429x2_after.server.jsonl",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_429x2_after.server.jsonl",
      "sha256": "d635c4a30d66a088174e1bb593b2566e15e54286b0b13df26bd23e5177cb3a34",
      "bytes": 140523
     }
@@ -296,20 +296,20 @@
     "junit-4.13.2.pom": 1
    },
    "error": "[ERROR] Failed to execute goal on project tiny: Could not resolve dependencies for project replay.local:tiny:jar:1.0: Failed to collect dependencies at junit:junit:jar:4.13.2: Failed to read artifact descriptor for junit:junit:jar:4.13.2: Could not transfer artifact junit:junit:pom:4.13.2 from/to faultmirror (http://127.0.0.1:59640/maven2): GET request of: junit/junit/4.13.2/junit-4.13.2.pom from faultmirror failed: Premature end of Content-Length delimited message body (expected: 27,018; received: 13,509) -> [Help 1]",
-   "command": "./mvnw -B -s <scratch>/partA/runs/jdk8_truncate1_before/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk8_truncate1_before/repo -f pom.xml dependency:resolve",
-   "server_command": "/opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault truncate1 --log ./logs/partA/jdk8_truncate1_before.server.jsonl --port-file <scratch>/partA/runs/jdk8_truncate1_before.port",
+   "command": "./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_truncate1_before/settings.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_truncate1_before/repo -f pom.xml dependency:resolve",
+   "server_command": "/opt/anaconda3/bin/python3 -I /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/fault_mirror.py --root /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo --fault truncate1 --log /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_truncate1_before.server.jsonl --port-file /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_truncate1_before.port",
    "article": {
     "before": "fails",
     "after": "still fails"
    },
    "logs": [
     {
-     "path": "./logs/partA/jdk8_truncate1_before.mvn.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_truncate1_before.mvn.txt",
      "sha256": "ebff64c1e5aed1895e0b4e1b0fea354f7c33c4679aec6988140ac4242ec008ab",
      "bytes": 13649
     },
     {
-     "path": "./logs/partA/jdk8_truncate1_before.server.jsonl",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_truncate1_before.server.jsonl",
      "sha256": "c01a10eb592baedac49f5ef6521df7bcca7960d5f914d76510ec156aa8a42902",
      "bytes": 18423
     }
@@ -337,20 +337,20 @@
     "junit-4.13.2.pom": 1
    },
    "error": "[ERROR] Failed to execute goal on project tiny: Could not resolve dependencies for project replay.local:tiny:jar:1.0: Failed to collect dependencies at junit:junit:jar:4.13.2: Failed to read artifact descriptor for junit:junit:jar:4.13.2: Could not transfer artifact junit:junit:pom:4.13.2 from/to faultmirror (http://127.0.0.1:59691/maven2): GET request of: junit/junit/4.13.2/junit-4.13.2.pom from faultmirror failed: Premature end of Content-Length delimited message body (expected: 27,018; received: 13,509) -> [Help 1]",
-   "command": "./mvnw -B -s <scratch>/partA/runs/jdk8_truncate1_after/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk8_truncate1_after/repo -f pom.xml dependency:resolve",
-   "server_command": "/opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault truncate1 --log ./logs/partA/jdk8_truncate1_after.server.jsonl --port-file <scratch>/partA/runs/jdk8_truncate1_after.port",
+   "command": "./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_truncate1_after/settings.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_truncate1_after/repo -f pom.xml dependency:resolve",
+   "server_command": "/opt/anaconda3/bin/python3 -I /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/fault_mirror.py --root /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo --fault truncate1 --log /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_truncate1_after.server.jsonl --port-file /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_truncate1_after.port",
    "article": {
     "before": "fails",
     "after": "still fails"
    },
    "logs": [
     {
-     "path": "./logs/partA/jdk8_truncate1_after.mvn.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_truncate1_after.mvn.txt",
      "sha256": "d3633b80a3fb862611c106bc1cc63c44daf3f3b43cc73f89537f7344af1ffc7d",
      "bytes": 13643
     },
     {
-     "path": "./logs/partA/jdk8_truncate1_after.server.jsonl",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_truncate1_after.server.jsonl",
      "sha256": "57859a6d57c8c13b7fb7aac28d72c6f5eab323ee7efbdd711f784a1aae4b1864",
      "bytes": 18469
     }
@@ -374,20 +374,20 @@
    "junit_pom_4_13_2_actions": [],
    "junit_requests_per_path": {},
    "error": null,
-   "command": "./mvnw -B -s <scratch>/partA/runs/jdk8_wrapper429s_before/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk8_wrapper429s_before/repo -f pom.xml dependency:resolve",
-   "server_command": "/opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault wrapper429s --log ./logs/partA/jdk8_wrapper429s_before.server.jsonl --port-file <scratch>/partA/runs/jdk8_wrapper429s_before.port",
+   "command": "./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_wrapper429s_before/settings.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_wrapper429s_before/repo -f pom.xml dependency:resolve",
+   "server_command": "/opt/anaconda3/bin/python3 -I /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/fault_mirror.py --root /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo --fault wrapper429s --log /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_wrapper429s_before.server.jsonl --port-file /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_wrapper429s_before.port",
    "article": {
     "before": "fails at 21 seconds, main class not found",
     "after": "succeeds at 35 seconds on the fourth attempt"
    },
    "logs": [
     {
-     "path": "./logs/partA/jdk8_wrapper429s_before.mvn.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_wrapper429s_before.mvn.txt",
      "sha256": "306bb79b30f629eb51d1e5bfea739caf23c15c30380aa00d22292ebf8118c563",
      "bytes": 3265
     },
     {
-     "path": "./logs/partA/jdk8_wrapper429s_before.server.jsonl",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_wrapper429s_before.server.jsonl",
      "sha256": "1e48e7370a58c42382ebc46f170ee76405a18a9ed4dbb46e9bf21d10b5e3f183",
      "bytes": 1370
     }
@@ -436,20 +436,20 @@
     "junit-3.8.1.jar": 1
    },
    "error": null,
-   "command": "./mvnw -B -s <scratch>/partA/runs/jdk8_wrapper429s_after/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk8_wrapper429s_after/repo -f pom.xml dependency:resolve",
-   "server_command": "/opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault wrapper429s --log ./logs/partA/jdk8_wrapper429s_after.server.jsonl --port-file <scratch>/partA/runs/jdk8_wrapper429s_after.port",
+   "command": "./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_wrapper429s_after/settings.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_wrapper429s_after/repo -f pom.xml dependency:resolve",
+   "server_command": "/opt/anaconda3/bin/python3 -I /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/fault_mirror.py --root /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo --fault wrapper429s --log /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_wrapper429s_after.server.jsonl --port-file /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_wrapper429s_after.port",
    "article": {
     "before": "fails at 21 seconds, main class not found",
     "after": "succeeds at 35 seconds on the fourth attempt"
    },
    "logs": [
     {
-     "path": "./logs/partA/jdk8_wrapper429s_after.mvn.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_wrapper429s_after.mvn.txt",
      "sha256": "9c0e91662384ca2cb7a9cecb3b02819427fa2e2cd54af05b9f1032f77430114b",
      "bytes": 87133
     },
     {
-     "path": "./logs/partA/jdk8_wrapper429s_after.server.jsonl",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_wrapper429s_after.server.jsonl",
      "sha256": "9ebb3955412782c90b42c2f85e9282435add4fd034552a891325e9558ecf3247",
      "bytes": 139553
     }
@@ -492,20 +492,20 @@
     "junit-4.13.2.pom": 1
    },
    "error": "[ERROR] Failed to execute goal on project tiny: Could not resolve dependencies for project replay.local:tiny:jar:1.0: Failed to collect dependencies at junit:junit:jar:4.13.2: Failed to read artifact descriptor for junit:junit:jar:4.13.2: Could not transfer artifact junit:junit:pom:4.13.2 from/to faultmirror (http://127.0.0.1:60090/maven2): transfer failed for http://127.0.0.1:60090/maven2/junit/junit/4.13.2/junit-4.13.2.pom, status: 503 Service Unavailable -> [Help 1]",
-   "command": "./mvnw -B -s <scratch>/partA/runs/jdk11_503x2_before/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk11_503x2_before/repo -f pom.xml dependency:resolve",
-   "server_command": "/opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault 503x2 --log ./logs/partA/jdk11_503x2_before.server.jsonl --port-file <scratch>/partA/runs/jdk11_503x2_before.port",
+   "command": "./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_503x2_before/settings.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_503x2_before/repo -f pom.xml dependency:resolve",
+   "server_command": "/opt/anaconda3/bin/python3 -I /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/fault_mirror.py --root /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo --fault 503x2 --log /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_503x2_before.server.jsonl --port-file /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_503x2_before.port",
    "article": {
     "before": "fails on the first 503",
     "after": "succeeds on the third request"
    },
    "logs": [
     {
-     "path": "./logs/partA/jdk11_503x2_before.mvn.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_503x2_before.mvn.txt",
      "sha256": "383068e84d1a4be6b4b5695c211d7263ffab2c896f5091deb6d66a4ac63783df",
      "bytes": 13597
     },
     {
-     "path": "./logs/partA/jdk11_503x2_before.server.jsonl",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_503x2_before.server.jsonl",
      "sha256": "129aefa295af2c17adc665ef29650aabe2db311882f10cf877fc355647cd9918",
      "bytes": 18415
     }
@@ -528,21 +528,21 @@
    "junit_pom_4_13_2_attempts": 0,
    "junit_pom_4_13_2_actions": [],
    "junit_requests_per_path": {},
-   "error": "[ERROR] No plugin found for prefix 'dependency' in the current project and in the plugin groups [org.apache.maven.plugins, org.codehaus.mojo] available from the repositories [local (<scratch>/partA/runs/jdk11_503x2_after/repo), faultmirror (http://127.0.0.1:59148/maven2)] -> [Help 1]",
-   "command": "./mvnw -B -s <scratch>/partA/runs/jdk11_503x2_after/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk11_503x2_after/repo -f pom.xml dependency:resolve",
-   "server_command": "/opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault 503x2 --log ./logs/partA/jdk11_503x2_after.server.jsonl --port-file <scratch>/partA/runs/jdk11_503x2_after.port",
+   "error": "[ERROR] No plugin found for prefix 'dependency' in the current project and in the plugin groups [org.apache.maven.plugins, org.codehaus.mojo] available from the repositories [local (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_503x2_after/repo), faultmirror (http://127.0.0.1:59148/maven2)] -> [Help 1]",
+   "command": "./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_503x2_after/settings.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_503x2_after/repo -f pom.xml dependency:resolve",
+   "server_command": "/opt/anaconda3/bin/python3 -I /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/fault_mirror.py --root /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo --fault 503x2 --log /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_503x2_after.server.jsonl --port-file /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_503x2_after.port",
    "article": {
     "before": "fails on the first 503",
     "after": "succeeds on the third request"
    },
    "logs": [
     {
-     "path": "./logs/partA/invalid/jdk11_503x2_after.attempt1-stale-port.mvn.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/invalid/jdk11_503x2_after.attempt1-stale-port.mvn.txt",
      "sha256": "6325153346b9e8bef7ad2e53f762ae108cf0018285834099c0632acff743f4ae",
      "bytes": 9301
     },
     {
-     "path": "./logs/partA/invalid/jdk11_503x2_after.attempt1-stale-port.server.jsonl",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/invalid/jdk11_503x2_after.attempt1-stale-port.server.jsonl",
      "sha256": "cc737158559dd0269f92ae7ce6845cb8f482bc3b53e440cb17fd9d56e7225764",
      "bytes": 191
     }
@@ -573,20 +573,20 @@
     "junit-4.13.2.pom": 4
    },
    "error": "[ERROR] Failed to execute goal on project tiny: Could not resolve dependencies for project replay.local:tiny:jar:1.0: Failed to collect dependencies at junit:junit:jar:4.13.2: Failed to read artifact descriptor for junit:junit:jar:4.13.2: Could not transfer artifact junit:junit:pom:4.13.2 from/to faultmirror (http://127.0.0.1:60155/maven2): transfer failed for http://127.0.0.1:60155/maven2/junit/junit/4.13.2/junit-4.13.2.pom: Connection reset -> [Help 1]",
-   "command": "./mvnw -B -s <scratch>/partA/runs/jdk11_reset4_before/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk11_reset4_before/repo -f pom.xml dependency:resolve",
-   "server_command": "/opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault reset4 --log ./logs/partA/jdk11_reset4_before.server.jsonl --port-file <scratch>/partA/runs/jdk11_reset4_before.port",
+   "command": "./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_reset4_before/settings.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_reset4_before/repo -f pom.xml dependency:resolve",
+   "server_command": "/opt/anaconda3/bin/python3 -I /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/fault_mirror.py --root /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo --fault reset4 --log /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_reset4_before.server.jsonl --port-file /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_reset4_before.port",
    "article": {
     "before": "fails after four attempts",
     "after": "succeeds on the fifth"
    },
    "logs": [
     {
-     "path": "./logs/partA/jdk11_reset4_before.mvn.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_reset4_before.mvn.txt",
      "sha256": "9814e4994a3004f9ae442436e83732dad5289d0019800a76f56424ac2f309ec2",
      "bytes": 13588
     },
     {
-     "path": "./logs/partA/jdk11_reset4_before.server.jsonl",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_reset4_before.server.jsonl",
      "sha256": "99c20cb4e96364d25ef2d80ecdef2e06f947e517e378455f2256571dfb55d5c4",
      "bytes": 19027
     }
@@ -622,20 +622,20 @@
     "junit-3.8.1.jar": 5
    },
    "error": null,
-   "command": "./mvnw -B -s <scratch>/partA/runs/jdk11_reset4_after/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk11_reset4_after/repo -f pom.xml dependency:resolve",
-   "server_command": "/opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault reset4 --log ./logs/partA/jdk11_reset4_after.server.jsonl --port-file <scratch>/partA/runs/jdk11_reset4_after.port",
+   "command": "./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_reset4_after/settings.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_reset4_after/repo -f pom.xml dependency:resolve",
+   "server_command": "/opt/anaconda3/bin/python3 -I /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/fault_mirror.py --root /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo --fault reset4 --log /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_reset4_after.server.jsonl --port-file /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_reset4_after.port",
    "article": {
     "before": "fails after four attempts",
     "after": "succeeds on the fifth"
    },
    "logs": [
     {
-     "path": "./logs/partA/jdk11_reset4_after.mvn.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_reset4_after.mvn.txt",
      "sha256": "6c4dd4b39c7b13dc3d942fd2463a7fddf5c55f7fb2110cec0f3ac01aecd1295a",
      "bytes": 85561
     },
     {
-     "path": "./logs/partA/jdk11_reset4_after.server.jsonl",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_reset4_after.server.jsonl",
      "sha256": "10fb866f4ccac710447f334dfdc80e2176831f3c0723a95d7d39eed2e95dafbf",
      "bytes": 142208
     }
@@ -665,20 +665,20 @@
     "junit-4.13.2.pom": 3
    },
    "error": "[ERROR] Failed to execute goal on project tiny: Could not resolve dependencies for project replay.local:tiny:jar:1.0: Failed to collect dependencies at junit:junit:jar:4.13.2: Failed to read artifact descriptor for junit:junit:jar:4.13.2: Could not transfer artifact junit:junit:pom:4.13.2 from/to faultmirror (http://127.0.0.1:60252/maven2): GET request of: junit/junit/4.13.2/junit-4.13.2.pom from faultmirror failed: Attempted read from closed stream. -> [Help 1]",
-   "command": "./mvnw -B -s <scratch>/partA/runs/jdk11_429x2_before/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk11_429x2_before/repo -f pom.xml dependency:resolve",
-   "server_command": "/opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault 429x2 --log ./logs/partA/jdk11_429x2_before.server.jsonl --port-file <scratch>/partA/runs/jdk11_429x2_before.port",
+   "command": "./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_429x2_before/settings.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_429x2_before/repo -f pom.xml dependency:resolve",
+   "server_command": "/opt/anaconda3/bin/python3 -I /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/fault_mirror.py --root /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo --fault 429x2 --log /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_429x2_before.server.jsonl --port-file /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_429x2_before.port",
    "article": {
     "before": "succeeds, the transport already backs off on 429",
     "after": "succeeds"
    },
    "logs": [
     {
-     "path": "./logs/partA/jdk11_429x2_before.mvn.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_429x2_before.mvn.txt",
      "sha256": "2bb25b7de33970ea5f5e1653b96f36184ec7643531bda15d865be785fe0b9cdd",
      "bytes": 13589
     },
     {
-     "path": "./logs/partA/jdk11_429x2_before.server.jsonl",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_429x2_before.server.jsonl",
      "sha256": "f9892ca89cbee267af7c65b3127353f740dc7b7426d5ebf6161aff63f3e75616",
      "bytes": 18823
     }
@@ -712,20 +712,20 @@
     "junit-3.8.1.jar": 3
    },
    "error": null,
-   "command": "./mvnw -B -s <scratch>/partA/runs/jdk11_429x2_after/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk11_429x2_after/repo -f pom.xml dependency:resolve",
-   "server_command": "/opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault 429x2 --log ./logs/partA/jdk11_429x2_after.server.jsonl --port-file <scratch>/partA/runs/jdk11_429x2_after.port",
+   "command": "./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_429x2_after/settings.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_429x2_after/repo -f pom.xml dependency:resolve",
+   "server_command": "/opt/anaconda3/bin/python3 -I /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/fault_mirror.py --root /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo --fault 429x2 --log /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_429x2_after.server.jsonl --port-file /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_429x2_after.port",
    "article": {
     "before": "succeeds, the transport already backs off on 429",
     "after": "succeeds"
    },
    "logs": [
     {
-     "path": "./logs/partA/jdk11_429x2_after.mvn.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_429x2_after.mvn.txt",
      "sha256": "10c97bdb49152666545fb1085843c62a94d74277f9a821a21548611d3c6bd434",
      "bytes": 85541
     },
     {
-     "path": "./logs/partA/jdk11_429x2_after.server.jsonl",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_429x2_after.server.jsonl",
      "sha256": "cc23017cfb7f9abd6a1b21392c2b5be9ba147a103af01602f42911b5a200e5ec",
      "bytes": 140520
     }
@@ -753,20 +753,20 @@
     "junit-4.13.2.pom": 1
    },
    "error": "[ERROR] Failed to execute goal on project tiny: Could not resolve dependencies for project replay.local:tiny:jar:1.0: Failed to collect dependencies at junit:junit:jar:4.13.2: Failed to read artifact descriptor for junit:junit:jar:4.13.2: Could not transfer artifact junit:junit:pom:4.13.2 from/to faultmirror (http://127.0.0.1:60492/maven2): GET request of: junit/junit/4.13.2/junit-4.13.2.pom from faultmirror failed: Premature end of Content-Length delimited message body (expected: 27,018; received: 13,509) -> [Help 1]",
-   "command": "./mvnw -B -s <scratch>/partA/runs/jdk11_truncate1_before/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk11_truncate1_before/repo -f pom.xml dependency:resolve",
-   "server_command": "/opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault truncate1 --log ./logs/partA/jdk11_truncate1_before.server.jsonl --port-file <scratch>/partA/runs/jdk11_truncate1_before.port",
+   "command": "./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_truncate1_before/settings.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_truncate1_before/repo -f pom.xml dependency:resolve",
+   "server_command": "/opt/anaconda3/bin/python3 -I /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/fault_mirror.py --root /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo --fault truncate1 --log /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_truncate1_before.server.jsonl --port-file /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_truncate1_before.port",
    "article": {
     "before": "fails",
     "after": "still fails"
    },
    "logs": [
     {
-     "path": "./logs/partA/jdk11_truncate1_before.mvn.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_truncate1_before.mvn.txt",
      "sha256": "f5e04c077be966fffb2becba5630789148a26e8e9115753e22b3d6f0e2433b98",
      "bytes": 13672
     },
     {
-     "path": "./logs/partA/jdk11_truncate1_before.server.jsonl",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_truncate1_before.server.jsonl",
      "sha256": "4288b6080f460492fecb5094072a617ab839d48f8457f4309b0f8a209b89d368",
      "bytes": 18428
     }
@@ -794,20 +794,20 @@
     "junit-4.13.2.pom": 1
    },
    "error": "[ERROR] Failed to execute goal on project tiny: Could not resolve dependencies for project replay.local:tiny:jar:1.0: Failed to collect dependencies at junit:junit:jar:4.13.2: Failed to read artifact descriptor for junit:junit:jar:4.13.2: Could not transfer artifact junit:junit:pom:4.13.2 from/to faultmirror (http://127.0.0.1:60524/maven2): GET request of: junit/junit/4.13.2/junit-4.13.2.pom from faultmirror failed: Premature end of Content-Length delimited message body (expected: 27,018; received: 13,509) -> [Help 1]",
-   "command": "./mvnw -B -s <scratch>/partA/runs/jdk11_truncate1_after/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk11_truncate1_after/repo -f pom.xml dependency:resolve",
-   "server_command": "/opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault truncate1 --log ./logs/partA/jdk11_truncate1_after.server.jsonl --port-file <scratch>/partA/runs/jdk11_truncate1_after.port",
+   "command": "./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_truncate1_after/settings.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_truncate1_after/repo -f pom.xml dependency:resolve",
+   "server_command": "/opt/anaconda3/bin/python3 -I /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/fault_mirror.py --root /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo --fault truncate1 --log /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_truncate1_after.server.jsonl --port-file /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_truncate1_after.port",
    "article": {
     "before": "fails",
     "after": "still fails"
    },
    "logs": [
     {
-     "path": "./logs/partA/jdk11_truncate1_after.mvn.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_truncate1_after.mvn.txt",
      "sha256": "a346e9f9f86b5ab3f385b76c5408bb74d9273da8e4e2726f78dcb47dcbbe5caf",
      "bytes": 13667
     },
     {
-     "path": "./logs/partA/jdk11_truncate1_after.server.jsonl",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_truncate1_after.server.jsonl",
      "sha256": "4fddfb9b629ec84c2f9e93fc1dec7485dba0efda9dfc4349aa0edc5b49161080",
      "bytes": 18428
     }
@@ -831,20 +831,20 @@
    "junit_pom_4_13_2_actions": [],
    "junit_requests_per_path": {},
    "error": null,
-   "command": "./mvnw -B -s <scratch>/partA/runs/jdk11_wrapper429s_before/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk11_wrapper429s_before/repo -f pom.xml dependency:resolve",
-   "server_command": "/opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault wrapper429s --log ./logs/partA/jdk11_wrapper429s_before.server.jsonl --port-file <scratch>/partA/runs/jdk11_wrapper429s_before.port",
+   "command": "./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_wrapper429s_before/settings.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_wrapper429s_before/repo -f pom.xml dependency:resolve",
+   "server_command": "/opt/anaconda3/bin/python3 -I /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/fault_mirror.py --root /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo --fault wrapper429s --log /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_wrapper429s_before.server.jsonl --port-file /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_wrapper429s_before.port",
    "article": {
     "before": "fails at 21 seconds, main class not found",
     "after": "succeeds at 35 seconds on the fourth attempt"
    },
    "logs": [
     {
-     "path": "./logs/partA/jdk11_wrapper429s_before.mvn.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_wrapper429s_before.mvn.txt",
      "sha256": "fe794beb11947827c2e34052c2dbbd46cec9c5df3f367d6964a89635b36c4772",
      "bytes": 3377
     },
     {
-     "path": "./logs/partA/jdk11_wrapper429s_before.server.jsonl",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_wrapper429s_before.server.jsonl",
      "sha256": "8e725099f3d6b89cba20b2ef35aa0f47753fb5a767f8fc035a1c95cca96789ad",
      "bytes": 1370
     }
@@ -893,20 +893,20 @@
     "junit-3.8.1.jar": 1
    },
    "error": null,
-   "command": "./mvnw -B -s <scratch>/partA/runs/jdk11_wrapper429s_after/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk11_wrapper429s_after/repo -f pom.xml dependency:resolve",
-   "server_command": "/opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault wrapper429s --log ./logs/partA/jdk11_wrapper429s_after.server.jsonl --port-file <scratch>/partA/runs/jdk11_wrapper429s_after.port",
+   "command": "./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_wrapper429s_after/settings.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_wrapper429s_after/repo -f pom.xml dependency:resolve",
+   "server_command": "/opt/anaconda3/bin/python3 -I /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/fault_mirror.py --root /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo --fault wrapper429s --log /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_wrapper429s_after.server.jsonl --port-file /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_wrapper429s_after.port",
    "article": {
     "before": "fails at 21 seconds, main class not found",
     "after": "succeeds at 35 seconds on the fourth attempt"
    },
    "logs": [
     {
-     "path": "./logs/partA/jdk11_wrapper429s_after.mvn.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_wrapper429s_after.mvn.txt",
      "sha256": "6072018cb062ab56dd652ce06831f1a438a66ca6089f09d5de7a2403a1fddbb1",
      "bytes": 87195
     },
     {
-     "path": "./logs/partA/jdk11_wrapper429s_after.server.jsonl",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_wrapper429s_after.server.jsonl",
      "sha256": "82b6fcfaa163b34abc086962932ee706666f81e3d4ee50a38a5e21df709d81c9",
      "bytes": 139554
     }
@@ -955,20 +955,20 @@
     "junit-3.8.1.jar": 3
    },
    "error": null,
-   "command": "./mvnw -B -s <scratch>/partA/runs/jdk11_503x2_after/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk11_503x2_after/repo -f pom.xml dependency:resolve",
-   "server_command": "/opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault 503x2 --log ./logs/partA/jdk11_503x2_after.server.jsonl --port-file <scratch>/partA/runs/jdk11_503x2_after.port",
+   "command": "./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_503x2_after/settings.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_503x2_after/repo -f pom.xml dependency:resolve",
+   "server_command": "/opt/anaconda3/bin/python3 -I /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/fault_mirror.py --root /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo --fault 503x2 --log /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_503x2_after.server.jsonl --port-file /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_503x2_after.port",
    "article": {
     "before": "fails on the first 503",
     "after": "succeeds on the third request"
    },
    "logs": [
     {
-     "path": "./logs/partA/jdk11_503x2_after.mvn.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_503x2_after.mvn.txt",
      "sha256": "f4b0057437a702fcadfe8c03328216bb30b42cb1aa1b97dfdea3a72855780e40",
      "bytes": 85560
     },
     {
-     "path": "./logs/partA/jdk11_503x2_after.server.jsonl",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_503x2_after.server.jsonl",
      "sha256": "477ce766a1ffa5221eafe89ebd6ff001511f705338d187bf5198003c2097fd21",
      "bytes": 140496
     }
@@ -1003,20 +1003,20 @@
     "junit-3.8.1.jar": 4
    },
    "error": null,
-   "command": "./mvnw -B -s <scratch>/partA/runs/jdk8_429x2nobody_before/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk8_429x2nobody_before/repo -f pom.xml dependency:resolve",
-   "server_command": "/opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault 429x2nobody --log ./logs/partA/jdk8_429x2nobody_before.server.jsonl --port-file <scratch>/partA/runs/jdk8_429x2nobody_before.port",
+   "command": "./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_429x2nobody_before/settings.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_429x2nobody_before/repo -f pom.xml dependency:resolve",
+   "server_command": "/opt/anaconda3/bin/python3 -I /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/fault_mirror.py --root /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo --fault 429x2nobody --log /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_429x2nobody_before.server.jsonl --port-file /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk8_429x2nobody_before.port",
    "article": {
     "before": null,
     "after": null
    },
    "logs": [
     {
-     "path": "./logs/partA/jdk8_429x2nobody_before.mvn.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_429x2nobody_before.mvn.txt",
      "sha256": "8760d268cf0c4c3f3cb6eb91527f679c1a7b615851f3abe0c75c35fe51a3ea80",
      "bytes": 86682
     },
     {
-     "path": "./logs/partA/jdk8_429x2nobody_before.server.jsonl",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk8_429x2nobody_before.server.jsonl",
      "sha256": "7f2ee30f4238c434b12e3a2da5c70cca1dd6aca95371a7a352a70006a54c2a78",
      "bytes": 142636
     }
@@ -1051,20 +1051,20 @@
     "junit-3.8.1.jar": 4
    },
    "error": null,
-   "command": "./mvnw -B -s <scratch>/partA/runs/jdk11_429x2nobody_before/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk11_429x2nobody_before/repo -f pom.xml dependency:resolve",
-   "server_command": "/opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault 429x2nobody --log ./logs/partA/jdk11_429x2nobody_before.server.jsonl --port-file <scratch>/partA/runs/jdk11_429x2nobody_before.port",
+   "command": "./mvnw -B -s /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_429x2nobody_before/settings.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_429x2nobody_before/repo -f pom.xml dependency:resolve",
+   "server_command": "/opt/anaconda3/bin/python3 -I /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/fault_mirror.py --root /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo --fault 429x2nobody --log /Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_429x2nobody_before.server.jsonl --port-file /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/runs/jdk11_429x2nobody_before.port",
    "article": {
     "before": null,
     "after": null
    },
    "logs": [
     {
-     "path": "./logs/partA/jdk11_429x2nobody_before.mvn.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_429x2nobody_before.mvn.txt",
      "sha256": "20d430ce69f2a326ff85f3e3b8a10e090804ba9f6c40009464e271a1b5ed5bf1",
      "bytes": 86712
     },
     {
-     "path": "./logs/partA/jdk11_429x2nobody_before.server.jsonl",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partA/jdk11_429x2nobody_before.server.jsonl",
      "sha256": "d6d1d821137dd953eae81144db6e4996d0386e0664f749926ad0e7f14e21f7a9",
      "bytes": 142634
     }
@@ -1188,7 +1188,7 @@
    "article": "7/20 failed (JDK 11.0.19)",
    "logs": [
     {
-     "path": "./logs/partB/dev-hook-jdk11.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partB/dev-hook-jdk11.txt",
      "sha256": "5a9b99263360a307926495c241c6406ed5220c7241b97bf34c2d816754789445",
      "bytes": 18640
     }
@@ -1394,7 +1394,7 @@
    "article": "15/20 failed (JDK 8u172)",
    "logs": [
     {
-     "path": "./logs/partB/dev-hook-jdk8.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partB/dev-hook-jdk8.txt",
      "sha256": "c5d9179c9671077dc6838377f155c9b8204cdb4fecae754163b2c34ec30fb81e",
      "bytes": 18614
     }
@@ -1600,7 +1600,7 @@
    "article": "not in the article (sensitivity variant)",
    "logs": [
     {
-     "path": "./logs/partB/dev-hook-lead45-jdk11.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partB/dev-hook-lead45-jdk11.txt",
      "sha256": "69d8e4c18865cea745ef7ba5055901a6d3c1f0ad98e087e5edd58a8cf60eb582",
      "bytes": 18023
     }
@@ -1806,7 +1806,7 @@
    "article": "not in the article (sensitivity variant)",
    "logs": [
     {
-     "path": "./logs/partB/dev-hook-lead45-jdk8.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partB/dev-hook-lead45-jdk8.txt",
      "sha256": "6bca03d17f8debb1e3aa44191cfaf247428d3cb2a05e3243b1b04432b18f3b9a",
      "bytes": 17664
     }
@@ -2012,7 +2012,7 @@
    "article": "not in the article (sensitivity variant)",
    "logs": [
     {
-     "path": "./logs/partB/dev-hook-lead55-jdk11.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partB/dev-hook-lead55-jdk11.txt",
      "sha256": "06b71f89b0865309ec1f7f410de9d1fda7161de795b8a22356d1c97207217795",
      "bytes": 15671
     }
@@ -2218,7 +2218,7 @@
    "article": "not in the article (sensitivity variant)",
    "logs": [
     {
-     "path": "./logs/partB/dev-hook-lead55-jdk8.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partB/dev-hook-lead55-jdk8.txt",
      "sha256": "296a10f2c1c68ad52b84213259ca83b69355230933ad97789b3d7c9b89f1c05d",
      "bytes": 15646
     }
@@ -2424,7 +2424,7 @@
    "article": "not in the article (sensitivity variant)",
    "logs": [
     {
-     "path": "./logs/partB/dev-hook-lead65-jdk11.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partB/dev-hook-lead65-jdk11.txt",
      "sha256": "b750ee641493762fce0777ec4d2cba5f29bcaf44f896d8cf0c1c4d4c561f6a3f",
      "bytes": 12648
     }
@@ -2630,7 +2630,7 @@
    "article": "not in the article (sensitivity variant)",
    "logs": [
     {
-     "path": "./logs/partB/dev-hook-lead65-jdk8.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partB/dev-hook-lead65-jdk8.txt",
      "sha256": "26816209a82a7899e22f3085c10f9c81222471b4c723573cb8c2391e5e50cf78",
      "bytes": 14303
     }
@@ -2984,7 +2984,7 @@
    "article": "50/50 passed",
    "logs": [
     {
-     "path": "./logs/partB/dev-nohook-contention-jdk11.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partB/dev-nohook-contention-jdk11.txt",
      "sha256": "7b75968543def6a49aa44c68f6fc38ab1612984320823c079b944d0d06753d5d",
      "bytes": 11339
     }
@@ -3256,7 +3256,7 @@
    "article": "50/50 passed",
    "logs": [
     {
-     "path": "./logs/partB/dev-nohook-contention-jdk8.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partB/dev-nohook-contention-jdk8.txt",
      "sha256": "66f26a17b581a4f33c299a5d2c83ef6b08936cfd589371d2888f5d460a4433a3",
      "bytes": 11307
     }
@@ -3378,7 +3378,7 @@
    "article": "0/20 failed",
    "logs": [
     {
-     "path": "./logs/partB/patch-hook-jdk11.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partB/patch-hook-jdk11.txt",
      "sha256": "bb0dc624604262626c9d7296585e0e2250b99f1023077607bfb9598a25ef60ff",
      "bytes": 10778
     }
@@ -3500,7 +3500,7 @@
    "article": "0/20 failed",
    "logs": [
     {
-     "path": "./logs/partB/patch-hook-jdk8.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partB/patch-hook-jdk8.txt",
      "sha256": "e4606137b69c9112cbb20cae291ae12e1b2059f263e211cc51c1ff6f58d53219",
      "bytes": 10752
     }
@@ -3513,7 +3513,7 @@
    "outcome": "pass",
    "logs": [
     {
-     "path": "./logs/partB/build-dev-deb16a3c3-jdk8.full.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partB/build-dev-deb16a3c3-jdk8.full.txt",
      "sha256": "12244673304dd050dce13603b1efac716d559e62570dea51560a8a6b0c25f359",
      "bytes": 26633
     }
@@ -3526,7 +3526,7 @@
    "outcome": "pass",
    "logs": [
     {
-     "path": "./logs/partB/build-patch-87ed0afe0-jdk8.full.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partB/build-patch-87ed0afe0-jdk8.full.txt",
      "sha256": "05cd72e47438e3ca7f3310d124a63f6c609495c57d3491eceb4f56f538001999",
      "bytes": 26622
     }
@@ -3539,7 +3539,7 @@
    "outcome": "pass",
    "logs": [
     {
-     "path": "./logs/partC/build-after-0e4cf5289-jdk8-2.full.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partC/build-after-0e4cf5289-jdk8-2.full.txt",
      "sha256": "445b1a31aacffe3e6c6fbc31919010f2328a146ce087a1d506364a86a6316061",
      "bytes": 698374
     }
@@ -3552,7 +3552,7 @@
    "outcome": "pass",
    "logs": [
     {
-     "path": "./logs/partC/build-after-0e4cf5289-jdk8.full.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partC/build-after-0e4cf5289-jdk8.full.txt",
      "sha256": "5a01eb6dba907733d5b3566fa2aa7cd39b6223ac70fb85a72b9142881893d6a2",
      "bytes": 691478
     }
@@ -3618,12 +3618,12 @@
    ],
    "logs": [
     {
-     "path": "./logs/partC/flink118TaskManagerKilled-after-010556.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partC/flink118TaskManagerKilled-after-010556.txt",
      "sha256": "3b18380388426a65e0cbfceeca0b97092789938a6550d826495335ab42ac418b",
      "bytes": 1245578
     },
     {
-     "path": "./logs/partC/flink118TaskManagerKilled-after.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partC/flink118TaskManagerKilled-after.txt",
      "sha256": "8babfb10c02b39b20a969adbc42835dd284bf061a3a6913b6ee93ea622ca2135",
      "bytes": 314484
     }
@@ -3693,7 +3693,7 @@
    ],
    "logs": [
     {
-     "path": "./logs/partC/flink118TaskManagerKilled-before.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partC/flink118TaskManagerKilled-before.txt",
      "sha256": "de4168b7fc39d3457a2ee5fa024a4c0a3142b66162eb0a2a4dd0eb61f8931885",
      "bytes": 1521168
     }
@@ -3763,7 +3763,7 @@
    ],
    "logs": [
     {
-     "path": "./logs/partC/spark3MasterKilled-after.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partC/spark3MasterKilled-after.txt",
      "sha256": "6fa13624d2827b21db9fb811ee53a0776858edb927ccc5ab4884cfc3a7ca279d",
      "bytes": 409943
     }
@@ -3833,7 +3833,7 @@
    ],
    "logs": [
     {
-     "path": "./logs/partC/spark3MasterKilled-before.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partC/spark3MasterKilled-before.txt",
      "sha256": "cbfa9e8385f7b741f3ac5ca8b4fabcb30e95a6a31496cbc91b10fa761f5e464b",
      "bytes": 410504
     }
@@ -3850,7 +3850,7 @@
    "invalid_reason": "harness/build setup error before any container work (see README deviation 18)",
    "logs": [
     {
-     "path": "./logs/partC/invalid/build-after-0e4cf5289-classpath-noreactor.full.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partC/invalid/build-after-0e4cf5289-classpath-noreactor.full.txt",
      "sha256": "ac97b6ed1b2b84b3bf70d66f39f427f7520916311516f490fc1b6ab05bca035a",
      "bytes": 46447
     }
@@ -3863,7 +3863,7 @@
    "invalid_reason": "harness/build setup error before any container work (see README deviation 18)",
    "logs": [
     {
-     "path": "./logs/partC/invalid/flink118TaskManagerKilled-after.attempt1-missing-classpath.txt",
+     "path": "/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/partC/invalid/flink118TaskManagerKilled-after.attempt1-missing-classpath.txt",
      "sha256": "af9afefe80a21b6b5c74c1e82edd6f8a4fdf191b118eca2f69de91cb6fcc2914",
      "bytes": 1031
     }

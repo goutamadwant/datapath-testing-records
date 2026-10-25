@@ -35,7 +35,7 @@ approval (FIX-02-TABLE-EVIDENCE remains with the author).
 | C | `manuscript/article.md` Table 1 rows 6-7 | `source/raw/seatunnel_12481.md`, "E2E, local (Docker Desktop, JDK 8)" |
 
 Revisions (apache/seatunnel, blobless clone in
-`<scratch>/seatunnel`, gitignored runtime dir;
+`/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/seatunnel`, gitignored runtime dir;
 nothing was pushed):
 
 | Use | Commit |
@@ -175,8 +175,8 @@ Part A (fault mirror, tiny pom, settings template, driver):
 
 ```
 # warm the served repository from Maven Central (once; log: logs/partA/warm-repo-build.txt)
-cd <scratch>/partA/warmdir
-JAVA_HOME=<jdk> ./mvnw -B -s harness/settings-empty.xml -Dmaven.repo.local=<scratch>/partA/warm-repo -f pom.xml dependency:resolve
+cd /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warmdir
+JAVA_HOME=<jdk> ./mvnw -B -s harness/settings-empty.xml -Dmaven.repo.local=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo -f pom.xml dependency:resolve
 # the matrix (20 primary cells), then the re-run of the invalid cell and the sensitivity variant
 python3 harness/run_part_a.py
 python3 harness/run_part_a.py jdk11_503x2_after
@@ -200,8 +200,8 @@ within each, faults in the order 503, reset, 429, truncate, wrapper; `before` th
 Part B:
 
 ```
-harness/build_partB.sh <scratch>/wt-dev   <jdk8> logs/partB/build-dev-deb16a3c3-jdk8.full.txt
-harness/build_partB.sh <scratch>/wt-patch <jdk8> logs/partB/build-patch-87ed0afe0-jdk8.full.txt
+harness/build_partB.sh /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-dev   <jdk8> logs/partB/build-dev-deb16a3c3-jdk8.full.txt
+harness/build_partB.sh /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-patch <jdk8> logs/partB/build-patch-87ed0afe0-jdk8.full.txt
 #   = ./mvnw -B -T 1 -pl seatunnel-edge-agent/seatunnel-edge-agent-connector -am package dependency:build-classpath
 #       -DskipUT=true -DskipTests -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true
 #       -Dmdep.outputFile=target/test-classpath.txt -Dmdep.includeScope=test --no-snapshot-updates
@@ -218,7 +218,7 @@ exact java command and classpath are in each log header.
 Part C:
 
 ```
-harness/build_partC.sh <scratch>/wt-e2e <jdk8> logs/partC/build-after-0e4cf5289-jdk8-2.full.txt
+harness/build_partC.sh /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e <jdk8> logs/partC/build-after-0e4cf5289-jdk8-2.full.txt
 #   = ./mvnw -B -T 1C -pl seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter,seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter,
 #       seatunnel-connectors-v2/connector-fake,seatunnel-connectors-v2/connector-assert,seatunnel-transforms-v2,
 #       seatunnel-e2e/seatunnel-connector-v2-e2e/connector-fake-e2e -am package dependency:build-classpath
@@ -326,12 +326,16 @@ General
 
 ## Files
 
-- `./README.md`
-- `./results.json`
-- `./harness/`
+- `/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/README.md`
+- `/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/results.json`
+- `/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/harness/`
   (`fault_mirror.py`, `run_part_a.py`, `tiny-pom.xml`, `settings-mirror.template.xml`,
   `settings-empty.xml`, `build_partB.sh`, `run_part_b.sh`, `hook-dev-deb16a3c3-stall45.patch`,
   `hook-patch-87ed0afe0-stalls.patch`, `java/RepeatMethod.java`, `build_partC.sh`, `run_part_c.sh`,
   `java/ReplayKillTeardownTest.java`, `make_results.py`)
-- `./logs/`
+- `/Users/goutamadwant/Documents/ResearchPaper/lanes/ieeesw2026-datapath-testing/experiments/replay-2026-10-25/logs/`
   (`toolchain.txt`, `partA/`, `partB/`, `partC/`)
+
+## Paths
+
+Absolute paths in `results.json` and the logs refer to the workstation where the runs were executed on 2026-10-25; relative to this repository they resolve under `./`.

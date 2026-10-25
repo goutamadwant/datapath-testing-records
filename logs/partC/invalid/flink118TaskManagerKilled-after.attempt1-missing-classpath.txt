@@ -1,5 +1,5 @@
 # start=2026-10-25T00:44:50-0700 rev_label=after build_rev=0e4cf52896ee3604a8e7899d7736ffd914ee6ce7 runs=1
-# JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home cwd=<scratch>/wt-e2e/seatunnel-e2e/seatunnel-connector-v2-e2e/connector-fake-e2e
+# JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home cwd=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/wt-e2e/seatunnel-e2e/seatunnel-connector-v2-e2e/connector-fake-e2e
 # docker: 29.9.2 linux/arm64
 # command: java -Dreplay.runs=1 -cp <cp> RepeatMethod org.apache.seatunnel.e2e.connector.fake.ReplayKillTeardownTest flink118TaskManagerKilled 1
 Exception in thread "main" java.lang.NoClassDefFoundError: org/junit/platform/engine/ConfigurationParameters

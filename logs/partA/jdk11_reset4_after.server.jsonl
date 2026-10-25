@@ -1,4 +1,4 @@
-{"event": "start", "fault": "reset4", "port": 60179, "root": "<scratch>/partA/warm-repo", "t_rel_s": 0.009, "wall": "2026-10-25T00:21:21.736"}
+{"event": "start", "fault": "reset4", "port": 60179, "root": "/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/partA/warm-repo", "t_rel_s": 0.009, "wall": "2026-10-25T00:21:21.736"}
 {"method": "GET", "path": "/maven2/org/apache/maven/plugins/maven-clean-plugin/2.5/maven-clean-plugin-2.5.pom", "n": 1, "target": false, "action": "serve", "exists": true, "client": 60208, "t_rel_s": 5.365, "wall": "2026-10-25T00:21:27.093"}
 {"method": "GET", "path": "/maven2/org/apache/maven/plugins/maven-clean-plugin/2.5/maven-clean-plugin-2.5.pom.sha1", "n": 1, "target": false, "action": "serve", "exists": true, "client": 60208, "t_rel_s": 5.384, "wall": "2026-10-25T00:21:27.111"}
 {"method": "GET", "path": "/maven2/org/apache/maven/plugins/maven-plugins/22/maven-plugins-22.pom", "n": 1, "target": false, "action": "serve", "exists": true, "client": 60208, "t_rel_s": 5.463, "wall": "2026-10-25T00:21:27.190"}
