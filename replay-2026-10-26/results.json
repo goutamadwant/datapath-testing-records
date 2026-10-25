@@ -16035,7 +16035,9 @@
   {
    "path": "harness/part_c.sh",
    "bytes": 6969,
-   "sha256": "a75658e64990ce934935601d2c3f380003e049f84bd80d52a3243e9844835cdb"
+   "sha256": "8d9822d77788540e8c2ca7371a3504cb06d07b87cd19cd7e0461301da91bb3bc",
+   "sha256_as_run": "a75658e64990ce934935601d2c3f380003e049f84bd80d52a3243e9844835cdb",
+   "revised_after_runs": "2026-10-25: cleanup scoped to containers created during the cell; the executed runs used the as-run version (sha256_as_run), whose removals are listed in logs/partC/*.cleanup.txt"
   },
   {
    "path": "harness/settings-empty.xml",

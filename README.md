@@ -21,8 +21,6 @@ comes from a log in `logs/` (per-cell paths and sha256 in `results.json`). Nothi
 original evidence, and where the reconstruction had to guess, the guess is listed under
 "Deviations and interpretation choices".
 
-This record does not edit the article, the resolutions or any review file, and decides no
-approval (FIX-02-TABLE-EVIDENCE remains with the author).
 
 ## Summary
 

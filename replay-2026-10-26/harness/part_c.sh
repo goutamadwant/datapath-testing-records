@@ -74,6 +74,7 @@ for cell in $CELLS; do
     echo "# command: \$JAVA_HOME/bin/java -Dreplay.runs=$RUNS -Dreplay.jobTimeoutSec=$JOB_TIMEOUT_SEC -Dreplay.teardownBoundSec=$TEARDOWN_BOUND_SEC -cp <runner, harness classes, (before only) parent teardown classes, module test-classes/classes/test-classpath.txt, launcher> RepeatMethod org.apache.seatunnel.e2e.connector.fake.ReplayKillTeardownTest $METHOD 1"
   } > "$LOG"
   NETS_BEFORE="$(docker network ls -q | sort | tr '\n' ' ')"
+  CONTAINERS_BEFORE=" $(docker ps -aq | tr '\n' ' ')"
   T0=$(date +%s)
   (cd "$MODDIR" && "$JAVA8_HOME/bin/java" -Dreplay.runs="$RUNS" -Dreplay.jobTimeoutSec=$JOB_TIMEOUT_SEC \
      -Dreplay.teardownBoundSec=$TEARDOWN_BOUND_SEC -cp "$CCP" RepeatMethod \
@@ -99,5 +100,6 @@ for cell in $CELLS; do
   python3 "$B/harness/parse_part_c.py" "$LOG" "$cell" "$B" >> "$LOGS/runs.jsonl"
   echo "$cell: $(grep -c '^ASSERT .*result=PASS' "$LOG") PASS, $(grep -c '^ASSERT .*result=FAIL' "$LOG") FAIL assertions; wall ${WALL}s"
   # independence between cells: remove anything of this engine left behind
-  for id in $(docker ps -aq --filter "ancestor=$IMAGE"); do docker rm -f "$id" >> "$LOG.cleanup.txt" 2>&1; done
+  # only containers that appeared during this cell (never pre-existing containers of the same image)
+  for id in $(docker ps -aq --filter "ancestor=$IMAGE"); do case "$CONTAINERS_BEFORE" in *" $id "*) ;; *) docker rm -f "$id" >> "$LOG.cleanup.txt" 2>&1 ;; esac; done
 done

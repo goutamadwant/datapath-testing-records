@@ -436,3 +436,7 @@ the bundle's `work/` directory. `results.json` stores only bundle-relative paths
   interpretation 25), build and compile logs.
 - `results.json`: per-run records, per-cell summaries, and sha256 of every log and harness file.
 - `.gitignore`: excludes `work/`.
+
+## Revision after the runs (2026-10-25)
+
+`harness/part_c.sh` originally removed every container built from the engine image at the end of a cell (`docker ps -aq --filter ancestor=$IMAGE`), which would also remove unrelated containers on a developer's machine. The published script now records the containers present before the cell and removes only those created during it. The recorded runs were executed with the original line; its removals are in `logs/partC/*.cleanup.txt`, and `results.json` keeps the executed script's hash as `sha256_as_run`.
