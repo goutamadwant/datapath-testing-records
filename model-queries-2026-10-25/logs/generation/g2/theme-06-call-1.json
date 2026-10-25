@@ -1,0 +1,130 @@
+{
+ "command": [
+  "claude",
+  "-p",
+  "--model",
+  "sonnet",
+  "--output-format",
+  "json",
+  "--system-prompt",
+  "You are a helpful assistant.",
+  "--tools",
+  "",
+  "--strict-mcp-config",
+  "--setting-sources",
+  "",
+  "--no-session-persistence",
+  "<prompt>"
+ ],
+ "returncode": 0,
+ "seconds": 18.2,
+ "stderr": "",
+ "response": {
+  "duration_api_ms": 14489,
+  "stop_reason": "end_turn",
+  "session_id": "4aefb99c-609c-45f2-8320-f4526de412b1",
+  "total_cost_usd": 0.019206,
+  "usage": {
+   "input_tokens": 1023,
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "output_tokens": 1716,
+   "output_tokens_details": {
+    "thinking_tokens": 0
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 0,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 1023,
+     "output_tokens": 1716,
+     "cache_read_input_tokens": 0,
+     "cache_creation_input_tokens": 0,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 0
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "modelUsage": {
+   "claude-sonnet-5": {
+    "inputTokens": 1023,
+    "outputTokens": 1716,
+    "cacheReadInputTokens": 0,
+    "cacheCreationInputTokens": 0,
+    "webSearchRequests": 0,
+    "costUSD": 0.019206,
+    "contextWindow": 1000000,
+    "maxOutputTokens": 64000,
+    "thinkingTokens": 0,
+    "canonicalModel": "claude-sonnet-5",
+    "provider": "firstParty",
+    "costBasis": "list"
+   }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+   "spawned": 0,
+   "requested": {
+    "background": 0,
+    "foreground": 0,
+    "unset": 0
+   },
+   "started_in_background": 0,
+   "max_depth": 0,
+   "spawned_by_subagents": 0,
+   "completed": 0,
+   "failed": 0,
+   "killed": {
+    "parent": 0,
+    "user": 0,
+    "system": 0
+   },
+   "refused": {
+    "depth_limit": 0,
+    "concurrency_limit": 0,
+    "budget": 0
+   },
+   "by_type": {}
+  },
+  "is_error": false,
+  "num_turns": 1,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "{\"task\": \"Count events whose path contains a standard UUID anywhere in the string\", \"sql\": \"SELECT COUNT(*) FROM events WHERE regexp_like(path, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')\"}\n{\"task\": \"List distinct paths containing a UUID segment along with their status codes\", \"sql\": \"SELECT DISTINCT path, status FROM events WHERE regexp_like(path, '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}', 'i')\"}\n{\"task\": \"Find error-status events whose path has a UUID to investigate failing resource-specific requests\", \"sql\": \"SELECT id, user_id, path, status FROM events WHERE status >= 500 AND regexp_like(path, '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}', 'i')\"}\n{\"task\": \"Tag each event path as UUID or non-UUID using a CASE expression based on regexp_like\", \"sql\": \"SELECT id, path, CASE WHEN regexp_like(path, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}') THEN 'has_uuid' ELSE 'no_uuid' END AS uuid_flag FROM events\"}\n{\"task\": \"Count how many distinct user_ids made requests to UUID-containing paths\", \"sql\": \"SELECT COUNT(DISTINCT user_id) AS users_with_uuid_paths FROM events WHERE regexp_like(path, '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}', 'i')\"}\n{\"task\": \"Join logs and events to find log lines mentioning a UUID that also appear around requests to UUID-bearing paths on the same path string\", \"sql\": \"SELECT l.ts, l.level, l.message, e.path FROM logs l JOIN events e ON regexp_like(l.message, substring(e.path, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')) WHERE regexp_like(e.path, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')\"}\n{\"task\": \"Compute the percentage of total requests whose path contains a UUID\", \"sql\": \"SELECT 100.0 * SUM(CASE WHEN regexp_like(path, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}') THEN 1 ELSE 0 END) / COUNT(*) AS pct_uuid_paths FROM events\"}\n{\"task\": \"Find paths with a UUID immediately followed by a query string to spot resource-id-based endpoints with parameters\", \"sql\": \"SELECT path FROM events WHERE regexp_like(path, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\\\\?')\"}\n{\"task\": \"Group UUID-containing event paths by status code to see distribution of outcomes for resource-specific calls\", \"sql\": \"SELECT status, COUNT(*) AS cnt FROM events WHERE regexp_like(path, '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}', 'i') GROUP BY status ORDER BY cnt DESC\"}\n{\"task\": \"Identify paths that contain multiple UUIDs, suggesting nested resource relationships\", \"sql\": \"SELECT path FROM events WHERE regexp_like(path, '([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}).*([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})')\"}",
+  "ttft_ms": 14482,
+  "type": "result",
+  "duration_ms": 16272,
+  "uuid": "fd975856-e610-4678-b0f3-886a7c8f989e",
+  "ttft_stream_ms": 2510,
+  "time_to_request_ms": 61,
+  "first_content_frame_ms": 2511,
+  "queued_turn_count": 0,
+  "result_index": 0
+ },
+ "text": "{\"task\": \"Count events whose path contains a standard UUID anywhere in the string\", \"sql\": \"SELECT COUNT(*) FROM events WHERE regexp_like(path, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')\"}\n{\"task\": \"List distinct paths containing a UUID segment along with their status codes\", \"sql\": \"SELECT DISTINCT path, status FROM events WHERE regexp_like(path, '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}', 'i')\"}\n{\"task\": \"Find error-status events whose path has a UUID to investigate failing resource-specific requests\", \"sql\": \"SELECT id, user_id, path, status FROM events WHERE status >= 500 AND regexp_like(path, '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}', 'i')\"}\n{\"task\": \"Tag each event path as UUID or non-UUID using a CASE expression based on regexp_like\", \"sql\": \"SELECT id, path, CASE WHEN regexp_like(path, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}') THEN 'has_uuid' ELSE 'no_uuid' END AS uuid_flag FROM events\"}\n{\"task\": \"Count how many distinct user_ids made requests to UUID-containing paths\", \"sql\": \"SELECT COUNT(DISTINCT user_id) AS users_with_uuid_paths FROM events WHERE regexp_like(path, '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}', 'i')\"}\n{\"task\": \"Join logs and events to find log lines mentioning a UUID that also appear around requests to UUID-bearing paths on the same path string\", \"sql\": \"SELECT l.ts, l.level, l.message, e.path FROM logs l JOIN events e ON regexp_like(l.message, substring(e.path, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')) WHERE regexp_like(e.path, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')\"}\n{\"task\": \"Compute the percentage of total requests whose path contains a UUID\", \"sql\": \"SELECT 100.0 * SUM(CASE WHEN regexp_like(path, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}') THEN 1 ELSE 0 END) / COUNT(*) AS pct_uuid_paths FROM events\"}\n{\"task\": \"Find paths with a UUID immediately followed by a query string to spot resource-id-based endpoints with parameters\", \"sql\": \"SELECT path FROM events WHERE regexp_like(path, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\\\\?')\"}\n{\"task\": \"Group UUID-containing event paths by status code to see distribution of outcomes for resource-specific calls\", \"sql\": \"SELECT status, COUNT(*) AS cnt FROM events WHERE regexp_like(path, '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}', 'i') GROUP BY status ORDER BY cnt DESC\"}\n{\"task\": \"Identify paths that contain multiple UUIDs, suggesting nested resource relationships\", \"sql\": \"SELECT path FROM events WHERE regexp_like(path, '([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}).*([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})')\"}",
+ "generator": "g2",
+ "theme_index": 6,
+ "theme": "find request paths that contain UUIDs",
+ "call": 1,
+ "started": "2026-10-25T15:35:18-07:00",
+ "finished": "2026-10-25T15:35:36-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find request paths that contain UUIDs\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 10,
+ "unextractable_lines": []
+}

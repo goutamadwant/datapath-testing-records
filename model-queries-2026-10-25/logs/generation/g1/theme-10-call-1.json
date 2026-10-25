@@ -1,0 +1,58 @@
+{
+ "request": {
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You are a helpful assistant."
+   },
+   {
+    "role": "user",
+    "content": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find log messages that contain hexadecimal hashes or commit ids\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n"
+   }
+  ],
+  "temperature": 0.7,
+  "max_tokens": 4096
+ },
+ "response": {
+  "id": "chatcmpl-xe812y3nd95wiknfdpu88",
+  "object": "chat.completion",
+  "created": 1792967825,
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "role": "assistant",
+     "content": "{\"task\": \"Find all ERROR level logs containing 40-character hexadecimal commit hashes\", \"sql\": \"SELECT * FROM logs WHERE level = 'ERROR' AND regexp_like(message, '[a-fA-F0-9]{40}')\"}\n{\"task\": \"Identify WARNING messages with 8-character hexadecimal session IDs\", \"sql\": \"SELECT * FROM logs WHERE level = 'WARNING' AND regexp_like(message, '[a-fA-F0-9]{8}')\"}\n{\"task\": \"List all service logs containing UUID-like patterns with hyphens\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}')\"}\n{\"task\": \"Find application logs with 64-character hexadecimal cryptographic hashes\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[a-fA-F0-9]{64}') AND level IN ('INFO', 'DEBUG')\"}\n{\"task\": \"Search for events where user paths contain 32-character hexadecimal file hashes\", \"sql\": \"SELECT e.*, l.message FROM events e JOIN logs l ON e.id = l.ts WHERE regexp_like(e.path, '[a-fA-F0-9]{32}') AND regexp_like(l.message, 'hash|checksum')\"}\n{\"task\": \"Identify service logs with either 40-character commit hashes or 64-character crypto hashes\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[a-fA-F0-9]{40}|[a-fA-F0-9]{64}') AND level = 'INFO'\"}\n{\"task\": \"Find error messages containing hexadecimal memory addresses with 0x prefix\", \"sql\": \"SELECT * FROM logs WHERE level = 'ERROR' AND regexp_like(message, '0x[a-fA-F0-9]+')\"}\n{\"task\": \"Look for service logs that reference version control commit IDs in different formats\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '(commit|hash): [a-fA-F0-9]{40}') OR regexp_like(message, '([a-fA-F0-9]{40} )')\"}\n{\"task\": \"Search for event paths containing URL-encoded hexadecimal strings\", \"sql\": \"SELECT e.*, l.message FROM events e JOIN logs l ON e.user_id = l.ts WHERE regexp_like(e.path, '%[0-9a-fA-F]{2}') AND regexp_like(l.message, 'decode|url')\"}\n{\"task\": \"Find all log entries with 16-character hexadecimal session tokens\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[a-fA-F0-9]{16}') AND ts >= NOW() - INTERVAL '1 day'\"}",
+     "reasoning_content": "",
+     "tool_calls": []
+    },
+    "logprobs": null,
+    "finish_reason": "stop"
+   }
+  ],
+  "usage": {
+   "prompt_tokens": 212,
+   "completion_tokens": 612,
+   "total_tokens": 824,
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "stats": {},
+  "system_fingerprint": "qwen3-coder-30b-a3b-instruct"
+ },
+ "seconds": 5.62,
+ "text": "{\"task\": \"Find all ERROR level logs containing 40-character hexadecimal commit hashes\", \"sql\": \"SELECT * FROM logs WHERE level = 'ERROR' AND regexp_like(message, '[a-fA-F0-9]{40}')\"}\n{\"task\": \"Identify WARNING messages with 8-character hexadecimal session IDs\", \"sql\": \"SELECT * FROM logs WHERE level = 'WARNING' AND regexp_like(message, '[a-fA-F0-9]{8}')\"}\n{\"task\": \"List all service logs containing UUID-like patterns with hyphens\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}')\"}\n{\"task\": \"Find application logs with 64-character hexadecimal cryptographic hashes\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[a-fA-F0-9]{64}') AND level IN ('INFO', 'DEBUG')\"}\n{\"task\": \"Search for events where user paths contain 32-character hexadecimal file hashes\", \"sql\": \"SELECT e.*, l.message FROM events e JOIN logs l ON e.id = l.ts WHERE regexp_like(e.path, '[a-fA-F0-9]{32}') AND regexp_like(l.message, 'hash|checksum')\"}\n{\"task\": \"Identify service logs with either 40-character commit hashes or 64-character crypto hashes\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[a-fA-F0-9]{40}|[a-fA-F0-9]{64}') AND level = 'INFO'\"}\n{\"task\": \"Find error messages containing hexadecimal memory addresses with 0x prefix\", \"sql\": \"SELECT * FROM logs WHERE level = 'ERROR' AND regexp_like(message, '0x[a-fA-F0-9]+')\"}\n{\"task\": \"Look for service logs that reference version control commit IDs in different formats\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '(commit|hash): [a-fA-F0-9]{40}') OR regexp_like(message, '([a-fA-F0-9]{40} )')\"}\n{\"task\": \"Search for event paths containing URL-encoded hexadecimal strings\", \"sql\": \"SELECT e.*, l.message FROM events e JOIN logs l ON e.user_id = l.ts WHERE regexp_like(e.path, '%[0-9a-fA-F]{2}') AND regexp_like(l.message, 'decode|url')\"}\n{\"task\": \"Find all log entries with 16-character hexadecimal session tokens\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[a-fA-F0-9]{16}') AND ts >= NOW() - INTERVAL '1 day'\"}",
+ "generator": "g1",
+ "theme_index": 10,
+ "theme": "find log messages that contain hexadecimal hashes or commit ids",
+ "call": 1,
+ "started": "2026-10-25T15:37:04-07:00",
+ "finished": "2026-10-25T15:37:10-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find log messages that contain hexadecimal hashes or commit ids\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 10,
+ "unextractable_lines": []
+}

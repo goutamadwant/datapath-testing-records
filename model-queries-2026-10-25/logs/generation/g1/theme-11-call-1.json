@@ -1,0 +1,58 @@
+{
+ "request": {
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You are a helpful assistant."
+   },
+   {
+    "role": "user",
+    "content": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find log messages that contain MAC addresses\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n"
+   }
+  ],
+  "temperature": 0.7,
+  "max_tokens": 4096
+ },
+ "response": {
+  "id": "chatcmpl-vhe5c11ar1wubo13dfou",
+  "object": "chat.completion",
+  "created": 1792967830,
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "role": "assistant",
+     "content": "{\"task\": \"Find all log messages containing MAC addresses in colon format\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '([0-9a-fA-F]{2}[:]){5}[0-9a-fA-F]{2}')\"}\n{\"task\": \"Count error logs that mention MAC addresses with hyphen separator\", \"sql\": \"SELECT COUNT(*) as mac_error_count FROM logs WHERE level = 'ERROR' AND regexp_like(message, '([0-9a-fA-F]{2}[-]){5}[0-9a-fA-F]{2}')\"}\n{\"task\": \"Identify services with MAC address log entries and their message patterns\", \"sql\": \"SELECT service, message FROM logs WHERE regexp_like(message, '[0-9a-fA-F]{2}[:][0-9a-fA-F]{2}[:][0-9a-fA-F]{2}[:][0-9a-fA-F]{2}[:][0-9a-fA-F]{2}[:][0-9a-fA-F]{2}')\"}\n{\"task\": \"Find log messages with MAC addresses and extract them using regexp_substr\", \"sql\": \"SELECT message, regexp_like(message, '[0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}') as has_mac FROM logs\"}\n{\"task\": \"List distinct services that have MAC address related log messages\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(message, '[[:<:]]([0-9a-fA-F]{2}[:]){5}[0-9a-fA-F]{2}[[:>:]]')\"}\n{\"task\": \"Find events where user paths contain MAC address patterns\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '([0-9a-fA-F]{2}[:-]){5}[0-9a-fA-F]{2}')\"}\n{\"task\": \"Count total log messages containing MAC addresses with different formats\", \"sql\": \"SELECT COUNT(*) as mac_count FROM logs WHERE regexp_like(message, '(^|\\\\s)([0-9a-fA-F]{2}[:]){5}[0-9a-fA-F]{2}(\\\\s|$)') OR regexp_like(message, '(^|\\\\s)([0-9a-fA-F]{4}\\\\.){2}[0-9a-fA-F]{4}(\\\\s|$)')\"}\n{\"task\": \"Show log entries with MAC addresses and their timestamps\", \"sql\": \"SELECT ts, message FROM logs WHERE regexp_like(message, '(^|\\\\s)[[:xdigit:]]{2}[:-][[:xdigit:]]{2}[:-][[:xdigit:]]{2}[:-][[:xdigit:]]{2}[:-][[:xdigit:]]{2}[:-][[:xdigit:]]{2}(\\\\s|$)')\"}\n{\"task\": \"Find error logs with MAC addresses in different case formats\", \"sql\": \"SELECT * FROM logs WHERE level = 'ERROR' AND regexp_like(message, '[0-9a-fA-F]{2}[:][0-9a-fA-F]{2}[:][0-9a-fA-F]{2}[:][0-9a-fA-F]{2}[:][0-9a-fA-F]{2}[:][0-9a-fA-F]{2}')\"}\n{\"task\": \"Join events and logs to find MAC addresses in both tables\", \"sql\": \"SELECT e.id, l.message FROM events e JOIN logs l ON regexp_like(l.message, '[0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}') WHERE regexp_like(e.path, '[0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}')\"}",
+     "reasoning_content": "",
+     "tool_calls": []
+    },
+    "logprobs": null,
+    "finish_reason": "stop"
+   }
+  ],
+  "usage": {
+   "prompt_tokens": 209,
+   "completion_tokens": 952,
+   "total_tokens": 1161,
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "stats": {},
+  "system_fingerprint": "qwen3-coder-30b-a3b-instruct"
+ },
+ "seconds": 8.82,
+ "text": "{\"task\": \"Find all log messages containing MAC addresses in colon format\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '([0-9a-fA-F]{2}[:]){5}[0-9a-fA-F]{2}')\"}\n{\"task\": \"Count error logs that mention MAC addresses with hyphen separator\", \"sql\": \"SELECT COUNT(*) as mac_error_count FROM logs WHERE level = 'ERROR' AND regexp_like(message, '([0-9a-fA-F]{2}[-]){5}[0-9a-fA-F]{2}')\"}\n{\"task\": \"Identify services with MAC address log entries and their message patterns\", \"sql\": \"SELECT service, message FROM logs WHERE regexp_like(message, '[0-9a-fA-F]{2}[:][0-9a-fA-F]{2}[:][0-9a-fA-F]{2}[:][0-9a-fA-F]{2}[:][0-9a-fA-F]{2}[:][0-9a-fA-F]{2}')\"}\n{\"task\": \"Find log messages with MAC addresses and extract them using regexp_substr\", \"sql\": \"SELECT message, regexp_like(message, '[0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}') as has_mac FROM logs\"}\n{\"task\": \"List distinct services that have MAC address related log messages\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(message, '[[:<:]]([0-9a-fA-F]{2}[:]){5}[0-9a-fA-F]{2}[[:>:]]')\"}\n{\"task\": \"Find events where user paths contain MAC address patterns\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '([0-9a-fA-F]{2}[:-]){5}[0-9a-fA-F]{2}')\"}\n{\"task\": \"Count total log messages containing MAC addresses with different formats\", \"sql\": \"SELECT COUNT(*) as mac_count FROM logs WHERE regexp_like(message, '(^|\\\\s)([0-9a-fA-F]{2}[:]){5}[0-9a-fA-F]{2}(\\\\s|$)') OR regexp_like(message, '(^|\\\\s)([0-9a-fA-F]{4}\\\\.){2}[0-9a-fA-F]{4}(\\\\s|$)')\"}\n{\"task\": \"Show log entries with MAC addresses and their timestamps\", \"sql\": \"SELECT ts, message FROM logs WHERE regexp_like(message, '(^|\\\\s)[[:xdigit:]]{2}[:-][[:xdigit:]]{2}[:-][[:xdigit:]]{2}[:-][[:xdigit:]]{2}[:-][[:xdigit:]]{2}[:-][[:xdigit:]]{2}(\\\\s|$)')\"}\n{\"task\": \"Find error logs with MAC addresses in different case formats\", \"sql\": \"SELECT * FROM logs WHERE level = 'ERROR' AND regexp_like(message, '[0-9a-fA-F]{2}[:][0-9a-fA-F]{2}[:][0-9a-fA-F]{2}[:][0-9a-fA-F]{2}[:][0-9a-fA-F]{2}[:][0-9a-fA-F]{2}')\"}\n{\"task\": \"Join events and logs to find MAC addresses in both tables\", \"sql\": \"SELECT e.id, l.message FROM events e JOIN logs l ON regexp_like(l.message, '[0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}') WHERE regexp_like(e.path, '[0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}')\"}",
+ "generator": "g1",
+ "theme_index": 11,
+ "theme": "find log messages that contain MAC addresses",
+ "call": 1,
+ "started": "2026-10-25T15:37:10-07:00",
+ "finished": "2026-10-25T15:37:19-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find log messages that contain MAC addresses\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 10,
+ "unextractable_lines": []
+}

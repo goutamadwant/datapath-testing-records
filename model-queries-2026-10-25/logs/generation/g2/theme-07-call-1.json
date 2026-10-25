@@ -1,0 +1,130 @@
+{
+ "command": [
+  "claude",
+  "-p",
+  "--model",
+  "sonnet",
+  "--output-format",
+  "json",
+  "--system-prompt",
+  "You are a helpful assistant.",
+  "--tools",
+  "",
+  "--strict-mcp-config",
+  "--setting-sources",
+  "",
+  "--no-session-persistence",
+  "<prompt>"
+ ],
+ "returncode": 0,
+ "seconds": 17.09,
+ "stderr": "",
+ "response": {
+  "duration_api_ms": 13250,
+  "stop_reason": "end_turn",
+  "session_id": "c57e4c54-4c04-425c-855d-a067dd134989",
+  "total_cost_usd": 0.018958000000000003,
+  "usage": {
+   "input_tokens": 1024,
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "output_tokens": 1691,
+   "output_tokens_details": {
+    "thinking_tokens": 0
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 0,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 1024,
+     "output_tokens": 1691,
+     "cache_read_input_tokens": 0,
+     "cache_creation_input_tokens": 0,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 0
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "modelUsage": {
+   "claude-sonnet-5": {
+    "inputTokens": 1024,
+    "outputTokens": 1691,
+    "cacheReadInputTokens": 0,
+    "cacheCreationInputTokens": 0,
+    "webSearchRequests": 0,
+    "costUSD": 0.018958000000000003,
+    "contextWindow": 1000000,
+    "maxOutputTokens": 64000,
+    "thinkingTokens": 0,
+    "canonicalModel": "claude-sonnet-5",
+    "provider": "firstParty",
+    "costBasis": "list"
+   }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+   "spawned": 0,
+   "requested": {
+    "background": 0,
+    "foreground": 0,
+    "unset": 0
+   },
+   "started_in_background": 0,
+   "max_depth": 0,
+   "spawned_by_subagents": 0,
+   "completed": 0,
+   "failed": 0,
+   "killed": {
+    "parent": 0,
+    "user": 0,
+    "system": 0
+   },
+   "refused": {
+    "depth_limit": 0,
+    "concurrency_limit": 0,
+    "budget": 0
+   },
+   "by_type": {}
+  },
+  "is_error": false,
+  "num_turns": 1,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "{\"task\": \"Find all log messages that contain an ISO-8601 formatted timestamp\", \"sql\": \"SELECT ts, level, service, message FROM logs WHERE regexp_like(message, '\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}')\"}\n{\"task\": \"Count log messages per service that contain ISO-8601 timestamps with timezone offsets\", \"sql\": \"SELECT service, COUNT(*) AS cnt FROM logs WHERE regexp_like(message, '\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}(\\\\+\\\\d{2}:\\\\d{2}|-\\\\d{2}:\\\\d{2}|Z)') GROUP BY service ORDER BY cnt DESC\"}\n{\"task\": \"List ERROR level logs that embed an ISO-8601 timestamp with milliseconds\", \"sql\": \"SELECT ts, service, message FROM logs WHERE level = 'ERROR' AND regexp_like(message, '\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}\\\\.\\\\d{3}')\"}\n{\"task\": \"Flag each log row with a boolean indicating whether its message contains a UTC Zulu ISO-8601 timestamp\", \"sql\": \"SELECT ts, service, message, CASE WHEN regexp_like(message, '\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}Z') THEN true ELSE false END AS has_zulu_ts FROM logs\"}\n{\"task\": \"Find log messages containing an ISO-8601 timestamp that does not match the log's own ts column date\", \"sql\": \"SELECT ts, message FROM logs WHERE regexp_like(message, '\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}') AND NOT regexp_like(message, CAST(date_trunc('day', ts) AS VARCHAR))\"}\n{\"task\": \"Identify DEBUG logs with embedded ISO-8601 timestamps for a case-insensitive search of the word 'retry'\", \"sql\": \"SELECT ts, service, message FROM logs WHERE level = 'DEBUG' AND regexp_like(message, '\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}') AND regexp_like(message, 'retry', 'i')\"}\n{\"task\": \"Find the earliest log per service that contains an ISO-8601 timestamp in its message\", \"sql\": \"SELECT service, MIN(ts) AS first_ts_with_iso FROM logs WHERE regexp_like(message, '\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}') GROUP BY service\"}\n{\"task\": \"Classify log messages by whether they contain a full ISO-8601 timestamp, just a date, or neither\", \"sql\": \"SELECT ts, message, CASE WHEN regexp_like(message, '\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}') THEN 'full_timestamp' WHEN regexp_like(message, '\\\\d{4}-\\\\d{2}-\\\\d{2}') THEN 'date_only' ELSE 'none' END AS iso_classification FROM logs\"}\n{\"task\": \"Find WARN or ERROR logs with ISO-8601 timestamps that are suspiciously in the future relative to log ts\", \"sql\": \"SELECT ts, level, message FROM logs WHERE level IN ('WARN', 'ERROR') AND regexp_like(message, '\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}') AND regexp_like(message, '202[6-9]-\\\\d{2}-\\\\d{2}T')\"}\n{\"task\": \"Count distinct services that log messages containing ISO-8601 timestamps with fractional seconds and timezone Z\", \"sql\": \"SELECT COUNT(DISTINCT service) AS services_with_iso_z FROM logs WHERE regexp_like(message, '\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}\\\\.\\\\d+Z')\"}\n{\"task\": \"Sample 20 raw messages that contain an ISO-8601 timestamp for manual inspection, ordered by most recent\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, '\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}(\\\\.\\\\d+)?(Z|[+-]\\\\d{2}:\\\\d{2})?') ORDER BY ts DESC LIMIT 20\"}",
+  "ttft_ms": 13182,
+  "type": "result",
+  "duration_ms": 15122,
+  "uuid": "6627f18f-594b-4300-bc4d-3b713f9556f4",
+  "ttft_stream_ms": 1340,
+  "time_to_request_ms": 50,
+  "first_content_frame_ms": 1341,
+  "queued_turn_count": 0,
+  "result_index": 0
+ },
+ "text": "{\"task\": \"Find all log messages that contain an ISO-8601 formatted timestamp\", \"sql\": \"SELECT ts, level, service, message FROM logs WHERE regexp_like(message, '\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}')\"}\n{\"task\": \"Count log messages per service that contain ISO-8601 timestamps with timezone offsets\", \"sql\": \"SELECT service, COUNT(*) AS cnt FROM logs WHERE regexp_like(message, '\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}(\\\\+\\\\d{2}:\\\\d{2}|-\\\\d{2}:\\\\d{2}|Z)') GROUP BY service ORDER BY cnt DESC\"}\n{\"task\": \"List ERROR level logs that embed an ISO-8601 timestamp with milliseconds\", \"sql\": \"SELECT ts, service, message FROM logs WHERE level = 'ERROR' AND regexp_like(message, '\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}\\\\.\\\\d{3}')\"}\n{\"task\": \"Flag each log row with a boolean indicating whether its message contains a UTC Zulu ISO-8601 timestamp\", \"sql\": \"SELECT ts, service, message, CASE WHEN regexp_like(message, '\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}Z') THEN true ELSE false END AS has_zulu_ts FROM logs\"}\n{\"task\": \"Find log messages containing an ISO-8601 timestamp that does not match the log's own ts column date\", \"sql\": \"SELECT ts, message FROM logs WHERE regexp_like(message, '\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}') AND NOT regexp_like(message, CAST(date_trunc('day', ts) AS VARCHAR))\"}\n{\"task\": \"Identify DEBUG logs with embedded ISO-8601 timestamps for a case-insensitive search of the word 'retry'\", \"sql\": \"SELECT ts, service, message FROM logs WHERE level = 'DEBUG' AND regexp_like(message, '\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}') AND regexp_like(message, 'retry', 'i')\"}\n{\"task\": \"Find the earliest log per service that contains an ISO-8601 timestamp in its message\", \"sql\": \"SELECT service, MIN(ts) AS first_ts_with_iso FROM logs WHERE regexp_like(message, '\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}') GROUP BY service\"}\n{\"task\": \"Classify log messages by whether they contain a full ISO-8601 timestamp, just a date, or neither\", \"sql\": \"SELECT ts, message, CASE WHEN regexp_like(message, '\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}') THEN 'full_timestamp' WHEN regexp_like(message, '\\\\d{4}-\\\\d{2}-\\\\d{2}') THEN 'date_only' ELSE 'none' END AS iso_classification FROM logs\"}\n{\"task\": \"Find WARN or ERROR logs with ISO-8601 timestamps that are suspiciously in the future relative to log ts\", \"sql\": \"SELECT ts, level, message FROM logs WHERE level IN ('WARN', 'ERROR') AND regexp_like(message, '\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}') AND regexp_like(message, '202[6-9]-\\\\d{2}-\\\\d{2}T')\"}\n{\"task\": \"Count distinct services that log messages containing ISO-8601 timestamps with fractional seconds and timezone Z\", \"sql\": \"SELECT COUNT(DISTINCT service) AS services_with_iso_z FROM logs WHERE regexp_like(message, '\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}\\\\.\\\\d+Z')\"}\n{\"task\": \"Sample 20 raw messages that contain an ISO-8601 timestamp for manual inspection, ordered by most recent\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, '\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}(\\\\.\\\\d+)?(Z|[+-]\\\\d{2}:\\\\d{2})?') ORDER BY ts DESC LIMIT 20\"}",
+ "generator": "g2",
+ "theme_index": 7,
+ "theme": "find log messages that contain ISO-8601 timestamps",
+ "call": 1,
+ "started": "2026-10-25T15:35:18-07:00",
+ "finished": "2026-10-25T15:35:35-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find log messages that contain ISO-8601 timestamps\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 11,
+ "unextractable_lines": []
+}

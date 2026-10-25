@@ -1,0 +1,68 @@
+{
+ "request": {
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You are a helpful assistant."
+   },
+   {
+    "role": "user",
+    "content": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find request paths with numeric resource ids, such as /api/v2/users/123/orders\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n"
+   }
+  ],
+  "temperature": 0.7,
+  "max_tokens": 4096
+ },
+ "response": {
+  "id": "chatcmpl-cu1dtd9mhx7mhhoquje3bi",
+  "object": "chat.completion",
+  "created": 1792967808,
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "role": "assistant",
+     "content": "{\"task\": \"Find all log messages containing numeric resource IDs in API paths\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '/api/v[0-9]+/[^/]+/[0-9]+')}\"},\n{\"task\": \"Count distinct user IDs for requests with numeric resource IDs\", \"sql\": \"SELECT COUNT(DISTINCT user_id) FROM events WHERE regexp_like(path, '^/api/v[0-9]+/[^/]+/[0-9]+')}\"},\n{\"task\": \"Identify log levels associated with requests having numeric resource IDs\", \"sql\": \"SELECT DISTINCT level FROM logs WHERE regexp_like(message, '/api/v[0-9]+/[^/]+/[0-9]+')}\"},\n{\"task\": \"Find request paths that match API pattern with numeric IDs and have status 200\", \"sql\": \"SELECT path FROM events WHERE regexp_like(path, '^/api/v[0-9]+/[^/]+/[0-9]+') AND status = 200\"}},  \n{\"task\": \"List all services that logged requests with numeric resource IDs\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(message, '/api/v[0-9]+/[^/]+/[0-9]+')}\"},\n{\"task\": \"Count events grouped by status for paths with numeric resource IDs\", \"sql\": \"SELECT status, COUNT(*) FROM events WHERE regexp_like(path, '^/api/v[0-9]+/[^/]+/[0-9]+') GROUP BY status\"}},  \n{\"task\": \"Extract service names from logs where message contains API paths with numeric IDs\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(message, '/api/v[0-9]+/[^/]+/[0-9]+')}\"},\n{\"task\": \"Find log messages that contain both API paths and error indicators for numeric resource IDs\", \"sql\": \"SELECT message FROM logs WHERE regexp_like(message, '/api/v[0-9]+/[^/]+/[0-9]+') AND regexp_like(message, 'error|failed|exception')}\"},\n{\"task\": \"Identify the most common HTTP paths with numeric IDs in events table\", \"sql\": \"SELECT path, COUNT(*) FROM events WHERE regexp_like(path, '^/api/v[0-9]+/[^/]+/[0-9]+') GROUP BY path ORDER BY COUNT DESC LIMIT 5\"}},  \n{\"task\": \"Find logs where message contains API paths with numeric IDs and timestamp within last hour\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '/api/v[0-9]+/[^/]+/[0-9]+') AND ts >= now() - INTERVAL '1 hour'}\"}",
+     "reasoning_content": "",
+     "tool_calls": []
+    },
+    "logprobs": null,
+    "finish_reason": "stop"
+   }
+  ],
+  "usage": {
+   "prompt_tokens": 222,
+   "completion_tokens": 565,
+   "total_tokens": 787,
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "stats": {},
+  "system_fingerprint": "qwen3-coder-30b-a3b-instruct"
+ },
+ "seconds": 5.22,
+ "text": "{\"task\": \"Find all log messages containing numeric resource IDs in API paths\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '/api/v[0-9]+/[^/]+/[0-9]+')}\"},\n{\"task\": \"Count distinct user IDs for requests with numeric resource IDs\", \"sql\": \"SELECT COUNT(DISTINCT user_id) FROM events WHERE regexp_like(path, '^/api/v[0-9]+/[^/]+/[0-9]+')}\"},\n{\"task\": \"Identify log levels associated with requests having numeric resource IDs\", \"sql\": \"SELECT DISTINCT level FROM logs WHERE regexp_like(message, '/api/v[0-9]+/[^/]+/[0-9]+')}\"},\n{\"task\": \"Find request paths that match API pattern with numeric IDs and have status 200\", \"sql\": \"SELECT path FROM events WHERE regexp_like(path, '^/api/v[0-9]+/[^/]+/[0-9]+') AND status = 200\"}},  \n{\"task\": \"List all services that logged requests with numeric resource IDs\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(message, '/api/v[0-9]+/[^/]+/[0-9]+')}\"},\n{\"task\": \"Count events grouped by status for paths with numeric resource IDs\", \"sql\": \"SELECT status, COUNT(*) FROM events WHERE regexp_like(path, '^/api/v[0-9]+/[^/]+/[0-9]+') GROUP BY status\"}},  \n{\"task\": \"Extract service names from logs where message contains API paths with numeric IDs\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(message, '/api/v[0-9]+/[^/]+/[0-9]+')}\"},\n{\"task\": \"Find log messages that contain both API paths and error indicators for numeric resource IDs\", \"sql\": \"SELECT message FROM logs WHERE regexp_like(message, '/api/v[0-9]+/[^/]+/[0-9]+') AND regexp_like(message, 'error|failed|exception')}\"},\n{\"task\": \"Identify the most common HTTP paths with numeric IDs in events table\", \"sql\": \"SELECT path, COUNT(*) FROM events WHERE regexp_like(path, '^/api/v[0-9]+/[^/]+/[0-9]+') GROUP BY path ORDER BY COUNT DESC LIMIT 5\"}},  \n{\"task\": \"Find logs where message contains API paths with numeric IDs and timestamp within last hour\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '/api/v[0-9]+/[^/]+/[0-9]+') AND ts >= now() - INTERVAL '1 hour'}\"}",
+ "generator": "g1",
+ "theme_index": 8,
+ "theme": "find request paths with numeric resource ids, such as /api/v2/users/123/orders",
+ "call": 1,
+ "started": "2026-10-25T15:36:48-07:00",
+ "finished": "2026-10-25T15:36:53-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find request paths with numeric resource ids, such as /api/v2/users/123/orders\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 1,
+ "unextractable_lines": [
+  "{\"task\": \"Find all log messages containing numeric resource IDs in API paths\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '/api/v[0-9]+/[^/]+/[0-9]+')}\"},",
+  "{\"task\": \"Count distinct user IDs for requests with numeric resource IDs\", \"sql\": \"SELECT COUNT(DISTINCT user_id) FROM events WHERE regexp_like(path, '^/api/v[0-9]+/[^/]+/[0-9]+')}\"},",
+  "{\"task\": \"Identify log levels associated with requests having numeric resource IDs\", \"sql\": \"SELECT DISTINCT level FROM logs WHERE regexp_like(message, '/api/v[0-9]+/[^/]+/[0-9]+')}\"},",
+  "{\"task\": \"Find request paths that match API pattern with numeric IDs and have status 200\", \"sql\": \"SELECT path FROM events WHERE regexp_like(path, '^/api/v[0-9]+/[^/]+/[0-9]+') AND status = 200\"}},  ",
+  "{\"task\": \"List all services that logged requests with numeric resource IDs\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(message, '/api/v[0-9]+/[^/]+/[0-9]+')}\"},",
+  "{\"task\": \"Count events grouped by status for paths with numeric resource IDs\", \"sql\": \"SELECT status, COUNT(*) FROM events WHERE regexp_like(path, '^/api/v[0-9]+/[^/]+/[0-9]+') GROUP BY status\"}},  ",
+  "{\"task\": \"Extract service names from logs where message contains API paths with numeric IDs\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(message, '/api/v[0-9]+/[^/]+/[0-9]+')}\"},",
+  "{\"task\": \"Find log messages that contain both API paths and error indicators for numeric resource IDs\", \"sql\": \"SELECT message FROM logs WHERE regexp_like(message, '/api/v[0-9]+/[^/]+/[0-9]+') AND regexp_like(message, 'error|failed|exception')}\"},",
+  "{\"task\": \"Identify the most common HTTP paths with numeric IDs in events table\", \"sql\": \"SELECT path, COUNT(*) FROM events WHERE regexp_like(path, '^/api/v[0-9]+/[^/]+/[0-9]+') GROUP BY path ORDER BY COUNT DESC LIMIT 5\"}},  "
+ ]
+}

@@ -1,0 +1,5 @@
+2026-10-25T15:46:24-0700
+before issue-8: {"status":"ok","logical_ms":4.193542,"physical_ms":71.598667,"total_ms":75.792209}
+before simple: {"status":"ok","logical_ms":1.7713329999999998,"physical_ms":3.272541,"total_ms":5.043874}
+after issue-8: {"status":"ok","logical_ms":3.979666,"physical_ms":7.317875,"total_ms":11.297540999999999}
+after simple: {"status":"ok","logical_ms":2.108834,"physical_ms":3.6065419999999997,"total_ms":5.715375999999999}

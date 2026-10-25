@@ -1,0 +1,60 @@
+{
+ "request": {
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You are a helpful assistant."
+   },
+   {
+    "role": "user",
+    "content": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find request paths that look like SQL injection attempts\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n"
+   }
+  ],
+  "temperature": 0.7,
+  "max_tokens": 4096
+ },
+ "response": {
+  "id": "chatcmpl-eo4hjeq4cuh68fm9f36qyg",
+  "object": "chat.completion",
+  "created": 1792967884,
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "role": "assistant",
+     "content": "{\"task\": \"Find log messages containing common SQL injection patterns\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '(union|select|insert|update|delete|drop|create|alter|exec|execute)\\\\s+(all|distinct|top|into|from|where|order|group|having|limit|offset|table|database|schema)', 'i')\"}\n{\"task\": \"Identify HTTP paths with potential SQL injection attempts in query parameters\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '\\\\?[^=&]*=\\\\s*(union|select|insert|update|delete|drop|create|alter|exec|execute)\\\\b', 'i')\"}\n{\"task\": \"Detect log entries with apostrophe followed by SQL keywords\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '''\\\\s+(union|select|insert|update|delete|drop|create|alter|exec|execute)', 'i')\"}\n{\"task\": \"Find events where path contains multiple SQL operators in sequence\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '[&?](?:[^=&]*=.*[&?]){2,}', 'i') AND regexp_like(path, '(union|select|insert|update|delete)', 'i')\"}\n{\"task\": \"Identify logs with SQL injection patterns in message text\", \"sql\": \"SELECT ts, level, service, message FROM logs WHERE regexp_like(message, '(\\\\b(?:union|select|insert|update|delete)\\\\b.*?\\\\b(?:all|distinct|top|into|from|where|order|group|having|limit|offset)\\\\b)', 'i')\"}\n{\"task\": \"Find request paths with dangerous SQL injection payloads\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '(?:%27|%22)%s*(?:union|select|insert|update|delete|drop|create|alter|exec|execute)', 'i')\"}\n{\"task\": \"Detect log messages containing numeric SQL injection patterns\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '\\\\b(?:[0-9]+\\\\s*[-+*/]\\\\s*){2,}[0-9]+\\\\b', 'i') AND regexp_like(message, '(union|select|insert|update|delete)', 'i')\"}\n{\"task\": \"Identify events with SQL injection patterns in query strings\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '\\\\?.*?(?:[;\\\"\\'\\\\\\\\]+|\\\\b(?:union|select|insert|update|delete)\\\\b)', 'i')\"}\n{\"task\": \"Find log entries with dangerous SQL keywords followed by database objects\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '(?:union|select|insert|update|delete)\\\\s+(?:all|distinct|top)?\\\\s+[^\\\\s]*\\\\.?\\\\w+', 'i')\"}\n{\"task\": \"Detect HTTP paths with SQL injection attempts using common payloads\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '(?:%20(?:union|select|insert|update|delete)%20|%27\\\\s*(?:or|and)\\\\s*1=1)', 'i')\"}",
+     "reasoning_content": "",
+     "tool_calls": []
+    },
+    "logprobs": null,
+    "finish_reason": "stop"
+   }
+  ],
+  "usage": {
+   "prompt_tokens": 211,
+   "completion_tokens": 691,
+   "total_tokens": 902,
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "stats": {},
+  "system_fingerprint": "qwen3-coder-30b-a3b-instruct"
+ },
+ "seconds": 6.29,
+ "text": "{\"task\": \"Find log messages containing common SQL injection patterns\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '(union|select|insert|update|delete|drop|create|alter|exec|execute)\\\\s+(all|distinct|top|into|from|where|order|group|having|limit|offset|table|database|schema)', 'i')\"}\n{\"task\": \"Identify HTTP paths with potential SQL injection attempts in query parameters\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '\\\\?[^=&]*=\\\\s*(union|select|insert|update|delete|drop|create|alter|exec|execute)\\\\b', 'i')\"}\n{\"task\": \"Detect log entries with apostrophe followed by SQL keywords\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '''\\\\s+(union|select|insert|update|delete|drop|create|alter|exec|execute)', 'i')\"}\n{\"task\": \"Find events where path contains multiple SQL operators in sequence\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '[&?](?:[^=&]*=.*[&?]){2,}', 'i') AND regexp_like(path, '(union|select|insert|update|delete)', 'i')\"}\n{\"task\": \"Identify logs with SQL injection patterns in message text\", \"sql\": \"SELECT ts, level, service, message FROM logs WHERE regexp_like(message, '(\\\\b(?:union|select|insert|update|delete)\\\\b.*?\\\\b(?:all|distinct|top|into|from|where|order|group|having|limit|offset)\\\\b)', 'i')\"}\n{\"task\": \"Find request paths with dangerous SQL injection payloads\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '(?:%27|%22)%s*(?:union|select|insert|update|delete|drop|create|alter|exec|execute)', 'i')\"}\n{\"task\": \"Detect log messages containing numeric SQL injection patterns\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '\\\\b(?:[0-9]+\\\\s*[-+*/]\\\\s*){2,}[0-9]+\\\\b', 'i') AND regexp_like(message, '(union|select|insert|update|delete)', 'i')\"}\n{\"task\": \"Identify events with SQL injection patterns in query strings\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '\\\\?.*?(?:[;\\\"\\'\\\\\\\\]+|\\\\b(?:union|select|insert|update|delete)\\\\b)', 'i')\"}\n{\"task\": \"Find log entries with dangerous SQL keywords followed by database objects\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '(?:union|select|insert|update|delete)\\\\s+(?:all|distinct|top)?\\\\s+[^\\\\s]*\\\\.?\\\\w+', 'i')\"}\n{\"task\": \"Detect HTTP paths with SQL injection attempts using common payloads\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '(?:%20(?:union|select|insert|update|delete)%20|%27\\\\s*(?:or|and)\\\\s*1=1)', 'i')\"}",
+ "generator": "g1",
+ "theme_index": 18,
+ "theme": "find request paths that look like SQL injection attempts",
+ "call": 2,
+ "started": "2026-10-25T15:38:04-07:00",
+ "finished": "2026-10-25T15:38:10-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find request paths that look like SQL injection attempts\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 9,
+ "unextractable_lines": [
+  "{\"task\": \"Identify events with SQL injection patterns in query strings\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '\\\\?.*?(?:[;\\\"\\'\\\\\\\\]+|\\\\b(?:union|select|insert|update|delete)\\\\b)', 'i')\"}"
+ ]
+}

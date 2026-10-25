@@ -1,0 +1,130 @@
+{
+ "command": [
+  "claude",
+  "-p",
+  "--model",
+  "sonnet",
+  "--output-format",
+  "json",
+  "--system-prompt",
+  "You are a helpful assistant.",
+  "--tools",
+  "",
+  "--strict-mcp-config",
+  "--setting-sources",
+  "",
+  "--no-session-persistence",
+  "<prompt>"
+ ],
+ "returncode": 0,
+ "seconds": 13.76,
+ "stderr": "",
+ "response": {
+  "duration_api_ms": 9651,
+  "stop_reason": "end_turn",
+  "session_id": "99cf2d54-f2f4-49fc-bdc4-417980457f53",
+  "total_cost_usd": 0.015418000000000001,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 1026,
+   "cache_read_input_tokens": 0,
+   "output_tokens": 1131,
+   "output_tokens_details": {
+    "thinking_tokens": 0
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 1026,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 1131,
+     "cache_read_input_tokens": 0,
+     "cache_creation_input_tokens": 1026,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 1026
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "modelUsage": {
+   "claude-sonnet-5": {
+    "inputTokens": 2,
+    "outputTokens": 1131,
+    "cacheReadInputTokens": 0,
+    "cacheCreationInputTokens": 1026,
+    "webSearchRequests": 0,
+    "costUSD": 0.015418000000000001,
+    "contextWindow": 1000000,
+    "maxOutputTokens": 64000,
+    "thinkingTokens": 0,
+    "canonicalModel": "claude-sonnet-5",
+    "provider": "firstParty",
+    "costBasis": "list"
+   }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+   "spawned": 0,
+   "requested": {
+    "background": 0,
+    "foreground": 0,
+    "unset": 0
+   },
+   "started_in_background": 0,
+   "max_depth": 0,
+   "spawned_by_subagents": 0,
+   "completed": 0,
+   "failed": 0,
+   "killed": {
+    "parent": 0,
+    "user": 0,
+    "system": 0
+   },
+   "refused": {
+    "depth_limit": 0,
+    "concurrency_limit": 0,
+    "budget": 0
+   },
+   "by_type": {}
+  },
+  "is_error": false,
+  "num_turns": 1,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "{\"task\": \"Find all log messages that contain an error code matching the pattern E followed by digits-dash-digits\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'E[0-9]+-[0-9]+')\"}\n{\"task\": \"Count how many log entries per service contain a valid error code\", \"sql\": \"SELECT service, COUNT(*) AS error_count FROM logs WHERE regexp_like(message, 'E[0-9]{3}-[0-9]{3}') GROUP BY service\"}\n{\"task\": \"List distinct error codes extracted via a case-insensitive match from log messages\", \"sql\": \"SELECT DISTINCT regexp_match(message, 'E[0-9]{3}-[0-9]{3}') AS error_code FROM logs WHERE regexp_like(message, 'E[0-9]{3}-[0-9]{3}', 'i')\"}\n{\"task\": \"Find error-level logs that mention an error code but exclude known benign codes like E000-000\", \"sql\": \"SELECT ts, service, message FROM logs WHERE level = 'ERROR' AND regexp_like(message, 'E[0-9]{3}-[0-9]{3}') AND NOT regexp_like(message, 'E000-000')\"}\n{\"task\": \"Flag each log row with a boolean indicating whether it contains a structured error code\", \"sql\": \"SELECT ts, service, message, CASE WHEN regexp_like(message, 'E[0-9]{3}-[0-9]{3}') THEN true ELSE false END AS has_error_code FROM logs\"}\n{\"task\": \"Find the most recent occurrences of a specific error code E123-456 across all services\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, 'E123-456') ORDER BY ts DESC LIMIT 50\"}\n{\"task\": \"Identify services that never emit any structured error code in their messages\", \"sql\": \"SELECT service FROM logs GROUP BY service HAVING COUNT(*) FILTER (WHERE regexp_like(message, 'E[0-9]{3}-[0-9]{3}')) = 0\"}\n{\"task\": \"Join events and logs to find HTTP requests whose timestamps correlate with error-code log messages from the same service\", \"sql\": \"SELECT e.id, e.path, e.status, l.message FROM events e JOIN logs l ON regexp_like(l.message, 'E[0-9]{3}-[0-9]{3}') AND l.ts BETWEEN e.id - 1000 AND e.id + 1000\"}\n{\"task\": \"Categorize error codes into severity buckets based on the numeric prefix pattern in the message\", \"sql\": \"SELECT message, CASE WHEN regexp_like(message, 'E1[0-9]{2}-[0-9]{3}') THEN 'critical' WHEN regexp_like(message, 'E2[0-9]{2}-[0-9]{3}') THEN 'warning' ELSE 'other' END AS severity_bucket FROM logs WHERE regexp_like(message, 'E[0-9]{3}-[0-9]{3}')\"}\n{\"task\": \"Find request paths containing an error code reference in their query string parameters\", \"sql\": \"SELECT path, status FROM events WHERE regexp_like(path, 'errorCode=E[0-9]{3}-[0-9]{3}')\"}",
+  "ttft_ms": 9790,
+  "type": "result",
+  "duration_ms": 11391,
+  "uuid": "b2359a87-3a65-4064-a895-c32c5594854f",
+  "ttft_stream_ms": 1240,
+  "time_to_request_ms": 234,
+  "first_content_frame_ms": 1240,
+  "queued_turn_count": 0,
+  "result_index": 0
+ },
+ "text": "{\"task\": \"Find all log messages that contain an error code matching the pattern E followed by digits-dash-digits\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'E[0-9]+-[0-9]+')\"}\n{\"task\": \"Count how many log entries per service contain a valid error code\", \"sql\": \"SELECT service, COUNT(*) AS error_count FROM logs WHERE regexp_like(message, 'E[0-9]{3}-[0-9]{3}') GROUP BY service\"}\n{\"task\": \"List distinct error codes extracted via a case-insensitive match from log messages\", \"sql\": \"SELECT DISTINCT regexp_match(message, 'E[0-9]{3}-[0-9]{3}') AS error_code FROM logs WHERE regexp_like(message, 'E[0-9]{3}-[0-9]{3}', 'i')\"}\n{\"task\": \"Find error-level logs that mention an error code but exclude known benign codes like E000-000\", \"sql\": \"SELECT ts, service, message FROM logs WHERE level = 'ERROR' AND regexp_like(message, 'E[0-9]{3}-[0-9]{3}') AND NOT regexp_like(message, 'E000-000')\"}\n{\"task\": \"Flag each log row with a boolean indicating whether it contains a structured error code\", \"sql\": \"SELECT ts, service, message, CASE WHEN regexp_like(message, 'E[0-9]{3}-[0-9]{3}') THEN true ELSE false END AS has_error_code FROM logs\"}\n{\"task\": \"Find the most recent occurrences of a specific error code E123-456 across all services\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, 'E123-456') ORDER BY ts DESC LIMIT 50\"}\n{\"task\": \"Identify services that never emit any structured error code in their messages\", \"sql\": \"SELECT service FROM logs GROUP BY service HAVING COUNT(*) FILTER (WHERE regexp_like(message, 'E[0-9]{3}-[0-9]{3}')) = 0\"}\n{\"task\": \"Join events and logs to find HTTP requests whose timestamps correlate with error-code log messages from the same service\", \"sql\": \"SELECT e.id, e.path, e.status, l.message FROM events e JOIN logs l ON regexp_like(l.message, 'E[0-9]{3}-[0-9]{3}') AND l.ts BETWEEN e.id - 1000 AND e.id + 1000\"}\n{\"task\": \"Categorize error codes into severity buckets based on the numeric prefix pattern in the message\", \"sql\": \"SELECT message, CASE WHEN regexp_like(message, 'E1[0-9]{2}-[0-9]{3}') THEN 'critical' WHEN regexp_like(message, 'E2[0-9]{2}-[0-9]{3}') THEN 'warning' ELSE 'other' END AS severity_bucket FROM logs WHERE regexp_like(message, 'E[0-9]{3}-[0-9]{3}')\"}\n{\"task\": \"Find request paths containing an error code reference in their query string parameters\", \"sql\": \"SELECT path, status FROM events WHERE regexp_like(path, 'errorCode=E[0-9]{3}-[0-9]{3}')\"}",
+ "generator": "g2",
+ "theme_index": 1,
+ "theme": "find log messages that contain error codes like E123-456",
+ "call": 1,
+ "started": "2026-10-25T15:35:04-07:00",
+ "finished": "2026-10-25T15:35:18-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find log messages that contain error codes like E123-456\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 10,
+ "unextractable_lines": []
+}

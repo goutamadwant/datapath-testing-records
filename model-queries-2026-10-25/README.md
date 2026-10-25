@@ -1,0 +1,228 @@
+# Model-written regexp_like queries and DataFusion planning time (2026-10-25)
+
+Question: do SQL queries that language models write with `regexp_like`, for ordinary
+text-matching tasks, trigger the planning stall of Apache DataFusion issue 22185 before the fix
+(pull request 24917) and not after?
+
+Answer for this sample: no. None of 412 model-written queries (375 of them planned without error)
+took more than 1 s to plan, before or after the fix. The slowest took 2.9 ms before and 2.7 ms
+after. No query passed `regexp_like` only literal arguments, which constant folding requires
+before it compiles a pattern during planning. 47 queries contained a nested counted quantifier,
+all of depth 2 (for example `([0-9]{1,3}\.){3}`). None of those patterns exceeded the fix's
+256 KiB compiled-size limit. The positive control, the issue's own reproducer, planned in 61.6 ms
+before and 2.0 ms after. That shows the mechanism, but the planning time stays well under the
+issue's "about 1 s" on this machine in a release build.
+
+The design, hypotheses and outcome definitions were fixed in `PREREGISTRATION.md` before the
+first generation call. Its sha256 and the time it was recorded are in
+`logs/preregistration.sha256`. Every number below is parsed from logs under `logs/` written by
+executed runs. `results.json` lists the sha256 of every log and query file.
+
+## Code under test
+
+| Label | apache/datafusion commit | Meaning |
+| --- | --- | --- |
+| before | `408527ae58b5b706f5c02df8c37e096122cd8c78` | single parent of the PR 24917 merge |
+| after | `3dfa245d61dde362e2c077761783bc735931659c` | PR 24917 "fix(optimizer): bound planning-time regex compilation", squash merge, closes issue 22185 |
+| issuedate (exploratory) | `b426232b8a13c641a522bba414e932914f3b79f5` | last main commit before issue 22185 was opened (2026-05-14T21:53:10Z) |
+
+The regex fix is PR 24917. PR 24193 is the `RepartitionExec` fix for issue 24044 and is not
+involved. The pre-registration names PR 24917 and these commits. `logs/commit-verification.txt`
+checks the merge commit and its parent against the GitHub API.
+
+## Toolchain and machine
+
+Apple M1 Pro (10 cores, 16 GiB), macOS (Darwin 27.0.0); `cargo 1.99.0-nightly (59800466c
+2026-07-07)`, `rustc 1.99.0-nightly (3d50c25bc 2026-07-16)`. The harness `harness/plan_time` is
+built three times, each time against one checkout's `datafusion/core` with default features, in
+the release profile (`debug = false`). Each build starts from that checkout's own `Cargo.lock`,
+and the three builds share one target directory. Resolved versions in all three builds: `regex`
+1.13.1, `regex-syntax` 0.8.11; `regex-automata` 0.4.16 (before, after) and 0.4.18 (issuedate);
+`datafusion` 55.0.0 (before, after) and 53.1.0 (issuedate). Build wall times: before 444 s
+(first build, empty target directory), after 276 s and issuedate 395 s (sharing the already
+compiled dependencies) (`logs/build/`).
+
+## Generators
+
+| | G1 | G2 |
+| --- | --- | --- |
+| Model | `qwen3-coder-30b-a3b-instruct` (LM Studio, GGUF, Q4_K_M, arch `qwen3moe`, publisher `lmstudio-community`; `logs/generation-g1-model-info.json`) | `claude-sonnet-5` (the model id reported by the `claude` client for `--model sonnet`) |
+| Interface | OpenAI-compatible `/v1/chat/completions`, temperature 0.7, `max_tokens` 4096 | `claude -p --model sonnet --output-format json`, default sampling, no tools, no settings sources, run from an empty temporary directory |
+| Calls | 25 (20 themes; second calls for themes 8, 14, 15, 18, 20) | 20 |
+| Queries extracted | 211 | 201 (theme 7 returned 11) |
+| Response lines not parseable as JSON | 39 (malformed JSON, e.g. a stray `}` after the SQL string) | 0 |
+
+Both generators received the same 20 prompts (`prompts/template.txt` with each line of
+`prompts/themes.txt`) and the system message "You are a helpful assistant.". Every raw response
+is kept in `logs/generation/g1/` and `logs/generation/g2/`. Generation ran from 15:35:03 to
+15:38:24 local time (UTC-7) on 2026-10-25.
+
+## Measurement
+
+Each query and control was planned at each build in three repetitions. Each repetition ran in its
+own process with a 20 s timeout. The process creates a fresh `SessionContext`, registers the two
+empty tables, and times `ctx.sql(sql).await` followed by `df.create_physical_plan().await`
+(nothing is executed). The order is repetition-major, and the build order alternates by item.
+The planning time of a query is the median of its three repetitions. The p95 is nearest-rank.
+Measurement ran 15:46:46 to 15:47:21 (`logs/measure/runs.jsonl`, 2,502 process runs). The
+patterns were classified with `regex-syntax` 0.8.11 and `regex` 1.13.1 inside the after binary
+(`logs/measure/classify.jsonl`).
+
+## Results (pre-registered outcomes)
+
+| | G1 | G2 | Pooled |
+|---|---:|---:|---:|
+| Queries extracted | 211 | 201 | 412 |
+| Using regexp_like | 211 | 201 | 412 |
+| With an all-literal regexp_like call | 0 | 0 | 0 |
+| With a nested counted quantifier | 18 | 29 | 47 |
+| Pattern over the 256 KiB planning limit | 0 | 0 | 0 |
+| Planned without error at both builds | 189 | 186 | 375 |
+| before: median ms | 1.4 | 1.6 | 1.5 |
+| before: p95 ms | 2.1 | 2.4 | 2.3 |
+| before: max ms | 2.6 | 2.9 | 2.9 |
+| before: queries over 1 s | 0 | 0 | 0 |
+| before: timeouts (20 s) | 0 | 0 | 0 |
+| after: median ms | 1.4 | 1.6 | 1.5 |
+| after: p95 ms | 2.1 | 2.3 | 2.2 |
+| after: max ms | 2.5 | 2.7 | 2.7 |
+| after: queries over 1 s | 0 | 0 | 0 |
+| after: timeouts (20 s) | 0 | 0 | 0 |
+
+| Stratum (planned at both builds) | n | before median / p95 / max ms | after median / p95 / max ms | over 1 s before / after |
+|---|---:|---|---|---|
+| nested counted quantifier: no | 330 | 1.5 / 2.3 / 2.9 | 1.5 / 2.2 / 2.7 | 0 / 0 |
+| nested counted quantifier: yes | 45 | 1.5 / 2.2 / 2.8 | 1.5 / 2.2 / 2.7 | 0 / 0 |
+| longest pattern <= 20 bytes | 102 | 1.5 / 2.1 / 2.3 | 1.5 / 2.2 / 2.5 | 0 / 0 |
+| longest pattern 21-50 bytes | 207 | 1.5 / 2.3 / 2.9 | 1.5 / 2.3 / 2.7 | 0 / 0 |
+| longest pattern > 50 bytes | 66 | 1.4 / 2.3 / 2.8 | 1.4 / 2.2 / 2.7 | 0 / 0 |
+
+No query stalled before the fix, so the result is "not triggered in this sample". The
+rule-of-three 95 % upper bound on the per-query stall rate is 3/375 = 0.8 % pooled (G1 3/189 =
+1.6 %, G2 3/186 = 1.6 %). It holds for this schema, these 20 prompts and these two models.
+
+Planning errors were identical at both builds: 37 queries, 22 G1 and 15 G2. 22 failed in the
+`simplify_expressions` rule with "Invalid regex", because the patterns use syntax the Rust regex
+engine rejects, mostly backreferences such as `(.)\1{2,}` under the repeated-characters theme.
+Eight failed on type coercion or the schema, four on functions DataFusion lacks
+(`regexp_extract`, `regexp_matches`) and three on SQL parsing. No query changed status between
+builds.
+
+Pattern facts: the queries contain 485 `regexp_like` calls, and 7 of them take a non-literal
+pattern. The deepest counted-repetition nesting is 2, and the longest literal pattern is 166 bytes.
+The slowest model-written pattern to compile under the 10 MiB default limit took 0.67 ms.
+Five queries also used `regexp_match` and two used `regexp_replace`.
+
+### Controls (author-designed, not counted above)
+
+| Control | before | after |
+|---|---|---|
+| positive: issue reproducer, `SELECT regexp_like('aaaaa', 'a{5}{5}{5}{5}{5}{5}{5}{5}');` | 61.6 ms (reps 119.2, 61.6, 59.9) | 2.0 ms (reps 10.9, 2.0, 2.0) |
+| positive: 18-nesting fuzzer statement as printed in the issue (pattern's closing quote missing) | tokenizer error, unterminated string | same error |
+| positive: the same 18-nesting statement with the closing quote added | 58.6 ms (reps 58.7, 58.5, 58.6) | 2.1 ms (reps 2.0, 2.1, 2.1) |
+| mechanism: 8-nesting pattern on a column, `... WHERE regexp_like(message, 'a{5}...{5}')` | 1.5 ms (reps 9.7, 1.4, 1.5) | 1.4 ms (reps 2.7, 1.4, 1.3) |
+| negative: `SELECT regexp_like('E123-456', '^E[0-9]{3}-[0-9]{3}$');` | 1.5 ms | 1.4 ms |
+
+The positive control shows the mechanism. When every argument is a literal and the pattern nests
+counted repetitions eight or more deep, planning before the fix took about 58-62 ms, and after
+the fix it took 2 ms, about 30 times less. The pre-registered expectation of "about 1 s or more
+before" was not met on this machine in a release build. Under the pre-registered 1 s threshold,
+the positive control itself does not count as a stall. The pattern alone fails the 10 MiB
+compile in 6.1 ms (`compile_10m_ms` in `classify.jsonl`), so most of the 58-62 ms comes from the
+planner and not from one compilation. The same pattern applied to a column planned in 1.4-1.5 ms
+at both builds.
+
+### Hypotheses
+
+* H1 (stall requires all-literal arguments): consistent with the data. No model-written call had
+  all-literal arguments, and no query stalled. The mechanism control on a column did not slow
+  down. The pre-registration says a column-argument pattern "is not folded". That is correct, but
+  the optimizer's `simplify_expressions` rule still parses the pattern of `column ~ 'literal'`
+  with `regex_syntax::Parser`, to rewrite simple regexes as LIKE. This is why 22 queries fail
+  planning with "Invalid regex". Parsing does not expand counted repetitions into an automaton,
+  and the mechanism control measures it at 1.4-1.5 ms.
+* H2 (nested counted quantifiers mainly under the theme that names them): not supported. Of 47
+  queries, 9 came from the "nested groups with counted repetitions" theme (all G2, 0 G1). 18 came
+  from IPv4 addresses, 15 from MAC addresses, 3 from card numbers and secrets, 1 from UUIDs and 1
+  from base64 tokens. All are of the form `(atom{m,n}sep){k}`, at depth 2. None is stacked like
+  `a{5}{5}`.
+* H3 (stalls before do not stall after): not testable, because nothing stalled before.
+
+## Exploratory, not pre-registered (decided after the positive control stayed below 1 s)
+
+To check whether the issue's figure reproduces at the code the issue was filed against, the
+harness was also built at `issuedate`. The controls and the issue's nesting series were then
+timed at all three commits (`./run.sh explore`, `logs/exploratory/`, runs 15:55:18 to 15:55:23). Values are medians of 3
+repetitions in ms, with an all-literal `SELECT regexp_like('aaaaa', 'a{5}...')`:
+
+| `{5}` nestings | issuedate | before | after | issue 22185 table |
+|---:|---:|---:|---:|---:|
+| 4 | 1.2 | 1.4 | 1.4 | 6 ms |
+| 6 | 2.2 | 2.4 | 2.2 | 17 ms |
+| 8 | 58.1 | 57.5 | 2.1 | 1008 ms |
+| 10 | 57.6 | 58.0 | 2.0 | 1005 ms |
+| 12 | 58.3 | 58.0 | 2.0 | 757 ms |
+| 18 | 58.0 | 58.0 | 1.9 | ~1 s |
+
+The shape matches the issue: cost rises sharply at 8 nestings and then plateaus once the size
+limit trips. The magnitude is about 17 times smaller on this machine in a release build, at the
+issue-date commit too. The issue says its scaling numbers were "measured via the fuzz target";
+how that build was configured is not known here, and the cause of the difference is not
+established. In the article, the "about a second" figure is therefore the issue reporter's
+measurement and not a reproduction.
+
+## Deviations and details not fixed in the pre-registration
+
+1. The system message "You are a helpful assistant." was sent to both generators. G2 ran with no
+   tools, no settings sources and an empty working directory, so no local files entered its
+   prompt.
+2. G1 took 5 second calls (themes 8, 14, 15, 18, 20) under the pre-registered rule. G2 theme 7
+   returned 11 queries; all were measured, as pre-registered.
+3. The 18-nesting statement is malformed in the issue text. It was run verbatim (tokenizer error
+   at both builds), and also with the closing quote added.
+4. The exploratory issue-date build and nesting series were added after the results above were
+   known. They are reported separately and do not change any pre-registered outcome.
+5. The remark on H1 about regex parsing in `simplify_expressions` is an interpretation added
+   after seeing the "Invalid regex" errors.
+
+## Limits
+
+Two generators and one sample each; generation is not deterministic, so a new run produces
+different queries. One schema with two empty tables; 20 themes chosen by the experimenter,
+including one that names the issue's syntactic class. Planning only: a pattern deferred to
+execution by the fix is not timed at execution, and nothing here measures execution cost. One
+machine, release builds, default session configuration, three repetitions; the first repetition
+of some items is slower (process and cache warm-up), which is why medians are reported. Only
+`regexp_like` patterns are classified; the 7 queries using `regexp_match` or `regexp_replace`
+were timed but their patterns were not analysed. The scanner treats an argument as literal only
+when it is a bare string, number, NULL, TRUE or FALSE; a constant expression such as
+`lower('X')` would be counted as non-literal, though none of the 412 queries stalled anyway.
+Log files contain the workstation paths printed by the tools.
+
+## Files
+
+* `PREREGISTRATION.md`: design, written before generation; `logs/preregistration.sha256`
+* `prompts/template.txt`, `prompts/themes.txt`: the prompts
+* `queries/g1.jsonl`, `queries/g2.jsonl`: every extracted query (id, theme, call, task, SQL)
+* `harness/plan_time/`: the Rust planning and classification program (`Cargo.toml.in`, `src/main.rs`)
+* `harness/generate.py`, `harness/sqlscan.py`, `harness/measure.py`, `harness/analyze.py`,
+  `harness/explore.py`, `harness/controls.jsonl`
+* `logs/build/`: build logs with commits, versions, lockfile differences, build times, binary sha256
+* `logs/generation/`: raw responses per call, `summary.json`, and the `/v1/models` listing
+* `logs/measure/`: `classify.jsonl`, `runs.jsonl`; `logs/tables.md` is the printed tables
+* `logs/exploratory/`: issue-date series runs and summary
+* `results.json`: per-query outcomes, summaries, strata, controls, exploratory summary, sha256 of logs
+
+## Commands
+
+```
+./run.sh build      # clone apache/datafusion at the pinned commits into ./work and build (RUN_WORK overrides)
+./run.sh measure    # classify patterns and time every query in queries/ and every control
+./run.sh results    # rebuild results.json and print the tables
+./run.sh explore    # exploratory issue-date build and nesting series
+./run.sh generate   # new queries (needs an LM Studio endpoint and the claude client; refuses to overwrite)
+```
+
+`measure` skips (query, build, repetition) runs that are already in `logs/measure/runs.jsonl`,
+and `explore` refuses to overwrite `logs/exploratory/runs.jsonl`. A fresh replay therefore starts
+from a copy of this directory without `logs/measure/`, `logs/exploratory/` and `results.json`.

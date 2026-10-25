@@ -1,0 +1,58 @@
+{
+ "request": {
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You are a helpful assistant."
+   },
+   {
+    "role": "user",
+    "content": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: check that service names follow a naming convention such as svc-payments-01\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n"
+   }
+  ],
+  "temperature": 0.7,
+  "max_tokens": 4096
+ },
+ "response": {
+  "id": "chatcmpl-wuvilwzmsnps8j0nnej80q",
+  "object": "chat.completion",
+  "created": 1792967867,
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "role": "assistant",
+     "content": "{\"task\": \"Find logs with service names that don't follow the svc-<name>-<number> pattern\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE NOT regexp_like(service, '^svc-[a-z]+-[0-9]+$')\"}\n{\"task\": \"Count log entries by service name that matches the expected naming convention\", \"sql\": \"SELECT service, COUNT(*) as log_count FROM logs WHERE regexp_like(service, '^svc-[a-z]+-[0-9]+$') GROUP BY service\"}\n{\"task\": \"Identify services with unusual naming patterns in error level logs\", \"sql\": \"SELECT service, COUNT(*) as error_count FROM logs WHERE level = 'ERROR' AND NOT regexp_like(service, '^svc-[a-z]+-[0-9]+$') GROUP BY service\"}\n{\"task\": \"Find event paths that contain user IDs but don't match expected format\", \"sql\": \"SELECT path FROM events WHERE regexp_like(path, '/users/[0-9]+/') AND NOT regexp_like(path, '/users/[0-9]+/profile$')\"}\n{\"task\": \"List services with numeric suffixes in log messages using regex pattern matching\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(message, 'svc-[a-z]+-[0-9]+')\"}\n{\"task\": \"Count events per user ID format that matches expected patterns\", \"sql\": \"SELECT COUNT(*) as valid_events FROM events WHERE regexp_like(path, '/users/[0-9]+/.*')\"}\n{\"task\": \"Find logs where service name has incorrect capitalization\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(service, '^[a-z]+-[a-z]+-[0-9]+$') AND NOT regexp_like(service, '^svc-[a-z]+-[0-9]+$')\"}\n{\"task\": \"Identify service names that have valid format but unusual suffixes\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(service, '^svc-[a-z]+-[0-9]+$') AND regexp_like(service, 'svc-.+-[0-9]{3}$')\"}\n{\"task\": \"Check for events with path patterns matching API endpoint conventions\", \"sql\": \"SELECT user_id, path FROM events WHERE regexp_like(path, '/api/v[0-9]+/.*')\"}\n{\"task\": \"Find logs where service name matches pattern but message contains errors\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(service, '^svc-[a-z]+-[0-9]+$') AND regexp_like(message, 'error|exception', 'i')\"}",
+     "reasoning_content": "",
+     "tool_calls": []
+    },
+    "logprobs": null,
+    "finish_reason": "stop"
+   }
+  ],
+  "usage": {
+   "prompt_tokens": 218,
+   "completion_tokens": 536,
+   "total_tokens": 754,
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "stats": {},
+  "system_fingerprint": "qwen3-coder-30b-a3b-instruct"
+ },
+ "seconds": 4.97,
+ "text": "{\"task\": \"Find logs with service names that don't follow the svc-<name>-<number> pattern\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE NOT regexp_like(service, '^svc-[a-z]+-[0-9]+$')\"}\n{\"task\": \"Count log entries by service name that matches the expected naming convention\", \"sql\": \"SELECT service, COUNT(*) as log_count FROM logs WHERE regexp_like(service, '^svc-[a-z]+-[0-9]+$') GROUP BY service\"}\n{\"task\": \"Identify services with unusual naming patterns in error level logs\", \"sql\": \"SELECT service, COUNT(*) as error_count FROM logs WHERE level = 'ERROR' AND NOT regexp_like(service, '^svc-[a-z]+-[0-9]+$') GROUP BY service\"}\n{\"task\": \"Find event paths that contain user IDs but don't match expected format\", \"sql\": \"SELECT path FROM events WHERE regexp_like(path, '/users/[0-9]+/') AND NOT regexp_like(path, '/users/[0-9]+/profile$')\"}\n{\"task\": \"List services with numeric suffixes in log messages using regex pattern matching\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(message, 'svc-[a-z]+-[0-9]+')\"}\n{\"task\": \"Count events per user ID format that matches expected patterns\", \"sql\": \"SELECT COUNT(*) as valid_events FROM events WHERE regexp_like(path, '/users/[0-9]+/.*')\"}\n{\"task\": \"Find logs where service name has incorrect capitalization\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(service, '^[a-z]+-[a-z]+-[0-9]+$') AND NOT regexp_like(service, '^svc-[a-z]+-[0-9]+$')\"}\n{\"task\": \"Identify service names that have valid format but unusual suffixes\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(service, '^svc-[a-z]+-[0-9]+$') AND regexp_like(service, 'svc-.+-[0-9]{3}$')\"}\n{\"task\": \"Check for events with path patterns matching API endpoint conventions\", \"sql\": \"SELECT user_id, path FROM events WHERE regexp_like(path, '/api/v[0-9]+/.*')\"}\n{\"task\": \"Find logs where service name matches pattern but message contains errors\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(service, '^svc-[a-z]+-[0-9]+$') AND regexp_like(message, 'error|exception', 'i')\"}",
+ "generator": "g1",
+ "theme_index": 16,
+ "theme": "check that service names follow a naming convention such as svc-payments-01",
+ "call": 1,
+ "started": "2026-10-25T15:37:47-07:00",
+ "finished": "2026-10-25T15:37:52-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: check that service names follow a naming convention such as svc-payments-01\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 10,
+ "unextractable_lines": []
+}

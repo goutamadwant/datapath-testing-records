@@ -1,0 +1,58 @@
+{
+ "request": {
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You are a helpful assistant."
+   },
+   {
+    "role": "user",
+    "content": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find log messages that contain error codes like E123-456\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n"
+   }
+  ],
+  "temperature": 0.7,
+  "max_tokens": 4096
+ },
+ "response": {
+  "id": "chatcmpl-eca6yvh91gw3ij33rr2xft",
+  "object": "chat.completion",
+  "created": 1792967764,
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "role": "assistant",
+     "content": "{\"task\": \"Find all ERROR level logs containing error codes in format E123-456\", \"sql\": \"SELECT * FROM logs WHERE level = 'ERROR' AND regexp_like(message, 'E[0-9]+-[0-9]+')\"}\n{\"task\": \"Count log messages by service that contain error codes\", \"sql\": \"SELECT service, COUNT(*) as error_count FROM logs WHERE regexp_like(message, 'E[0-9]+-[0-9]+') GROUP BY service\"}\n{\"task\": \"Identify unique error codes from all log messages\", \"sql\": \"SELECT DISTINCT regexp_extract(message, 'E[0-9]+-[0-9]+', 0) as error_code FROM logs WHERE regexp_like(message, 'E[0-9]+-[0-9]+')\"}\n{\"task\": \"Find warning logs with error codes that occurred in last hour\", \"sql\": \"SELECT * FROM logs WHERE level = 'WARNING' AND regexp_like(message, 'E[0-9]+-[0-9]+') AND ts > now() - INTERVAL '1 hour'\"}\n{\"task\": \"Match error codes in both logs and events tables using JOIN\", \"sql\": \"SELECT l.ts, l.message, e.path FROM logs l INNER JOIN events e ON regexp_like(l.message, 'E[0-9]+-[0-9]+') WHERE regexp_like(e.path, '/api/.*E[0-9]+-[0-9]+.*')\"}\n{\"task\": \"Categorize log messages based on error code format\", \"sql\": \"SELECT ts, message, CASE WHEN regexp_like(message, 'E[0-9]{3}-[0-9]{3}') THEN 'Standard' ELSE 'Other' END as code_type FROM logs WHERE regexp_like(message, 'E[0-9]+-[0-9]+')\"}\n{\"task\": \"Find log messages with error codes that have specific service\", \"sql\": \"SELECT * FROM logs WHERE service = 'auth-service' AND regexp_like(message, 'E[0-9]+-[0-9]+')\"}\n{\"task\": \"Count total occurrences of each error code pattern in logs\", \"sql\": \"SELECT regexp_extract(message, 'E[0-9]+-[0-9]+', 0) as error_code, COUNT(*) as frequency FROM logs WHERE regexp_like(message, 'E[0-9]+-[0-9]+') GROUP BY error_code ORDER BY frequency DESC\"}\n{\"task\": \"Search for log messages with multiple different error codes\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'E[0-9]+-[0-9]+.*E[0-9]+-[0-9]+')\"}\n{\"task\": \"Find error code patterns that appear in both logs and events paths\", \"sql\": \"SELECT DISTINCT l.message, e.path FROM logs l CROSS JOIN events e WHERE regexp_like(l.message, 'E[0-9]+-[0-9]+') AND regexp_like(e.path, '.*E[0-9]+-[0-9]+.*')\"}",
+     "reasoning_content": "",
+     "tool_calls": []
+    },
+    "logprobs": null,
+    "finish_reason": "stop"
+   }
+  ],
+  "usage": {
+   "prompt_tokens": 218,
+   "completion_tokens": 644,
+   "total_tokens": 862,
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "stats": {},
+  "system_fingerprint": "qwen3-coder-30b-a3b-instruct"
+ },
+ "seconds": 6.55,
+ "text": "{\"task\": \"Find all ERROR level logs containing error codes in format E123-456\", \"sql\": \"SELECT * FROM logs WHERE level = 'ERROR' AND regexp_like(message, 'E[0-9]+-[0-9]+')\"}\n{\"task\": \"Count log messages by service that contain error codes\", \"sql\": \"SELECT service, COUNT(*) as error_count FROM logs WHERE regexp_like(message, 'E[0-9]+-[0-9]+') GROUP BY service\"}\n{\"task\": \"Identify unique error codes from all log messages\", \"sql\": \"SELECT DISTINCT regexp_extract(message, 'E[0-9]+-[0-9]+', 0) as error_code FROM logs WHERE regexp_like(message, 'E[0-9]+-[0-9]+')\"}\n{\"task\": \"Find warning logs with error codes that occurred in last hour\", \"sql\": \"SELECT * FROM logs WHERE level = 'WARNING' AND regexp_like(message, 'E[0-9]+-[0-9]+') AND ts > now() - INTERVAL '1 hour'\"}\n{\"task\": \"Match error codes in both logs and events tables using JOIN\", \"sql\": \"SELECT l.ts, l.message, e.path FROM logs l INNER JOIN events e ON regexp_like(l.message, 'E[0-9]+-[0-9]+') WHERE regexp_like(e.path, '/api/.*E[0-9]+-[0-9]+.*')\"}\n{\"task\": \"Categorize log messages based on error code format\", \"sql\": \"SELECT ts, message, CASE WHEN regexp_like(message, 'E[0-9]{3}-[0-9]{3}') THEN 'Standard' ELSE 'Other' END as code_type FROM logs WHERE regexp_like(message, 'E[0-9]+-[0-9]+')\"}\n{\"task\": \"Find log messages with error codes that have specific service\", \"sql\": \"SELECT * FROM logs WHERE service = 'auth-service' AND regexp_like(message, 'E[0-9]+-[0-9]+')\"}\n{\"task\": \"Count total occurrences of each error code pattern in logs\", \"sql\": \"SELECT regexp_extract(message, 'E[0-9]+-[0-9]+', 0) as error_code, COUNT(*) as frequency FROM logs WHERE regexp_like(message, 'E[0-9]+-[0-9]+') GROUP BY error_code ORDER BY frequency DESC\"}\n{\"task\": \"Search for log messages with multiple different error codes\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'E[0-9]+-[0-9]+.*E[0-9]+-[0-9]+')\"}\n{\"task\": \"Find error code patterns that appear in both logs and events paths\", \"sql\": \"SELECT DISTINCT l.message, e.path FROM logs l CROSS JOIN events e WHERE regexp_like(l.message, 'E[0-9]+-[0-9]+') AND regexp_like(e.path, '.*E[0-9]+-[0-9]+.*')\"}",
+ "generator": "g1",
+ "theme_index": 1,
+ "theme": "find log messages that contain error codes like E123-456",
+ "call": 1,
+ "started": "2026-10-25T15:36:04-07:00",
+ "finished": "2026-10-25T15:36:10-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find log messages that contain error codes like E123-456\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 10,
+ "unextractable_lines": []
+}

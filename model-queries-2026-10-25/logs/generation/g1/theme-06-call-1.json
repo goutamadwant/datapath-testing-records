@@ -1,0 +1,58 @@
+{
+ "request": {
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You are a helpful assistant."
+   },
+   {
+    "role": "user",
+    "content": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find request paths that contain UUIDs\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n"
+   }
+  ],
+  "temperature": 0.7,
+  "max_tokens": 4096
+ },
+ "response": {
+  "id": "chatcmpl-y4bfmmsvw28vb43hch4eo",
+  "object": "chat.completion",
+  "created": 1792967793,
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "role": "assistant",
+     "content": "{\"task\": \"Find all log messages containing UUID patterns\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')\"}\n{\"task\": \"Identify HTTP paths with UUID parameters\", \"sql\": \"SELECT DISTINCT path FROM events WHERE regexp_like(path, '/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')\"}\n{\"task\": \"Count log entries with UUIDs by service\", \"sql\": \"SELECT service, COUNT(*) as uuid_count FROM logs WHERE regexp_like(message, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}') GROUP BY service\"}\n{\"task\": \"Find events with UUIDs in path and status 200\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '[0-9a-fA-F]{8}-09a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}') AND status = 200\"}\n{\"task\": \"Extract UUIDs from log messages using regex\", \"sql\": \"SELECT ts, level, service, regexp_like(message, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}') as has_uuid FROM logs\"}\n{\"task\": \"Find paths with UUIDs in query parameters\", \"sql\": \"SELECT path FROM events WHERE regexp_like(path, '\\\\?[^=&]*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}[^=&]*=')\"}\n{\"task\": \"Count distinct UUIDs in log messages\", \"sql\": \"SELECT COUNT(DISTINCT regexp_extract(message, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')) as unique_uuids FROM logs WHERE regexp_like(message, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')\"}\n{\"task\": \"Find log messages with UUIDs in different formats\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}') OR regexp_like(message, '[0-9a-fA-F]{32}')\"}\n{\"task\": \"Analyze request paths with UUIDs by timestamp\", \"sql\": \"SELECT ts::date as date, COUNT(*) as path_count FROM events WHERE regexp_like(path, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}') GROUP BY ts::date ORDER BY date\"}\n{\"task\": \"Find services that log UUIDs with error level\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(message, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}') AND level = 'ERROR'\"}",
+     "reasoning_content": "",
+     "tool_calls": []
+    },
+    "logprobs": null,
+    "finish_reason": "stop"
+   }
+  ],
+  "usage": {
+   "prompt_tokens": 209,
+   "completion_tokens": 961,
+   "total_tokens": 1170,
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "stats": {},
+  "system_fingerprint": "qwen3-coder-30b-a3b-instruct"
+ },
+ "seconds": 8.77,
+ "text": "{\"task\": \"Find all log messages containing UUID patterns\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')\"}\n{\"task\": \"Identify HTTP paths with UUID parameters\", \"sql\": \"SELECT DISTINCT path FROM events WHERE regexp_like(path, '/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')\"}\n{\"task\": \"Count log entries with UUIDs by service\", \"sql\": \"SELECT service, COUNT(*) as uuid_count FROM logs WHERE regexp_like(message, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}') GROUP BY service\"}\n{\"task\": \"Find events with UUIDs in path and status 200\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '[0-9a-fA-F]{8}-09a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}') AND status = 200\"}\n{\"task\": \"Extract UUIDs from log messages using regex\", \"sql\": \"SELECT ts, level, service, regexp_like(message, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}') as has_uuid FROM logs\"}\n{\"task\": \"Find paths with UUIDs in query parameters\", \"sql\": \"SELECT path FROM events WHERE regexp_like(path, '\\\\?[^=&]*[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}[^=&]*=')\"}\n{\"task\": \"Count distinct UUIDs in log messages\", \"sql\": \"SELECT COUNT(DISTINCT regexp_extract(message, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')) as unique_uuids FROM logs WHERE regexp_like(message, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')\"}\n{\"task\": \"Find log messages with UUIDs in different formats\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}') OR regexp_like(message, '[0-9a-fA-F]{32}')\"}\n{\"task\": \"Analyze request paths with UUIDs by timestamp\", \"sql\": \"SELECT ts::date as date, COUNT(*) as path_count FROM events WHERE regexp_like(path, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}') GROUP BY ts::date ORDER BY date\"}\n{\"task\": \"Find services that log UUIDs with error level\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(message, '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}') AND level = 'ERROR'\"}",
+ "generator": "g1",
+ "theme_index": 6,
+ "theme": "find request paths that contain UUIDs",
+ "call": 1,
+ "started": "2026-10-25T15:36:33-07:00",
+ "finished": "2026-10-25T15:36:42-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find request paths that contain UUIDs\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 10,
+ "unextractable_lines": []
+}

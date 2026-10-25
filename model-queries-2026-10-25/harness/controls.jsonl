@@ -1,0 +1,5 @@
+{"query_id": "control-positive-issue-8", "kind": "positive control", "note": "issue 22185 reproducer, verbatim", "sql": "SELECT regexp_like('aaaaa', 'a{5}{5}{5}{5}{5}{5}{5}{5}');"}
+{"query_id": "control-positive-issue-18-verbatim", "kind": "positive control", "note": "issue 22185 fuzzer statement as printed in the issue (18 nestings; the closing quote of the pattern is missing in the issue text)", "sql": "SELECT regexp_like('aaaaa', 'a{5}{5}{5}{5}{5}{5}{5}{5}{5}{5}{5}{5}{5}{5}{5}{5}{5}{5});"}
+{"query_id": "control-positive-issue-18-quoted", "kind": "positive control", "note": "the same 18-nesting statement with the pattern's closing quote added", "sql": "SELECT regexp_like('aaaaa', 'a{5}{5}{5}{5}{5}{5}{5}{5}{5}{5}{5}{5}{5}{5}{5}{5}{5}{5}');"}
+{"query_id": "control-mechanism-column-8", "kind": "mechanism control", "note": "the 8-nesting pattern applied to a column (no constant folding expected)", "sql": "SELECT * FROM logs WHERE regexp_like(message, 'a{5}{5}{5}{5}{5}{5}{5}{5}');"}
+{"query_id": "control-negative-literal", "kind": "negative control", "note": "ordinary all-literal pattern", "sql": "SELECT regexp_like('E123-456', '^E[0-9]{3}-[0-9]{3}$');"}

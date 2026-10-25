@@ -1,0 +1,23 @@
+# Template: run.sh writes work/build-<label>/Cargo.toml from this file, replacing
+# @LABEL@ with before|after and @DATAFUSION@ with the path of that checkout's datafusion/core.
+[package]
+name = "plan_time_@LABEL@"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[[bin]]
+name = "plan_time_@LABEL@"
+path = "src/main.rs"
+
+[dependencies]
+datafusion = { path = "@DATAFUSION@" }
+tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
+regex = "1.13"
+regex-syntax = "0.8"
+serde_json = "1"
+
+[profile.release]
+debug = false
+
+[workspace]

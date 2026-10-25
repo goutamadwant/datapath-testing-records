@@ -1,0 +1,5 @@
+2026-10-25T15:37:16-0700
+GitHub API: repos/apache/datafusion/pulls/24917
+{"head":"86f9679269c30096f02913d3fca7a638f484dc2d","merge_commit_sha":"3dfa245d61dde362e2c077761783bc735931659c","merged_at":"2026-09-06T02:05:09Z","number":24917,"title":"fix(optimizer): bound planning-time regex compilation"}
+GitHub API: repos/apache/datafusion/commits/3dfa245d61dde362e2c077761783bc735931659c
+{"msg":"fix(optimizer): bound planning-time regex compilation (#24917)","parents":["408527ae58b5b706f5c02df8c37e096122cd8c78"],"sha":"3dfa245d61dde362e2c077761783bc735931659c"}

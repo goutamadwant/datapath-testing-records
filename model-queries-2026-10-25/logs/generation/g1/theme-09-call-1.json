@@ -1,0 +1,58 @@
+{
+ "request": {
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You are a helpful assistant."
+   },
+   {
+    "role": "user",
+    "content": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find version strings like v1.2.3 in paths or messages\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n"
+   }
+  ],
+  "temperature": 0.7,
+  "max_tokens": 4096
+ },
+ "response": {
+  "id": "chatcmpl-xj1ynu1njmscbruvq2am",
+  "object": "chat.completion",
+  "created": 1792967818,
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "role": "assistant",
+     "content": "{\"task\": \"Find all log entries containing version strings in messages\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'v[0-9]+\\\\.[0-9]+\\\\.[0-9]+')\"}\n{\"task\": \"Count error logs that mention version numbers\", \"sql\": \"SELECT count(*) as error_count FROM logs WHERE level = 'ERROR' AND regexp_like(message, '\\\\bv[0-9]+\\\\.[0-9]+\\\\.[0-9]+\\\\b')\"}\n{\"task\": \"Identify services with version references in log messages\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(message, 'v[0-9]+\\\\.[0-9]+\\\\.[0-9]+')\"}\n{\"task\": \"Find events where request paths contain version strings\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '/v[0-9]+\\\\.[0-9]+\\\\.[0-9]+/')\"}\n{\"task\": \"List all unique version patterns found in messages or paths\", \"sql\": \"SELECT DISTINCT regexp_matches(message, 'v[0-9]+\\\\.[0-9]+\\\\.[0-9]+') as version FROM logs WHERE regexp_like(message, 'v[0-9]+\\\\.[0-9]+\\\\.[0-9]+') UNION SELECT DISTINCT regexp_matches(path, '/v[0-9]+\\\\.[0-9]+\\\\.[0-9]+/') as version FROM events WHERE regexp_like(path, '/v[0-9]+\\\\.[0-9]+\\\\.[0-9]+/')\"}\n{\"task\": \"Show log entries with version strings grouped by service\", \"sql\": \"SELECT service, message, ts FROM logs WHERE regexp_like(message, '\\\\bv[0-9]+\\\\.[0-9]+\\\\.[0-9]+\\\\b') ORDER BY service, ts\"}\n{\"task\": \"Find events that have version numbers in both path and user_id is greater than 1000\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '/v[0-9]+\\\\.[0-9]+\\\\.[0-9]+/') AND user_id > 1000\"}\n{\"task\": \"Count occurrences of version patterns in logs and events combined\", \"sql\": \"SELECT 'logs' as source, count(*) FROM logs WHERE regexp_like(message, '\\\\bv[0-9]+\\\\.[0-9]+\\\\.[0-9]+\\\\b') UNION ALL SELECT 'events' as source, count(*) FROM events WHERE regexp_like(path, '/v[0-9]+\\\\.[0-9]+\\\\.[0-9]+/')\"}\n{\"task\": \"Identify log messages with version strings that also contain error keywords\", \"sql\": \"SELECT message, ts FROM logs WHERE regexp_like(message, 'v[0-9]+\\\\.[0-9]+\\\\.[0-9]+') AND regexp_like(message, '(error|exception|failure)')\"}\n{\"task\": \"Find the most recent version references in log messages within last 24 hours\", \"sql\": \"SELECT message, ts FROM logs WHERE regexp_like(message, '\\\\bv[0-9]+\\\\.[0-9]+\\\\.[0-9]+\\\\b') AND ts > now() - interval '24 hours' ORDER BY ts DESC LIMIT 10\"}",
+     "reasoning_content": "",
+     "tool_calls": []
+    },
+    "logprobs": null,
+    "finish_reason": "stop"
+   }
+  ],
+  "usage": {
+   "prompt_tokens": 216,
+   "completion_tokens": 701,
+   "total_tokens": 917,
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "stats": {},
+  "system_fingerprint": "qwen3-coder-30b-a3b-instruct"
+ },
+ "seconds": 6.44,
+ "text": "{\"task\": \"Find all log entries containing version strings in messages\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'v[0-9]+\\\\.[0-9]+\\\\.[0-9]+')\"}\n{\"task\": \"Count error logs that mention version numbers\", \"sql\": \"SELECT count(*) as error_count FROM logs WHERE level = 'ERROR' AND regexp_like(message, '\\\\bv[0-9]+\\\\.[0-9]+\\\\.[0-9]+\\\\b')\"}\n{\"task\": \"Identify services with version references in log messages\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(message, 'v[0-9]+\\\\.[0-9]+\\\\.[0-9]+')\"}\n{\"task\": \"Find events where request paths contain version strings\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '/v[0-9]+\\\\.[0-9]+\\\\.[0-9]+/')\"}\n{\"task\": \"List all unique version patterns found in messages or paths\", \"sql\": \"SELECT DISTINCT regexp_matches(message, 'v[0-9]+\\\\.[0-9]+\\\\.[0-9]+') as version FROM logs WHERE regexp_like(message, 'v[0-9]+\\\\.[0-9]+\\\\.[0-9]+') UNION SELECT DISTINCT regexp_matches(path, '/v[0-9]+\\\\.[0-9]+\\\\.[0-9]+/') as version FROM events WHERE regexp_like(path, '/v[0-9]+\\\\.[0-9]+\\\\.[0-9]+/')\"}\n{\"task\": \"Show log entries with version strings grouped by service\", \"sql\": \"SELECT service, message, ts FROM logs WHERE regexp_like(message, '\\\\bv[0-9]+\\\\.[0-9]+\\\\.[0-9]+\\\\b') ORDER BY service, ts\"}\n{\"task\": \"Find events that have version numbers in both path and user_id is greater than 1000\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '/v[0-9]+\\\\.[0-9]+\\\\.[0-9]+/') AND user_id > 1000\"}\n{\"task\": \"Count occurrences of version patterns in logs and events combined\", \"sql\": \"SELECT 'logs' as source, count(*) FROM logs WHERE regexp_like(message, '\\\\bv[0-9]+\\\\.[0-9]+\\\\.[0-9]+\\\\b') UNION ALL SELECT 'events' as source, count(*) FROM events WHERE regexp_like(path, '/v[0-9]+\\\\.[0-9]+\\\\.[0-9]+/')\"}\n{\"task\": \"Identify log messages with version strings that also contain error keywords\", \"sql\": \"SELECT message, ts FROM logs WHERE regexp_like(message, 'v[0-9]+\\\\.[0-9]+\\\\.[0-9]+') AND regexp_like(message, '(error|exception|failure)')\"}\n{\"task\": \"Find the most recent version references in log messages within last 24 hours\", \"sql\": \"SELECT message, ts FROM logs WHERE regexp_like(message, '\\\\bv[0-9]+\\\\.[0-9]+\\\\.[0-9]+\\\\b') AND ts > now() - interval '24 hours' ORDER BY ts DESC LIMIT 10\"}",
+ "generator": "g1",
+ "theme_index": 9,
+ "theme": "find version strings like v1.2.3 in paths or messages",
+ "call": 1,
+ "started": "2026-10-25T15:36:58-07:00",
+ "finished": "2026-10-25T15:37:04-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find version strings like v1.2.3 in paths or messages\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 10,
+ "unextractable_lines": []
+}

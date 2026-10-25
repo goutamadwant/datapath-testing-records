@@ -1,0 +1,14 @@
+You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.
+
+The database has two tables:
+
+logs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)
+events(id BIGINT, user_id BIGINT, path VARCHAR, status INT)
+
+`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.
+
+Task theme: {THEME}
+
+Write 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.
+
+Output exactly 10 lines and nothing else. Each line is one JSON object of the form {"task": "<one-sentence description>", "sql": "<one SQL statement>"}.

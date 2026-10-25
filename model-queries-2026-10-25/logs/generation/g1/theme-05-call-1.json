@@ -1,0 +1,58 @@
+{
+ "request": {
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You are a helpful assistant."
+   },
+   {
+    "role": "user",
+    "content": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: match identifiers built from nested groups with counted repetitions, such as several blocks of a fixed number of characters\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n"
+   }
+  ],
+  "temperature": 0.7,
+  "max_tokens": 4096
+ },
+ "response": {
+  "id": "chatcmpl-ocf7sntfuskdpf16vg7d",
+  "object": "chat.completion",
+  "created": 1792967788,
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "role": "assistant",
+     "content": "{\"task\": \"Find log entries containing AWS access keys with 20-character alphanumeric patterns\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'AKIA[0-9A-Z]{16}')\"}\n{\"task\": \"Identify error messages with repeated 4-digit numbers in sequence\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}')\"}\n{\"task\": \"Detect API endpoints with exactly 3 path segments separated by slashes\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '^/[^/]+/[^/]+/[^/]+$')\"}\n{\"task\": \"Find log entries containing UUID patterns with specific format\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}')\"}\n{\"task\": \"Identify service requests with 6-digit PIN codes\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '/api/[^/]+/[0-9]{6}/')\"}\n{\"task\": \"Match log messages containing credit card numbers with 4 groups of 4 digits\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}')\"}\n{\"task\": \"Find events where user ID appears in path with specific pattern\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '/user/[0-9]+/profile') AND user_id > 1000\"}\n{\"task\": \"Detect log entries with email addresses containing exactly 3 dots\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}.*\\\\.[a-zA-Z]{2,}.*\\\\.[a-zA-Z]{2,}')\"}\n{\"task\": \"Identify service calls with 5-character alphanumeric codes\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[A-Z0-9]{5}-[A-Z0-9]{5}-[A-Z0-9]{5}')\"}\n{\"task\": \"Find events where path contains exactly 2 query parameters\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '^/[^?]+\\\\?[a-zA-Z0-9]+=[^&]+&[a-zA-Z0-9]+=[^&]*$')\"}",
+     "reasoning_content": "",
+     "tool_calls": []
+    },
+    "logprobs": null,
+    "finish_reason": "stop"
+   }
+  ],
+  "usage": {
+   "prompt_tokens": 222,
+   "completion_tokens": 576,
+   "total_tokens": 798,
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "stats": {},
+  "system_fingerprint": "qwen3-coder-30b-a3b-instruct"
+ },
+ "seconds": 5.31,
+ "text": "{\"task\": \"Find log entries containing AWS access keys with 20-character alphanumeric patterns\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'AKIA[0-9A-Z]{16}')\"}\n{\"task\": \"Identify error messages with repeated 4-digit numbers in sequence\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}')\"}\n{\"task\": \"Detect API endpoints with exactly 3 path segments separated by slashes\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '^/[^/]+/[^/]+/[^/]+$')\"}\n{\"task\": \"Find log entries containing UUID patterns with specific format\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}')\"}\n{\"task\": \"Identify service requests with 6-digit PIN codes\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '/api/[^/]+/[0-9]{6}/')\"}\n{\"task\": \"Match log messages containing credit card numbers with 4 groups of 4 digits\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}')\"}\n{\"task\": \"Find events where user ID appears in path with specific pattern\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '/user/[0-9]+/profile') AND user_id > 1000\"}\n{\"task\": \"Detect log entries with email addresses containing exactly 3 dots\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}.*\\\\.[a-zA-Z]{2,}.*\\\\.[a-zA-Z]{2,}')\"}\n{\"task\": \"Identify service calls with 5-character alphanumeric codes\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[A-Z0-9]{5}-[A-Z0-9]{5}-[A-Z0-9]{5}')\"}\n{\"task\": \"Find events where path contains exactly 2 query parameters\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '^/[^?]+\\\\?[a-zA-Z0-9]+=[^&]+&[a-zA-Z0-9]+=[^&]*$')\"}",
+ "generator": "g1",
+ "theme_index": 5,
+ "theme": "match identifiers built from nested groups with counted repetitions, such as several blocks of a fixed number of characters",
+ "call": 1,
+ "started": "2026-10-25T15:36:28-07:00",
+ "finished": "2026-10-25T15:36:33-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: match identifiers built from nested groups with counted repetitions, such as several blocks of a fixed number of characters\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 10,
+ "unextractable_lines": []
+}

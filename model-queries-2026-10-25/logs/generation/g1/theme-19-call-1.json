@@ -1,0 +1,58 @@
+{
+ "request": {
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You are a helpful assistant."
+   },
+   {
+    "role": "user",
+    "content": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find log messages that contain base64-encoded tokens\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n"
+   }
+  ],
+  "temperature": 0.7,
+  "max_tokens": 4096
+ },
+ "response": {
+  "id": "chatcmpl-tlyyvm5jo8v82giam03i",
+  "object": "chat.completion",
+  "created": 1792967890,
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "role": "assistant",
+     "content": "{\"task\": \"Find all ERROR level logs containing base64 encoded strings\", \"sql\": \"SELECT * FROM logs WHERE level = 'ERROR' AND regexp_like(message, '([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)')\"}\n{\"task\": \"Identify service logs with potential API tokens in base64 format\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, '(?:[A-Za-z0-9+\\\\/]{4}){10,}(?:[A-Za-z0-9+\\\\/]{3}=|[A-Za-z0-9+\\\\/]{2}==)')\"}\n{\"task\": \"Count base64 tokens found in each log level\", \"sql\": \"SELECT level, COUNT(*) as token_count FROM logs WHERE regexp_like(message, '[A-Za-z0-9+/]{40,}') GROUP BY level\"}\n{\"task\": \"Find HTTP events that reference base64 encoded data in their path\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '([A-Za-z0-9+\\\\/]{4})*([A-Za-z0-9+\\\\/]{3}=|[A-Za-z0-9+\\\\/]{2}==)')\"}\n{\"task\": \"Extract logs containing JWT tokens with base64 encoding\", \"sql\": \"SELECT ts, message FROM logs WHERE regexp_like(message, '[A-Za-z0-9-_]{10,}\\\\.[A-Za-z0-9-_]{10,}\\\\.[A-Za-z0-9-_]{10,}')\"}\n{\"task\": \"Search for base64 encoded passwords in log messages\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '(password|passwd|pwd)\\\\s*[:=]\\\\s*[A-Za-z0-9+/]{20,}')\"}\n{\"task\": \"Find service logs that might contain OAuth tokens in base64 format\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, 'Bearer\\\\s+[A-Za-z0-9._\\\\/-]{30,}')\"}\n{\"task\": \"Identify events with base64 encoded user data in paths\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, 'user_id=([A-Za-z0-9+/]{20,})')\"}\n{\"task\": \"Count occurrences of base64 strings longer than 50 characters per service\", \"sql\": \"SELECT service, COUNT(*) as long_base64_count FROM logs WHERE regexp_like(message, '[A-Za-z0-9+/]{50,}') GROUP BY service\"}\n{\"task\": \"Find mixed content logs that contain both base64 and JSON data\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[A-Za-z0-9+/]{20,}') AND regexp_like(message, '\\\\{.*\\\\}')\"}",
+     "reasoning_content": "",
+     "tool_calls": []
+    },
+    "logprobs": null,
+    "finish_reason": "stop"
+   }
+  ],
+  "usage": {
+   "prompt_tokens": 212,
+   "completion_tokens": 626,
+   "total_tokens": 838,
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "stats": {},
+  "system_fingerprint": "qwen3-coder-30b-a3b-instruct"
+ },
+ "seconds": 5.77,
+ "text": "{\"task\": \"Find all ERROR level logs containing base64 encoded strings\", \"sql\": \"SELECT * FROM logs WHERE level = 'ERROR' AND regexp_like(message, '([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)')\"}\n{\"task\": \"Identify service logs with potential API tokens in base64 format\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, '(?:[A-Za-z0-9+\\\\/]{4}){10,}(?:[A-Za-z0-9+\\\\/]{3}=|[A-Za-z0-9+\\\\/]{2}==)')\"}\n{\"task\": \"Count base64 tokens found in each log level\", \"sql\": \"SELECT level, COUNT(*) as token_count FROM logs WHERE regexp_like(message, '[A-Za-z0-9+/]{40,}') GROUP BY level\"}\n{\"task\": \"Find HTTP events that reference base64 encoded data in their path\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '([A-Za-z0-9+\\\\/]{4})*([A-Za-z0-9+\\\\/]{3}=|[A-Za-z0-9+\\\\/]{2}==)')\"}\n{\"task\": \"Extract logs containing JWT tokens with base64 encoding\", \"sql\": \"SELECT ts, message FROM logs WHERE regexp_like(message, '[A-Za-z0-9-_]{10,}\\\\.[A-Za-z0-9-_]{10,}\\\\.[A-Za-z0-9-_]{10,}')\"}\n{\"task\": \"Search for base64 encoded passwords in log messages\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '(password|passwd|pwd)\\\\s*[:=]\\\\s*[A-Za-z0-9+/]{20,}')\"}\n{\"task\": \"Find service logs that might contain OAuth tokens in base64 format\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, 'Bearer\\\\s+[A-Za-z0-9._\\\\/-]{30,}')\"}\n{\"task\": \"Identify events with base64 encoded user data in paths\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, 'user_id=([A-Za-z0-9+/]{20,})')\"}\n{\"task\": \"Count occurrences of base64 strings longer than 50 characters per service\", \"sql\": \"SELECT service, COUNT(*) as long_base64_count FROM logs WHERE regexp_like(message, '[A-Za-z0-9+/]{50,}') GROUP BY service\"}\n{\"task\": \"Find mixed content logs that contain both base64 and JSON data\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[A-Za-z0-9+/]{20,}') AND regexp_like(message, '\\\\{.*\\\\}')\"}",
+ "generator": "g1",
+ "theme_index": 19,
+ "theme": "find log messages that contain base64-encoded tokens",
+ "call": 1,
+ "started": "2026-10-25T15:38:10-07:00",
+ "finished": "2026-10-25T15:38:16-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find log messages that contain base64-encoded tokens\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 10,
+ "unextractable_lines": []
+}

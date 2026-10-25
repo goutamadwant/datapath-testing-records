@@ -1,0 +1,130 @@
+{
+ "command": [
+  "claude",
+  "-p",
+  "--model",
+  "sonnet",
+  "--output-format",
+  "json",
+  "--system-prompt",
+  "You are a helpful assistant.",
+  "--tools",
+  "",
+  "--strict-mcp-config",
+  "--setting-sources",
+  "",
+  "--no-session-persistence",
+  "<prompt>"
+ ],
+ "returncode": 0,
+ "seconds": 13.09,
+ "stderr": "",
+ "response": {
+  "duration_api_ms": 8723,
+  "stop_reason": "end_turn",
+  "session_id": "467cc588-67bd-407e-98ba-9cf1def4d4b5",
+  "total_cost_usd": 0.013578000000000002,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 1026,
+   "cache_read_input_tokens": 0,
+   "output_tokens": 947,
+   "output_tokens_details": {
+    "thinking_tokens": 0
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 1026,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 947,
+     "cache_read_input_tokens": 0,
+     "cache_creation_input_tokens": 1026,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 1026
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "modelUsage": {
+   "claude-sonnet-5": {
+    "inputTokens": 2,
+    "outputTokens": 947,
+    "cacheReadInputTokens": 0,
+    "cacheCreationInputTokens": 1026,
+    "webSearchRequests": 0,
+    "costUSD": 0.013578000000000002,
+    "contextWindow": 1000000,
+    "maxOutputTokens": 64000,
+    "thinkingTokens": 0,
+    "canonicalModel": "claude-sonnet-5",
+    "provider": "firstParty",
+    "costBasis": "list"
+   }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+   "spawned": 0,
+   "requested": {
+    "background": 0,
+    "foreground": 0,
+    "unset": 0
+   },
+   "started_in_background": 0,
+   "max_depth": 0,
+   "spawned_by_subagents": 0,
+   "completed": 0,
+   "failed": 0,
+   "killed": {
+    "parent": 0,
+    "user": 0,
+    "system": 0
+   },
+   "refused": {
+    "depth_limit": 0,
+    "concurrency_limit": 0,
+    "budget": 0
+   },
+   "by_type": {}
+  },
+  "is_error": false,
+  "num_turns": 1,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "{\"task\": \"Find log messages mentioning .log files\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, '\\\\.log\\\\b')\"}\n{\"task\": \"Find log messages mentioning configuration files like .conf or .cfg\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, '\\\\.(conf|cfg)\\\\b', 'i')\"}\n{\"task\": \"Count error-level log messages mentioning SQL script files\", \"sql\": \"SELECT count(*) AS sql_file_errors FROM logs WHERE level = 'ERROR' AND regexp_like(message, '\\\\.sql\\\\b')\"}\n{\"task\": \"List distinct services whose logs mention compressed archive files\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(message, '\\\\.(zip|tar|gz|rar)\\\\b', 'i')\"}\n{\"task\": \"Tag each log line with whether it references an image file extension\", \"sql\": \"SELECT ts, message, CASE WHEN regexp_like(message, '\\\\.(png|jpg|jpeg|gif|svg)\\\\b', 'i') THEN 'image' ELSE 'other' END AS file_type FROM logs\"}\n{\"task\": \"Find request paths that reference executable or script file extensions, a potential security concern\", \"sql\": \"SELECT id, user_id, path, status FROM events WHERE regexp_like(path, '\\\\.(php|exe|sh|bat)(\\\\?|$)', 'i')\"}\n{\"task\": \"Get hourly counts of log lines mentioning Java class or jar files\", \"sql\": \"SELECT date_trunc('hour', ts) AS hr, count(*) AS mentions FROM logs WHERE regexp_like(message, '\\\\.(class|jar)\\\\b') GROUP BY hr ORDER BY hr\"}\n{\"task\": \"Find warning or error logs referencing YAML or JSON config files\", \"sql\": \"SELECT ts, level, message FROM logs WHERE level IN ('WARN', 'ERROR') AND regexp_like(message, '\\\\.(yml|yaml|json)\\\\b', 'i')\"}\n{\"task\": \"Find events paths requesting backup or temp file extensions that may indicate scanning attempts\", \"sql\": \"SELECT id, path, status FROM events WHERE regexp_like(path, '\\\\.(bak|tmp|old)(\\\\?|$)', 'i') AND status = 404\"}\n{\"task\": \"Rank services by how often their logs mention PDF or DOCX document files\", \"sql\": \"SELECT service, count(*) AS doc_mentions FROM logs WHERE regexp_like(message, '\\\\.(pdf|docx?)\\\\b', 'i') GROUP BY service ORDER BY doc_mentions DESC\"}",
+  "ttft_ms": 8856,
+  "type": "result",
+  "duration_ms": 10608,
+  "uuid": "631f27c9-a80c-4fc4-8f6d-c08bf41f1925",
+  "ttft_stream_ms": 1205,
+  "time_to_request_ms": 179,
+  "first_content_frame_ms": 1206,
+  "queued_turn_count": 0,
+  "result_index": 0
+ },
+ "text": "{\"task\": \"Find log messages mentioning .log files\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, '\\\\.log\\\\b')\"}\n{\"task\": \"Find log messages mentioning configuration files like .conf or .cfg\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, '\\\\.(conf|cfg)\\\\b', 'i')\"}\n{\"task\": \"Count error-level log messages mentioning SQL script files\", \"sql\": \"SELECT count(*) AS sql_file_errors FROM logs WHERE level = 'ERROR' AND regexp_like(message, '\\\\.sql\\\\b')\"}\n{\"task\": \"List distinct services whose logs mention compressed archive files\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(message, '\\\\.(zip|tar|gz|rar)\\\\b', 'i')\"}\n{\"task\": \"Tag each log line with whether it references an image file extension\", \"sql\": \"SELECT ts, message, CASE WHEN regexp_like(message, '\\\\.(png|jpg|jpeg|gif|svg)\\\\b', 'i') THEN 'image' ELSE 'other' END AS file_type FROM logs\"}\n{\"task\": \"Find request paths that reference executable or script file extensions, a potential security concern\", \"sql\": \"SELECT id, user_id, path, status FROM events WHERE regexp_like(path, '\\\\.(php|exe|sh|bat)(\\\\?|$)', 'i')\"}\n{\"task\": \"Get hourly counts of log lines mentioning Java class or jar files\", \"sql\": \"SELECT date_trunc('hour', ts) AS hr, count(*) AS mentions FROM logs WHERE regexp_like(message, '\\\\.(class|jar)\\\\b') GROUP BY hr ORDER BY hr\"}\n{\"task\": \"Find warning or error logs referencing YAML or JSON config files\", \"sql\": \"SELECT ts, level, message FROM logs WHERE level IN ('WARN', 'ERROR') AND regexp_like(message, '\\\\.(yml|yaml|json)\\\\b', 'i')\"}\n{\"task\": \"Find events paths requesting backup or temp file extensions that may indicate scanning attempts\", \"sql\": \"SELECT id, path, status FROM events WHERE regexp_like(path, '\\\\.(bak|tmp|old)(\\\\?|$)', 'i') AND status = 404\"}\n{\"task\": \"Rank services by how often their logs mention PDF or DOCX document files\", \"sql\": \"SELECT service, count(*) AS doc_mentions FROM logs WHERE regexp_like(message, '\\\\.(pdf|docx?)\\\\b', 'i') GROUP BY service ORDER BY doc_mentions DESC\"}",
+ "generator": "g2",
+ "theme_index": 20,
+ "theme": "find log messages that mention file names with particular extensions",
+ "call": 1,
+ "started": "2026-10-25T15:35:58-07:00",
+ "finished": "2026-10-25T15:36:11-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find log messages that mention file names with particular extensions\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 10,
+ "unextractable_lines": []
+}

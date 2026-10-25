@@ -1,0 +1,130 @@
+{
+ "command": [
+  "claude",
+  "-p",
+  "--model",
+  "sonnet",
+  "--output-format",
+  "json",
+  "--system-prompt",
+  "You are a helpful assistant.",
+  "--tools",
+  "",
+  "--strict-mcp-config",
+  "--setting-sources",
+  "",
+  "--no-session-persistence",
+  "<prompt>"
+ ],
+ "returncode": 0,
+ "seconds": 14.83,
+ "stderr": "",
+ "response": {
+  "duration_api_ms": 10996,
+  "stop_reason": "end_turn",
+  "session_id": "2131078d-02a6-4e50-a239-be79bb40e15b",
+  "total_cost_usd": 0.016306,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 1028,
+   "cache_read_input_tokens": 0,
+   "output_tokens": 1219,
+   "output_tokens_details": {
+    "thinking_tokens": 0
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 1028,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 1219,
+     "cache_read_input_tokens": 0,
+     "cache_creation_input_tokens": 1028,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 1028
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "modelUsage": {
+   "claude-sonnet-5": {
+    "inputTokens": 2,
+    "outputTokens": 1219,
+    "cacheReadInputTokens": 0,
+    "cacheCreationInputTokens": 1028,
+    "webSearchRequests": 0,
+    "costUSD": 0.016306,
+    "contextWindow": 1000000,
+    "maxOutputTokens": 64000,
+    "thinkingTokens": 0,
+    "canonicalModel": "claude-sonnet-5",
+    "provider": "firstParty",
+    "costBasis": "list"
+   }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+   "spawned": 0,
+   "requested": {
+    "background": 0,
+    "foreground": 0,
+    "unset": 0
+   },
+   "started_in_background": 0,
+   "max_depth": 0,
+   "spawned_by_subagents": 0,
+   "completed": 0,
+   "failed": 0,
+   "killed": {
+    "parent": 0,
+    "user": 0,
+    "system": 0
+   },
+   "refused": {
+    "depth_limit": 0,
+    "concurrency_limit": 0,
+    "budget": 0
+   },
+   "by_type": {}
+  },
+  "is_error": false,
+  "num_turns": 1,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "{\"task\": \"Count events whose path contains a full date segment like /YYYY/MM/DD/\", \"sql\": \"SELECT COUNT(*) AS date_path_count FROM events WHERE regexp_like(path, '/[0-9]{4}/[0-9]{2}/[0-9]{2}/')\"}\n{\"task\": \"List distinct dated paths found in events for manual review\", \"sql\": \"SELECT DISTINCT path FROM events WHERE regexp_like(path, '/[0-9]{4}/[0-9]{2}/[0-9]{2}/') ORDER BY path\"}\n{\"task\": \"Extract the year/month/day segment from dated paths and count occurrences per date\", \"sql\": \"SELECT regexp_match(path, '/([0-9]{4}/[0-9]{2}/[0-9]{2})/') AS date_part, COUNT(*) AS cnt FROM events WHERE regexp_like(path, '/[0-9]{4}/[0-9]{2}/[0-9]{2}/') GROUP BY date_part ORDER BY cnt DESC\"}\n{\"task\": \"Find error-status requests to dated paths to spot broken archive links\", \"sql\": \"SELECT path, status FROM events WHERE status >= 400 AND regexp_like(path, '/[0-9]{4}/[0-9]{2}/[0-9]{2}/') ORDER BY status DESC\"}\n{\"task\": \"Flag log lines that reference a dated path in the free-text message\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, '/[0-9]{4}/[0-9]{2}/[0-9]{2}/') ORDER BY ts DESC LIMIT 100\"}\n{\"task\": \"Categorize each event path as dated or non-dated using a CASE expression with regexp_like\", \"sql\": \"SELECT path, CASE WHEN regexp_like(path, '/[0-9]{4}/[0-9]{2}/[0-9]{2}/') THEN 'dated' ELSE 'non_dated' END AS path_type FROM events\"}\n{\"task\": \"Find requests to today's date path (2026/10/25) specifically\", \"sql\": \"SELECT path, status FROM events WHERE regexp_like(path, '^/2026/10/25/') ORDER BY path\"}\n{\"task\": \"Detect malformed date-like paths with an invalid month value (00 or >12) for data quality checks\", \"sql\": \"SELECT path FROM events WHERE regexp_like(path, '/[0-9]{4}/') AND regexp_like(path, '/[0-9]{4}/(00|1[3-9])/')\"}\n{\"task\": \"Identify users who hit dated archive paths, joined with their event status codes\", \"sql\": \"SELECT user_id, path, status FROM events WHERE regexp_like(path, '/[0-9]{4}/[0-9]{2}/[0-9]{2}/') ORDER BY user_id\"}\n{\"task\": \"Correlate error logs with dated-path events by matching the date substring in both the log message and the request path\", \"sql\": \"SELECT l.ts, l.service, l.message, e.path, e.status FROM logs l JOIN events e ON regexp_like(l.message, '/[0-9]{4}/[0-9]{2}/[0-9]{2}/') AND regexp_like(e.path, '/[0-9]{4}/[0-9]{2}/[0-9]{2}/') AND l.message LIKE '%' || substring(e.path FROM '/[0-9]{4}/[0-9]{2}/[0-9]{2}/') || '%' WHERE l.level = 'ERROR'\"}",
+  "ttft_ms": 10958,
+  "type": "result",
+  "duration_ms": 12612,
+  "uuid": "8a052b45-9203-4811-a5a8-fa3b32ff87c8",
+  "ttft_stream_ms": 1038,
+  "time_to_request_ms": 78,
+  "first_content_frame_ms": 1039,
+  "queued_turn_count": 0,
+  "result_index": 0
+ },
+ "text": "{\"task\": \"Count events whose path contains a full date segment like /YYYY/MM/DD/\", \"sql\": \"SELECT COUNT(*) AS date_path_count FROM events WHERE regexp_like(path, '/[0-9]{4}/[0-9]{2}/[0-9]{2}/')\"}\n{\"task\": \"List distinct dated paths found in events for manual review\", \"sql\": \"SELECT DISTINCT path FROM events WHERE regexp_like(path, '/[0-9]{4}/[0-9]{2}/[0-9]{2}/') ORDER BY path\"}\n{\"task\": \"Extract the year/month/day segment from dated paths and count occurrences per date\", \"sql\": \"SELECT regexp_match(path, '/([0-9]{4}/[0-9]{2}/[0-9]{2})/') AS date_part, COUNT(*) AS cnt FROM events WHERE regexp_like(path, '/[0-9]{4}/[0-9]{2}/[0-9]{2}/') GROUP BY date_part ORDER BY cnt DESC\"}\n{\"task\": \"Find error-status requests to dated paths to spot broken archive links\", \"sql\": \"SELECT path, status FROM events WHERE status >= 400 AND regexp_like(path, '/[0-9]{4}/[0-9]{2}/[0-9]{2}/') ORDER BY status DESC\"}\n{\"task\": \"Flag log lines that reference a dated path in the free-text message\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, '/[0-9]{4}/[0-9]{2}/[0-9]{2}/') ORDER BY ts DESC LIMIT 100\"}\n{\"task\": \"Categorize each event path as dated or non-dated using a CASE expression with regexp_like\", \"sql\": \"SELECT path, CASE WHEN regexp_like(path, '/[0-9]{4}/[0-9]{2}/[0-9]{2}/') THEN 'dated' ELSE 'non_dated' END AS path_type FROM events\"}\n{\"task\": \"Find requests to today's date path (2026/10/25) specifically\", \"sql\": \"SELECT path, status FROM events WHERE regexp_like(path, '^/2026/10/25/') ORDER BY path\"}\n{\"task\": \"Detect malformed date-like paths with an invalid month value (00 or >12) for data quality checks\", \"sql\": \"SELECT path FROM events WHERE regexp_like(path, '/[0-9]{4}/') AND regexp_like(path, '/[0-9]{4}/(00|1[3-9])/')\"}\n{\"task\": \"Identify users who hit dated archive paths, joined with their event status codes\", \"sql\": \"SELECT user_id, path, status FROM events WHERE regexp_like(path, '/[0-9]{4}/[0-9]{2}/[0-9]{2}/') ORDER BY user_id\"}\n{\"task\": \"Correlate error logs with dated-path events by matching the date substring in both the log message and the request path\", \"sql\": \"SELECT l.ts, l.service, l.message, e.path, e.status FROM logs l JOIN events e ON regexp_like(l.message, '/[0-9]{4}/[0-9]{2}/[0-9]{2}/') AND regexp_like(e.path, '/[0-9]{4}/[0-9]{2}/[0-9]{2}/') AND l.message LIKE '%' || substring(e.path FROM '/[0-9]{4}/[0-9]{2}/[0-9]{2}/') || '%' WHERE l.level = 'ERROR'\"}",
+ "generator": "g2",
+ "theme_index": 17,
+ "theme": "find request paths that contain dates such as /2026/10/25/",
+ "call": 1,
+ "started": "2026-10-25T15:35:50-07:00",
+ "finished": "2026-10-25T15:36:05-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find request paths that contain dates such as /2026/10/25/\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 10,
+ "unextractable_lines": []
+}

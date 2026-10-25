@@ -1,0 +1,58 @@
+{
+ "request": {
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You are a helpful assistant."
+   },
+   {
+    "role": "user",
+    "content": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find log messages that contain ISO-8601 timestamps\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n"
+   }
+  ],
+  "temperature": 0.7,
+  "max_tokens": 4096
+ },
+ "response": {
+  "id": "chatcmpl-ujgwpu133zapqenw7amtp",
+  "object": "chat.completion",
+  "created": 1792967802,
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "role": "assistant",
+     "content": "{\"task\": \"Find log messages containing ISO-8601 timestamps in YYYY-MM-DD format\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '20[0-9]{2}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])')\"}\n{\"task\": \"Count error level logs with ISO-8601 timestamps from last week\", \"sql\": \"SELECT count(*) FROM logs WHERE level = 'ERROR' AND regexp_like(message, '[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}') AND ts >= current_timestamp - interval '7 days'\"}\n{\"task\": \"Identify service logs with ISO timestamps in yyyy-MM-dd format\", \"sql\": \"SELECT DISTINCT service, message FROM logs WHERE regexp_like(message, '\\\\d{4}-\\\\d{2}-\\\\d{2}') AND service IS NOT NULL\"}\n{\"task\": \"Find log entries with timestamp patterns including milliseconds\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\\\.[0-9]{3}')\"}\n{\"task\": \"Extract events with user paths containing date patterns\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '20[0-9]{2}/[0-1][0-9]/[0-3][0-9]')\"}\n{\"task\": \"Count logs where message has ISO timestamp in format yyyy-MM-dd HH:mm:ss\", \"sql\": \"SELECT count(*) FROM logs WHERE regexp_like(message, '[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}')\"}\n{\"task\": \"Find messages with timezone-aware ISO timestamps\", \"sql\": \"SELECT message FROM logs WHERE regexp_like(message, '[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\\\+|-)[0-9]{2}:[0-9]{2}')\"}\n{\"task\": \"Identify log messages with multiple timestamp formats\", \"sql\": \"SELECT message FROM logs WHERE regexp_like(message, '(20[0-9]{2}-[0-9]{2}-[0-9]{2}|[0-9]{4}/[0-9]{2}/[0-9]{2})')\"}\n{\"task\": \"Find service logs with timestamp patterns in ISO 8601 basic format\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '20[0-9]{6}T[0-9]{6}') AND service = 'api-service'\"}\n{\"task\": \"Count events where path contains date strings without slashes\", \"sql\": \"SELECT count(*) FROM events WHERE regexp_like(path, '[0-9]{8}')\"}",
+     "reasoning_content": "",
+     "tool_calls": []
+    },
+    "logprobs": null,
+    "finish_reason": "stop"
+   }
+  ],
+  "usage": {
+   "prompt_tokens": 214,
+   "completion_tokens": 692,
+   "total_tokens": 906,
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "stats": {},
+  "system_fingerprint": "qwen3-coder-30b-a3b-instruct"
+ },
+ "seconds": 6.33,
+ "text": "{\"task\": \"Find log messages containing ISO-8601 timestamps in YYYY-MM-DD format\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '20[0-9]{2}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])')\"}\n{\"task\": \"Count error level logs with ISO-8601 timestamps from last week\", \"sql\": \"SELECT count(*) FROM logs WHERE level = 'ERROR' AND regexp_like(message, '[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}') AND ts >= current_timestamp - interval '7 days'\"}\n{\"task\": \"Identify service logs with ISO timestamps in yyyy-MM-dd format\", \"sql\": \"SELECT DISTINCT service, message FROM logs WHERE regexp_like(message, '\\\\d{4}-\\\\d{2}-\\\\d{2}') AND service IS NOT NULL\"}\n{\"task\": \"Find log entries with timestamp patterns including milliseconds\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\\\.[0-9]{3}')\"}\n{\"task\": \"Extract events with user paths containing date patterns\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '20[0-9]{2}/[0-1][0-9]/[0-3][0-9]')\"}\n{\"task\": \"Count logs where message has ISO timestamp in format yyyy-MM-dd HH:mm:ss\", \"sql\": \"SELECT count(*) FROM logs WHERE regexp_like(message, '[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}')\"}\n{\"task\": \"Find messages with timezone-aware ISO timestamps\", \"sql\": \"SELECT message FROM logs WHERE regexp_like(message, '[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\\\+|-)[0-9]{2}:[0-9]{2}')\"}\n{\"task\": \"Identify log messages with multiple timestamp formats\", \"sql\": \"SELECT message FROM logs WHERE regexp_like(message, '(20[0-9]{2}-[0-9]{2}-[0-9]{2}|[0-9]{4}/[0-9]{2}/[0-9]{2})')\"}\n{\"task\": \"Find service logs with timestamp patterns in ISO 8601 basic format\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '20[0-9]{6}T[0-9]{6}') AND service = 'api-service'\"}\n{\"task\": \"Count events where path contains date strings without slashes\", \"sql\": \"SELECT count(*) FROM events WHERE regexp_like(path, '[0-9]{8}')\"}",
+ "generator": "g1",
+ "theme_index": 7,
+ "theme": "find log messages that contain ISO-8601 timestamps",
+ "call": 1,
+ "started": "2026-10-25T15:36:42-07:00",
+ "finished": "2026-10-25T15:36:48-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find log messages that contain ISO-8601 timestamps\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 10,
+ "unextractable_lines": []
+}

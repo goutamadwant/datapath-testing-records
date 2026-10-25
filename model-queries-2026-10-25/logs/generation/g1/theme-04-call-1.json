@@ -1,0 +1,58 @@
+{
+ "request": {
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You are a helpful assistant."
+   },
+   {
+    "role": "user",
+    "content": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find log messages with repeated characters, such as a character repeated several times in a row\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n"
+   }
+  ],
+  "temperature": 0.7,
+  "max_tokens": 4096
+ },
+ "response": {
+  "id": "chatcmpl-tctoaeicmheyz27fpga2hm",
+  "object": "chat.completion",
+  "created": 1792967784,
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "role": "assistant",
+     "content": "{\"task\": \"Find log messages containing three or more consecutive identical characters\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '(.)\\\\1{2,}')\"}\n{\"task\": \"Identify error logs with repeated uppercase letters in service names\", \"sql\": \"SELECT * FROM logs WHERE level = 'ERROR' AND regexp_like(service, '[A-Z]\\\\1{2,}')\"}\n{\"task\": \"Detect log messages with repeated digits longer than 3 characters\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '\\\\d\\\\1{3,}')\"}\n{\"task\": \"Find events where user paths contain repeated character sequences\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '(.)\\\\1{2,}')\"}\n{\"task\": \"Show warning messages with consecutive repeated lowercase letters\", \"sql\": \"SELECT * FROM logs WHERE level = 'WARN' AND regexp_like(message, '[a-z]\\\\1{2,}')\"}\n{\"task\": \"Identify log entries with repeated special characters like '!!!' or '???'\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[^a-zA-Z0-9]\\\\1{2,}')\"}\n{\"task\": \"Find service names that repeat the same character 4 times in a row\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(service, '(.)\\\\1{3,}')\"}\n{\"task\": \"Show events with repeated characters in path parameters\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '([^/]+)\\\\1{2,}')\"}\n{\"task\": \"Detect log messages containing sequences of 5 or more identical characters\", \"sql\": \"SELECT message, ts FROM logs WHERE regexp_like(message, '(.)\\\\1{4,}')\"}\n{\"task\": \"Find error logs where service names have repeated character patterns with case insensitive matching\", \"sql\": \"SELECT * FROM logs WHERE level = 'ERROR' AND regexp_like(service, '(.)\\\\1{2,}', 'i')\"}",
+     "reasoning_content": "",
+     "tool_calls": []
+    },
+    "logprobs": null,
+    "finish_reason": "stop"
+   }
+  ],
+  "usage": {
+   "prompt_tokens": 219,
+   "completion_tokens": 418,
+   "total_tokens": 637,
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "stats": {},
+  "system_fingerprint": "qwen3-coder-30b-a3b-instruct"
+ },
+ "seconds": 3.89,
+ "text": "{\"task\": \"Find log messages containing three or more consecutive identical characters\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '(.)\\\\1{2,}')\"}\n{\"task\": \"Identify error logs with repeated uppercase letters in service names\", \"sql\": \"SELECT * FROM logs WHERE level = 'ERROR' AND regexp_like(service, '[A-Z]\\\\1{2,}')\"}\n{\"task\": \"Detect log messages with repeated digits longer than 3 characters\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '\\\\d\\\\1{3,}')\"}\n{\"task\": \"Find events where user paths contain repeated character sequences\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '(.)\\\\1{2,}')\"}\n{\"task\": \"Show warning messages with consecutive repeated lowercase letters\", \"sql\": \"SELECT * FROM logs WHERE level = 'WARN' AND regexp_like(message, '[a-z]\\\\1{2,}')\"}\n{\"task\": \"Identify log entries with repeated special characters like '!!!' or '???'\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[^a-zA-Z0-9]\\\\1{2,}')\"}\n{\"task\": \"Find service names that repeat the same character 4 times in a row\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(service, '(.)\\\\1{3,}')\"}\n{\"task\": \"Show events with repeated characters in path parameters\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '([^/]+)\\\\1{2,}')\"}\n{\"task\": \"Detect log messages containing sequences of 5 or more identical characters\", \"sql\": \"SELECT message, ts FROM logs WHERE regexp_like(message, '(.)\\\\1{4,}')\"}\n{\"task\": \"Find error logs where service names have repeated character patterns with case insensitive matching\", \"sql\": \"SELECT * FROM logs WHERE level = 'ERROR' AND regexp_like(service, '(.)\\\\1{2,}', 'i')\"}",
+ "generator": "g1",
+ "theme_index": 4,
+ "theme": "find log messages with repeated characters, such as a character repeated several times in a row",
+ "call": 1,
+ "started": "2026-10-25T15:36:24-07:00",
+ "finished": "2026-10-25T15:36:28-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find log messages with repeated characters, such as a character repeated several times in a row\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 10,
+ "unextractable_lines": []
+}

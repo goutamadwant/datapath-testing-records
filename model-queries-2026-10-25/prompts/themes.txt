@@ -1,0 +1,20 @@
+find log messages that contain error codes like E123-456
+find log messages that contain IPv4 addresses
+find log messages that contain e-mail addresses
+find log messages with repeated characters, such as a character repeated several times in a row
+match identifiers built from nested groups with counted repetitions, such as several blocks of a fixed number of characters
+find request paths that contain UUIDs
+find log messages that contain ISO-8601 timestamps
+find request paths with numeric resource ids, such as /api/v2/users/123/orders
+find version strings like v1.2.3 in paths or messages
+find log messages that contain hexadecimal hashes or commit ids
+find log messages that contain MAC addresses
+find log messages that contain phone numbers
+detect possible leaked secrets or card numbers in log messages
+find stack-trace lines from Java or Python in log messages
+find request paths with specific query-string parameters
+check that service names follow a naming convention such as svc-payments-01
+find request paths that contain dates such as /2026/10/25/
+find request paths that look like SQL injection attempts
+find log messages that contain base64-encoded tokens
+find log messages that mention file names with particular extensions

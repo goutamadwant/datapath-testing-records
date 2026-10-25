@@ -1,0 +1,130 @@
+{
+ "command": [
+  "claude",
+  "-p",
+  "--model",
+  "sonnet",
+  "--output-format",
+  "json",
+  "--system-prompt",
+  "You are a helpful assistant.",
+  "--tools",
+  "",
+  "--strict-mcp-config",
+  "--setting-sources",
+  "",
+  "--no-session-persistence",
+  "<prompt>"
+ ],
+ "returncode": 0,
+ "seconds": 15.77,
+ "stderr": "",
+ "response": {
+  "duration_api_ms": 11739,
+  "stop_reason": "end_turn",
+  "session_id": "644d9739-6a23-4561-a298-aae7920dc4fe",
+  "total_cost_usd": 0.018462000000000003,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 1027,
+   "cache_read_input_tokens": 0,
+   "output_tokens": 1435,
+   "output_tokens_details": {
+    "thinking_tokens": 0
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 1027,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 1435,
+     "cache_read_input_tokens": 0,
+     "cache_creation_input_tokens": 1027,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 1027
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "modelUsage": {
+   "claude-sonnet-5": {
+    "inputTokens": 2,
+    "outputTokens": 1435,
+    "cacheReadInputTokens": 0,
+    "cacheCreationInputTokens": 1027,
+    "webSearchRequests": 0,
+    "costUSD": 0.018462000000000003,
+    "contextWindow": 1000000,
+    "maxOutputTokens": 64000,
+    "thinkingTokens": 0,
+    "canonicalModel": "claude-sonnet-5",
+    "provider": "firstParty",
+    "costBasis": "list"
+   }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+   "spawned": 0,
+   "requested": {
+    "background": 0,
+    "foreground": 0,
+    "unset": 0
+   },
+   "started_in_background": 0,
+   "max_depth": 0,
+   "spawned_by_subagents": 0,
+   "completed": 0,
+   "failed": 0,
+   "killed": {
+    "parent": 0,
+    "user": 0,
+    "system": 0
+   },
+   "refused": {
+    "depth_limit": 0,
+    "concurrency_limit": 0,
+    "budget": 0
+   },
+   "by_type": {}
+  },
+  "is_error": false,
+  "num_turns": 1,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "{\"task\": \"Find log lines containing a Java exception stack trace frame\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, 'at [a-zA-Z0-9_.$]+\\\\([A-Za-z0-9_.]+\\\\.java:[0-9]+\\\\)')\"}\n{\"task\": \"Find log lines containing a Python traceback frame\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, 'File \\\"[^\\\"]+\\\\.py\\\", line [0-9]+')\"}\n{\"task\": \"Count stack-trace lines per service, distinguishing Java and Python frames\", \"sql\": \"SELECT service, SUM(CASE WHEN regexp_like(message, 'at [a-zA-Z0-9_.$]+\\\\([A-Za-z0-9_.]+\\\\.java:[0-9]+\\\\)') THEN 1 ELSE 0 END) AS java_frames, SUM(CASE WHEN regexp_like(message, 'File \\\"[^\\\"]+\\\\.py\\\", line [0-9]+') THEN 1 ELSE 0 END) AS python_frames FROM logs GROUP BY service\"}\n{\"task\": \"List error-level logs that contain any kind of stack trace line from either language\", \"sql\": \"SELECT ts, service, message FROM logs WHERE level = 'ERROR' AND regexp_like(message, 'at [a-zA-Z0-9_.$]+\\\\([A-Za-z0-9_.]+\\\\.java:[0-9]+\\\\)|File \\\"[^\\\"]+\\\\.py\\\", line [0-9]+')\"}\n{\"task\": \"Find Java stack traces that mention a specific exception class name pattern\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, '[A-Za-z0-9_.]*Exception(?!\\\\w)') AND regexp_like(message, 'at [a-zA-Z0-9_.$]+\\\\([A-Za-z0-9_.]+\\\\.java:[0-9]+\\\\)')\"}\n{\"task\": \"Find Python tracebacks that raised a specific error type at the final line\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, '^[A-Za-z0-9_.]+Error: .+', 'm')\"}\n{\"task\": \"Tag each log row with a stack-trace category using a CASE expression based on regexp_like matches\", \"sql\": \"SELECT ts, service, CASE WHEN regexp_like(message, 'at [a-zA-Z0-9_.$]+\\\\([A-Za-z0-9_.]+\\\\.java:[0-9]+\\\\)') THEN 'java_trace' WHEN regexp_like(message, 'File \\\"[^\\\"]+\\\\.py\\\", line [0-9]+') THEN 'python_trace' ELSE 'other' END AS trace_type FROM logs\"}\n{\"task\": \"Find stack-trace lines referencing third-party or framework packages like org.springframework or com.google\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, 'at (org\\\\.springframework|com\\\\.google|org\\\\.apache)\\\\.[A-Za-z0-9_.]+\\\\([A-Za-z0-9_.]+\\\\.java:[0-9]+\\\\)')\"}\n{\"task\": \"Find Python traceback lines that occur inside site-packages or virtualenv dependency code rather than application code\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, 'File \\\"[^\\\"]*(site-packages|venv)[^\\\"]*\\\\.py\\\", line [0-9]+')\"}\n{\"task\": \"Get daily counts of distinct services emitting stack traces in the last 7 days\", \"sql\": \"SELECT CAST(ts AS DATE) AS day, COUNT(DISTINCT service) AS services_with_traces FROM logs WHERE ts >= now() - INTERVAL '7 days' AND regexp_like(message, 'at [a-zA-Z0-9_.$]+\\\\([A-Za-z0-9_.]+\\\\.java:[0-9]+\\\\)|Traceback \\\\(most recent call last\\\\)') GROUP BY day ORDER BY day\"}",
+  "ttft_ms": 11794,
+  "type": "result",
+  "duration_ms": 13356,
+  "uuid": "236875a5-9533-4577-9c60-62a2cbe8e445",
+  "ttft_stream_ms": 1327,
+  "time_to_request_ms": 125,
+  "first_content_frame_ms": 1327,
+  "queued_turn_count": 0,
+  "result_index": 0
+ },
+ "text": "{\"task\": \"Find log lines containing a Java exception stack trace frame\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, 'at [a-zA-Z0-9_.$]+\\\\([A-Za-z0-9_.]+\\\\.java:[0-9]+\\\\)')\"}\n{\"task\": \"Find log lines containing a Python traceback frame\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, 'File \\\"[^\\\"]+\\\\.py\\\", line [0-9]+')\"}\n{\"task\": \"Count stack-trace lines per service, distinguishing Java and Python frames\", \"sql\": \"SELECT service, SUM(CASE WHEN regexp_like(message, 'at [a-zA-Z0-9_.$]+\\\\([A-Za-z0-9_.]+\\\\.java:[0-9]+\\\\)') THEN 1 ELSE 0 END) AS java_frames, SUM(CASE WHEN regexp_like(message, 'File \\\"[^\\\"]+\\\\.py\\\", line [0-9]+') THEN 1 ELSE 0 END) AS python_frames FROM logs GROUP BY service\"}\n{\"task\": \"List error-level logs that contain any kind of stack trace line from either language\", \"sql\": \"SELECT ts, service, message FROM logs WHERE level = 'ERROR' AND regexp_like(message, 'at [a-zA-Z0-9_.$]+\\\\([A-Za-z0-9_.]+\\\\.java:[0-9]+\\\\)|File \\\"[^\\\"]+\\\\.py\\\", line [0-9]+')\"}\n{\"task\": \"Find Java stack traces that mention a specific exception class name pattern\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, '[A-Za-z0-9_.]*Exception(?!\\\\w)') AND regexp_like(message, 'at [a-zA-Z0-9_.$]+\\\\([A-Za-z0-9_.]+\\\\.java:[0-9]+\\\\)')\"}\n{\"task\": \"Find Python tracebacks that raised a specific error type at the final line\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, '^[A-Za-z0-9_.]+Error: .+', 'm')\"}\n{\"task\": \"Tag each log row with a stack-trace category using a CASE expression based on regexp_like matches\", \"sql\": \"SELECT ts, service, CASE WHEN regexp_like(message, 'at [a-zA-Z0-9_.$]+\\\\([A-Za-z0-9_.]+\\\\.java:[0-9]+\\\\)') THEN 'java_trace' WHEN regexp_like(message, 'File \\\"[^\\\"]+\\\\.py\\\", line [0-9]+') THEN 'python_trace' ELSE 'other' END AS trace_type FROM logs\"}\n{\"task\": \"Find stack-trace lines referencing third-party or framework packages like org.springframework or com.google\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, 'at (org\\\\.springframework|com\\\\.google|org\\\\.apache)\\\\.[A-Za-z0-9_.]+\\\\([A-Za-z0-9_.]+\\\\.java:[0-9]+\\\\)')\"}\n{\"task\": \"Find Python traceback lines that occur inside site-packages or virtualenv dependency code rather than application code\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, 'File \\\"[^\\\"]*(site-packages|venv)[^\\\"]*\\\\.py\\\", line [0-9]+')\"}\n{\"task\": \"Get daily counts of distinct services emitting stack traces in the last 7 days\", \"sql\": \"SELECT CAST(ts AS DATE) AS day, COUNT(DISTINCT service) AS services_with_traces FROM logs WHERE ts >= now() - INTERVAL '7 days' AND regexp_like(message, 'at [a-zA-Z0-9_.$]+\\\\([A-Za-z0-9_.]+\\\\.java:[0-9]+\\\\)|Traceback \\\\(most recent call last\\\\)') GROUP BY day ORDER BY day\"}",
+ "generator": "g2",
+ "theme_index": 14,
+ "theme": "find stack-trace lines from Java or Python in log messages",
+ "call": 1,
+ "started": "2026-10-25T15:35:38-07:00",
+ "finished": "2026-10-25T15:35:54-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find stack-trace lines from Java or Python in log messages\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 10,
+ "unextractable_lines": []
+}

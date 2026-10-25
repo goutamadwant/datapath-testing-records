@@ -1,0 +1,58 @@
+{
+ "request": {
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You are a helpful assistant."
+   },
+   {
+    "role": "user",
+    "content": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find log messages that contain phone numbers\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n"
+   }
+  ],
+  "temperature": 0.7,
+  "max_tokens": 4096
+ },
+ "response": {
+  "id": "chatcmpl-mcqihc6oe3ampok73py8qq",
+  "object": "chat.completion",
+  "created": 1792967839,
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "role": "assistant",
+     "content": "{\"task\": \"Find all ERROR level logs containing US phone numbers in (XXX) XXX-XXXX format\", \"sql\": \"SELECT * FROM logs WHERE level = 'ERROR' AND regexp_like(message, '\\\\([0-9]{3}\\\\) [0-9]{3}-[0-9]{4}')\"}\n{\"task\": \"Identify INFO logs with UK phone numbers starting with 0 and having 10 digits\", \"sql\": \"SELECT * FROM logs WHERE level = 'INFO' AND regexp_like(message, '0[0-9]{9}')\"}\n{\"task\": \"Count service logs containing Canadian phone numbers with area code\", \"sql\": \"SELECT service, COUNT(*) as count FROM logs WHERE regexp_like(message, '\\\\+1 [0-9]{3}-[0-9]{3}-[0-9]{4}') GROUP BY service\"}\n{\"task\": \"Find warning messages that include international phone numbers starting with +\", \"sql\": \"SELECT * FROM logs WHERE level = 'WARNING' AND regexp_like(message, '\\\\+[0-9]{10,15}')\"}\n{\"task\": \"List all log entries containing 3-digit area code followed by 7-digit number\", \"sql\": \"SELECT ts, message FROM logs WHERE regexp_like(message, '[0-9]{3}-[0-9]{7}') ORDER BY ts\"}\n{\"task\": \"Search events table for paths containing US phone numbers in various formats\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '(\\\\+1|1)?[-.\\\\s]?\\\\(?([0-9]{3})\\\\)?[-.\\\\s]?([0-9]{3})[-.\\\\s]?([0-9]{4})')\"}\n{\"task\": \"Find logs with phone numbers that have parentheses around area code\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '\\\\([0-9]{3}\\\\)[ -][0-9]{3}-[0-9]{4}')\"}\n{\"task\": \"Count distinct services that logged phone number patterns in the last hour\", \"sql\": \"SELECT service, COUNT(DISTINCT message) as unique_messages FROM logs WHERE ts > now() - interval '1 hour' AND regexp_like(message, '[0-9]{3}[.-][0-9]{3}[.-][0-9]{4}') GROUP BY service\"}\n{\"task\": \"Identify error messages containing phone numbers with exactly 10 digits\", \"sql\": \"SELECT * FROM logs WHERE level = 'ERROR' AND regexp_like(message, '\\\\b[0-9]{10}\\\\b')\"}\n{\"task\": \"Find all entries where log message contains phone number in format XXX.XXX.XXXX\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, '[0-9]{3}\\\\.[0-9]{3}\\\\.[0-9]{4}')\"}",
+     "reasoning_content": "",
+     "tool_calls": []
+    },
+    "logprobs": null,
+    "finish_reason": "stop"
+   }
+  ],
+  "usage": {
+   "prompt_tokens": 209,
+   "completion_tokens": 602,
+   "total_tokens": 811,
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "stats": {},
+  "system_fingerprint": "qwen3-coder-30b-a3b-instruct"
+ },
+ "seconds": 5.57,
+ "text": "{\"task\": \"Find all ERROR level logs containing US phone numbers in (XXX) XXX-XXXX format\", \"sql\": \"SELECT * FROM logs WHERE level = 'ERROR' AND regexp_like(message, '\\\\([0-9]{3}\\\\) [0-9]{3}-[0-9]{4}')\"}\n{\"task\": \"Identify INFO logs with UK phone numbers starting with 0 and having 10 digits\", \"sql\": \"SELECT * FROM logs WHERE level = 'INFO' AND regexp_like(message, '0[0-9]{9}')\"}\n{\"task\": \"Count service logs containing Canadian phone numbers with area code\", \"sql\": \"SELECT service, COUNT(*) as count FROM logs WHERE regexp_like(message, '\\\\+1 [0-9]{3}-[0-9]{3}-[0-9]{4}') GROUP BY service\"}\n{\"task\": \"Find warning messages that include international phone numbers starting with +\", \"sql\": \"SELECT * FROM logs WHERE level = 'WARNING' AND regexp_like(message, '\\\\+[0-9]{10,15}')\"}\n{\"task\": \"List all log entries containing 3-digit area code followed by 7-digit number\", \"sql\": \"SELECT ts, message FROM logs WHERE regexp_like(message, '[0-9]{3}-[0-9]{7}') ORDER BY ts\"}\n{\"task\": \"Search events table for paths containing US phone numbers in various formats\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '(\\\\+1|1)?[-.\\\\s]?\\\\(?([0-9]{3})\\\\)?[-.\\\\s]?([0-9]{3})[-.\\\\s]?([0-9]{4})')\"}\n{\"task\": \"Find logs with phone numbers that have parentheses around area code\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '\\\\([0-9]{3}\\\\)[ -][0-9]{3}-[0-9]{4}')\"}\n{\"task\": \"Count distinct services that logged phone number patterns in the last hour\", \"sql\": \"SELECT service, COUNT(DISTINCT message) as unique_messages FROM logs WHERE ts > now() - interval '1 hour' AND regexp_like(message, '[0-9]{3}[.-][0-9]{3}[.-][0-9]{4}') GROUP BY service\"}\n{\"task\": \"Identify error messages containing phone numbers with exactly 10 digits\", \"sql\": \"SELECT * FROM logs WHERE level = 'ERROR' AND regexp_like(message, '\\\\b[0-9]{10}\\\\b')\"}\n{\"task\": \"Find all entries where log message contains phone number in format XXX.XXX.XXXX\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, '[0-9]{3}\\\\.[0-9]{3}\\\\.[0-9]{4}')\"}",
+ "generator": "g1",
+ "theme_index": 12,
+ "theme": "find log messages that contain phone numbers",
+ "call": 1,
+ "started": "2026-10-25T15:37:19-07:00",
+ "finished": "2026-10-25T15:37:24-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find log messages that contain phone numbers\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 10,
+ "unextractable_lines": []
+}

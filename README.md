@@ -350,3 +350,7 @@ General
 ## Paths
 
 Absolute paths in `results.json` and the logs refer to the workstation where the runs were executed on 2026-10-25; relative to this repository they resolve under `./`.
+
+## model-queries-2026-10-25
+
+Model-written `regexp_like` queries planned on Apache DataFusion before and after PR 24917 (issue 22185): pre-registration, prompts, raw generator outputs, harness, logs and `results.json`. See `model-queries-2026-10-25/README.md`.

@@ -1,0 +1,58 @@
+{
+ "request": {
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You are a helpful assistant."
+   },
+   {
+    "role": "user",
+    "content": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find log messages that contain e-mail addresses\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n"
+   }
+  ],
+  "temperature": 0.7,
+  "max_tokens": 4096
+ },
+ "response": {
+  "id": "chatcmpl-mnohb4nlyn25en1uo11e9",
+  "object": "chat.completion",
+  "created": 1792967778,
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "role": "assistant",
+     "content": "{\"task\": \"Find all error logs that contain potential email addresses\", \"sql\": \"SELECT * FROM logs WHERE level = 'ERROR' AND regexp_like(message, '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}')\"}\n{\"task\": \"Count log messages by service that contain email addresses\", \"sql\": \"SELECT service, COUNT(*) as email_count FROM logs WHERE regexp_like(message, '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}') GROUP BY service\"}\n{\"task\": \"Identify log messages with email addresses in warning level entries\", \"sql\": \"SELECT ts, message FROM logs WHERE level = 'WARNING' AND regexp_like(message, '\\\\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}\\\\b')\"}\n{\"task\": \"Extract user IDs from events table where path contains email patterns\", \"sql\": \"SELECT id, user_id FROM events WHERE regexp_like(path, '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}')\"}\n{\"task\": \"Find log entries with email addresses that also mention 'password'\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}') AND regexp_like(message, 'password', 'i')\"}\n{\"task\": \"List all unique services that have log messages containing emails\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(message, '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}')\"}\n{\"task\": \"Count email addresses per hour in error logs\", \"sql\": \"SELECT date_trunc('hour', ts) as hour, COUNT(*) as email_count FROM logs WHERE level = 'ERROR' AND regexp_like(message, '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}') GROUP BY hour\"}\n{\"task\": \"Find events with paths containing email addresses that have failed status\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}') AND status = 400\"}\n{\"task\": \"Show log messages with email addresses and their corresponding service level\", \"sql\": \"SELECT message, service, CASE WHEN regexp_like(message, '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}') THEN 'HAS_EMAIL' ELSE 'NO_EMAIL' END as contains_email FROM logs\"}\n{\"task\": \"Find log messages with email addresses that occurred in the last 24 hours\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}') AND ts >= now() - INTERVAL '24 hours'\"}",
+     "reasoning_content": "",
+     "tool_calls": []
+    },
+    "logprobs": null,
+    "finish_reason": "stop"
+   }
+  ],
+  "usage": {
+   "prompt_tokens": 210,
+   "completion_tokens": 689,
+   "total_tokens": 899,
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "stats": {},
+  "system_fingerprint": "qwen3-coder-30b-a3b-instruct"
+ },
+ "seconds": 6.33,
+ "text": "{\"task\": \"Find all error logs that contain potential email addresses\", \"sql\": \"SELECT * FROM logs WHERE level = 'ERROR' AND regexp_like(message, '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}')\"}\n{\"task\": \"Count log messages by service that contain email addresses\", \"sql\": \"SELECT service, COUNT(*) as email_count FROM logs WHERE regexp_like(message, '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}') GROUP BY service\"}\n{\"task\": \"Identify log messages with email addresses in warning level entries\", \"sql\": \"SELECT ts, message FROM logs WHERE level = 'WARNING' AND regexp_like(message, '\\\\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}\\\\b')\"}\n{\"task\": \"Extract user IDs from events table where path contains email patterns\", \"sql\": \"SELECT id, user_id FROM events WHERE regexp_like(path, '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}')\"}\n{\"task\": \"Find log entries with email addresses that also mention 'password'\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}') AND regexp_like(message, 'password', 'i')\"}\n{\"task\": \"List all unique services that have log messages containing emails\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(message, '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}')\"}\n{\"task\": \"Count email addresses per hour in error logs\", \"sql\": \"SELECT date_trunc('hour', ts) as hour, COUNT(*) as email_count FROM logs WHERE level = 'ERROR' AND regexp_like(message, '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}') GROUP BY hour\"}\n{\"task\": \"Find events with paths containing email addresses that have failed status\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}') AND status = 400\"}\n{\"task\": \"Show log messages with email addresses and their corresponding service level\", \"sql\": \"SELECT message, service, CASE WHEN regexp_like(message, '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}') THEN 'HAS_EMAIL' ELSE 'NO_EMAIL' END as contains_email FROM logs\"}\n{\"task\": \"Find log messages with email addresses that occurred in the last 24 hours\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}') AND ts >= now() - INTERVAL '24 hours'\"}",
+ "generator": "g1",
+ "theme_index": 3,
+ "theme": "find log messages that contain e-mail addresses",
+ "call": 1,
+ "started": "2026-10-25T15:36:18-07:00",
+ "finished": "2026-10-25T15:36:24-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find log messages that contain e-mail addresses\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 10,
+ "unextractable_lines": []
+}

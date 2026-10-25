@@ -1,0 +1,130 @@
+{
+ "command": [
+  "claude",
+  "-p",
+  "--model",
+  "sonnet",
+  "--output-format",
+  "json",
+  "--system-prompt",
+  "You are a helpful assistant.",
+  "--tools",
+  "",
+  "--strict-mcp-config",
+  "--setting-sources",
+  "",
+  "--no-session-persistence",
+  "<prompt>"
+ ],
+ "returncode": 0,
+ "seconds": 12.87,
+ "stderr": "",
+ "response": {
+  "duration_api_ms": 9342,
+  "stop_reason": "end_turn",
+  "session_id": "8f22c7f7-7c38-4b0d-90f8-4b2454befaca",
+  "total_cost_usd": 0.01275,
+  "usage": {
+   "input_tokens": 1025,
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "output_tokens": 1070,
+   "output_tokens_details": {
+    "thinking_tokens": 0
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 0,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 1025,
+     "output_tokens": 1070,
+     "cache_read_input_tokens": 0,
+     "cache_creation_input_tokens": 0,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 0
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "modelUsage": {
+   "claude-sonnet-5": {
+    "inputTokens": 1025,
+    "outputTokens": 1070,
+    "cacheReadInputTokens": 0,
+    "cacheCreationInputTokens": 0,
+    "webSearchRequests": 0,
+    "costUSD": 0.01275,
+    "contextWindow": 1000000,
+    "maxOutputTokens": 64000,
+    "thinkingTokens": 0,
+    "canonicalModel": "claude-sonnet-5",
+    "provider": "firstParty",
+    "costBasis": "list"
+   }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+   "spawned": 0,
+   "requested": {
+    "background": 0,
+    "foreground": 0,
+    "unset": 0
+   },
+   "started_in_background": 0,
+   "max_depth": 0,
+   "spawned_by_subagents": 0,
+   "completed": 0,
+   "failed": 0,
+   "killed": {
+    "parent": 0,
+    "user": 0,
+    "system": 0
+   },
+   "refused": {
+    "depth_limit": 0,
+    "concurrency_limit": 0,
+    "budget": 0
+   },
+   "by_type": {}
+  },
+  "is_error": false,
+  "num_turns": 1,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "{\"task\": \"Find all event paths that contain a semantic version string like v1.2.3\", \"sql\": \"SELECT path FROM events WHERE regexp_like(path, 'v[0-9]+\\\\.[0-9]+\\\\.[0-9]+')\"}\n{\"task\": \"Find all log messages that contain a semantic version string like v1.2.3\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, 'v[0-9]+\\\\.[0-9]+\\\\.[0-9]+')\"}\n{\"task\": \"Count how many events reference each distinct path-embedded version number\", \"sql\": \"SELECT regexp_match(path, 'v([0-9]+\\\\.[0-9]+\\\\.[0-9]+)')[1] AS version, COUNT(*) AS cnt FROM events WHERE regexp_like(path, 'v[0-9]+\\\\.[0-9]+\\\\.[0-9]+') GROUP BY version ORDER BY cnt DESC\"}\n{\"task\": \"List error-level log messages that mention a version string, to investigate version-specific failures\", \"sql\": \"SELECT ts, service, message FROM logs WHERE level = 'ERROR' AND regexp_like(message, 'v[0-9]+\\\\.[0-9]+\\\\.[0-9]+')\"}\n{\"task\": \"Flag events whose path contains an old major version (v0.x.x) for deprecation tracking\", \"sql\": \"SELECT id, user_id, path FROM events WHERE regexp_like(path, 'v0\\\\.[0-9]+\\\\.[0-9]+')\"}\n{\"task\": \"Categorize log lines by whether they mention a version string using a CASE expression\", \"sql\": \"SELECT ts, service, CASE WHEN regexp_like(message, 'v[0-9]+\\\\.[0-9]+\\\\.[0-9]+') THEN 'has_version' ELSE 'no_version' END AS version_flag FROM logs\"}\n{\"task\": \"Find events with non-2xx status whose path includes a version string, to spot failing versioned endpoints\", \"sql\": \"SELECT id, path, status FROM events WHERE status >= 400 AND regexp_like(path, 'v[0-9]+\\\\.[0-9]+\\\\.[0-9]+')\"}\n{\"task\": \"Case-insensitively search log messages for a version string following the word 'version'\", \"sql\": \"SELECT ts, message FROM logs WHERE regexp_like(message, 'version[: ]*v?[0-9]+\\\\.[0-9]+\\\\.[0-9]+', 'i')\"}\n{\"task\": \"Identify distinct services that have logged a version string in their messages\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(message, 'v[0-9]+\\\\.[0-9]+\\\\.[0-9]+')\"}\n{\"task\": \"Count events per path prefix that includes a versioned API segment like /api/v1.2.3/\", \"sql\": \"SELECT path, COUNT(*) AS cnt FROM events WHERE regexp_like(path, '/api/v[0-9]+\\\\.[0-9]+\\\\.[0-9]+/') GROUP BY path ORDER BY cnt DESC\"}",
+  "ttft_ms": 9329,
+  "type": "result",
+  "duration_ms": 11231,
+  "uuid": "b23b9b65-47eb-421a-86fd-5477943025b0",
+  "ttft_stream_ms": 1222,
+  "time_to_request_ms": 64,
+  "first_content_frame_ms": 1223,
+  "queued_turn_count": 0,
+  "result_index": 0
+ },
+ "text": "{\"task\": \"Find all event paths that contain a semantic version string like v1.2.3\", \"sql\": \"SELECT path FROM events WHERE regexp_like(path, 'v[0-9]+\\\\.[0-9]+\\\\.[0-9]+')\"}\n{\"task\": \"Find all log messages that contain a semantic version string like v1.2.3\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, 'v[0-9]+\\\\.[0-9]+\\\\.[0-9]+')\"}\n{\"task\": \"Count how many events reference each distinct path-embedded version number\", \"sql\": \"SELECT regexp_match(path, 'v([0-9]+\\\\.[0-9]+\\\\.[0-9]+)')[1] AS version, COUNT(*) AS cnt FROM events WHERE regexp_like(path, 'v[0-9]+\\\\.[0-9]+\\\\.[0-9]+') GROUP BY version ORDER BY cnt DESC\"}\n{\"task\": \"List error-level log messages that mention a version string, to investigate version-specific failures\", \"sql\": \"SELECT ts, service, message FROM logs WHERE level = 'ERROR' AND regexp_like(message, 'v[0-9]+\\\\.[0-9]+\\\\.[0-9]+')\"}\n{\"task\": \"Flag events whose path contains an old major version (v0.x.x) for deprecation tracking\", \"sql\": \"SELECT id, user_id, path FROM events WHERE regexp_like(path, 'v0\\\\.[0-9]+\\\\.[0-9]+')\"}\n{\"task\": \"Categorize log lines by whether they mention a version string using a CASE expression\", \"sql\": \"SELECT ts, service, CASE WHEN regexp_like(message, 'v[0-9]+\\\\.[0-9]+\\\\.[0-9]+') THEN 'has_version' ELSE 'no_version' END AS version_flag FROM logs\"}\n{\"task\": \"Find events with non-2xx status whose path includes a version string, to spot failing versioned endpoints\", \"sql\": \"SELECT id, path, status FROM events WHERE status >= 400 AND regexp_like(path, 'v[0-9]+\\\\.[0-9]+\\\\.[0-9]+')\"}\n{\"task\": \"Case-insensitively search log messages for a version string following the word 'version'\", \"sql\": \"SELECT ts, message FROM logs WHERE regexp_like(message, 'version[: ]*v?[0-9]+\\\\.[0-9]+\\\\.[0-9]+', 'i')\"}\n{\"task\": \"Identify distinct services that have logged a version string in their messages\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(message, 'v[0-9]+\\\\.[0-9]+\\\\.[0-9]+')\"}\n{\"task\": \"Count events per path prefix that includes a versioned API segment like /api/v1.2.3/\", \"sql\": \"SELECT path, COUNT(*) AS cnt FROM events WHERE regexp_like(path, '/api/v[0-9]+\\\\.[0-9]+\\\\.[0-9]+/') GROUP BY path ORDER BY cnt DESC\"}",
+ "generator": "g2",
+ "theme_index": 9,
+ "theme": "find version strings like v1.2.3 in paths or messages",
+ "call": 1,
+ "started": "2026-10-25T15:35:25-07:00",
+ "finished": "2026-10-25T15:35:38-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find version strings like v1.2.3 in paths or messages\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 10,
+ "unextractable_lines": []
+}

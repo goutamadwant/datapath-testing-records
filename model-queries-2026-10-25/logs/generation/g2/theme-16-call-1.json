@@ -1,0 +1,130 @@
+{
+ "command": [
+  "claude",
+  "-p",
+  "--model",
+  "sonnet",
+  "--output-format",
+  "json",
+  "--system-prompt",
+  "You are a helpful assistant.",
+  "--tools",
+  "",
+  "--strict-mcp-config",
+  "--setting-sources",
+  "",
+  "--no-session-persistence",
+  "<prompt>"
+ ],
+ "returncode": 0,
+ "seconds": 14.31,
+ "stderr": "",
+ "response": {
+  "duration_api_ms": 10474,
+  "stop_reason": "end_turn",
+  "session_id": "0468deef-b20a-43ae-afeb-08f59a6ed970",
+  "total_cost_usd": 0.015696,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 1028,
+   "cache_read_input_tokens": 0,
+   "output_tokens": 1158,
+   "output_tokens_details": {
+    "thinking_tokens": 0
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 1028,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 1158,
+     "cache_read_input_tokens": 0,
+     "cache_creation_input_tokens": 1028,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 1028
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "modelUsage": {
+   "claude-sonnet-5": {
+    "inputTokens": 2,
+    "outputTokens": 1158,
+    "cacheReadInputTokens": 0,
+    "cacheCreationInputTokens": 1028,
+    "webSearchRequests": 0,
+    "costUSD": 0.015696,
+    "contextWindow": 1000000,
+    "maxOutputTokens": 64000,
+    "thinkingTokens": 0,
+    "canonicalModel": "claude-sonnet-5",
+    "provider": "firstParty",
+    "costBasis": "list"
+   }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+   "spawned": 0,
+   "requested": {
+    "background": 0,
+    "foreground": 0,
+    "unset": 0
+   },
+   "started_in_background": 0,
+   "max_depth": 0,
+   "spawned_by_subagents": 0,
+   "completed": 0,
+   "failed": 0,
+   "killed": {
+    "parent": 0,
+    "user": 0,
+    "system": 0
+   },
+   "refused": {
+    "depth_limit": 0,
+    "concurrency_limit": 0,
+    "budget": 0
+   },
+   "by_type": {}
+  },
+  "is_error": false,
+  "num_turns": 1,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "{\"task\": \"List distinct service names from logs that do not follow the svc-<name>-<two digit number> naming convention\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE NOT regexp_like(service, '^svc-[a-z]+-[0-9]{2}$')\"}\n{\"task\": \"Count log entries per service that violate the naming convention\", \"sql\": \"SELECT service, COUNT(*) AS violation_count FROM logs WHERE NOT regexp_like(service, '^svc-[a-z0-9]+-[0-9]{2}$') GROUP BY service ORDER BY violation_count DESC\"}\n{\"task\": \"Flag each log row as compliant or non-compliant with the naming convention using a CASE expression\", \"sql\": \"SELECT ts, service, CASE WHEN regexp_like(service, '^svc-[a-z]+-[0-9]{2}$') THEN 'compliant' ELSE 'non_compliant' END AS naming_status FROM logs\"}\n{\"task\": \"Find error-level log messages that mention a malformed service identifier embedded in the free text message\", \"sql\": \"SELECT ts, service, message FROM logs WHERE level = 'ERROR' AND regexp_like(message, 'svc-[a-zA-Z0-9]+(?!-[0-9]{2})\\\\b')\"}\n{\"task\": \"Identify services using uppercase letters, which violates the lowercase naming convention\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(service, '[A-Z]')\"}\n{\"task\": \"Count how many distinct valid vs invalid service names exist based on the naming convention\", \"sql\": \"SELECT CASE WHEN regexp_like(service, '^svc-[a-z]+-[0-9]{2}$') THEN 'valid' ELSE 'invalid' END AS status, COUNT(DISTINCT service) AS distinct_services FROM logs GROUP BY status\"}\n{\"task\": \"Find services missing the required svc- prefix entirely\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE NOT regexp_like(service, '^svc-')\"}\n{\"task\": \"Detect services that have the correct prefix and suffix pattern but use an unapproved middle segment name outside payments, auth, billing, or search\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(service, '^svc-[a-z]+-[0-9]{2}$') AND NOT regexp_like(service, '^svc-(payments|auth|billing|search)-[0-9]{2}$')\"}\n{\"task\": \"Find recent non-compliant service names seen in logs over the last 7 days along with an example message\", \"sql\": \"SELECT service, MIN(message) AS example_message, COUNT(*) AS occurrences FROM logs WHERE ts >= now() - INTERVAL '7 days' AND NOT regexp_like(service, '^svc-[a-z]+-[0-9]{2}$') GROUP BY service ORDER BY occurrences DESC\"}\n{\"task\": \"Join logs and events on request path to surface events whose associated service name (parsed from message) fails the naming convention check\", \"sql\": \"SELECT e.id, e.path, l.service FROM events e JOIN logs l ON regexp_like(l.message, e.path) WHERE NOT regexp_like(l.service, '^svc-[a-z]+-[0-9]{2}$')\"}",
+  "ttft_ms": 10544,
+  "type": "result",
+  "duration_ms": 12276,
+  "uuid": "8b3b54a7-67c9-46a6-82c0-fd6b3a64de25",
+  "ttft_stream_ms": 1071,
+  "time_to_request_ms": 133,
+  "first_content_frame_ms": 1072,
+  "queued_turn_count": 0,
+  "result_index": 0
+ },
+ "text": "{\"task\": \"List distinct service names from logs that do not follow the svc-<name>-<two digit number> naming convention\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE NOT regexp_like(service, '^svc-[a-z]+-[0-9]{2}$')\"}\n{\"task\": \"Count log entries per service that violate the naming convention\", \"sql\": \"SELECT service, COUNT(*) AS violation_count FROM logs WHERE NOT regexp_like(service, '^svc-[a-z0-9]+-[0-9]{2}$') GROUP BY service ORDER BY violation_count DESC\"}\n{\"task\": \"Flag each log row as compliant or non-compliant with the naming convention using a CASE expression\", \"sql\": \"SELECT ts, service, CASE WHEN regexp_like(service, '^svc-[a-z]+-[0-9]{2}$') THEN 'compliant' ELSE 'non_compliant' END AS naming_status FROM logs\"}\n{\"task\": \"Find error-level log messages that mention a malformed service identifier embedded in the free text message\", \"sql\": \"SELECT ts, service, message FROM logs WHERE level = 'ERROR' AND regexp_like(message, 'svc-[a-zA-Z0-9]+(?!-[0-9]{2})\\\\b')\"}\n{\"task\": \"Identify services using uppercase letters, which violates the lowercase naming convention\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(service, '[A-Z]')\"}\n{\"task\": \"Count how many distinct valid vs invalid service names exist based on the naming convention\", \"sql\": \"SELECT CASE WHEN regexp_like(service, '^svc-[a-z]+-[0-9]{2}$') THEN 'valid' ELSE 'invalid' END AS status, COUNT(DISTINCT service) AS distinct_services FROM logs GROUP BY status\"}\n{\"task\": \"Find services missing the required svc- prefix entirely\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE NOT regexp_like(service, '^svc-')\"}\n{\"task\": \"Detect services that have the correct prefix and suffix pattern but use an unapproved middle segment name outside payments, auth, billing, or search\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(service, '^svc-[a-z]+-[0-9]{2}$') AND NOT regexp_like(service, '^svc-(payments|auth|billing|search)-[0-9]{2}$')\"}\n{\"task\": \"Find recent non-compliant service names seen in logs over the last 7 days along with an example message\", \"sql\": \"SELECT service, MIN(message) AS example_message, COUNT(*) AS occurrences FROM logs WHERE ts >= now() - INTERVAL '7 days' AND NOT regexp_like(service, '^svc-[a-z]+-[0-9]{2}$') GROUP BY service ORDER BY occurrences DESC\"}\n{\"task\": \"Join logs and events on request path to surface events whose associated service name (parsed from message) fails the naming convention check\", \"sql\": \"SELECT e.id, e.path, l.service FROM events e JOIN logs l ON regexp_like(l.message, e.path) WHERE NOT regexp_like(l.service, '^svc-[a-z]+-[0-9]{2}$')\"}",
+ "generator": "g2",
+ "theme_index": 16,
+ "theme": "check that service names follow a naming convention such as svc-payments-01",
+ "call": 1,
+ "started": "2026-10-25T15:35:49-07:00",
+ "finished": "2026-10-25T15:36:04-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: check that service names follow a naming convention such as svc-payments-01\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 10,
+ "unextractable_lines": []
+}

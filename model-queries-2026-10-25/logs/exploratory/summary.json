@@ -1,0 +1,262 @@
+{
+ "control-positive-issue-8": {
+  "issuedate": {
+   "median_ms": 58.2,
+   "reps_ms": [
+    70.3,
+    57.6,
+    58.2
+   ]
+  },
+  "before": {
+   "median_ms": 57.7,
+   "reps_ms": [
+    105.4,
+    57.7,
+    57.7
+   ]
+  },
+  "after": {
+   "median_ms": 2.1,
+   "reps_ms": [
+    60.8,
+    2.1,
+    2.1
+   ]
+  }
+ },
+ "control-positive-issue-18-quoted": {
+  "issuedate": {
+   "median_ms": 57.1,
+   "reps_ms": [
+    57.1,
+    56.6,
+    57.5
+   ]
+  },
+  "before": {
+   "median_ms": 57.0,
+   "reps_ms": [
+    56.2,
+    57.0,
+    58.2
+   ]
+  },
+  "after": {
+   "median_ms": 2.0,
+   "reps_ms": [
+    2.1,
+    2.0,
+    1.9
+   ]
+  }
+ },
+ "control-mechanism-column-8": {
+  "issuedate": {
+   "median_ms": 1.3,
+   "reps_ms": [
+    3.1,
+    1.3,
+    1.3
+   ]
+  },
+  "before": {
+   "median_ms": 1.4,
+   "reps_ms": [
+    9.4,
+    1.3,
+    1.4
+   ]
+  },
+  "after": {
+   "median_ms": 1.4,
+   "reps_ms": [
+    9.5,
+    1.3,
+    1.4
+   ]
+  }
+ },
+ "control-negative-literal": {
+  "issuedate": {
+   "median_ms": 1.3,
+   "reps_ms": [
+    1.9,
+    1.3,
+    1.3
+   ]
+  },
+  "before": {
+   "median_ms": 1.4,
+   "reps_ms": [
+    3.5,
+    1.3,
+    1.4
+   ]
+  },
+  "after": {
+   "median_ms": 1.2,
+   "reps_ms": [
+    5.0,
+    1.2,
+    1.2
+   ]
+  }
+ },
+ "series-literal-04": {
+  "issuedate": {
+   "median_ms": 1.2,
+   "reps_ms": [
+    1.6,
+    1.2,
+    1.1
+   ]
+  },
+  "before": {
+   "median_ms": 1.4,
+   "reps_ms": [
+    1.5,
+    1.4,
+    1.4
+   ]
+  },
+  "after": {
+   "median_ms": 1.4,
+   "reps_ms": [
+    1.4,
+    1.4,
+    1.4
+   ]
+  }
+ },
+ "series-literal-06": {
+  "issuedate": {
+   "median_ms": 2.2,
+   "reps_ms": [
+    2.2,
+    2.2,
+    2.2
+   ]
+  },
+  "before": {
+   "median_ms": 2.4,
+   "reps_ms": [
+    2.4,
+    2.2,
+    2.4
+   ]
+  },
+  "after": {
+   "median_ms": 2.2,
+   "reps_ms": [
+    2.2,
+    1.8,
+    2.2
+   ]
+  }
+ },
+ "series-literal-08": {
+  "issuedate": {
+   "median_ms": 58.1,
+   "reps_ms": [
+    57.2,
+    58.1,
+    58.2
+   ]
+  },
+  "before": {
+   "median_ms": 57.5,
+   "reps_ms": [
+    57.2,
+    57.5,
+    59.8
+   ]
+  },
+  "after": {
+   "median_ms": 2.1,
+   "reps_ms": [
+    2.1,
+    2.3,
+    2.1
+   ]
+  }
+ },
+ "series-literal-10": {
+  "issuedate": {
+   "median_ms": 57.6,
+   "reps_ms": [
+    57.6,
+    57.5,
+    57.7
+   ]
+  },
+  "before": {
+   "median_ms": 58.0,
+   "reps_ms": [
+    57.0,
+    58.0,
+    58.1
+   ]
+  },
+  "after": {
+   "median_ms": 2.0,
+   "reps_ms": [
+    1.9,
+    2.0,
+    2.1
+   ]
+  }
+ },
+ "series-literal-12": {
+  "issuedate": {
+   "median_ms": 58.3,
+   "reps_ms": [
+    57.5,
+    58.3,
+    58.8
+   ]
+  },
+  "before": {
+   "median_ms": 58.0,
+   "reps_ms": [
+    57.8,
+    58.0,
+    58.4
+   ]
+  },
+  "after": {
+   "median_ms": 2.0,
+   "reps_ms": [
+    2.1,
+    2.0,
+    2.0
+   ]
+  }
+ },
+ "series-literal-18": {
+  "issuedate": {
+   "median_ms": 58.0,
+   "reps_ms": [
+    57.6,
+    58.3,
+    58.0
+   ]
+  },
+  "before": {
+   "median_ms": 58.0,
+   "reps_ms": [
+    57.8,
+    58.0,
+    58.1
+   ]
+  },
+  "after": {
+   "median_ms": 1.9,
+   "reps_ms": [
+    2.0,
+    1.9,
+    1.9
+   ]
+  }
+ }
+}

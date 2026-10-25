@@ -1,0 +1,58 @@
+{
+ "request": {
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You are a helpful assistant."
+   },
+   {
+    "role": "user",
+    "content": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: detect possible leaked secrets or card numbers in log messages\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n"
+   }
+  ],
+  "temperature": 0.7,
+  "max_tokens": 4096
+ },
+ "response": {
+  "id": "chatcmpl-qwafvkucxdkio46rsbra7",
+  "object": "chat.completion",
+  "created": 1792967845,
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "role": "assistant",
+     "content": "{\"task\": \"Find log messages containing potential credit card numbers\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '(?:\\\\d{4}[-\\\\s]?){3}\\\\d{4}')\"}\n{\"task\": \"Identify log entries with AWS access key IDs\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'AKIA[0-9A-Z]{16}')\"}\n{\"task\": \"Detect potential API keys in log messages\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '(?:api[_-]?key|secret)[=\\\\s]*[a-zA-Z0-9_\\\\-]{10,}')\"}\n{\"task\": \"Find log entries containing email addresses\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}')\"}\n{\"task\": \"Search for potential JWT tokens in logs\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\\\\.[a-zA-Z0-9_\\\\-]+\\\\.[a-zA-Z0-9_\\\\-]+')\"}\n{\"task\": \"Identify log messages with SSN patterns\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '\\\\b\\\\d{3}-?\\\\d{2}-?\\\\d{4}\\\\b')\"}\n{\"task\": \"Find potential database connection strings in logs\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '(?:postgres|mysql|mongodb)://[^:\\\\s]+:[^@\\\\s]+@[^\\\\s]+')\"}\n{\"task\": \"Detect password patterns in log messages\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '(?i)(password|pwd|passwd)[=\\\\s]*[a-zA-Z0-9!@#$%^&*()_+\\\\-=\\\\[\\\\]{};\\\\\\\\:\\\"\\\\\\\\'\\\\\\\\|,.<>\\\\/]{4,}')\"}\n{\"task\": \"Search for potential phone numbers in logs\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '(?:\\\\+?1[-.\\\\s]?)?\\\\(?\\\\d{3}\\\\)?[-.\\\\s]?\\\\d{3}[-.\\\\s]?\\\\d{4}')\"}\n{\"task\": \"Identify log entries with potential tokens\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '(?:token|access[_-]?token)[=\\\\s]*[a-zA-Z0-9_\\\\-.]{15,}')\"}",
+     "reasoning_content": "",
+     "tool_calls": []
+    },
+    "logprobs": null,
+    "finish_reason": "stop"
+   }
+  ],
+  "usage": {
+   "prompt_tokens": 212,
+   "completion_tokens": 570,
+   "total_tokens": 782,
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "stats": {},
+  "system_fingerprint": "qwen3-coder-30b-a3b-instruct"
+ },
+ "seconds": 5.47,
+ "text": "{\"task\": \"Find log messages containing potential credit card numbers\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '(?:\\\\d{4}[-\\\\s]?){3}\\\\d{4}')\"}\n{\"task\": \"Identify log entries with AWS access key IDs\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'AKIA[0-9A-Z]{16}')\"}\n{\"task\": \"Detect potential API keys in log messages\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '(?:api[_-]?key|secret)[=\\\\s]*[a-zA-Z0-9_\\\\-]{10,}')\"}\n{\"task\": \"Find log entries containing email addresses\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}')\"}\n{\"task\": \"Search for potential JWT tokens in logs\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\\\\.[a-zA-Z0-9_\\\\-]+\\\\.[a-zA-Z0-9_\\\\-]+')\"}\n{\"task\": \"Identify log messages with SSN patterns\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '\\\\b\\\\d{3}-?\\\\d{2}-?\\\\d{4}\\\\b')\"}\n{\"task\": \"Find potential database connection strings in logs\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '(?:postgres|mysql|mongodb)://[^:\\\\s]+:[^@\\\\s]+@[^\\\\s]+')\"}\n{\"task\": \"Detect password patterns in log messages\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '(?i)(password|pwd|passwd)[=\\\\s]*[a-zA-Z0-9!@#$%^&*()_+\\\\-=\\\\[\\\\]{};\\\\\\\\:\\\"\\\\\\\\'\\\\\\\\|,.<>\\\\/]{4,}')\"}\n{\"task\": \"Search for potential phone numbers in logs\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '(?:\\\\+?1[-.\\\\s]?)?\\\\(?\\\\d{3}\\\\)?[-.\\\\s]?\\\\d{3}[-.\\\\s]?\\\\d{4}')\"}\n{\"task\": \"Identify log entries with potential tokens\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '(?:token|access[_-]?token)[=\\\\s]*[a-zA-Z0-9_\\\\-.]{15,}')\"}",
+ "generator": "g1",
+ "theme_index": 13,
+ "theme": "detect possible leaked secrets or card numbers in log messages",
+ "call": 1,
+ "started": "2026-10-25T15:37:24-07:00",
+ "finished": "2026-10-25T15:37:30-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: detect possible leaked secrets or card numbers in log messages\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 10,
+ "unextractable_lines": []
+}

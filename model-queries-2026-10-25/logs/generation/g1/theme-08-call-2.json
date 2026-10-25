@@ -1,0 +1,68 @@
+{
+ "request": {
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You are a helpful assistant."
+   },
+   {
+    "role": "user",
+    "content": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find request paths with numeric resource ids, such as /api/v2/users/123/orders\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n"
+   }
+  ],
+  "temperature": 0.7,
+  "max_tokens": 4096
+ },
+ "response": {
+  "id": "chatcmpl-qnc9sh61ed744seqme26s",
+  "object": "chat.completion",
+  "created": 1792967813,
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "role": "assistant",
+     "content": "{\"task\": \"Find all log messages containing numeric resource IDs in API paths\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '/api/v[0-9]+/[^/]+/[0-9]+')}\"},\n{\"task\": \"Count distinct user paths that contain numeric IDs\", \"sql\": \"SELECT COUNT(DISTINCT path) FROM events WHERE regexp_like(path, '/[^/]+/[0-9]+/[^/]*')}\"},\n{\"task\": \"Identify log entries with API endpoints having numeric resource identifiers\", \"sql\": \"SELECT ts, level, message FROM logs WHERE regexp_like(message, '(/api/v[0-9]+/[^/]+/[0-9]+/)')}\"},\n{\"task\": \"Find events where user paths contain exactly 3 segments with numeric IDs\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '^/[^/]+/[0-9]+/[^/]+$')}\"},\n{\"task\": \"Extract log messages showing API calls with numeric resource IDs in the path\", \"sql\": \"SELECT message FROM logs WHERE regexp_like(message, 'GET|POST|PUT|DELETE /api/v[0-9]+/[^/]+/[0-9]+')}\"},\n{\"task\": \"Count requests by service that contain numeric resource identifiers\", \"sql\": \"SELECT service, COUNT(*) as request_count FROM logs WHERE regexp_like(message, '/api/v[0-9]+/[^/]+/[0-9]+') GROUP BY service\"}]}\n{\"task\": \"Find all paths with numeric IDs in the third segment after the root\", \"sql\": \"SELECT DISTINCT path FROM events WHERE regexp_like(path, '^/[^/]+/[^/]+/[0-9]+')}\"},\n{\"task\": \"Identify log lines where resource ID appears as a trailing number after slash\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '/[^/]+/[0-9]+/[0-9]+$')}\"},\n{\"task\": \"Count service requests with numeric IDs in paths using case-insensitive matching\", \"sql\": \"SELECT level, COUNT(*) FROM logs WHERE regexp_like(message, '(?i)/api/v[0-9]+/[^/]+/[0-9]+') GROUP BY level\"}]}\n{\"task\": \"Find events where path contains a numeric resource ID with optional trailing characters\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '/[^/]+/[0-9]+/.*')}\"}",
+     "reasoning_content": "",
+     "tool_calls": []
+    },
+    "logprobs": null,
+    "finish_reason": "stop"
+   }
+  ],
+  "usage": {
+   "prompt_tokens": 222,
+   "completion_tokens": 510,
+   "total_tokens": 732,
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "stats": {},
+  "system_fingerprint": "qwen3-coder-30b-a3b-instruct"
+ },
+ "seconds": 4.59,
+ "text": "{\"task\": \"Find all log messages containing numeric resource IDs in API paths\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '/api/v[0-9]+/[^/]+/[0-9]+')}\"},\n{\"task\": \"Count distinct user paths that contain numeric IDs\", \"sql\": \"SELECT COUNT(DISTINCT path) FROM events WHERE regexp_like(path, '/[^/]+/[0-9]+/[^/]*')}\"},\n{\"task\": \"Identify log entries with API endpoints having numeric resource identifiers\", \"sql\": \"SELECT ts, level, message FROM logs WHERE regexp_like(message, '(/api/v[0-9]+/[^/]+/[0-9]+/)')}\"},\n{\"task\": \"Find events where user paths contain exactly 3 segments with numeric IDs\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '^/[^/]+/[0-9]+/[^/]+$')}\"},\n{\"task\": \"Extract log messages showing API calls with numeric resource IDs in the path\", \"sql\": \"SELECT message FROM logs WHERE regexp_like(message, 'GET|POST|PUT|DELETE /api/v[0-9]+/[^/]+/[0-9]+')}\"},\n{\"task\": \"Count requests by service that contain numeric resource identifiers\", \"sql\": \"SELECT service, COUNT(*) as request_count FROM logs WHERE regexp_like(message, '/api/v[0-9]+/[^/]+/[0-9]+') GROUP BY service\"}]}\n{\"task\": \"Find all paths with numeric IDs in the third segment after the root\", \"sql\": \"SELECT DISTINCT path FROM events WHERE regexp_like(path, '^/[^/]+/[^/]+/[0-9]+')}\"},\n{\"task\": \"Identify log lines where resource ID appears as a trailing number after slash\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '/[^/]+/[0-9]+/[0-9]+$')}\"},\n{\"task\": \"Count service requests with numeric IDs in paths using case-insensitive matching\", \"sql\": \"SELECT level, COUNT(*) FROM logs WHERE regexp_like(message, '(?i)/api/v[0-9]+/[^/]+/[0-9]+') GROUP BY level\"}]}\n{\"task\": \"Find events where path contains a numeric resource ID with optional trailing characters\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '/[^/]+/[0-9]+/.*')}\"}",
+ "generator": "g1",
+ "theme_index": 8,
+ "theme": "find request paths with numeric resource ids, such as /api/v2/users/123/orders",
+ "call": 2,
+ "started": "2026-10-25T15:36:53-07:00",
+ "finished": "2026-10-25T15:36:58-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find request paths with numeric resource ids, such as /api/v2/users/123/orders\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 1,
+ "unextractable_lines": [
+  "{\"task\": \"Find all log messages containing numeric resource IDs in API paths\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '/api/v[0-9]+/[^/]+/[0-9]+')}\"},",
+  "{\"task\": \"Count distinct user paths that contain numeric IDs\", \"sql\": \"SELECT COUNT(DISTINCT path) FROM events WHERE regexp_like(path, '/[^/]+/[0-9]+/[^/]*')}\"},",
+  "{\"task\": \"Identify log entries with API endpoints having numeric resource identifiers\", \"sql\": \"SELECT ts, level, message FROM logs WHERE regexp_like(message, '(/api/v[0-9]+/[^/]+/[0-9]+/)')}\"},",
+  "{\"task\": \"Find events where user paths contain exactly 3 segments with numeric IDs\", \"sql\": \"SELECT * FROM events WHERE regexp_like(path, '^/[^/]+/[0-9]+/[^/]+$')}\"},",
+  "{\"task\": \"Extract log messages showing API calls with numeric resource IDs in the path\", \"sql\": \"SELECT message FROM logs WHERE regexp_like(message, 'GET|POST|PUT|DELETE /api/v[0-9]+/[^/]+/[0-9]+')}\"},",
+  "{\"task\": \"Count requests by service that contain numeric resource identifiers\", \"sql\": \"SELECT service, COUNT(*) as request_count FROM logs WHERE regexp_like(message, '/api/v[0-9]+/[^/]+/[0-9]+') GROUP BY service\"}]}",
+  "{\"task\": \"Find all paths with numeric IDs in the third segment after the root\", \"sql\": \"SELECT DISTINCT path FROM events WHERE regexp_like(path, '^/[^/]+/[^/]+/[0-9]+')}\"},",
+  "{\"task\": \"Identify log lines where resource ID appears as a trailing number after slash\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '/[^/]+/[0-9]+/[0-9]+$')}\"},",
+  "{\"task\": \"Count service requests with numeric IDs in paths using case-insensitive matching\", \"sql\": \"SELECT level, COUNT(*) FROM logs WHERE regexp_like(message, '(?i)/api/v[0-9]+/[^/]+/[0-9]+') GROUP BY level\"}]}"
+ ]
+}

@@ -1,0 +1,60 @@
+{
+ "request": {
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You are a helpful assistant."
+   },
+   {
+    "role": "user",
+    "content": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find stack-trace lines from Java or Python in log messages\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n"
+   }
+  ],
+  "temperature": 0.7,
+  "max_tokens": 4096
+ },
+ "response": {
+  "id": "chatcmpl-4up0z5iovlrcyffdy4qxnf",
+  "object": "chat.completion",
+  "created": 1792967850,
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "role": "assistant",
+     "content": "{\"task\": \"Find all Java stack trace lines in log messages\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '^java\\\\.lang\\\\.[A-Z][a-z]+:')\"}\n{\"task\": \"Identify Python exception traces with traceback information\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'Traceback \\\\(most recent call last\\\\):')\"}\n{\"task\": \"Extract log lines containing Java class loading errors\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'Caused by: java\\\\.lang\\\\.ClassNotFoundException')\"}\n{\"task\": \"Filter for Python syntax error messages\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'SyntaxError:')\"}\n{\"task\": \"Find all log entries with Java thread dump patterns\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '^\\\".*\\\" (tid=0x[0-9a-f]+) prio=.*java\\\\.lang\\\\.Thread\\\\$State')\"}\n{\"task\": \"Identify Python import errors in application logs\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'ImportError:')\"}\n{\"task\": \"Extract lines with Java OutOfMemoryError patterns\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'java\\\\.lang\\\\.OutOfMemoryError')\"}\n{\"task\": \"Find Python unhandled exception traces\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'Unhandled exception:') OR regexp_like(message, 'Exception in thread.*')\n{\"task\": \"Identify Java NullPointerException messages with stack traces\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '^java\\\\.lang\\\\.NullPointerException')\"}\n{\"task\": \"Filter log lines for Python RuntimeError exceptions\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'RuntimeError:') AND level = 'ERROR'\"}",
+     "reasoning_content": "",
+     "tool_calls": []
+    },
+    "logprobs": null,
+    "finish_reason": "stop"
+   }
+  ],
+  "usage": {
+   "prompt_tokens": 214,
+   "completion_tokens": 382,
+   "total_tokens": 596,
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "stats": {},
+  "system_fingerprint": "qwen3-coder-30b-a3b-instruct"
+ },
+ "seconds": 3.63,
+ "text": "{\"task\": \"Find all Java stack trace lines in log messages\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '^java\\\\.lang\\\\.[A-Z][a-z]+:')\"}\n{\"task\": \"Identify Python exception traces with traceback information\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'Traceback \\\\(most recent call last\\\\):')\"}\n{\"task\": \"Extract log lines containing Java class loading errors\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'Caused by: java\\\\.lang\\\\.ClassNotFoundException')\"}\n{\"task\": \"Filter for Python syntax error messages\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'SyntaxError:')\"}\n{\"task\": \"Find all log entries with Java thread dump patterns\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '^\\\".*\\\" (tid=0x[0-9a-f]+) prio=.*java\\\\.lang\\\\.Thread\\\\$State')\"}\n{\"task\": \"Identify Python import errors in application logs\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'ImportError:')\"}\n{\"task\": \"Extract lines with Java OutOfMemoryError patterns\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'java\\\\.lang\\\\.OutOfMemoryError')\"}\n{\"task\": \"Find Python unhandled exception traces\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'Unhandled exception:') OR regexp_like(message, 'Exception in thread.*')\n{\"task\": \"Identify Java NullPointerException messages with stack traces\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '^java\\\\.lang\\\\.NullPointerException')\"}\n{\"task\": \"Filter log lines for Python RuntimeError exceptions\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'RuntimeError:') AND level = 'ERROR'\"}",
+ "generator": "g1",
+ "theme_index": 14,
+ "theme": "find stack-trace lines from Java or Python in log messages",
+ "call": 1,
+ "started": "2026-10-25T15:37:30-07:00",
+ "finished": "2026-10-25T15:37:34-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find stack-trace lines from Java or Python in log messages\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 9,
+ "unextractable_lines": [
+  "{\"task\": \"Find Python unhandled exception traces\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, 'Unhandled exception:') OR regexp_like(message, 'Exception in thread.*')"
+ ]
+}

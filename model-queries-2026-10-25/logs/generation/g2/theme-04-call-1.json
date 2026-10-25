@@ -1,0 +1,130 @@
+{
+ "command": [
+  "claude",
+  "-p",
+  "--model",
+  "sonnet",
+  "--output-format",
+  "json",
+  "--system-prompt",
+  "You are a helpful assistant.",
+  "--tools",
+  "",
+  "--strict-mcp-config",
+  "--setting-sources",
+  "",
+  "--no-session-persistence",
+  "<prompt>"
+ ],
+ "returncode": 0,
+ "seconds": 14.56,
+ "stderr": "",
+ "response": {
+  "duration_api_ms": 10614,
+  "stop_reason": "end_turn",
+  "session_id": "7b1c4b4a-157b-4d95-9b69-d69d5ace868c",
+  "total_cost_usd": 0.015234000000000001,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 1030,
+   "cache_read_input_tokens": 0,
+   "output_tokens": 1111,
+   "output_tokens_details": {
+    "thinking_tokens": 0
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 1030,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 1111,
+     "cache_read_input_tokens": 0,
+     "cache_creation_input_tokens": 1030,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 1030
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "modelUsage": {
+   "claude-sonnet-5": {
+    "inputTokens": 2,
+    "outputTokens": 1111,
+    "cacheReadInputTokens": 0,
+    "cacheCreationInputTokens": 1030,
+    "webSearchRequests": 0,
+    "costUSD": 0.015234000000000001,
+    "contextWindow": 1000000,
+    "maxOutputTokens": 64000,
+    "thinkingTokens": 0,
+    "canonicalModel": "claude-sonnet-5",
+    "provider": "firstParty",
+    "costBasis": "list"
+   }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+   "spawned": 0,
+   "requested": {
+    "background": 0,
+    "foreground": 0,
+    "unset": 0
+   },
+   "started_in_background": 0,
+   "max_depth": 0,
+   "spawned_by_subagents": 0,
+   "completed": 0,
+   "failed": 0,
+   "killed": {
+    "parent": 0,
+    "user": 0,
+    "system": 0
+   },
+   "refused": {
+    "depth_limit": 0,
+    "concurrency_limit": 0,
+    "budget": 0
+   },
+   "by_type": {}
+  },
+  "is_error": false,
+  "num_turns": 1,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "{\"task\": \"Find log messages containing any character repeated three or more times consecutively\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '(.)\\\\1{2,}');\"}\n{\"task\": \"Count how many log messages per service contain repeated character sequences\", \"sql\": \"SELECT service, COUNT(*) AS repeated_char_count FROM logs WHERE regexp_like(message, '(.)\\\\1{2,}') GROUP BY service ORDER BY repeated_char_count DESC;\"}\n{\"task\": \"List error-level logs with excessive repeated letters, often indicating corrupted or spammy output\", \"sql\": \"SELECT ts, service, message FROM logs WHERE level = 'ERROR' AND regexp_like(message, '([a-zA-Z])\\\\1{3,}');\"}\n{\"task\": \"Flag log messages with repeated punctuation characters like multiple exclamation marks or dashes\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, '([!?\\\\-])\\\\1{2,}');\"}\n{\"task\": \"Categorize each log message as having repeated digits, repeated letters, both, or neither using a CASE expression\", \"sql\": \"SELECT ts, message, CASE WHEN regexp_like(message, '([0-9])\\\\1{2,}') AND regexp_like(message, '([a-zA-Z])\\\\1{2,}') THEN 'both' WHEN regexp_like(message, '([0-9])\\\\1{2,}') THEN 'digits' WHEN regexp_like(message, '([a-zA-Z])\\\\1{2,}') THEN 'letters' ELSE 'none' END AS repeat_category FROM logs;\"}\n{\"task\": \"Find the most recent 50 log entries that contain repeated whitespace characters, which may indicate formatting bugs\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, '\\\\s{3,}') ORDER BY ts DESC LIMIT 50;\"}\n{\"task\": \"Identify distinct services that have ever logged a message with four or more identical consecutive characters\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(message, '(.)\\\\1{3,}');\"}\n{\"task\": \"Compute the hourly trend of log messages containing repeated character patterns to spot spikes over time\", \"sql\": \"SELECT date_trunc('hour', ts) AS hour_bucket, COUNT(*) AS repeated_char_logs FROM logs WHERE regexp_like(message, '(.)\\\\1{2,}') GROUP BY hour_bucket ORDER BY hour_bucket;\"}\n{\"task\": \"Search WARN and ERROR logs for repeated uppercase letters, which can signal shouting or alert-style messages\", \"sql\": \"SELECT ts, level, message FROM logs WHERE level IN ('WARN', 'ERROR') AND regexp_like(message, '([A-Z])\\\\1{2,}');\"}\n{\"task\": \"Find log messages where a repeated character pattern appears alongside the word 'error', combining regex and text search\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, '(.)\\\\1{2,}') AND message ILIKE '%error%';\"}",
+  "ttft_ms": 10610,
+  "type": "result",
+  "duration_ms": 12386,
+  "uuid": "dc91d755-d6d2-4348-81e5-fe7c469f5357",
+  "ttft_stream_ms": 1377,
+  "time_to_request_ms": 157,
+  "first_content_frame_ms": 1378,
+  "queued_turn_count": 0,
+  "result_index": 0
+ },
+ "text": "{\"task\": \"Find log messages containing any character repeated three or more times consecutively\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '(.)\\\\1{2,}');\"}\n{\"task\": \"Count how many log messages per service contain repeated character sequences\", \"sql\": \"SELECT service, COUNT(*) AS repeated_char_count FROM logs WHERE regexp_like(message, '(.)\\\\1{2,}') GROUP BY service ORDER BY repeated_char_count DESC;\"}\n{\"task\": \"List error-level logs with excessive repeated letters, often indicating corrupted or spammy output\", \"sql\": \"SELECT ts, service, message FROM logs WHERE level = 'ERROR' AND regexp_like(message, '([a-zA-Z])\\\\1{3,}');\"}\n{\"task\": \"Flag log messages with repeated punctuation characters like multiple exclamation marks or dashes\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, '([!?\\\\-])\\\\1{2,}');\"}\n{\"task\": \"Categorize each log message as having repeated digits, repeated letters, both, or neither using a CASE expression\", \"sql\": \"SELECT ts, message, CASE WHEN regexp_like(message, '([0-9])\\\\1{2,}') AND regexp_like(message, '([a-zA-Z])\\\\1{2,}') THEN 'both' WHEN regexp_like(message, '([0-9])\\\\1{2,}') THEN 'digits' WHEN regexp_like(message, '([a-zA-Z])\\\\1{2,}') THEN 'letters' ELSE 'none' END AS repeat_category FROM logs;\"}\n{\"task\": \"Find the most recent 50 log entries that contain repeated whitespace characters, which may indicate formatting bugs\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, '\\\\s{3,}') ORDER BY ts DESC LIMIT 50;\"}\n{\"task\": \"Identify distinct services that have ever logged a message with four or more identical consecutive characters\", \"sql\": \"SELECT DISTINCT service FROM logs WHERE regexp_like(message, '(.)\\\\1{3,}');\"}\n{\"task\": \"Compute the hourly trend of log messages containing repeated character patterns to spot spikes over time\", \"sql\": \"SELECT date_trunc('hour', ts) AS hour_bucket, COUNT(*) AS repeated_char_logs FROM logs WHERE regexp_like(message, '(.)\\\\1{2,}') GROUP BY hour_bucket ORDER BY hour_bucket;\"}\n{\"task\": \"Search WARN and ERROR logs for repeated uppercase letters, which can signal shouting or alert-style messages\", \"sql\": \"SELECT ts, level, message FROM logs WHERE level IN ('WARN', 'ERROR') AND regexp_like(message, '([A-Z])\\\\1{2,}');\"}\n{\"task\": \"Find log messages where a repeated character pattern appears alongside the word 'error', combining regex and text search\", \"sql\": \"SELECT ts, service, message FROM logs WHERE regexp_like(message, '(.)\\\\1{2,}') AND message ILIKE '%error%';\"}",
+ "generator": "g2",
+ "theme_index": 4,
+ "theme": "find log messages with repeated characters, such as a character repeated several times in a row",
+ "call": 1,
+ "started": "2026-10-25T15:35:04-07:00",
+ "finished": "2026-10-25T15:35:18-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find log messages with repeated characters, such as a character repeated several times in a row\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 10,
+ "unextractable_lines": []
+}

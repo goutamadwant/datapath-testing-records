@@ -1,0 +1,15 @@
+{
+  "id": "qwen3-coder-30b-a3b-instruct",
+  "object": "model",
+  "type": "llm",
+  "publisher": "lmstudio-community",
+  "arch": "qwen3moe",
+  "compatibility_type": "gguf",
+  "quantization": "Q4_K_M",
+  "state": "loaded",
+  "max_context_length": 262144,
+  "loaded_context_length": 8192,
+  "capabilities": [
+    "tool_use"
+  ]
+}

@@ -1,0 +1,58 @@
+{
+ "request": {
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You are a helpful assistant."
+   },
+   {
+    "role": "user",
+    "content": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find log messages that mention file names with particular extensions\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n"
+   }
+  ],
+  "temperature": 0.7,
+  "max_tokens": 4096
+ },
+ "response": {
+  "id": "chatcmpl-wravihnfyeet7qck2a70hq",
+  "object": "chat.completion",
+  "created": 1792967900,
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "choices": [
+   {
+    "index": 0,
+    "message": {
+     "role": "assistant",
+     "content": "{\"task\": \"Find all ERROR level logs that mention .log files\", \"sql\": \"SELECT * FROM logs WHERE level = 'ERROR' AND regexp_like(message, '\\\\.log\\\\b')\"}\n{\"task\": \"Identify WARN messages containing temporary file extensions\", \"sql\": \"SELECT * FROM logs WHERE level = 'WARN' AND regexp_like(message, '\\\\.(tmp|temp|bak)\\\\b')\"}\n{\"task\": \"List all service logs that reference configuration files\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '\\\\.(conf|config|cfg)\\\\b')\"}\n{\"task\": \"Find database-related log messages with SQL file extensions\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '\\\\.sql\\\\b') AND service = 'database'\"}\n{\"task\": \"Show application logs mentioning image files in error contexts\", \"sql\": \"SELECT * FROM logs WHERE level = 'ERROR' AND regexp_like(message, '\\\\.(jpg|png|gif|jpeg)\\\\b')\"}\n{\"task\": \"Retrieve all warning messages that include backup file patterns\", \"sql\": \"SELECT * FROM logs WHERE level = 'WARN' AND regexp_like(message, '\\\\.(bak|backup|old)\\\\b')\"}\n{\"task\": \"Find service logs with JavaScript or CSS file references\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '\\\\.(js|css)\\\\b') AND service = 'webserver'\"}\n{\"task\": \"Identify log entries containing source code file extensions\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '\\\\.(py|java|cpp|c|h)\\\\b')\"}\n{\"task\": \"List events where users accessed files with specific extensions\", \"sql\": \"SELECT e.* FROM events e JOIN logs l ON l.ts >= e.id::timestamp AND l.ts <= (e.id + 3600)::timestamp WHERE regexp_like(e.path, '\\\\.(pdf|doc|xls)\\\\b')\"}\n{\"task\": \"Find all log messages mentioning compressed files\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '\\\\.(zip|tar|gz|rar|7z)\\\\b')\"}",
+     "reasoning_content": "",
+     "tool_calls": []
+    },
+    "logprobs": null,
+    "finish_reason": "stop"
+   }
+  ],
+  "usage": {
+   "prompt_tokens": 212,
+   "completion_tokens": 452,
+   "total_tokens": 664,
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "stats": {},
+  "system_fingerprint": "qwen3-coder-30b-a3b-instruct"
+ },
+ "seconds": 4.17,
+ "text": "{\"task\": \"Find all ERROR level logs that mention .log files\", \"sql\": \"SELECT * FROM logs WHERE level = 'ERROR' AND regexp_like(message, '\\\\.log\\\\b')\"}\n{\"task\": \"Identify WARN messages containing temporary file extensions\", \"sql\": \"SELECT * FROM logs WHERE level = 'WARN' AND regexp_like(message, '\\\\.(tmp|temp|bak)\\\\b')\"}\n{\"task\": \"List all service logs that reference configuration files\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '\\\\.(conf|config|cfg)\\\\b')\"}\n{\"task\": \"Find database-related log messages with SQL file extensions\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '\\\\.sql\\\\b') AND service = 'database'\"}\n{\"task\": \"Show application logs mentioning image files in error contexts\", \"sql\": \"SELECT * FROM logs WHERE level = 'ERROR' AND regexp_like(message, '\\\\.(jpg|png|gif|jpeg)\\\\b')\"}\n{\"task\": \"Retrieve all warning messages that include backup file patterns\", \"sql\": \"SELECT * FROM logs WHERE level = 'WARN' AND regexp_like(message, '\\\\.(bak|backup|old)\\\\b')\"}\n{\"task\": \"Find service logs with JavaScript or CSS file references\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '\\\\.(js|css)\\\\b') AND service = 'webserver'\"}\n{\"task\": \"Identify log entries containing source code file extensions\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '\\\\.(py|java|cpp|c|h)\\\\b')\"}\n{\"task\": \"List events where users accessed files with specific extensions\", \"sql\": \"SELECT e.* FROM events e JOIN logs l ON l.ts >= e.id::timestamp AND l.ts <= (e.id + 3600)::timestamp WHERE regexp_like(e.path, '\\\\.(pdf|doc|xls)\\\\b')\"}\n{\"task\": \"Find all log messages mentioning compressed files\", \"sql\": \"SELECT * FROM logs WHERE regexp_like(message, '\\\\.(zip|tar|gz|rar|7z)\\\\b')\"}",
+ "generator": "g1",
+ "theme_index": 20,
+ "theme": "find log messages that mention file names with particular extensions",
+ "call": 2,
+ "started": "2026-10-25T15:38:20-07:00",
+ "finished": "2026-10-25T15:38:24-07:00",
+ "prompt": "You are writing SQL for Apache DataFusion, which uses a PostgreSQL-like SQL dialect.\n\nThe database has two tables:\n\nlogs(ts TIMESTAMP, level VARCHAR, service VARCHAR, message VARCHAR)\nevents(id BIGINT, user_id BIGINT, path VARCHAR, status INT)\n\n`message` holds free-text application log lines. `path` holds HTTP request paths with query strings.\n\nTask theme: find log messages that mention file names with particular extensions\n\nWrite 10 different, realistic SQL queries that an engineer analysing these tables would run for this theme. Every query must use the function regexp_like(string, pattern [, flags]) at least once to match text, for example in a WHERE clause or a CASE expression. regexp_like returns true when the string matches the regular expression pattern.\n\nOutput exactly 10 lines and nothing else. Each line is one JSON object of the form {\"task\": \"<one-sentence description>\", \"sql\": \"<one SQL statement>\"}.\n",
+ "system": "You are a helpful assistant.",
+ "extracted": 10,
+ "unextractable_lines": []
+}
