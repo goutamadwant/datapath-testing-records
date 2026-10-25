@@ -1,0 +1,41 @@
+# run_id=jdk8_wrapper429s_before order=9 start=2026-10-25T00:19:34-0700
+# cwd=<scratch>/partA/runs/jdk8_wrapper429s_before/proj
+# JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home
+# server: /opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault wrapper429s --log ./logs/partA/jdk8_wrapper429s_before.server.jsonl --port-file <scratch>/partA/runs/jdk8_wrapper429s_before.port
+# command: ./mvnw -B -s <scratch>/partA/runs/jdk8_wrapper429s_before/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk8_wrapper429s_before/repo -f pom.xml dependency:resolve
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (22) The requested URL returned error: 429
+Maven wrapper download failed, retrying in 5 seconds ...
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (22) The requested URL returned error: 429
+Maven wrapper download failed, retrying in 5 seconds ...
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (22) The requested URL returned error: 429
+Maven wrapper download failed, retrying in 5 seconds ...
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (22) The requested URL returned error: 429
+Maven wrapper download failed, retrying in 5 seconds ...
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (22) The requested URL returned error: 429
+Error: Could not find or load main class org.apache.maven.wrapper.MavenWrapperMain
+# exit=1 timed_out=False wall_seconds=24.14

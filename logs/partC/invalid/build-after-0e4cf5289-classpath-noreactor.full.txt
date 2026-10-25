@@ -1,0 +1,602 @@
+# 2026-10-25T00:45:17-0700 JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home (e2e modules set <skip>${e2e.dependency.skip}</skip> on maven-dependency-plugin, so the first build skipped build-classpath there)
+# command: ./mvnw -B -o -pl seatunnel-e2e/seatunnel-connector-v2-e2e/connector-fake-e2e -am dependency:build-classpath -De2e.dependency.skip=false -Dmdep.outputFile=target/test-classpath.txt -Dmdep.includeScope=test
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] SeaTunnel :                                                        [pom]
+[INFO] SeaTunnel : Config :                                               [pom]
+[INFO] SeaTunnel : Config : Base                                          [jar]
+[INFO] SeaTunnel : Config : Shade                                         [jar]
+[INFO] SeaTunnel : Common                                                 [jar]
+[INFO] SeaTunnel : Api                                                    [jar]
+[INFO] SeaTunnel : Config : SQL                                           [jar]
+[INFO] SeaTunnel : Plugin Discovery                                       [jar]
+[INFO] SeaTunnel : Connectors V2 :                                        [pom]
+[INFO] SeaTunnel : Connectors V2 : Common                                 [jar]
+[INFO] SeaTunnel : Formats :                                              [pom]
+[INFO] SeaTunnel : Formats : Json                                         [jar]
+[INFO] SeaTunnel : Connectors V2 : Fake                                   [jar]
+[INFO] SeaTunnel : Transforms : V2                                        [jar]
+[INFO] SeaTunnel : E2E :                                                  [pom]
+[INFO] SeaTunnel : E2E : Common                                           [jar]
+[INFO] SeaTunnel : Core :                                                 [pom]
+[INFO] SeaTunnel : Core : Core Starter                                    [jar]
+[INFO] SeaTunnel : Translation :                                          [pom]
+[INFO] SeaTunnel : Translation : Base                                     [jar]
+[INFO] SeaTunnel : Translation : Flink :                                  [pom]
+[INFO] SeaTunnel : Translation : Flink : Common                           [jar]
+[INFO] SeaTunnel : Translation : Flink : 1.15                             [jar]
+[INFO] SeaTunnel : Connectors V2 : Console                                [jar]
+[INFO] SeaTunnel : Core : Flink Starter :                                 [pom]
+[INFO] SeaTunnel : Core : Flink Starter : Common                          [jar]
+[INFO] SeaTunnel : Translation : Flink : 1.13                             [jar]
+[INFO] SeaTunnel : Core : Flink Starter : 1.3                             [jar]
+[INFO] SeaTunnel : Core : Flink Starter : 1.5                             [jar]
+[INFO] SeaTunnel : Translation : Flink : 20                               [jar]
+[INFO] SeaTunnel : Core : Flink Starter : 2.0                             [jar]
+[INFO] SeaTunnel : Translation : Spark :                                  [pom]
+[INFO] SeaTunnel : Translation : Spark : Common                           [jar]
+[INFO] SeaTunnel : Translation : Spark : 2.4                              [jar]
+[INFO] SeaTunnel : Translation : Spark : 3.3                              [jar]
+[INFO] SeaTunnel : Core : Spark Starter :                                 [pom]
+[INFO] SeaTunnel : Core : Spark Starter : Common                          [jar]
+[INFO] SeaTunnel : Core : Spark Starter : 2.4                             [jar]
+[INFO] SeaTunnel : Core : Spark Starter : 3.3                             [jar]
+[INFO] SeaTunnel : Engine :                                               [pom]
+[INFO] SeaTunnel : Engine : Common                                        [jar]
+[INFO] SeaTunnel : Engine : Core                                          [jar]
+[INFO] SeaTunnel : Engine : UI                                            [jar]
+[INFO] SeaTunnel : Engine : Serializer :                                  [pom]
+[INFO] SeaTunnel : Engine : Serializer : Api                              [jar]
+[INFO] SeaTunnel : Engine : Serializer : Protobuf                         [jar]
+[INFO] SeaTunnel : Engine : Storage :                                     [pom]
+[INFO] SeaTunnel : Engine : Storage : Checkpoint Storage Api              [jar]
+[INFO] SeaTunnel : Engine : Storage : Checkpoint Storage Plugins :        [pom]
+[INFO] SeaTunnel : Engine : Storage : Checkpoint Storage Plugins : HDFS   [jar]
+[INFO] SeaTunnel : Engine : Storage : IMap Storage Api                    [jar]
+[INFO] SeaTunnel : Engine : Storage : IMap Storage Plugins :              [pom]
+[INFO] SeaTunnel : Engine : Storage : IMap Storage Plugins : File         [jar]
+[INFO] SeaTunnel : Formats : Text                                         [jar]
+[INFO] SeaTunnel : Formats : Csv                                          [jar]
+[INFO] SeaTunnel : Connectors V2 : File :                                 [pom]
+[INFO] SeaTunnel : Connectors V2 : File : Base                            [jar]
+[INFO] SeaTunnel : Connectors V2 : File : Local                           [jar]
+[INFO] SeaTunnel : Engine : Storage : Checkpoint Storage Plugins : Local File [jar]
+[INFO] SeaTunnel : Engine : Server                                        [jar]
+[INFO] SeaTunnel : Engine : Client                                        [jar]
+[INFO] SeaTunnel : Core : Starter                                         [jar]
+[INFO] SeaTunnel : Connectors V2 : Assert                                 [jar]
+[INFO] SeaTunnel : E2E : Connector V2 :                                   [pom]
+[INFO] SeaTunnel : E2E : Connector V2 : Fake                              [jar]
+[INFO] 
+[INFO] -------------------< org.apache.seatunnel:seatunnel >-------------------
+[INFO] Building SeaTunnel : 3.0.0-SNAPSHOT                               [1/65]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel ---
+[INFO] Skipped writing classpath file '<scratch>/wt-e2e/target/test-classpath.txt'.  No changes found.
+[INFO] 
+[INFO] ---------------< org.apache.seatunnel:seatunnel-config >----------------
+[INFO] Building SeaTunnel : Config : 3.0.0-SNAPSHOT                      [2/65]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-config ---
+[INFO] Skipped writing classpath file '<scratch>/wt-e2e/seatunnel-config/target/test-classpath.txt'.  No changes found.
+[INFO] 
+[INFO] -------------< org.apache.seatunnel:seatunnel-config-base >-------------
+[INFO] Building SeaTunnel : Config : Base 3.0.0-SNAPSHOT                 [3/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-config-base ---
+[INFO] Skipped writing classpath file '<scratch>/wt-e2e/seatunnel-config/seatunnel-config-base/target/test-classpath.txt'.  No changes found.
+[INFO] 
+[INFO] ------------< org.apache.seatunnel:seatunnel-config-shade >-------------
+[INFO] Building SeaTunnel : Config : Shade 3.0.0-SNAPSHOT                [4/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-config-shade ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-config/seatunnel-config-shade/target/test-classpath.txt'.
+[INFO] 
+[INFO] ---------------< org.apache.seatunnel:seatunnel-common >----------------
+[INFO] Building SeaTunnel : Common 3.0.0-SNAPSHOT                        [5/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-common ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-common/target/test-classpath.txt'.
+[INFO] 
+[INFO] -----------------< org.apache.seatunnel:seatunnel-api >-----------------
+[INFO] Building SeaTunnel : Api 3.0.0-SNAPSHOT                           [6/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-api ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-api/target/test-classpath.txt'.
+[INFO] 
+[INFO] -------------< org.apache.seatunnel:seatunnel-config-sql >--------------
+[INFO] Building SeaTunnel : Config : SQL 3.0.0-SNAPSHOT                  [7/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-config-sql ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-config/seatunnel-config-sql/target/test-classpath.txt'.
+[INFO] 
+[INFO] ----------< org.apache.seatunnel:seatunnel-plugin-discovery >-----------
+[INFO] Building SeaTunnel : Plugin Discovery 3.0.0-SNAPSHOT              [8/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-plugin-discovery ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-plugin-discovery/target/test-classpath.txt'.
+[INFO] 
+[INFO] ------------< org.apache.seatunnel:seatunnel-connectors-v2 >------------
+[INFO] Building SeaTunnel : Connectors V2 : 3.0.0-SNAPSHOT               [9/65]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-connectors-v2 ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-connectors-v2/target/test-classpath.txt'.
+[INFO] 
+[INFO] ---------------< org.apache.seatunnel:connector-common >----------------
+[INFO] Building SeaTunnel : Connectors V2 : Common 3.0.0-SNAPSHOT       [10/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ connector-common ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-connectors-v2/connector-common/target/test-classpath.txt'.
+[INFO] 
+[INFO] ---------------< org.apache.seatunnel:seatunnel-formats >---------------
+[INFO] Building SeaTunnel : Formats : 3.0.0-SNAPSHOT                    [11/65]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-formats ---
+[INFO] Skipped writing classpath file '<scratch>/wt-e2e/seatunnel-formats/target/test-classpath.txt'.  No changes found.
+[INFO] 
+[INFO] -------------< org.apache.seatunnel:seatunnel-format-json >-------------
+[INFO] Building SeaTunnel : Formats : Json 3.0.0-SNAPSHOT               [12/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-format-json ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-formats/seatunnel-format-json/target/test-classpath.txt'.
+[INFO] 
+[INFO] ----------------< org.apache.seatunnel:connector-fake >-----------------
+[INFO] Building SeaTunnel : Connectors V2 : Fake 3.0.0-SNAPSHOT         [13/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ connector-fake ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-connectors-v2/connector-fake/target/test-classpath.txt'.
+[INFO] 
+[INFO] ------------< org.apache.seatunnel:seatunnel-transforms-v2 >------------
+[INFO] Building SeaTunnel : Transforms : V2 3.0.0-SNAPSHOT              [14/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-transforms-v2 ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-transforms-v2/target/test-classpath.txt'.
+[INFO] 
+[INFO] -----------------< org.apache.seatunnel:seatunnel-e2e >-----------------
+[INFO] Building SeaTunnel : E2E : 3.0.0-SNAPSHOT                        [15/65]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-e2e ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-e2e/target/test-classpath.txt'.
+[INFO] 
+[INFO] -------------< org.apache.seatunnel:seatunnel-e2e-common >--------------
+[INFO] Building SeaTunnel : E2E : Common 3.0.0-SNAPSHOT                 [16/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-e2e-common ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-e2e/seatunnel-e2e-common/target/test-classpath.txt'.
+[INFO] 
+[INFO] ----------------< org.apache.seatunnel:seatunnel-core >-----------------
+[INFO] Building SeaTunnel : Core : 3.0.0-SNAPSHOT                       [17/65]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-core ---
+[INFO] Skipped writing classpath file '<scratch>/wt-e2e/seatunnel-core/target/test-classpath.txt'.  No changes found.
+[INFO] 
+[INFO] ------------< org.apache.seatunnel:seatunnel-core-starter >-------------
+[INFO] Building SeaTunnel : Core : Core Starter 3.0.0-SNAPSHOT          [18/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-core-starter ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-core/seatunnel-core-starter/target/test-classpath.txt'.
+[INFO] 
+[INFO] -------------< org.apache.seatunnel:seatunnel-translation >-------------
+[INFO] Building SeaTunnel : Translation : 3.0.0-SNAPSHOT                [19/65]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-translation ---
+[INFO] Skipped writing classpath file '<scratch>/wt-e2e/seatunnel-translation/target/test-classpath.txt'.  No changes found.
+[INFO] 
+[INFO] ----------< org.apache.seatunnel:seatunnel-translation-base >-----------
+[INFO] Building SeaTunnel : Translation : Base 3.0.0-SNAPSHOT           [20/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-translation-base ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-base/target/test-classpath.txt'.
+[INFO] 
+[INFO] ----------< org.apache.seatunnel:seatunnel-translation-flink >----------
+[INFO] Building SeaTunnel : Translation : Flink : 3.0.0-SNAPSHOT        [21/65]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-translation-flink ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-flink/target/test-classpath.txt'.
+[INFO] 
+[INFO] ------< org.apache.seatunnel:seatunnel-translation-flink-common >-------
+[INFO] Building SeaTunnel : Translation : Flink : Common 3.0.0-SNAPSHOT [22/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-translation-flink-common ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-common/target/test-classpath.txt'.
+[INFO] 
+[INFO] --------< org.apache.seatunnel:seatunnel-translation-flink-15 >---------
+[INFO] Building SeaTunnel : Translation : Flink : 1.15 3.0.0-SNAPSHOT   [23/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-translation-flink-15 ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-15/target/test-classpath.txt'.
+[INFO] 
+[INFO] ---------------< org.apache.seatunnel:connector-console >---------------
+[INFO] Building SeaTunnel : Connectors V2 : Console 3.0.0-SNAPSHOT      [24/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ connector-console ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-connectors-v2/connector-console/target/test-classpath.txt'.
+[INFO] 
+[INFO] ------------< org.apache.seatunnel:seatunnel-flink-starter >------------
+[INFO] Building SeaTunnel : Core : Flink Starter : 3.0.0-SNAPSHOT       [25/65]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-flink-starter ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/target/test-classpath.txt'.
+[INFO] 
+[INFO] --------< org.apache.seatunnel:seatunnel-flink-starter-common >---------
+[INFO] Building SeaTunnel : Core : Flink Starter : Common 3.0.0-SNAPSHOT [26/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-flink-starter-common ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-starter-common/target/test-classpath.txt'.
+[INFO] 
+[INFO] --------< org.apache.seatunnel:seatunnel-translation-flink-13 >---------
+[INFO] Building SeaTunnel : Translation : Flink : 1.13 3.0.0-SNAPSHOT   [27/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-translation-flink-13 ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-13/target/test-classpath.txt'.
+[INFO] 
+[INFO] ----------< org.apache.seatunnel:seatunnel-flink-13-starter >-----------
+[INFO] Building SeaTunnel : Core : Flink Starter : 1.3 3.0.0-SNAPSHOT   [28/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-flink-13-starter ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-13-starter/target/test-classpath.txt'.
+[INFO] 
+[INFO] ----------< org.apache.seatunnel:seatunnel-flink-15-starter >-----------
+[INFO] Building SeaTunnel : Core : Flink Starter : 1.5 3.0.0-SNAPSHOT   [29/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-flink-15-starter ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter/target/test-classpath.txt'.
+[INFO] 
+[INFO] --------< org.apache.seatunnel:seatunnel-translation-flink-20 >---------
+[INFO] Building SeaTunnel : Translation : Flink : 20 3.0.0-SNAPSHOT     [30/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-translation-flink-20 ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-flink/seatunnel-translation-flink-20/target/test-classpath.txt'.
+[INFO] 
+[INFO] ----------< org.apache.seatunnel:seatunnel-flink-20-starter >-----------
+[INFO] Building SeaTunnel : Core : Flink Starter : 2.0 3.0.0-SNAPSHOT   [31/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-flink-20-starter ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-core/seatunnel-flink-starter/seatunnel-flink-20-starter/target/test-classpath.txt'.
+[INFO] 
+[INFO] ----------< org.apache.seatunnel:seatunnel-translation-spark >----------
+[INFO] Building SeaTunnel : Translation : Spark : 3.0.0-SNAPSHOT        [32/65]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-translation-spark ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-spark/target/test-classpath.txt'.
+[INFO] 
+[INFO] ------< org.apache.seatunnel:seatunnel-translation-spark-common >-------
+[INFO] Building SeaTunnel : Translation : Spark : Common 3.0.0-SNAPSHOT [33/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-translation-spark-common ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-common/target/test-classpath.txt'.
+[INFO] 
+[INFO] --------< org.apache.seatunnel:seatunnel-translation-spark-2.4 >--------
+[INFO] Building SeaTunnel : Translation : Spark : 2.4 3.0.0-SNAPSHOT    [34/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[WARNING] The artifact org.slf4j:slf4j-log4j12:jar:1.7.36 has been relocated to org.slf4j:slf4j-reload4j:jar:1.7.36
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-translation-spark-2.4 ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-2.4/target/test-classpath.txt'.
+[INFO] 
+[INFO] --------< org.apache.seatunnel:seatunnel-translation-spark-3.3 >--------
+[INFO] Building SeaTunnel : Translation : Spark : 3.3 3.0.0-SNAPSHOT    [35/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-translation-spark-3.3 ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-translation/seatunnel-translation-spark/seatunnel-translation-spark-3.3/target/test-classpath.txt'.
+[INFO] 
+[INFO] ------------< org.apache.seatunnel:seatunnel-spark-starter >------------
+[INFO] Building SeaTunnel : Core : Spark Starter : 3.0.0-SNAPSHOT       [36/65]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-spark-starter ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/target/test-classpath.txt'.
+[INFO] 
+[INFO] --------< org.apache.seatunnel:seatunnel-spark-starter-common >---------
+[INFO] Building SeaTunnel : Core : Spark Starter : Common 3.0.0-SNAPSHOT [37/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-spark-starter-common ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-starter-common/target/test-classpath.txt'.
+[INFO] 
+[INFO] -----------< org.apache.seatunnel:seatunnel-spark-2-starter >-----------
+[INFO] Building SeaTunnel : Core : Spark Starter : 2.4 3.0.0-SNAPSHOT   [38/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-spark-2-starter ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-2-starter/target/test-classpath.txt'.
+[INFO] 
+[INFO] -----------< org.apache.seatunnel:seatunnel-spark-3-starter >-----------
+[INFO] Building SeaTunnel : Core : Spark Starter : 3.3 3.0.0-SNAPSHOT   [39/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-spark-3-starter ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter/target/test-classpath.txt'.
+[INFO] 
+[INFO] ---------------< org.apache.seatunnel:seatunnel-engine >----------------
+[INFO] Building SeaTunnel : Engine : 3.0.0-SNAPSHOT                     [40/65]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-engine ---
+[INFO] Skipped writing classpath file '<scratch>/wt-e2e/seatunnel-engine/target/test-classpath.txt'.  No changes found.
+[INFO] 
+[INFO] ------------< org.apache.seatunnel:seatunnel-engine-common >------------
+[INFO] Building SeaTunnel : Engine : Common 3.0.0-SNAPSHOT              [41/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-engine-common ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-common/target/test-classpath.txt'.
+[INFO] 
+[INFO] -------------< org.apache.seatunnel:seatunnel-engine-core >-------------
+[INFO] Building SeaTunnel : Engine : Core 3.0.0-SNAPSHOT                [42/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-engine-core ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-core/target/test-classpath.txt'.
+[INFO] 
+[INFO] --------------< org.apache.seatunnel:seatunnel-engine-ui >--------------
+[INFO] Building SeaTunnel : Engine : UI 3.0.0-SNAPSHOT                  [43/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-engine-ui ---
+[INFO] Skipped writing classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-ui/target/test-classpath.txt'.  No changes found.
+[INFO] 
+[INFO] ----------< org.apache.seatunnel:seatunnel-engine-serializer >----------
+[INFO] Building SeaTunnel : Engine : Serializer : 3.0.0-SNAPSHOT        [44/65]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-engine-serializer ---
+[INFO] Skipped writing classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/target/test-classpath.txt'.  No changes found.
+[INFO] 
+[INFO] ----------------< org.apache.seatunnel:serializer-api >-----------------
+[INFO] Building SeaTunnel : Engine : Serializer : Api 3.0.0-SNAPSHOT    [45/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ serializer-api ---
+[INFO] Skipped writing classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/serializer-api/target/test-classpath.txt'.  No changes found.
+[INFO] 
+[INFO] --------------< org.apache.seatunnel:serializer-protobuf >--------------
+[INFO] Building SeaTunnel : Engine : Serializer : Protobuf 3.0.0-SNAPSHOT [46/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ serializer-protobuf ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-serializer/serializer-protobuf/target/test-classpath.txt'.
+[INFO] 
+[INFO] -----------< org.apache.seatunnel:seatunnel-engine-storage >------------
+[INFO] Building SeaTunnel : Engine : Storage : 3.0.0-SNAPSHOT           [47/65]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-engine-storage ---
+[INFO] Skipped writing classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/target/test-classpath.txt'.  No changes found.
+[INFO] 
+[INFO] ------------< org.apache.seatunnel:checkpoint-storage-api >-------------
+[INFO] Building SeaTunnel : Engine : Storage : Checkpoint Storage Api 3.0.0-SNAPSHOT [48/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ checkpoint-storage-api ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-api/target/test-classpath.txt'.
+[INFO] 
+[INFO] ----------< org.apache.seatunnel:checkpoint-storage-plugins >-----------
+[INFO] Building SeaTunnel : Engine : Storage : Checkpoint Storage Plugins : 3.0.0-SNAPSHOT [49/65]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ checkpoint-storage-plugins ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/target/test-classpath.txt'.
+[INFO] 
+[INFO] ------------< org.apache.seatunnel:checkpoint-storage-hdfs >------------
+[INFO] Building SeaTunnel : Engine : Storage : Checkpoint Storage Plugins : HDFS 3.0.0-SNAPSHOT [50/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ checkpoint-storage-hdfs ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/checkpoint-storage-hdfs/target/test-classpath.txt'.
+[INFO] 
+[INFO] ---------------< org.apache.seatunnel:imap-storage-api >----------------
+[INFO] Building SeaTunnel : Engine : Storage : IMap Storage Api 3.0.0-SNAPSHOT [51/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ imap-storage-api ---
+[INFO] Skipped writing classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-api/target/test-classpath.txt'.  No changes found.
+[INFO] 
+[INFO] -------------< org.apache.seatunnel:imap-storage-plugins >--------------
+[INFO] Building SeaTunnel : Engine : Storage : IMap Storage Plugins : 3.0.0-SNAPSHOT [52/65]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ imap-storage-plugins ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-plugins/target/test-classpath.txt'.
+[INFO] 
+[INFO] ---------------< org.apache.seatunnel:imap-storage-file >---------------
+[INFO] Building SeaTunnel : Engine : Storage : IMap Storage Plugins : File 3.0.0-SNAPSHOT [53/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ imap-storage-file ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/imap-storage-plugins/imap-storage-file/target/test-classpath.txt'.
+[INFO] 
+[INFO] -------------< org.apache.seatunnel:seatunnel-format-text >-------------
+[INFO] Building SeaTunnel : Formats : Text 3.0.0-SNAPSHOT               [54/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-format-text ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-formats/seatunnel-format-text/target/test-classpath.txt'.
+[INFO] 
+[INFO] -------------< org.apache.seatunnel:seatunnel-format-csv >--------------
+[INFO] Building SeaTunnel : Formats : Csv 3.0.0-SNAPSHOT                [55/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-format-csv ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-formats/seatunnel-format-csv/target/test-classpath.txt'.
+[INFO] 
+[INFO] ----------------< org.apache.seatunnel:connector-file >-----------------
+[INFO] Building SeaTunnel : Connectors V2 : File : 3.0.0-SNAPSHOT       [56/65]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ connector-file ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-connectors-v2/connector-file/target/test-classpath.txt'.
+[INFO] 
+[INFO] --------------< org.apache.seatunnel:connector-file-base >--------------
+[INFO] Building SeaTunnel : Connectors V2 : File : Base 3.0.0-SNAPSHOT  [57/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ connector-file-base ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-connectors-v2/connector-file/connector-file-base/target/test-classpath.txt'.
+[INFO] 
+[INFO] -------------< org.apache.seatunnel:connector-file-local >--------------
+[INFO] Building SeaTunnel : Connectors V2 : File : Local 3.0.0-SNAPSHOT [58/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ connector-file-local ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-connectors-v2/connector-file/connector-file-local/target/test-classpath.txt'.
+[INFO] 
+[INFO] ---------< org.apache.seatunnel:checkpoint-storage-local-file >---------
+[INFO] Building SeaTunnel : Engine : Storage : Checkpoint Storage Plugins : Local File 3.0.0-SNAPSHOT [59/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ checkpoint-storage-local-file ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-storage/checkpoint-storage-plugins/checkpoint-storage-local-file/target/test-classpath.txt'.
+[INFO] 
+[INFO] ------------< org.apache.seatunnel:seatunnel-engine-server >------------
+[INFO] Building SeaTunnel : Engine : Server 3.0.0-SNAPSHOT              [60/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-engine-server ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-server/target/test-classpath.txt'.
+[INFO] 
+[INFO] ------------< org.apache.seatunnel:seatunnel-engine-client >------------
+[INFO] Building SeaTunnel : Engine : Client 3.0.0-SNAPSHOT              [61/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-engine-client ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-engine/seatunnel-engine-client/target/test-classpath.txt'.
+[INFO] 
+[INFO] ---------------< org.apache.seatunnel:seatunnel-starter >---------------
+[INFO] Building SeaTunnel : Core : Starter 3.0.0-SNAPSHOT               [62/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-starter ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-core/seatunnel-starter/target/test-classpath.txt'.
+[INFO] 
+[INFO] ---------------< org.apache.seatunnel:connector-assert >----------------
+[INFO] Building SeaTunnel : Connectors V2 : Assert 3.0.0-SNAPSHOT       [63/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ connector-assert ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-connectors-v2/connector-assert/target/test-classpath.txt'.
+[INFO] 
+[INFO] ----------< org.apache.seatunnel:seatunnel-connector-v2-e2e >-----------
+[INFO] Building SeaTunnel : E2E : Connector V2 : 3.0.0-SNAPSHOT         [64/65]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ seatunnel-connector-v2-e2e ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-e2e/seatunnel-connector-v2-e2e/target/test-classpath.txt'.
+[INFO] 
+[INFO] --------------< org.apache.seatunnel:connector-fake-e2e >---------------
+[INFO] Building SeaTunnel : E2E : Connector V2 : Fake 3.0.0-SNAPSHOT    [65/65]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.1.1:build-classpath (default-cli) @ connector-fake-e2e ---
+[INFO] Wrote classpath file '<scratch>/wt-e2e/seatunnel-e2e/seatunnel-connector-v2-e2e/connector-fake-e2e/target/test-classpath.txt'.
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for SeaTunnel : 3.0.0-SNAPSHOT:
+[INFO] 
+[INFO] SeaTunnel : ........................................ SUCCESS [  1.958 s]
+[INFO] SeaTunnel : Config : ............................... SUCCESS [  0.116 s]
+[INFO] SeaTunnel : Config : Base .......................... SUCCESS [  0.077 s]
+[INFO] SeaTunnel : Config : Shade ......................... SUCCESS [  0.073 s]
+[INFO] SeaTunnel : Common ................................. SUCCESS [  0.211 s]
+[INFO] SeaTunnel : Api .................................... SUCCESS [  0.117 s]
+[INFO] SeaTunnel : Config : SQL ........................... SUCCESS [  0.043 s]
+[INFO] SeaTunnel : Plugin Discovery ....................... SUCCESS [  0.064 s]
+[INFO] SeaTunnel : Connectors V2 : ........................ SUCCESS [  0.050 s]
+[INFO] SeaTunnel : Connectors V2 : Common ................. SUCCESS [  0.045 s]
+[INFO] SeaTunnel : Formats : .............................. SUCCESS [  0.034 s]
+[INFO] SeaTunnel : Formats : Json ......................... SUCCESS [  0.036 s]
+[INFO] SeaTunnel : Connectors V2 : Fake ................... SUCCESS [  0.071 s]
+[INFO] SeaTunnel : Transforms : V2 ........................ SUCCESS [  0.267 s]
+[INFO] SeaTunnel : E2E : .................................. SUCCESS [  0.068 s]
+[INFO] SeaTunnel : E2E : Common ........................... SUCCESS [  0.522 s]
+[INFO] SeaTunnel : Core : ................................. SUCCESS [  0.024 s]
+[INFO] SeaTunnel : Core : Core Starter .................... SUCCESS [  0.051 s]
+[INFO] SeaTunnel : Translation : .......................... SUCCESS [  0.030 s]
+[INFO] SeaTunnel : Translation : Base ..................... SUCCESS [  0.026 s]
+[INFO] SeaTunnel : Translation : Flink : .................. SUCCESS [  0.016 s]
+[INFO] SeaTunnel : Translation : Flink : Common ........... SUCCESS [  0.602 s]
+[INFO] SeaTunnel : Translation : Flink : 1.15 ............. SUCCESS [  0.046 s]
+[INFO] SeaTunnel : Connectors V2 : Console ................ SUCCESS [  0.022 s]
+[INFO] SeaTunnel : Core : Flink Starter : ................. SUCCESS [  0.030 s]
+[INFO] SeaTunnel : Core : Flink Starter : Common .......... SUCCESS [  0.045 s]
+[INFO] SeaTunnel : Translation : Flink : 1.13 ............. SUCCESS [  0.165 s]
+[INFO] SeaTunnel : Core : Flink Starter : 1.3 ............. SUCCESS [  0.038 s]
+[INFO] SeaTunnel : Core : Flink Starter : 1.5 ............. SUCCESS [  0.043 s]
+[INFO] SeaTunnel : Translation : Flink : 20 ............... SUCCESS [  0.143 s]
+[INFO] SeaTunnel : Core : Flink Starter : 2.0 ............. SUCCESS [  0.145 s]
+[INFO] SeaTunnel : Translation : Spark : .................. SUCCESS [  0.031 s]
+[INFO] SeaTunnel : Translation : Spark : Common ........... SUCCESS [  0.401 s]
+[INFO] SeaTunnel : Translation : Spark : 2.4 .............. SUCCESS [  0.657 s]
+[INFO] SeaTunnel : Translation : Spark : 3.3 .............. SUCCESS [  0.077 s]
+[INFO] SeaTunnel : Core : Spark Starter : ................. SUCCESS [  0.024 s]
+[INFO] SeaTunnel : Core : Spark Starter : Common .......... SUCCESS [  0.039 s]
+[INFO] SeaTunnel : Core : Spark Starter : 2.4 ............. SUCCESS [  0.133 s]
+[INFO] SeaTunnel : Core : Spark Starter : 3.3 ............. SUCCESS [  0.055 s]
+[INFO] SeaTunnel : Engine : ............................... SUCCESS [  0.008 s]
+[INFO] SeaTunnel : Engine : Common ........................ SUCCESS [  0.154 s]
+[INFO] SeaTunnel : Engine : Core .......................... SUCCESS [  0.054 s]
+[INFO] SeaTunnel : Engine : UI ............................ SUCCESS [  0.146 s]
+[INFO] SeaTunnel : Engine : Serializer : .................. SUCCESS [  0.012 s]
+[INFO] SeaTunnel : Engine : Serializer : Api .............. SUCCESS [  0.009 s]
+[INFO] SeaTunnel : Engine : Serializer : Protobuf ......... SUCCESS [  0.036 s]
+[INFO] SeaTunnel : Engine : Storage : ..................... SUCCESS [  0.012 s]
+[INFO] SeaTunnel : Engine : Storage : Checkpoint Storage Api SUCCESS [  0.014 s]
+[INFO] SeaTunnel : Engine : Storage : Checkpoint Storage Plugins : SUCCESS [  0.012 s]
+[INFO] SeaTunnel : Engine : Storage : Checkpoint Storage Plugins : HDFS SUCCESS [  0.207 s]
+[INFO] SeaTunnel : Engine : Storage : IMap Storage Api .... SUCCESS [  0.011 s]
+[INFO] SeaTunnel : Engine : Storage : IMap Storage Plugins : SUCCESS [  0.015 s]
+[INFO] SeaTunnel : Engine : Storage : IMap Storage Plugins : File SUCCESS [  0.055 s]
+[INFO] SeaTunnel : Formats : Text ......................... SUCCESS [  0.017 s]
+[INFO] SeaTunnel : Formats : Csv .......................... SUCCESS [  0.016 s]
+[INFO] SeaTunnel : Connectors V2 : File : ................. SUCCESS [  0.017 s]
+[INFO] SeaTunnel : Connectors V2 : File : Base ............ SUCCESS [  0.231 s]
+[INFO] SeaTunnel : Connectors V2 : File : Local ........... SUCCESS [  0.087 s]
+[INFO] SeaTunnel : Engine : Storage : Checkpoint Storage Plugins : Local File SUCCESS [  0.041 s]
+[INFO] SeaTunnel : Engine : Server ........................ SUCCESS [  0.256 s]
+[INFO] SeaTunnel : Engine : Client ........................ SUCCESS [  0.073 s]
+[INFO] SeaTunnel : Core : Starter ......................... SUCCESS [  0.208 s]
+[INFO] SeaTunnel : Connectors V2 : Assert ................. SUCCESS [  0.188 s]
+[INFO] SeaTunnel : E2E : Connector V2 : ................... SUCCESS [  0.091 s]
+[INFO] SeaTunnel : E2E : Connector V2 : Fake .............. SUCCESS [  0.034 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  14.422 s
+[INFO] Finished at: 2026-10-25T00:45:34-07:00
+[INFO] ------------------------------------------------------------------------
+# exit=0

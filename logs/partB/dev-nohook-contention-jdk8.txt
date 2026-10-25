@@ -1,0 +1,61 @@
+# cell=dev-nohook-contention-jdk8 start=2026-10-25T00:33:04-0700 rev=deb16a3c3152f0349a587a504dccc997a131a9d7
+# JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home iterations=50 busy_loops=20 jvm_props=
+# hooked_test_classes=none
+# load_before:  0:33  up 25 days, 16:49, 2 users, load averages: 4.82 6.64 8.57
+# command: /Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home/bin/java  -cp <classpath below> RepeatMethod org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest rediscoversFileAfterInactiveCursorClosed 50
+# classpath: <scratch>/partB/runner:<scratch>/wt-dev/seatunnel-edge-agent/seatunnel-edge-agent-connector/target/test-classes:<scratch>/wt-dev/seatunnel-edge-agent/seatunnel-edge-agent-connector/target/classes:<scratch>/wt-dev/seatunnel-api/target/seatunnel-api-3.0.0-SNAPSHOT-2.12.15.jar:<scratch>/wt-dev/seatunnel-common/target/seatunnel-common-3.0.0-SNAPSHOT-2.12.15.jar:<scratch>/wt-dev/seatunnel-config/seatunnel-config-shade/target/seatunnel-config-shade-3.0.0-SNAPSHOT.jar:<scratch>/wt-dev/seatunnel-config/seatunnel-config-base/target/seatunnel-config-base-3.0.0-SNAPSHOT.jar:<home>
+# busy-loop pids: 50207 50208 50209 50210 50211 50212 50213 50214 50215 50216 50217 50218 50219 50220 50221 50222 50223 50224 50225 50226
+# load_with_busy_loops:  0:33  up 25 days, 16:49, 2 users, load averages: 6.60 6.97 8.67
+JVM 1.8.0_172 Java HotSpot(TM) 64-Bit Server VM x86_64
+ITER 1 PASS 4260
+ITER 2 PASS 630
+ITER 3 PASS 612
+ITER 4 PASS 618
+ITER 5 PASS 601
+ITER 6 PASS 610
+ITER 7 PASS 617
+ITER 8 PASS 612
+ITER 9 PASS 589
+ITER 10 PASS 602
+ITER 11 PASS 607
+ITER 12 PASS 605
+ITER 13 PASS 586
+ITER 14 PASS 610
+ITER 15 PASS 595
+ITER 16 PASS 602
+ITER 17 PASS 600
+ITER 18 PASS 596
+ITER 19 PASS 634
+ITER 20 PASS 595
+ITER 21 PASS 580
+ITER 22 PASS 598
+ITER 23 PASS 582
+ITER 24 PASS 588
+ITER 25 PASS 583
+ITER 26 PASS 596
+ITER 27 PASS 602
+ITER 28 PASS 631
+ITER 29 PASS 628
+ITER 30 PASS 600
+ITER 31 PASS 591
+ITER 32 PASS 583
+ITER 33 PASS 593
+ITER 34 PASS 586
+ITER 35 PASS 654
+ITER 36 PASS 592
+ITER 37 PASS 584
+ITER 38 PASS 587
+ITER 39 PASS 582
+ITER 40 PASS 582
+ITER 41 PASS 578
+ITER 42 PASS 582
+ITER 43 PASS 619
+ITER 44 PASS 594
+ITER 45 PASS 575
+ITER 46 PASS 574
+ITER 47 PASS 579
+ITER 48 PASS 577
+ITER 49 PASS 582
+ITER 50 PASS 575
+SUMMARY failed=0/50
+# exit=0 wall_seconds=35 end=2026-10-25T00:33:42-0700

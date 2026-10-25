@@ -1,0 +1,29 @@
+# cell=patch-hook-jdk8 start=2026-10-25T00:31:46-0700 rev=87ed0afe0f783eda1b1f3ac6f0ac9fadedcb4f98
+# JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home iterations=20 busy_loops=0 jvm_props=
+# hooked_test_classes=<scratch>/partB/classes/patch-hook
+# load_before:  0:31  up 25 days, 16:47, 2 users, load averages: 5.92 7.25 8.94
+# command: /Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home/bin/java  -cp <classpath below> RepeatMethod org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest rediscoversFileAfterInactiveCursorClosed 20
+# classpath: <scratch>/partB/classes/patch-hook:<scratch>/partB/runner:<scratch>/wt-patch/seatunnel-edge-agent/seatunnel-edge-agent-connector/target/test-classes:<scratch>/wt-patch/seatunnel-edge-agent/seatunnel-edge-agent-connector/target/classes:<scratch>/wt-patch/seatunnel-api/target/seatunnel-api-3.0.0-SNAPSHOT-2.12.15.jar:<scratch>/wt-patch/seatunnel-common/target/seatunnel-common-3.0.0-SNAPSHOT-2.12.15.jar:<scratch>/wt-patch/seatunnel-config/seatunnel-config-shade/target/seatunnel-config-shade-3.0.0-SNAPSHOT.jar:<scratch>/wt-patch/seatunnel-config/seatunnel-config-base/target/seatunnel-config-base-3.0.0-SNAPSHOT.jar:<home>
+JVM 1.8.0_172 Java HotSpot(TM) 64-Bit Server VM x86_64
+ITER 1 PASS 3164
+ITER 2 PASS 1508
+ITER 3 PASS 1516
+ITER 4 PASS 1527
+ITER 5 PASS 1500
+ITER 6 PASS 1502
+ITER 7 PASS 1497
+ITER 8 PASS 1539
+ITER 9 PASS 1530
+ITER 10 PASS 1497
+ITER 11 PASS 1503
+ITER 12 PASS 1509
+ITER 13 PASS 1496
+ITER 14 PASS 1496
+ITER 15 PASS 1517
+ITER 16 PASS 1527
+ITER 17 PASS 1506
+ITER 18 PASS 1498
+ITER 19 PASS 1502
+ITER 20 PASS 1496
+SUMMARY failed=0/20
+# exit=0 wall_seconds=33 end=2026-10-25T00:32:19-0700

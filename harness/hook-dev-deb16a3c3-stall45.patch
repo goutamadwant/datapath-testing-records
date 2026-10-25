@@ -1,0 +1,31 @@
+--- a/seatunnel-edge-agent/seatunnel-edge-agent-connector/src/test/java/org/apache/seatunnel/edge/agent/connector/file/FileCollectReaderBehaviorTest.java
++++ b/seatunnel-edge-agent/seatunnel-edge-agent-connector/src/test/java/org/apache/seatunnel/edge/agent/connector/file/FileCollectReaderBehaviorTest.java
+@@ -70,11 +70,28 @@
+             Assertions.assertEquals(1, reader.poll(10).size());
+ 
+             long idleDeadlineMs = System.currentTimeMillis() + CLOSE_INACTIVE_MS + 30L;
++            // REPLAY HOOK (reconstruction 2026-10-25, local-only): one 45 ms stall in the first
++            // Awaitility loop, injected at the first evaluation that is at most
++            // replay.stall.lead.ms (default 35) before idleDeadlineMs.
++            final long replayLeadMs = Long.getLong("replay.stall.lead.ms", 35L);
++            final long[] replayStallAt = {0L};
+             Awaitility.await()
+                     .atMost(3, TimeUnit.SECONDS)
+                     .pollInterval(GLOB_SCAN_INTERVAL_MS, TimeUnit.MILLISECONDS)
+                     .until(
+                             () -> {
++                                if (replayStallAt[0] == 0L
++                                        && System.currentTimeMillis()
++                                                >= idleDeadlineMs - replayLeadMs) {
++                                    replayStallAt[0] = System.currentTimeMillis();
++                                    Thread.sleep(45L);
++                                    System.out.println(
++                                            "REPLAY-HOOK stall45 at deadline"
++                                                    + (replayStallAt[0] - idleDeadlineMs)
++                                                    + "ms, woke at deadline"
++                                                    + (System.currentTimeMillis() - idleDeadlineMs)
++                                                    + "ms");
++                                }
+                                 reader.poll(10);
+                                 return System.currentTimeMillis() >= idleDeadlineMs;
+                             });

@@ -1,0 +1,49 @@
+# cell=dev-hook-lead65-jdk11 start=2026-10-25T00:34:55-0700 rev=deb16a3c3152f0349a587a504dccc997a131a9d7
+# JAVA_HOME=<home> iterations=20 busy_loops=0 jvm_props=-Dreplay.stall.lead.ms=65
+# hooked_test_classes=<scratch>/partB/classes/dev-hook
+# load_before:  0:34  up 25 days, 16:51, 2 users, load averages: 22.02 15.00 11.78
+# command: <home> -Dreplay.stall.lead.ms=65 -cp <classpath below> RepeatMethod org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest rediscoversFileAfterInactiveCursorClosed 20
+# classpath: <scratch>/partB/classes/dev-hook:<scratch>/partB/runner:<scratch>/wt-dev/seatunnel-edge-agent/seatunnel-edge-agent-connector/target/test-classes:<scratch>/wt-dev/seatunnel-edge-agent/seatunnel-edge-agent-connector/target/classes:<scratch>/wt-dev/seatunnel-api/target/seatunnel-api-3.0.0-SNAPSHOT-2.12.15.jar:<scratch>/wt-dev/seatunnel-common/target/seatunnel-common-3.0.0-SNAPSHOT-2.12.15.jar:<scratch>/wt-dev/seatunnel-config/seatunnel-config-shade/target/seatunnel-config-shade-3.0.0-SNAPSHOT.jar:<scratch>/wt-dev/seatunnel-config/seatunnel-config-base/target/seatunnel-config-base-3.0.0-SNAPSHOT.jar:<home>
+JVM 11.0.19 OpenJDK 64-Bit Server VM x86_64
+REPLAY-HOOK stall45 at deadline-61ms, woke at deadline-11ms
+ITER 1 PASS 2458
+REPLAY-HOOK stall45 at deadline-54ms, woke at deadline-5ms
+ITER 2 PASS 603
+REPLAY-HOOK stall45 at deadline-65ms, woke at deadline-15ms
+ITER 3 PASS 595
+REPLAY-HOOK stall45 at deadline-58ms, woke at deadline-8ms
+ITER 4 PASS 603
+REPLAY-HOOK stall45 at deadline-50ms, woke at deadline-4ms
+ITER 5 PASS 611
+REPLAY-HOOK stall45 at deadline-50ms, woke at deadline-3ms
+ITER 6 PASS 589
+REPLAY-HOOK stall45 at deadline-47ms, woke at deadline2ms
+ITER 7 PASS 611
+REPLAY-HOOK stall45 at deadline-56ms, woke at deadline-8ms
+ITER 8 PASS 595
+REPLAY-HOOK stall45 at deadline-51ms, woke at deadline0ms
+ITER 9 PASS 594
+REPLAY-HOOK stall45 at deadline-43ms, woke at deadline8ms
+ITER 10 FAIL 3607 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+REPLAY-HOOK stall45 at deadline-49ms, woke at deadline1ms
+ITER 11 PASS 594
+REPLAY-HOOK stall45 at deadline-53ms, woke at deadline-3ms
+ITER 12 PASS 622
+REPLAY-HOOK stall45 at deadline-49ms, woke at deadline1ms
+ITER 13 PASS 591
+REPLAY-HOOK stall45 at deadline-56ms, woke at deadline-3ms
+ITER 14 PASS 576
+REPLAY-HOOK stall45 at deadline-52ms, woke at deadline-2ms
+ITER 15 PASS 589
+REPLAY-HOOK stall45 at deadline-50ms, woke at deadline0ms
+ITER 16 PASS 600
+REPLAY-HOOK stall45 at deadline-55ms, woke at deadline-5ms
+ITER 17 PASS 603
+REPLAY-HOOK stall45 at deadline-44ms, woke at deadline5ms
+ITER 18 FAIL 3597 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+REPLAY-HOOK stall45 at deadline-55ms, woke at deadline-5ms
+ITER 19 PASS 609
+REPLAY-HOOK stall45 at deadline-55ms, woke at deadline-4ms
+ITER 20 PASS 595
+SUMMARY failed=2/20
+# exit=0 wall_seconds=21 end=2026-10-25T00:35:16-0700

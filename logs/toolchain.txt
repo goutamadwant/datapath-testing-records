@@ -1,0 +1,46 @@
+# toolchain record, 2026-10-25T00:38:53-0700
+## host
+Apple M1 Pro
+hw.ncpu=10 hw.memsize=17179869184
+ProductName:		macOS
+ProductVersion:		27.0
+BuildVersion:		26A428
+Darwin MacBook-Pro.local 27.0.0 Darwin Kernel Version 27.0.0: Tue Aug 11 21:22:49 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T6000 arm64
+## JDK 8
+java version "1.8.0_172"
+Java(TM) SE Runtime Environment (build 1.8.0_172-b11)
+Java HotSpot(TM) 64-Bit Server VM (build 25.172-b11, mixed mode)
+/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home/bin/java: Mach-O 64-bit executable x86_64
+## JDK 11
+openjdk version "11.0.19" 2023-04-18
+OpenJDK Runtime Environment Temurin-11.0.19+7 (build 11.0.19+7)
+OpenJDK 64-Bit Server VM Temurin-11.0.19+7 (build 11.0.19+7, mixed mode)
+<home> Mach-O 64-bit executable x86_64
+## Maven via wrapper (before config dir)
+Apache Maven 3.8.4 (9b656c72d54e5bacbed989b64718c159fe39b537)
+Maven home: <home>
+Java version: 11.0.19, vendor: Eclipse Adoptium, runtime: <home>
+Default locale: en_US, platform encoding: UTF-8
+OS name: "mac os x", version: "27.0", arch: "x86_64", family: "mac"
+maven-resolver-api-1.6.3.jar
+maven-resolver-connector-basic-1.6.3.jar
+maven-resolver-impl-1.6.3.jar
+maven-resolver-provider-3.8.4.jar
+maven-resolver-spi-1.6.3.jar
+maven-resolver-transport-wagon-1.6.3.jar
+maven-resolver-util-1.6.3.jar
+wagon-file-3.4.3.jar
+wagon-http-3.4.3-shaded.jar
+wagon-provider-api-3.4.3.jar
+ccd67d1ee4fd79339c9b6f95d1e5e1e0e0209a8c1b095d9291e009afa0a492a5  <home>
+## python
+Python 3.12.7
+## curl (used by mvnw; wget absent)
+curl 8.9.1 (arm64-apple-darwin20.0.0) libcurl/8.9.1 OpenSSL/3.0.15 zlib/1.2.13 libssh2/1.11.0 nghttp2/1.57.0
+wget not found
+wget: not installed
+## docker
+client 29.9.2 server 29.9.2 linux/arm64
+## git
+git version 2.55.0
+## installs performed: none (JDK 8u172, JDK 11.0.19, Maven 3.8.4 wrapper dist, docker, gh, python3 were already present)

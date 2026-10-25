@@ -1,0 +1,61 @@
+jdk8_503x2_before: rc=1 success=False t=5.0s junit={'junit-4.13.2.pom': ['503']} wrapper=[]
+jdk8_503x2_after: rc=0 success=True t=19.5s junit={'junit-4.13.2.pom': ['503', '503', 'serve'], 'junit-4.13.2.jar': ['503', '503', 'serve'], 'junit-3.8.1.pom': ['503', '503', 'serve'], 'junit-3.8.2.pom': ['503', '503', 'serve'], 'junit-3.8.1.jar': ['503', '503', 'serve']} wrapper=[]
+jdk8_reset4_before: rc=1 success=False t=4.6s junit={'junit-4.13.2.pom': ['reset', 'reset', 'reset', 'reset']} wrapper=[]
+jdk8_reset4_after: rc=0 success=True t=9.1s junit={'junit-4.13.2.pom': ['reset', 'reset', 'reset', 'reset', 'serve'], 'junit-4.13.2.jar': ['reset', 'reset', 'reset', 'reset', 'serve'], 'junit-3.8.1.pom': ['reset', 'reset', 'reset', 'reset', 'serve'], 'junit-3.8.2.pom': ['reset', 'reset', 'reset', 'reset', 'serve'], 'junit-3.8.1.jar': ['reset', 'reset', 'reset', 'reset', 'serve']} wrapper=[]
+jdk8_429x2_before: rc=1 success=False t=20.1s junit={'junit-4.13.2.pom': ['429', '429', 'serve']} wrapper=[]
+jdk8_429x2_after: rc=0 success=True t=26.6s junit={'junit-4.13.2.pom': ['429', '429', 'serve'], 'junit-4.13.2.jar': ['429', '429', 'serve'], 'junit-3.8.1.pom': ['429', '429', 'serve'], 'junit-3.8.2.pom': ['429', '429', 'serve'], 'junit-3.8.1.jar': ['429', '429', 'serve']} wrapper=[]
+jdk8_truncate1_before: rc=1 success=False t=9.8s junit={'junit-4.13.2.pom': ['truncate']} wrapper=[]
+jdk8_truncate1_after: rc=1 success=False t=11.7s junit={'junit-4.13.2.pom': ['truncate']} wrapper=[]
+jdk8_wrapper429s_before: rc=1 success=False t=24.1s junit={} wrapper=['429', '429', '429', '429', '429']
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 59908)
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 761, in __init__
+    self.handle()
+  File "/opt/anaconda3/lib/python3.12/http/server.py", line 438, in handle
+    self.handle_one_request()
+  File "/opt/anaconda3/lib/python3.12/http/server.py", line 404, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [Errno 54] Connection reset by peer
+----------------------------------------
+jdk8_wrapper429s_after: rc=0 success=True t=59.6s junit={'junit-4.13.2.pom': ['serve'], 'junit-4.13.2.jar': ['serve'], 'junit-3.8.1.pom': ['serve'], 'junit-3.8.2.pom': ['serve'], 'junit-3.8.1.jar': ['serve']} wrapper=['429', '429', '429', 'serve']
+jdk11_503x2_before: rc=1 success=False t=10.2s junit={'junit-4.13.2.pom': ['503']} wrapper=[]
+jdk11_503x2_after: rc=1 success=False t=5.6s junit={} wrapper=[]
+jdk11_reset4_before: rc=1 success=False t=5.9s junit={'junit-4.13.2.pom': ['reset', 'reset', 'reset', 'reset']} wrapper=[]
+jdk11_reset4_after: rc=0 success=True t=11.4s junit={'junit-4.13.2.pom': ['reset', 'reset', 'reset', 'reset', 'serve'], 'junit-4.13.2.jar': ['reset', 'reset', 'reset', 'reset', 'serve'], 'junit-3.8.1.pom': ['reset', 'reset', 'reset', 'reset', 'serve'], 'junit-3.8.2.pom': ['reset', 'reset', 'reset', 'reset', 'serve'], 'junit-3.8.1.jar': ['reset', 'reset', 'reset', 'reset', 'serve']} wrapper=[]
+jdk11_429x2_before: rc=1 success=False t=21.0s junit={'junit-4.13.2.pom': ['429', '429', 'serve']} wrapper=[]
+jdk11_429x2_after: rc=0 success=True t=23.1s junit={'junit-4.13.2.pom': ['429', '429', 'serve'], 'junit-4.13.2.jar': ['429', '429', 'serve'], 'junit-3.8.1.pom': ['429', '429', 'serve'], 'junit-3.8.2.pom': ['429', '429', 'serve'], 'junit-3.8.1.jar': ['429', '429', 'serve']} wrapper=[]
+jdk11_truncate1_before: rc=1 success=False t=7.5s junit={'junit-4.13.2.pom': ['truncate']} wrapper=[]
+jdk11_truncate1_after: rc=1 success=False t=6.8s junit={'junit-4.13.2.pom': ['truncate']} wrapper=[]
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 60639)
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/opt/anaconda3/lib/python3.12/socketserver.py", line 761, in __init__
+    self.handle()
+  File "/opt/anaconda3/lib/python3.12/http/server.py", line 438, in handle
+    self.handle_one_request()
+  File "/opt/anaconda3/lib/python3.12/http/server.py", line 404, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [Errno 54] Connection reset by peer
+----------------------------------------
+jdk11_wrapper429s_before: rc=1 success=False t=20.7s junit={} wrapper=['429', '429', '429', '429', '429']
+jdk11_wrapper429s_after: rc=0 success=True t=44.8s junit={'junit-4.13.2.pom': ['serve'], 'junit-4.13.2.jar': ['serve'], 'junit-3.8.1.pom': ['serve'], 'junit-3.8.2.pom': ['serve'], 'junit-3.8.1.jar': ['serve']} wrapper=['429', '429', '429', 'serve']
+jdk11_503x2_after: rc=0 success=True t=19.6s junit={'junit-4.13.2.pom': ['503', '503', 'serve'], 'junit-4.13.2.jar': ['503', '503', 'serve'], 'junit-3.8.1.pom': ['503', '503', 'serve'], 'junit-3.8.2.pom': ['503', '503', 'serve'], 'junit-3.8.1.jar': ['503', '503', 'serve']} wrapper=[]
+jdk8_429x2nobody_before: rc=0 success=True t=84.7s junit={'junit-4.13.2.pom': ['429nobody', '429nobody', 'serve', 'serve'], 'junit-4.13.2.jar': ['429nobody', '429nobody', 'serve', 'serve'], 'junit-3.8.1.pom': ['429nobody', '429nobody', 'serve', 'serve'], 'junit-3.8.2.pom': ['429nobody', '429nobody', 'serve', 'serve'], 'junit-3.8.1.jar': ['429nobody', '429nobody', 'serve', 'serve']} wrapper=[]
+jdk11_429x2nobody_before: rc=0 success=True t=84.4s junit={'junit-4.13.2.pom': ['429nobody', '429nobody', 'serve', 'serve'], 'junit-4.13.2.jar': ['429nobody', '429nobody', 'serve', 'serve'], 'junit-3.8.1.pom': ['429nobody', '429nobody', 'serve', 'serve'], 'junit-3.8.2.pom': ['429nobody', '429nobody', 'serve', 'serve'], 'junit-3.8.1.jar': ['429nobody', '429nobody', 'serve', 'serve']} wrapper=[]

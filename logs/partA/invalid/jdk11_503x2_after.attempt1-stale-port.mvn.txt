@@ -1,0 +1,50 @@
+# run_id=jdk11_503x2_after order=12 start=2026-10-25T00:21:09-0700
+# cwd=<scratch>/partA/runs/jdk11_503x2_after/proj
+# JAVA_HOME=<home>
+# server: /opt/anaconda3/bin/python3 -I ./harness/fault_mirror.py --root <scratch>/partA/warm-repo --fault 503x2 --log ./logs/partA/jdk11_503x2_after.server.jsonl --port-file <scratch>/partA/runs/jdk11_503x2_after.port
+# command: ./mvnw -B -s <scratch>/partA/runs/jdk11_503x2_after/settings.xml -Dmaven.repo.local=<scratch>/partA/runs/jdk11_503x2_after/repo -f pom.xml dependency:resolve
+[INFO] Scanning for projects...
+[INFO] Downloading from faultmirror: http://127.0.0.1:59148/maven2/org/apache/maven/plugins/maven-clean-plugin/2.5/maven-clean-plugin-2.5.pom
+[WARNING] Failed to retrieve plugin descriptor for org.apache.maven.plugins:maven-clean-plugin:2.5: Plugin org.apache.maven.plugins:maven-clean-plugin:2.5 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.apache.maven.plugins:maven-clean-plugin:jar:2.5
+[INFO] Downloading from faultmirror: http://127.0.0.1:59148/maven2/org/apache/maven/plugins/maven-resources-plugin/2.6/maven-resources-plugin-2.6.pom
+[WARNING] Failed to retrieve plugin descriptor for org.apache.maven.plugins:maven-resources-plugin:2.6: Plugin org.apache.maven.plugins:maven-resources-plugin:2.6 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.apache.maven.plugins:maven-resources-plugin:jar:2.6
+[INFO] Downloading from faultmirror: http://127.0.0.1:59148/maven2/org/apache/maven/plugins/maven-jar-plugin/2.4/maven-jar-plugin-2.4.pom
+[WARNING] Failed to retrieve plugin descriptor for org.apache.maven.plugins:maven-jar-plugin:2.4: Plugin org.apache.maven.plugins:maven-jar-plugin:2.4 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.apache.maven.plugins:maven-jar-plugin:jar:2.4
+[INFO] Downloading from faultmirror: http://127.0.0.1:59148/maven2/org/apache/maven/plugins/maven-compiler-plugin/3.1/maven-compiler-plugin-3.1.pom
+[WARNING] Failed to retrieve plugin descriptor for org.apache.maven.plugins:maven-compiler-plugin:3.1: Plugin org.apache.maven.plugins:maven-compiler-plugin:3.1 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.apache.maven.plugins:maven-compiler-plugin:jar:3.1
+[INFO] Downloading from faultmirror: http://127.0.0.1:59148/maven2/org/apache/maven/plugins/maven-surefire-plugin/2.12.4/maven-surefire-plugin-2.12.4.pom
+[WARNING] Failed to retrieve plugin descriptor for org.apache.maven.plugins:maven-surefire-plugin:2.12.4: Plugin org.apache.maven.plugins:maven-surefire-plugin:2.12.4 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.apache.maven.plugins:maven-surefire-plugin:jar:2.12.4
+[INFO] Downloading from faultmirror: http://127.0.0.1:59148/maven2/org/apache/maven/plugins/maven-install-plugin/2.4/maven-install-plugin-2.4.pom
+[WARNING] Failed to retrieve plugin descriptor for org.apache.maven.plugins:maven-install-plugin:2.4: Plugin org.apache.maven.plugins:maven-install-plugin:2.4 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.apache.maven.plugins:maven-install-plugin:jar:2.4
+[INFO] Downloading from faultmirror: http://127.0.0.1:59148/maven2/org/apache/maven/plugins/maven-deploy-plugin/2.7/maven-deploy-plugin-2.7.pom
+[WARNING] Failed to retrieve plugin descriptor for org.apache.maven.plugins:maven-deploy-plugin:2.7: Plugin org.apache.maven.plugins:maven-deploy-plugin:2.7 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.apache.maven.plugins:maven-deploy-plugin:jar:2.7
+[INFO] Downloading from faultmirror: http://127.0.0.1:59148/maven2/org/apache/maven/plugins/maven-site-plugin/3.3/maven-site-plugin-3.3.pom
+[WARNING] Failed to retrieve plugin descriptor for org.apache.maven.plugins:maven-site-plugin:3.3: Plugin org.apache.maven.plugins:maven-site-plugin:3.3 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.apache.maven.plugins:maven-site-plugin:jar:3.3
+[INFO] Downloading from faultmirror: http://127.0.0.1:59148/maven2/org/apache/maven/plugins/maven-antrun-plugin/1.3/maven-antrun-plugin-1.3.pom
+[WARNING] Failed to retrieve plugin descriptor for org.apache.maven.plugins:maven-antrun-plugin:1.3: Plugin org.apache.maven.plugins:maven-antrun-plugin:1.3 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.apache.maven.plugins:maven-antrun-plugin:jar:1.3
+[INFO] Downloading from faultmirror: http://127.0.0.1:59148/maven2/org/apache/maven/plugins/maven-assembly-plugin/2.2-beta-5/maven-assembly-plugin-2.2-beta-5.pom
+[WARNING] Failed to retrieve plugin descriptor for org.apache.maven.plugins:maven-assembly-plugin:2.2-beta-5: Plugin org.apache.maven.plugins:maven-assembly-plugin:2.2-beta-5 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.apache.maven.plugins:maven-assembly-plugin:jar:2.2-beta-5
+[INFO] Downloading from faultmirror: http://127.0.0.1:59148/maven2/org/apache/maven/plugins/maven-dependency-plugin/2.8/maven-dependency-plugin-2.8.pom
+[WARNING] Failed to retrieve plugin descriptor for org.apache.maven.plugins:maven-dependency-plugin:2.8: Plugin org.apache.maven.plugins:maven-dependency-plugin:2.8 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.apache.maven.plugins:maven-dependency-plugin:jar:2.8
+[INFO] Downloading from faultmirror: http://127.0.0.1:59148/maven2/org/apache/maven/plugins/maven-release-plugin/2.5.3/maven-release-plugin-2.5.3.pom
+[WARNING] Failed to retrieve plugin descriptor for org.apache.maven.plugins:maven-release-plugin:2.5.3: Plugin org.apache.maven.plugins:maven-release-plugin:2.5.3 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.apache.maven.plugins:maven-release-plugin:jar:2.5.3
+[INFO] Downloading from faultmirror: http://127.0.0.1:59148/maven2/org/codehaus/mojo/maven-metadata.xml
+[INFO] Downloading from faultmirror: http://127.0.0.1:59148/maven2/org/apache/maven/plugins/maven-metadata.xml
+[WARNING] Could not transfer metadata org.apache.maven.plugins/maven-metadata.xml from/to faultmirror (http://127.0.0.1:59148/maven2): transfer failed for http://127.0.0.1:59148/maven2/org/apache/maven/plugins/maven-metadata.xml
+[WARNING] Could not transfer metadata org.codehaus.mojo/maven-metadata.xml from/to faultmirror (http://127.0.0.1:59148/maven2): transfer failed for http://127.0.0.1:59148/maven2/org/codehaus/mojo/maven-metadata.xml
+[WARNING] org.apache.maven.plugins/maven-metadata.xmlfailed to transfer from http://127.0.0.1:59148/maven2 during a previous attempt. This failure was cached in the local repository and resolution will not be reattempted until the update interval of faultmirror has elapsed or updates are forced. Original error: Could not transfer metadata org.apache.maven.plugins/maven-metadata.xml from/to faultmirror (http://127.0.0.1:59148/maven2): transfer failed for http://127.0.0.1:59148/maven2/org/apache/maven/plugins/maven-metadata.xml
+[WARNING] org.codehaus.mojo/maven-metadata.xmlfailed to transfer from http://127.0.0.1:59148/maven2 during a previous attempt. This failure was cached in the local repository and resolution will not be reattempted until the update interval of faultmirror has elapsed or updates are forced. Original error: Could not transfer metadata org.codehaus.mojo/maven-metadata.xml from/to faultmirror (http://127.0.0.1:59148/maven2): transfer failed for http://127.0.0.1:59148/maven2/org/codehaus/mojo/maven-metadata.xml
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.195 s
+[INFO] Finished at: 2026-10-25T00:21:15-07:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] No plugin found for prefix 'dependency' in the current project and in the plugin groups [org.apache.maven.plugins, org.codehaus.mojo] available from the repositories [local (<scratch>/partA/runs/jdk11_503x2_after/repo), faultmirror (http://127.0.0.1:59148/maven2)] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/NoPluginFoundForPrefixException
+# exit=1 timed_out=False wall_seconds=5.65
