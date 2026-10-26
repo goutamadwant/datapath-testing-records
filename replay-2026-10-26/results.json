@@ -1,6 +1,6 @@
 {
  "bundle": "replay-2026-10-26",
- "generated": "2026-10-25T18:00:52-0700",
+ "generated": "2026-10-25T19:08:36-0700",
  "note": "Reconstruction runs. Every value below is parsed from a log under logs/; paths are relative to this file's directory.",
  "validation": {
   "result": "PASS",
@@ -16143,17 +16143,10 @@
   },
   {
    "path": "harness/make_results.py",
-   "bytes": 25632,
-   "sha256": "5a781d8e56c158b3195ec2b15d886aaab6f5fb74add7af2ed79a5844abb2950e",
+   "bytes": 28690,
+   "sha256": "e040312d67d6d0e5e8e4c61eba9c95b29b83c74d28383ac64d6c4f6974a5258f",
    "sha256_as_run": "0176e7b397d565bf75e5b7fcde44bf6b1872512032c303e29ce5513d8f9527b8",
-   "revised_after_runs": "2026-10-25: fail-closed validation of the requested matrix and per-cell runs_requested, runs_recorded, runs_valid; as-run hashes kept here. Re-running it over the recorded logs left every count and summary unchanged."
-  },
-  {
-   "path": "harness/parse_part_c.py",
-   "bytes": 7895,
-   "sha256": "1bafe4d218af112170e7f373839d11e5d77cbd8db1e12b0d07dda11f09dfe752",
-   "sha256_as_run": "bdad4ea98f03da6f6321d2237d3d0e5f9c178064604190a8e38fda5e5568802d",
-   "revised_after_runs": "2026-10-25: validation added (missing or unparsable log, fewer runs than requested, missing assertions, failed validity checks make the exit status 1); record format unchanged. Re-parsing the four recorded cell logs with this version reproduces logs/partC/runs.jsonl byte for byte."
+   "revised_after_runs": "2026-10-25 (third revision): fail-closed validation of the requested matrix and per-cell runs_requested, runs_recorded, runs_valid; as-run hashes kept here. Re-running it over the recorded logs left every count and summary unchanged. 2026-10-25 (fourth revision): imports parse_part_c from harness/historical-part-c; --part all requests Parts A and B only; harness entries of moved files carry path_as_run. Re-running it over the recorded logs left every count, summary and log hash unchanged."
   },
   {
    "path": "harness/part_a.py",
@@ -16164,18 +16157,6 @@
    "path": "harness/part_b.sh",
    "bytes": 7134,
    "sha256": "03a06ea6122d174a1e4639a0d3984a88ab019616d3df6682e745a93343661d29"
-  },
-  {
-   "path": "harness/part_c.sh",
-   "bytes": 13032,
-   "sha256": "b7757fbd63600d4715781317cf49fbaba5f66de619a178e99453661a252aa865",
-   "sha256_as_run": "a75658e64990ce934935601d2c3f380003e049f84bd80d52a3243e9844835cdb",
-   "revised_after_runs": "2026-10-25 (first revision): cleanup scoped to containers that appeared during the cell. 2026-10-25 (second revision): refuses to start when /tmp/seatunnel_mnt exists. 2026-10-25 (third revision): refuses to start a cell while any container of the Flink, Spark or Zeta images exists; removes a leftover only if it did not exist before the cell, was created after the cell start, runs the cell's engine image and carries the cell JVM's Testcontainers session label, logging every container considered; a cell fails and the script stops when a cell-level check fails, including /tmp/seatunnel_mnt present after the cell. The executed runs used the as-run version; its cleanup loop wrote no logs/partC/*.cleanup.txt file, i.e. it removed nothing (no engine container remained after any cell)."
-  },
-  {
-   "path": "harness/selftest_part_c_guards.sh",
-   "bytes": 8642,
-   "sha256": "cd6f9d9da31fcc373e91643e073cf73f1fcb4a4f9b42eed399722f623eaddcf1"
   },
   {
    "path": "harness/selftest_validation.py",
@@ -16194,8 +16175,10 @@
   },
   {
    "path": "harness/tables.py",
-   "bytes": 8601,
-   "sha256": "1e4db5170a6a1984fec5799644e854af43ebc7c4cb7294aee3bcc14691e97bb2"
+   "bytes": 9674,
+   "sha256": "734492705072ab7f7160fb07312d592e1edbc4f2a390984cbe78cf39152cefe5",
+   "sha256_as_run": "1e4db5170a6a1984fec5799644e854af43ebc7c4cb7294aee3bcc14691e97bb2",
+   "revised_after_runs": "2026-10-25 (fourth revision): the Article column now quotes Table 1 and the stall counts of the article revision of 25 October 2026 that cites these records at commit fe561f6; the Part B table gains that column. sha256_as_run is the version published with the runs, which quoted an earlier article text. Data columns unchanged."
   },
   {
    "path": "harness/tiny-pom.xml",
@@ -16203,23 +16186,52 @@
    "sha256": "abc1aa7e4a6ec7b2e48586a1bbda5c6c5cc28182441380823656e02a168fbc3b"
   },
   {
+   "path": "harness/historical-part-c/README.md",
+   "bytes": 4642,
+   "sha256": "ef0b37461e1f1b479e37f6e7c965dc295f763de45cf3c8bc9595fd2a34d11f66"
+  },
+  {
+   "path": "harness/historical-part-c/parse_part_c.py",
+   "bytes": 7895,
+   "sha256": "1bafe4d218af112170e7f373839d11e5d77cbd8db1e12b0d07dda11f09dfe752",
+   "path_as_run": "harness/parse_part_c.py",
+   "sha256_as_run": "bdad4ea98f03da6f6321d2237d3d0e5f9c178064604190a8e38fda5e5568802d",
+   "revised_after_runs": "2026-10-25: validation added (missing or unparsable log, fewer runs than requested, missing assertions, failed validity checks make the exit status 1); record format unchanged. Re-parsing the four recorded cell logs with this version reproduces logs/partC/runs.jsonl byte for byte. 2026-10-25 (fourth revision): moved from harness/parse_part_c.py to harness/historical-part-c/parse_part_c.py with its content unchanged (same sha256); replay.sh no longer runs Part C. Kept for inspection, not for execution; see harness/historical-part-c/README.md. It only reads logs; make_results.py imports it from there to validate the recorded Part C runs."
+  },
+  {
+   "path": "harness/historical-part-c/part_c.sh",
+   "bytes": 13032,
+   "sha256": "b7757fbd63600d4715781317cf49fbaba5f66de619a178e99453661a252aa865",
+   "path_as_run": "harness/part_c.sh",
+   "sha256_as_run": "a75658e64990ce934935601d2c3f380003e049f84bd80d52a3243e9844835cdb",
+   "revised_after_runs": "2026-10-25 (first revision): cleanup scoped to containers that appeared during the cell. 2026-10-25 (second revision): refuses to start when /tmp/seatunnel_mnt exists. 2026-10-25 (third revision): refuses to start a cell while any container of the Flink, Spark or Zeta images exists; removes a leftover only if it did not exist before the cell, was created after the cell start, runs the cell's engine image and carries the cell JVM's Testcontainers session label, logging every container considered; a cell fails and the script stops when a cell-level check fails, including /tmp/seatunnel_mnt present after the cell. The executed runs used the as-run version; its cleanup loop wrote no logs/partC/*.cleanup.txt file, i.e. it removed nothing (no engine container remained after any cell). 2026-10-25 (fourth revision): moved from harness/part_c.sh to harness/historical-part-c/part_c.sh with its content unchanged (same sha256); replay.sh no longer runs Part C. Kept for inspection, not for execution; see harness/historical-part-c/README.md."
+  },
+  {
+   "path": "harness/historical-part-c/selftest_part_c_guards.sh",
+   "bytes": 8642,
+   "sha256": "cd6f9d9da31fcc373e91643e073cf73f1fcb4a4f9b42eed399722f623eaddcf1",
+   "path_as_run": "harness/selftest_part_c_guards.sh",
+   "revised_after_runs": "2026-10-25 (fourth revision): moved from harness/selftest_part_c_guards.sh with its content unchanged (same sha256). Written after the runs (third revision) and executed there on 2026-10-25 at its old path; it creates and removes the host path /tmp/seatunnel_mnt. Kept for inspection, not for execution."
+  },
+  {
+   "path": "harness/historical-part-c/java/ReplayKillTeardownTest.java",
+   "bytes": 19322,
+   "sha256": "b715134750acad0875701c717d2140563dd14f3c49928a6104f0457d9252caf5",
+   "path_as_run": "harness/java/ReplayKillTeardownTest.java",
+   "sha256_as_run": "e0049c6c63c15d6fa037ab6b57261139c54fdd9145b29365e0e2dfe5867be259",
+   "revised_after_runs": "2026-10-25: a failed pre_run_no_engine_containers check aborts the cell (JVM exit 3) instead of being recorded and continued; prints the Testcontainers session id. The executed runs used the as-run version (its sha256 is in every Part C cell log header); the check passed in all 20 runs. 2026-10-25 (fourth revision): moved from harness/java/ReplayKillTeardownTest.java to harness/historical-part-c/java/ReplayKillTeardownTest.java with its content unchanged (same sha256); replay.sh no longer runs Part C. Kept for inspection, not for execution; see harness/historical-part-c/README.md."
+  },
+  {
    "path": "harness/java/RepeatMethod.java",
    "bytes": 3065,
    "sha256": "dd0a792181616d5d57a8750c97bc5e9bf1d70a8bb691e6c77a001355ff0968c9"
   },
   {
-   "path": "harness/java/ReplayKillTeardownTest.java",
-   "bytes": 19322,
-   "sha256": "b715134750acad0875701c717d2140563dd14f3c49928a6104f0457d9252caf5",
-   "sha256_as_run": "e0049c6c63c15d6fa037ab6b57261139c54fdd9145b29365e0e2dfe5867be259",
-   "revised_after_runs": "2026-10-25: a failed pre_run_no_engine_containers check aborts the cell (JVM exit 3) instead of being recorded and continued; prints the Testcontainers session id. The executed runs used the as-run version (its sha256 is in every Part C cell log header); the check passed in all 20 runs."
-  },
-  {
    "path": "replay.sh",
-   "bytes": 14996,
-   "sha256": "613d4434bcb7f257bf22005bde934ca3bc0b5b1d63abae3d00266a9eb6c945f7",
+   "bytes": 13640,
+   "sha256": "4b612c5de43833fb898b74467fec426204d556c6036db2f9339f156157a81642",
    "sha256_as_run": "6e85b14156590e4dc5217668afd3287f5829e93c5aa9876c2973f31195ca0d0b",
-   "revised_after_runs": "2026-10-25: --runs must be a positive integer; a failed validation is reported and the exit status is 1. sha256_as_run is the version published with the runs (interpretation 26: the maven-version block was added after Parts A and C had started)."
+   "revised_after_runs": "2026-10-25: --runs must be a positive integer; a failed validation is reported and the exit status is 1. sha256_as_run is the version published with the runs (interpretation 26: the maven-version block was added after Parts A and C had started). 2026-10-25 (fourth revision): Part C is no longer run. --part C prints why and exits 0 before creating, cloning, building or contacting anything; --part all prints the same reason and runs Parts A and B only. The Part C preparation (image pulls, e2e build) and the Docker lines of the toolchain record were removed."
   }
  ]
 }

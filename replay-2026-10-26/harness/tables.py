@@ -2,9 +2,12 @@
 """Print the README comparison tables (Markdown) from results.json.
 
 usage: python3 harness/tables.py [--old <results.json of the 2026-10-25 bundle>]
-The "Article" column quotes Table 1 of the article (rows 1-7) or, for Part B, PR 12472 (the
-article omits the rates). The 2026-10-25 column is read from the older bundle's results.json; the
-2026-10-26 column from this bundle's results.json.
+The "Article" column quotes, word for word, Table 1 (rows 1-7) and the PR 12472 stall counts of
+the article revision of 25 October 2026 that cites these records at commit fe561f6; that Table 1
+reports this bundle's runs. The stall counts are in the article's text, not in Table 1, and are
+marked "(text)"; the empty-body 429 variant is not in Table 1. The "PR 12472" column quotes the
+pull request. The 2026-10-25 column is read from the older bundle's results.json; the 2026-10-26
+column from this bundle's results.json.
 """
 import argparse
 import json
@@ -18,14 +21,30 @@ FAULT = {"503x2": "HTTP 503 on first 2 requests", "reset4": "Connection reset on
          "wrapper429s": "Wrapper jar 429 for 30 s",
          "429x2nobody": "HTTP 429 with empty body on first 2 requests (not a Table 1 row)"}
 ARTICLE_A = {
-    ("503x2", "before"): "fails on first 503", ("503x2", "after"): "succeeds on third request",
-    ("reset4", "before"): "fails after four attempts", ("reset4", "after"): "succeeds on fifth",
-    ("429x2", "before"): "fails after receiving 200, unlike the PR", ("429x2", "after"): "succeeds",
-    ("truncate1", "before"): "fails", ("truncate1", "after"): "still fails without retry",
-    ("wrapper429s", "before"): "five failed attempts; last at 20.2-20.5 s; main class not found",
-    ("wrapper429s", "after"): "fourth attempt succeeds at 35.2-35.6 s",
-    ("429x2nobody", "before"): "(boundary note: body-less 429s passed only after checksum-triggered redownload)",
-    ("429x2nobody", "after"): "-"}
+    ("503x2", "before"): "fails on first 503, 5/5 per JDK",
+    ("503x2", "after"): "succeeds on third request, 5/5 per JDK",
+    ("reset4", "before"): "fails after four attempts, 5/5 per JDK",
+    ("reset4", "after"): "succeeds on fifth, 5/5 per JDK",
+    ("429x2", "before"): "closed-stream error after receiving 200, 5/5 per JDK; unlike the PR",
+    ("429x2", "after"): "succeeds, 5/5 per JDK",
+    ("truncate1", "before"): "fails, 5/5 per JDK",
+    ("truncate1", "after"): "fails without retry, 5/5 per JDK; earlier JDK 11 hang not reproduced",
+    ("wrapper429s", "before"): "five attempts; main class not found, 5/5 per JDK",
+    ("wrapper429s", "after"): "fourth attempt succeeds, 5/5 per JDK",
+    ("429x2nobody", "before"): "- (not in Table 1)",
+    ("429x2nobody", "after"): "- (not in Table 1)"}
+ARTICLE_B = {
+    "dev-hook-jdk8": "(text) 17/20 failures on unchanged dev with JDK 8",
+    "dev-hook-jdk11": "(text) 19/20 with JDK 11",
+    "patch-hook-jdk8": "(text) The patch failed 0/20 per JDK under different stalls",
+    "patch-hook-jdk11": "(text) The patch failed 0/20 per JDK under different stalls",
+    "dev-nohook-contention-jdk8": "(text) unhooked dev passed 50/50 under CPU contention",
+    "dev-nohook-contention-jdk11": "(text) unhooked dev passed 50/50 under CPU contention"}
+ARTICLE_C = {
+    "flink-before": "teardown threw, containers left, 5/5; next job timed out at 150 s, 3/5",
+    "flink-after": "teardown completed, containers removed, next job exited 0, 5/5",
+    "spark-before": "Spark: teardown threw, master left, next job exited 0, 5/5",
+    "spark-after": "Spark: teardown completed, master removed, next job exited 0, 5/5"}
 
 
 def fmt_list(xs):
@@ -71,7 +90,7 @@ def main():
     old = json.load(open(a.old)) if a.old else {}
 
     print("#### Part A (PR 12468; Table 1 rows 1-5)\n")
-    print("| Row | Fault | Config | JDK | Article (Table 1) | 2026-10-25 (n=1) | 2026-10-26 (n per cell as listed) |")
+    print("| Row | Fault | Config | JDK | Article (Table 1, 25 Oct 2026 revision) | 2026-10-25 (n=1) | 2026-10-26 (n per cell as listed) |")
     print("| --- | --- | --- | --- | --- | --- | --- |")
     for cell, c in new["partA"]["cells"].items():
         print(f"| {ROW[c['fault']]} | {FAULT[c['fault']]} | {c['config']} | {c['jdk']} | "
@@ -82,15 +101,16 @@ def main():
           "patch-hook-jdk11": "0/20 failed", "dev-nohook-contention-jdk8": "0/50 failed (50/50 passed)",
           "dev-nohook-contention-jdk11": "0/50 failed (50/50 passed)"}
     oldb = {c["cell"]: c for c in old.get("cells", []) if c.get("part") == "B" and "iterations" in c}
-    print("| Cell | PR 12472 | 2026-10-25 | 2026-10-26 |")
-    print("| --- | --- | --- | --- |")
+    print("| Cell | Article (25 Oct 2026 revision) | PR 12472 | 2026-10-25 | 2026-10-26 |")
+    print("| --- | --- | --- | --- | --- |")
     for cell, c in new["partB"]["cells"].items():
         if "lead" in cell:
             continue
         o = oldb.get(cell)
         n = "; ".join(f"{f}/{i} failed" for f, i in zip(c["per_loop_failed"], c["iterations_per_loop"]))
-        print(f"| {cell} | {pr.get(cell, '-')} | {o['failed']}/{o['iterations']} failed |"
-              f" {n} |" if o else f"| {cell} | {pr.get(cell, '-')} | not run | {n} |")
+        art = ARTICLE_B.get(cell, "-")
+        print(f"| {cell} | {art} | {pr.get(cell, '-')} | {o['failed']}/{o['iterations']} failed |"
+              f" {n} |" if o else f"| {cell} | {art} | {pr.get(cell, '-')} | not run | {n} |")
     print("\n#### Part B sensitivity sweep (stall placed at <= N ms before `idleDeadlineMs`)\n")
     print("| N | JDK 8, 2026-10-25 | JDK 8, 2026-10-26 | JDK 11, 2026-10-25 | JDK 11, 2026-10-26 |")
     print("| --- | --- | --- | --- | --- |")
@@ -111,14 +131,10 @@ def main():
         print(f"| {k} | {v['iterations']} | {v['failed']} |")
 
     print("\n#### Part C (PR 12481; Table 1 rows 6-7)\n")
-    art = {"flink-before": "teardown threw in 5/5 records; 2/5 next jobs timed out at 150 s",
-           "flink-after": "teardown completed and next job exited 0 in 5/5 records",
-           "spark-before": "teardown threw in 5/5 records; all next jobs exited 0",
-           "spark-after": "teardown completed and next job exited 0 in 5/5 records"}
     oldname = {"flink-before": "flink118TaskManagerKilled-before", "flink-after": "flink118TaskManagerKilled-after",
                "spark-before": "spark3MasterKilled-before", "spark-after": "spark3MasterKilled-after"}
     oldc = {c["cell"]: c for c in old.get("cells", []) if c.get("part") == "C" and "n_runs" in c}
-    print("| Cell | Article (Table 1) | 2026-10-25 (n=5) | 2026-10-26 |")
+    print("| Cell | Article (Table 1, 25 Oct 2026 revision) | 2026-10-25 (n=5) | 2026-10-26 |")
     print("| --- | --- | --- | --- |")
     for cell, c in new["partC"]["cells"].items():
         o = oldc.get(oldname[cell])
@@ -128,7 +144,7 @@ def main():
         ns = (f"teardown threw {c['teardown_threw']}/{c['runs']}; killed engine's containers absent after "
               f"teardown {ab['PASS']}/{c['runs']}; next job exit 0 {c['next_job_exit_zero']}/{c['runs']}; "
               f"timed out {c['next_job_timed_out']}/{c['runs']}")
-        print(f"| {cell} | {art[cell]} | {os_} | {ns} |")
+        print(f"| {cell} | {ARTICLE_C[cell]} | {os_} | {ns} |")
     print("\n#### Part C assertions (PASS/FAIL counts per cell)\n")
     names = []
     for c in new["partC"]["cells"].values():
@@ -144,7 +160,7 @@ def main():
             s = new["partC"]["cells"][cell]["assertions"].get(n)
             row.append(f"{s['PASS']} PASS / {s['FAIL']} FAIL" if s else "-")
         print(f"| {n} | " + " | ".join(row) + " |")
-    print("\nCell-level checks (run by `harness/part_c.sh` after the JVM exited):\n")
+    print("\nCell-level checks (run by `part_c.sh`, now `harness/historical-part-c/part_c.sh`, after the JVM exited):\n")
     print("| Cell | Check | Result | Observed |")
     print("| --- | --- | --- | --- |")
     for cell, c in new["partC"]["cells"].items():

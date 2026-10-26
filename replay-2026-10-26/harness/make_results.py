@@ -2,11 +2,14 @@
 """Validate the recorded runs and regenerate results.json from logs/part{A,B,C}/runs.jsonl.
 
 Every value comes from a run record written by part_a.py / part_b.sh / part_c.sh, which in turn
-parse the run's own log. All paths are relative to the bundle root. The sha256 of every file
+parse the run's own log. part_c.sh and parse_part_c.py are in harness/historical-part-c/: replay.sh
+no longer runs Part C, and the recorded Part C runs are validated here from their retained logs. All paths are relative to the bundle root. The sha256 of every file
 under logs/ (and of every harness file) is recorded. Run: python3 harness/make_results.py
 
 Validation (revision 2026-10-25). The requested matrix is read from the invocation records
 logs/setup/setup-part<P>-*.txt (first line: "replay.sh --part P runs=N prepare_only=0 cells=...").
+"--part all" requests Parts A and B (since the fourth revision, 2026-10-25, replay.sh does not run
+Part C and writes no invocation record for --part C).
 For every requested cell the run records and the logs they name are checked:
   - a missing or unparsable runs.jsonl, run log or server log is a hard error;
   - a record that disagrees with a re-parse of its log is a hard error;
@@ -17,7 +20,7 @@ For every requested cell the run records and the logs they name are checked:
   - Part B: a loop is valid if its JVM exited 0, it recorded exactly the requested iterations
     (ITER 1..n), each hooked dev iteration logged its stall, and a contention loop logged its
     busy loops;
-  - Part C: see harness/parse_part_c.py (requested runs, complete assertion sets, harness
+  - Part C: see harness/historical-part-c/parse_part_c.py (requested runs, complete assertion sets, harness
     validity checks, cell-level checks).
 On any error the errors are listed on stderr, results.json is NOT written, and the exit status
 is 1. Each cell in results.json carries runs_requested, runs_recorded and runs_valid; the
@@ -33,7 +36,7 @@ import sys
 import time
 
 B = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.join(B, "harness"))
+sys.path.insert(0, os.path.join(B, "harness", "historical-part-c"))
 sys.dont_write_bytecode = True
 import parse_part_c  # noqa: E402
 
@@ -54,8 +57,12 @@ PRIMARY = "junit/junit/4.13.2/junit-4.13.2.pom"
 
 # Files changed after the recorded runs. sha256_as_run identifies the version the runs (or, for
 # the aggregation scripts, the published records) were produced with.
+MOVE = ("2026-10-25 (fourth revision): moved from {old} to {new} with its content unchanged (same "
+        "sha256); replay.sh no longer runs Part C. Kept for inspection, not for execution; see "
+        "harness/historical-part-c/README.md.")
 AS_RUN = {
-    "harness/part_c.sh": {
+    "harness/historical-part-c/part_c.sh": {
+        "path_as_run": "harness/part_c.sh",
         "sha256_as_run": "a75658e64990ce934935601d2c3f380003e049f84bd80d52a3243e9844835cdb",
         "revised_after_runs":
             "2026-10-25 (first revision): cleanup scoped to containers that appeared during the cell. "
@@ -66,31 +73,59 @@ AS_RUN = {
             "session label, logging every container considered; a cell fails and the script stops when a "
             "cell-level check fails, including /tmp/seatunnel_mnt present after the cell. The executed runs "
             "used the as-run version; its cleanup loop wrote no logs/partC/*.cleanup.txt file, i.e. it "
-            "removed nothing (no engine container remained after any cell)."},
-    "harness/java/ReplayKillTeardownTest.java": {
+            "removed nothing (no engine container remained after any cell). "
+            + MOVE.format(old="harness/part_c.sh", new="harness/historical-part-c/part_c.sh")},
+    "harness/historical-part-c/java/ReplayKillTeardownTest.java": {
+        "path_as_run": "harness/java/ReplayKillTeardownTest.java",
         "sha256_as_run": "e0049c6c63c15d6fa037ab6b57261139c54fdd9145b29365e0e2dfe5867be259",
         "revised_after_runs":
             "2026-10-25: a failed pre_run_no_engine_containers check aborts the cell (JVM exit 3) instead of "
             "being recorded and continued; prints the Testcontainers session id. The executed runs used the "
-            "as-run version (its sha256 is in every Part C cell log header); the check passed in all 20 runs."},
-    "harness/parse_part_c.py": {
+            "as-run version (its sha256 is in every Part C cell log header); the check passed in all 20 runs. "
+            + MOVE.format(old="harness/java/ReplayKillTeardownTest.java",
+                          new="harness/historical-part-c/java/ReplayKillTeardownTest.java")},
+    "harness/historical-part-c/parse_part_c.py": {
+        "path_as_run": "harness/parse_part_c.py",
         "sha256_as_run": "bdad4ea98f03da6f6321d2237d3d0e5f9c178064604190a8e38fda5e5568802d",
         "revised_after_runs":
             "2026-10-25: validation added (missing or unparsable log, fewer runs than requested, missing "
             "assertions, failed validity checks make the exit status 1); record format unchanged. Re-parsing "
-            "the four recorded cell logs with this version reproduces logs/partC/runs.jsonl byte for byte."},
+            "the four recorded cell logs with this version reproduces logs/partC/runs.jsonl byte for byte. "
+            + MOVE.format(old="harness/parse_part_c.py", new="harness/historical-part-c/parse_part_c.py")
+            + " It only reads logs; make_results.py imports it from there to validate the recorded Part C runs."},
     "harness/make_results.py": {
         "sha256_as_run": "0176e7b397d565bf75e5b7fcde44bf6b1872512032c303e29ce5513d8f9527b8",
         "revised_after_runs":
-            "2026-10-25: fail-closed validation of the requested matrix and per-cell runs_requested, "
+            "2026-10-25 (third revision): fail-closed validation of the requested matrix and per-cell runs_requested, "
             "runs_recorded, runs_valid; as-run hashes kept here. Re-running it over the recorded logs left "
-            "every count and summary unchanged."},
+            "every count and summary unchanged. "
+            "2026-10-25 (fourth revision): imports parse_part_c from harness/historical-part-c; --part all "
+            "requests Parts A and B only; harness entries of moved files carry path_as_run. Re-running it "
+            "over the recorded logs left every count, summary and log hash unchanged."},
     "replay.sh": {
         "sha256_as_run": "6e85b14156590e4dc5217668afd3287f5829e93c5aa9876c2973f31195ca0d0b",
         "revised_after_runs":
             "2026-10-25: --runs must be a positive integer; a failed validation is reported and the exit "
             "status is 1. sha256_as_run is the version published with the runs (interpretation 26: the "
-            "maven-version block was added after Parts A and C had started)."},
+            "maven-version block was added after Parts A and C had started). "
+            "2026-10-25 (fourth revision): Part C is no longer run. --part C prints why and exits 0 before "
+            "creating, cloning, building or contacting anything; --part all prints the same reason and runs "
+            "Parts A and B only. The Part C preparation (image pulls, e2e build) and the Docker lines of the "
+            "toolchain record were removed."},
+    "harness/historical-part-c/selftest_part_c_guards.sh": {
+        "path_as_run": "harness/selftest_part_c_guards.sh",
+        "revised_after_runs":
+            "2026-10-25 (fourth revision): moved from harness/selftest_part_c_guards.sh with its content "
+            "unchanged (same sha256). Written after the runs (third revision) and executed there on "
+            "2026-10-25 at its old path; it creates and removes the host path /tmp/seatunnel_mnt. Kept for "
+            "inspection, not for execution."},
+    "harness/tables.py": {
+        "sha256_as_run": "1e4db5170a6a1984fec5799644e854af43ebc7c4cb7294aee3bcc14691e97bb2",
+        "revised_after_runs":
+            "2026-10-25 (fourth revision): the Article column now quotes Table 1 and the stall counts of the "
+            "article revision of 25 October 2026 that cites these records at commit fe561f6; the Part B "
+            "table gains that column. sha256_as_run is the version published with the runs, which quoted an "
+            "earlier article text. Data columns unchanged."},
 }
 
 
@@ -149,7 +184,7 @@ def requested(problems):
         if prep != "0":
             continue
         sources.append(os.path.relpath(f, B))
-        for p in ("ABC" if part == "all" else part):
+        for p in ("AB" if part == "all" else part):
             if runs == "default":
                 n = DEFAULT_RUNS[p]
             elif runs.isdigit() and int(runs) > 0:

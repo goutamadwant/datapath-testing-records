@@ -1,17 +1,21 @@
 #!/usr/bin/env bash
 # Replay entry point for the datapath-testing reconstruction records (bundle 2026-10-26).
 #
-#   ./replay.sh --part A|B|C|all [--runs N] [--prepare-only] [--cells "<cell> ..."]
+#   ./replay.sh --part A|B|all [--runs N] [--prepare-only] [--cells "<cell> ..."]
 #
 #   --part A   PR 12468 Maven retry under injected faults (Table 1 rows 1-5)
 #   --part B   PR 12472 stall injection (FileCollectReaderBehaviorTest)
-#   --part C   PR 12481 killed-container teardown (Table 1 rows 6-7, Docker). Not a sandbox: run
-#              it only on a host with no other SeaTunnel/Flink/Spark/Zeta containers and without
-#              /tmp/seatunnel_mnt; harness/part_c.sh refuses to start otherwise.
-#   --runs N   A and C: runs per cell (default 5). B: repetitions of each 20-iteration
+#   --part all Parts A and B.
+#   --part C   not run. Part C (PR 12481 killed-container teardown, Table 1 rows 6-7) executed
+#              SeaTunnel's real end-to-end teardown against the host's Docker daemon, and that
+#              teardown deletes the host path /tmp/seatunnel_mnt. Its recorded runs are kept as
+#              historical records (logs/partC, results.json); its scripts are kept for inspection
+#              in harness/historical-part-c/ and are not run by this script. --part C prints this
+#              and exits 0; --part all prints it and runs Parts A and B only.
+#   --runs N   A: runs per cell (default 5). B: repetitions of each 20-iteration
 #              (50 for the contention cells) loop (default 1).
 #   --prepare-only   toolchain check, clone, worktrees and builds only; no runs.
-#   --cells    restrict a part to the named cells (see harness/part_*.{py,sh} for names).
+#   --cells    restrict a part to the named cells (see harness/part_a.py, harness/part_b.sh).
 #
 # Everything is created under ./work (override with REPLAY_WORK); logs go to ./logs and
 # ./results.json is regenerated from the per-run records after every invocation. The
@@ -23,8 +27,7 @@
 #                            /usr/lib/jvm; a JDK must contain bin/javac)
 #   REPLAY_WORK              work directory (default ./work, relative to this script)
 #   REPLAY_SEATUNNEL_URL     apache/seatunnel clone URL (default https://github.com/apache/seatunnel.git)
-#   REPLAY_MAVEN_REPO        local Maven repository for the Part B/C builds (default: Maven's own)
-#   REPLAY_PULL_ZETA=1       pull seatunnelhub/openjdk:8u342 (Zeta cell; not run by default)
+#   REPLAY_MAVEN_REPO        local Maven repository for the Part B build (default: Maven's own)
 set -u
 cd "$(dirname "$0")" || exit 2
 BUNDLE="$(pwd)"
@@ -37,12 +40,30 @@ while [ $# -gt 0 ]; do
     --runs) RUNS="$2"; shift 2 ;;
     --prepare-only) PREPARE_ONLY=1; shift ;;
     --cells) CELLS="$2"; shift 2 ;;
-    -h|--help) sed -n '2,30p' "$0"; exit 0 ;;
+    -h|--help) sed -n '2,29p' "$0"; exit 0 ;;
     *) echo "unknown argument: $1" >&2; exit 2 ;;
   esac
 done
-case "$PART" in A|B|C|all) ;; *) echo "usage: $0 --part A|B|C|all [--runs N]" >&2; exit 2 ;; esac
+case "$PART" in A|B|C|all) ;; *) echo "usage: $0 --part A|B|all [--runs N]" >&2; exit 2 ;; esac
 case "$RUNS" in '') ;; *[!0-9]*|0*) echo "--runs must be a positive integer (got '$RUNS')" >&2; exit 2 ;; esac
+
+# Part C is not run (checked before anything is created, cloned, built or contacted).
+part_c_notice() {
+  cat >&2 <<'MSG'
+replay.sh: Part C is not run by this script.
+  Part C (PR 12481 killed-container teardown, Table 1 rows 6-7) executed SeaTunnel's real
+  end-to-end teardown against the host's Docker daemon, not inside a sandbox, and that teardown
+  deletes the host path /tmp/seatunnel_mnt. Its 20 recorded runs are historical records: their
+  logs are in logs/partC and their sha256 values in results.json. The scripts that ran them are
+  kept for inspection, not for execution, in harness/historical-part-c/ (see its README.md).
+MSG
+}
+if [ "$PART" = C ]; then
+  part_c_notice; echo "replay.sh: nothing run for --part C." >&2; exit 0
+fi
+if [ "$PART" = all ]; then
+  part_c_notice; echo "replay.sh: --part all runs Parts A and B only." >&2
+fi
 
 STAMP="$(date +%Y%m%dT%H%M%S)"
 mkdir -p logs/setup "$REPLAY_WORK"
@@ -95,7 +116,7 @@ find_jdk() { # <8|11> -> prints a JDK home
 }
 
 toolchain() {
-  local need_docker="$1" t="logs/setup/toolchain-part$PART-$STAMP.txt"
+  local t="logs/setup/toolchain-part$PART-$STAMP.txt"
   JAVA8_HOME="$(find_jdk 8)" || { log "FATAL: no JDK 8 with javac found (set JAVA8_HOME)"; exit 3; }
   JAVA11_HOME="$(find_jdk 11)" || { log "FATAL: no JDK 11 with javac found (set JAVA11_HOME)"; exit 3; }
   export JAVA8_HOME JAVA11_HOME
@@ -117,14 +138,7 @@ toolchain() {
     echo "## curl"; curl --version | head -1
     echo "## wget"; command -v wget >/dev/null && wget --version | head -1 || echo "wget not installed"
     echo "## bash"; echo "$BASH_VERSION"
-    echo "## docker"
-    if command -v docker >/dev/null; then
-      docker version --format 'client {{.Client.Version}} server {{.Server.Version}} {{.Server.Os}}/{{.Server.Arch}}' 2>&1
-    else echo "docker not installed"; fi
   } > "$t" 2>&1
-  if [ "$need_docker" = 1 ] && ! docker info >/dev/null 2>&1; then
-    log "FATAL: docker daemon not reachable (Part C needs it)"; exit 3
-  fi
   log "toolchain ok: JDK8=$JAVA8_HOME JDK11=$JAVA11_HOME record=$t"
 }
 
@@ -208,7 +222,7 @@ prepare_a() {
   fi
 }
 
-# ---------------------------------------------------------------- Part B/C setup
+# ---------------------------------------------------------------- Part B setup
 fetch_launcher() { fetch_central "$LAUNCHER_JAR_PATH" "$REPLAY_WORK/lib/junit-platform-launcher-1.9.0.jar"; }
 
 mvn_repo_flag() { [ -n "${REPLAY_MAVEN_REPO:-}" ] && echo "-Dmaven.repo.local=$REPLAY_MAVEN_REPO"; }
@@ -240,37 +254,9 @@ prepare_b() {
   build_module wt-patch logs/partB/build-patch-87ed0afe0-jdk8.txt "${args[@]}"
 }
 
-prepare_c() {
-  fetch_launcher
-  mkdir -p logs/partC
-  worktree wt-e2e "$REV_C_AFTER"
-  local img
-  for img in tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27 tyrantlucifer/spark:3.3.0; do
-    if ! docker image inspect "$img" >/dev/null 2>&1; then
-      log "pulling $img"; docker pull "$img" >> "$SETUP_LOG" 2>&1 || { log "FATAL: pull $img"; exit 8; }
-    fi
-    log "image $img id=$(docker image inspect --format '{{.Id}}' "$img")"
-  done
-  if [ "${REPLAY_PULL_ZETA:-0}" = 1 ]; then docker pull seatunnelhub/openjdk:8u342 >> "$SETUP_LOG" 2>&1; fi
-  if docker image inspect seatunnelhub/openjdk:8u342 >/dev/null 2>&1; then
-    log "Zeta image seatunnelhub/openjdk:8u342 is cached (the Zeta cell is still not part of this harness)"
-  else
-    log "Zeta image seatunnelhub/openjdk:8u342 not cached: Zeta cell not re-run"
-  fi
-  # the local-only harness test is placed into connector-fake-e2e before the build
-  cp harness/java/ReplayKillTeardownTest.java \
-    "$REPLAY_WORK/wt-e2e/seatunnel-e2e/seatunnel-connector-v2-e2e/connector-fake-e2e/src/test/java/org/apache/seatunnel/e2e/connector/fake/"
-  local mods=seatunnel-core/seatunnel-flink-starter/seatunnel-flink-15-starter,seatunnel-core/seatunnel-spark-starter/seatunnel-spark-3-starter,seatunnel-connectors-v2/connector-fake,seatunnel-connectors-v2/connector-assert,seatunnel-transforms-v2,seatunnel-e2e/seatunnel-connector-v2-e2e/connector-fake-e2e
-  build_module wt-e2e logs/partC/build-after-0e4cf5289-jdk8.txt -B -T 1C -pl "$mods" -am package \
-    dependency:build-classpath -DskipUT=true -DskipIT=true -DskipTests -Dspotless.check.skip=true \
-    -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -De2e.dependency.skip=false \
-    -Dmdep.outputFile=target/test-classpath.txt -Dmdep.includeScope=test --no-snapshot-updates
-}
-
 # ---------------------------------------------------------------- main
-NEED_DOCKER=0; { [ "$PART" = C ] || [ "$PART" = all ]; } && NEED_DOCKER=1
 log "replay.sh --part $PART runs=${RUNS:-default} prepare_only=$PREPARE_ONLY cells=${CELLS:-all} work=${REPLAY_WORK#$BUNDLE/}"
-toolchain "$NEED_DOCKER"
+toolchain
 clone_seatunnel
 RC=0
 if [ "$PART" = A ] || [ "$PART" = all ]; then
@@ -282,10 +268,6 @@ fi
 if [ "$PART" = B ] || [ "$PART" = all ]; then
   prepare_b
   [ "$PREPARE_ONLY" = 0 ] && { bash harness/part_b.sh "${RUNS:-1}" $CELLS || RC=1; }
-fi
-if [ "$PART" = C ] || [ "$PART" = all ]; then
-  prepare_c
-  [ "$PREPARE_ONLY" = 0 ] && { bash harness/part_c.sh "${RUNS:-5}" $CELLS || RC=1; }
 fi
 if ! python3 harness/make_results.py; then
   log "validation failed: results.json not regenerated (the problems are listed above)"

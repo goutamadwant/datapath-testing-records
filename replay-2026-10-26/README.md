@@ -7,10 +7,17 @@ bundle, is kept unchanged at the root of the records repository. Both bundles ar
 from the pull-request texts.
 
 Every value this README and `results.json` give for this bundle's runs is parsed from a log
-under `logs/` that an executed run wrote. The "Article" and "2026-10-25" columns are quoted from
-the article and from the 2026-10-25 bundle's `results.json`. Failed, interrupted and invalid runs are kept. `results.json` lists the
-sha256 of every file under `logs/`. The comparison tables below are printed by
-`harness/tables.py` from `results.json`.
+under `logs/` that an executed run wrote. The "Article" columns quote, word for word, Table 1 and
+the PR 12472 stall counts of the article revision of 25 October 2026 that cites these records at
+commit `fe561f6`; that revision's Table 1 reports this bundle's runs (see "Results" below). The
+"2026-10-25" columns are read from the 2026-10-25 bundle's `results.json`. Failed, interrupted and
+invalid runs are kept. `results.json` lists the sha256 of every file under `logs/`. The comparison
+tables below are printed by `harness/tables.py` from `results.json`.
+
+**Part C is no longer run by `replay.sh`** (fourth revision, 2026-10-25). Its 20 recorded runs are
+historical records: their logs stay under `logs/partC/` and their hashes in `results.json`. The
+scripts that ran them are in `harness/historical-part-c/`, kept for inspection and not for
+execution; see "Revision (2026-10-25, fourth revision after the runs)" below.
 
 The runs were executed on 2026-10-25 between 13:26 and 14:26 local time (UTC-7) on the
 machine described under "Toolchain". The directory name gives the bundle date, not the run date.
@@ -19,7 +26,7 @@ machine described under "Toolchain". The directory name gives the bundle date, n
 
 | Topic | 2026-10-25 bundle | This bundle |
 | --- | --- | --- |
-| Entry point | separate scripts with absolute workstation paths; prepared worktrees, warm repository and launcher jar assumed | one script, `./replay.sh --part A\|B\|C\|all [--runs N]`. It checks the toolchain, clones apache/seatunnel at the six pinned commits into `./work`, creates the worktrees, builds, fetches the wrapper and launcher jars from Maven Central (sha1 checked), warms the Part A mirror repository from Maven Central, runs the parts and regenerates `results.json`. Scripts and configs contain no absolute workstation path |
+| Entry point | separate scripts with absolute workstation paths; prepared worktrees, warm repository and launcher jar assumed | one script, `./replay.sh --part A\|B\|C\|all [--runs N]` when the runs were made (since the fourth revision it runs Parts A and B only). It checks the toolchain, clones apache/seatunnel at the six pinned commits into `./work`, creates the worktrees, builds, fetches the wrapper and launcher jars from Maven Central (sha1 checked), warms the Part A mirror repository from Maven Central, runs the parts and regenerates `results.json`. Scripts and configs contain no absolute workstation path |
 | Part A repetitions | 1 run per cell | 5 runs per cell, interleaved (repetition k of every cell before repetition k+1 of any cell); 24 cells, 120 runs |
 | Part A empty-body 429 variant | `before` only, 1 run per JDK | separate labelled cell, `before` and `after`, 5 runs each per JDK |
 | Part B | one 20-iteration loop per cell | one more 20-iteration loop per cell, same hooks and sweep positions (50 iterations for the contention cells); results added to the sweep table |
@@ -30,37 +37,35 @@ machine described under "Toolchain". The directory name gives the bundle date, n
 ## Exact commands
 
 From a checkout of this directory (bash, git, curl, python3, patch, shasum; JDK 8 and JDK 11 with
-`javac`; Docker for Part C):
+`javac`; Docker is not used):
 
 ```
-./replay.sh --part all                 # A (5 runs/cell), B (1 loop/cell), C (5 runs/cell)
-./replay.sh --part A --runs 5          # one part; --runs = runs per cell (A, C) or loops per cell (B)
-./replay.sh --part C --prepare-only    # toolchain check, clone, worktrees, builds, images; no runs
+./replay.sh --part all                 # A (5 runs/cell) and B (1 loop/cell); Part C is not run
+./replay.sh --part A --runs 5          # one part; --runs = runs per cell (A) or loops per cell (B)
+./replay.sh --part B --prepare-only    # toolchain check, clone, worktrees, builds; no runs
 ./replay.sh --part B --cells "dev-hook-jdk8 patch-hook-jdk8"   # a subset of cells
 python3 harness/make_results.py        # validate the recorded runs, then regenerate results.json
 python3 harness/tables.py --old <2026-10-25 results.json>      # print the comparison tables
 python3 harness/selftest_validation.py # negative tests of the validation (temporary copies)
-bash harness/selftest_part_c_guards.sh # Part C safety rules against a simulated Docker
 ```
 
-**Part C is not a sandbox.** It drives the host's Docker daemon, and the SeaTunnel teardown it
-tests deletes the contents of the host path `/tmp/seatunnel_mnt`. Run Part C (and `--part all`)
-only on a host with no other SeaTunnel, Flink, Spark or Zeta containers, running or stopped, and
-without `/tmp/seatunnel_mnt`; a disposable VM is the safe choice. `harness/part_c.sh` enforces
-what it can (see "Revision (2026-10-25, third revision after the runs)" below): it refuses to start a cell while
-`/tmp/seatunnel_mnt` exists or while any container of `tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27`,
-`tyrantlucifer/spark:3.3.0` or `seatunnelhub/openjdk:8u342` exists, fails and stops when the path
-or an engine container is still there after a cell, and removes a leftover container only when it
-can attribute it to the cell. It cannot tell apart a container that another process creates
-during the cell from the same image with the same Testcontainers session label, which is why the
-host requirement above stays.
+**Part C is not run.** `./replay.sh --part C` prints the following reason and exits 0 before it
+creates, clones, builds or contacts anything; `./replay.sh --part all` prints the same reason and
+runs Parts A and B only. Part C executed SeaTunnel's real end-to-end teardown against the host's
+Docker daemon, not in a sandbox, and that teardown deletes the host path `/tmp/seatunnel_mnt`.
+The recorded Part C runs are historical records; their logs stay under `logs/partC/`, their
+hashes in `results.json`, and `harness/make_results.py` still validates them from those logs. The
+Part C scripts are kept in `harness/historical-part-c/` for inspection, not for execution (see
+its `README.md`).
 
 Optional environment: `JAVA8_HOME`, `JAVA11_HOME` (otherwise found with `/usr/libexec/java_home`
 or under `/usr/lib/jvm`, and a JDK must contain `javac`), `REPLAY_WORK` (default `./work`),
-`REPLAY_SEATUNNEL_URL`, `REPLAY_MAVEN_REPO` (local Maven repository for the Part B and C builds;
-default: Maven's own), `REPLAY_PULL_ZETA=1`. Part A skips runs that are already recorded in `logs/partA/runs.jsonl`. Parts B and C add new
-logs (`loop2.txt`, `<cell>-2.txt`) next to the existing ones. A fresh replay therefore starts from
-a copy of this directory without `logs/` and `results.json`.
+`REPLAY_SEATUNNEL_URL`, `REPLAY_MAVEN_REPO` (local Maven repository for the Part B build;
+default: Maven's own). Part A skips runs that are already recorded in `logs/partA/runs.jsonl`.
+Part B adds new logs (`loop2.txt`) next to the existing ones. A fresh replay of Parts A and B
+therefore starts from a copy of this directory without `logs/partA`, `logs/partB`, the Part A and
+Part B files in `logs/setup/`, and `results.json`; keeping `logs/partC/` and
+`logs/setup/*partC*` keeps the historical Part C records in the regenerated `results.json`.
 
 `results.json` is written only if validation passes. The requested matrix is read from the
 invocation records (`logs/setup/setup-part*-*.txt`, first line, `prepare_only=0`): the cells
@@ -71,7 +76,8 @@ unchanged, and `replay.sh` exits 1. Each cell in `results.json` has `runs_reques
 `runs_recorded` and `runs_valid`.
 
 The invocations that produced this bundle, in order (consoles in `logs/setup/` and
-`logs/partA/console.txt`):
+`logs/partA/console.txt`). The two Part C invocations ran with the replay script of that time;
+the current `replay.sh` no longer runs them:
 
 ```
 ./replay.sh --part A --runs 5          # 13:26-14:16
@@ -125,51 +131,55 @@ Revisions (apache/seatunnel):
 
 ## Results: article vs 2026-10-25 vs this run, per cell
 
-"Article" quotes Table 1 of the article. The article's Table 1 itself reports the 2026-10-25
-runs. For Part B it quotes PR 12472, because the article leaves out the rates. "Primary-path
+"Article" quotes, word for word, the article revision of 25 October 2026 that cites these records
+at commit `fe561f6`: its Table 1 for Parts A and C, and its text for the PR 12472 stall counts
+(marked "(text)"); the empty-body 429 variant is not in Table 1. That Table 1 reports this bundle's runs (the
+2026-10-26 column), five runs per cell. An earlier version of this README quoted an earlier
+article text, whose Table 1 reported the 2026-10-25 runs. "PR 12472" quotes the pull request.
+"Primary-path
 requests" counts the GET requests the fault mirror logged for
 `junit/junit/4.13.2/junit-4.13.2.pom`, the first fault target. Wrapper times are measured from
 the first wrapper-jar request. Wall times cover the whole `./mvnw` process.
 
 #### Part A (PR 12468; Table 1 rows 1-5)
 
-| Row | Fault | Config | JDK | Article (Table 1) | 2026-10-25 (n=1) | 2026-10-26 (n per cell as listed) |
+| Row | Fault | Config | JDK | Article (Table 1, 25 Oct 2026 revision) | 2026-10-25 (n=1) | 2026-10-26 (n per cell as listed) |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | HTTP 503 on first 2 requests | before | jdk8 | fails on first 503 | FAIL; primary-path requests: 1 | 0 PASS / 5 FAIL; primary-path requests per run: 1,1,1,1,1; wall 5.4/6.2/11.7 s (min/median/max) |
-| 1 | HTTP 503 on first 2 requests | after | jdk8 | succeeds on third request | PASS; primary-path requests: 3 | 5 PASS / 0 FAIL; primary-path requests per run: 3,3,3,3,3; wall 19.7/22.9/36.9 s (min/median/max) |
-| 2 | Connection reset on first 4 requests | before | jdk8 | fails after four attempts | FAIL; primary-path requests: 4 | 0 PASS / 5 FAIL; primary-path requests per run: 4,4,4,4,4; wall 5.1/6.4/11.4 s (min/median/max) |
-| 2 | Connection reset on first 4 requests | after | jdk8 | succeeds on fifth | PASS; primary-path requests: 5 | 5 PASS / 0 FAIL; primary-path requests per run: 5,5,5,5,5; wall 10.0/13.0/16.1 s (min/median/max) |
-| 3 | HTTP 429 on first 2 requests | before | jdk8 | fails after receiving 200, unlike the PR | FAIL; primary-path requests: 3 | 0 PASS / 5 FAIL; primary-path requests per run: 3,3,3,3,3; `Attempted read from closed stream` in 5/5; wall 20.2/21.9/26.6 s (min/median/max) |
-| 3 | HTTP 429 on first 2 requests | after | jdk8 | succeeds | PASS; primary-path requests: 3 | 5 PASS / 0 FAIL; primary-path requests per run: 3,3,3,3,3; wall 20.1/27.7/31.5 s (min/median/max) |
-| 4 | First response body cut off halfway | before | jdk8 | fails | FAIL; primary-path requests: 1 | 0 PASS / 5 FAIL; primary-path requests per run: 1,1,1,1,1; wall 5.2/9.1/11.5 s (min/median/max) |
-| 4 | First response body cut off halfway | after | jdk8 | still fails without retry | FAIL; primary-path requests: 1 | 0 PASS / 5 FAIL; primary-path requests per run: 1,1,1,1,1; wall 5.0/6.8/12.3 s (min/median/max) |
-| 5 | Wrapper jar 429 for 30 s | before | jdk8 | five failed attempts; last at 20.2-20.5 s; main class not found | FAIL; primary-path requests: 0; wrapper-jar requests 5, last at 20.5 s | 0 PASS / 5 FAIL; primary-path requests per run: 0,0,0,0,0; wrapper-jar requests per run: 5,5,5,5,5, last at 20.2-20.9 s; main class not found in 5/5; wall 20.6/21.3/22.9 s (min/median/max) |
-| 5 | Wrapper jar 429 for 30 s | after | jdk8 | fourth attempt succeeds at 35.2-35.6 s | PASS; primary-path requests: 1; wrapper-jar requests 4, last at 35.6 s | 5 PASS / 0 FAIL; primary-path requests per run: 1,1,1,1,1; wrapper-jar requests per run: 4,4,4,4,4, last at 35.2-35.3 s; wall 46.0/47.6/54.0 s (min/median/max) |
-| 3 (variant) | HTTP 429 with empty body on first 2 requests (not a Table 1 row) | before | jdk8 | (boundary note: body-less 429s passed only after checksum-triggered redownload) | PASS; primary-path requests: 4 | 5 PASS / 0 FAIL; primary-path requests per run: 4,4,4,4,4; checksum-triggered re-download in 5/5; wall 86.1/89.8/91.6 s (min/median/max) |
-| 3 (variant) | HTTP 429 with empty body on first 2 requests (not a Table 1 row) | after | jdk8 | - | not run | 5 PASS / 0 FAIL; primary-path requests per run: 3,3,3,3,3; wall 20.6/23.0/26.5 s (min/median/max) |
-| 1 | HTTP 503 on first 2 requests | before | jdk11 | fails on first 503 | FAIL; primary-path requests: 1 | 0 PASS / 5 FAIL; primary-path requests per run: 1,1,1,1,1; wall 5.1/6.2/8.2 s (min/median/max) |
-| 1 | HTTP 503 on first 2 requests | after | jdk11 | succeeds on third request | PASS; primary-path requests: 3 | 5 PASS / 0 FAIL; primary-path requests per run: 3,3,3,3,3; wall 19.2/22.5/24.1 s (min/median/max) |
-| 2 | Connection reset on first 4 requests | before | jdk11 | fails after four attempts | FAIL; primary-path requests: 4 | 0 PASS / 5 FAIL; primary-path requests per run: 4,4,4,4,4; wall 5.0/6.6/7.9 s (min/median/max) |
-| 2 | Connection reset on first 4 requests | after | jdk11 | succeeds on fifth | PASS; primary-path requests: 5 | 5 PASS / 0 FAIL; primary-path requests per run: 5,5,5,5,5; wall 9.3/11.8/13.2 s (min/median/max) |
-| 3 | HTTP 429 on first 2 requests | before | jdk11 | fails after receiving 200, unlike the PR | FAIL; primary-path requests: 3 | 0 PASS / 5 FAIL; primary-path requests per run: 3,3,3,3,3; `Attempted read from closed stream` in 5/5; wall 20.0/22.6/23.8 s (min/median/max) |
-| 3 | HTTP 429 on first 2 requests | after | jdk11 | succeeds | PASS; primary-path requests: 3 | 5 PASS / 0 FAIL; primary-path requests per run: 3,3,3,3,3; wall 20.9/23.0/28.2 s (min/median/max) |
-| 4 | First response body cut off halfway | before | jdk11 | fails | FAIL; primary-path requests: 1 | 0 PASS / 5 FAIL; primary-path requests per run: 1,1,1,1,1; wall 5.5/7.0/7.4 s (min/median/max) |
-| 4 | First response body cut off halfway | after | jdk11 | still fails without retry | FAIL; primary-path requests: 1 | 0 PASS / 5 FAIL; primary-path requests per run: 1,1,1,1,1; wall 5.4/5.6/7.0 s (min/median/max) |
-| 5 | Wrapper jar 429 for 30 s | before | jdk11 | five failed attempts; last at 20.2-20.5 s; main class not found | FAIL; primary-path requests: 0; wrapper-jar requests 5, last at 20.2 s | 0 PASS / 5 FAIL; primary-path requests per run: 0,0,0,0,0; wrapper-jar requests per run: 5,5,5,5,5, last at 20.2-20.2 s; main class not found in 5/5; wall 20.7/20.8/21.0 s (min/median/max) |
-| 5 | Wrapper jar 429 for 30 s | after | jdk11 | fourth attempt succeeds at 35.2-35.6 s | PASS; primary-path requests: 1; wrapper-jar requests 4, last at 35.2 s | 5 PASS / 0 FAIL; primary-path requests per run: 1,1,1,1,1; wrapper-jar requests per run: 4,4,4,4,4, last at 35.2-35.2 s; wall 44.7/49.1/55.1 s (min/median/max) |
-| 3 (variant) | HTTP 429 with empty body on first 2 requests (not a Table 1 row) | before | jdk11 | (boundary note: body-less 429s passed only after checksum-triggered redownload) | PASS; primary-path requests: 4 | 5 PASS / 0 FAIL; primary-path requests per run: 4,4,4,4,4; checksum-triggered re-download in 5/5; wall 84.7/87.0/93.0 s (min/median/max) |
-| 3 (variant) | HTTP 429 with empty body on first 2 requests (not a Table 1 row) | after | jdk11 | - | not run | 5 PASS / 0 FAIL; primary-path requests per run: 3,3,3,3,3; wall 19.4/22.5/25.7 s (min/median/max) |
+| 1 | HTTP 503 on first 2 requests | before | jdk8 | fails on first 503, 5/5 per JDK | FAIL; primary-path requests: 1 | 0 PASS / 5 FAIL; primary-path requests per run: 1,1,1,1,1; wall 5.4/6.2/11.7 s (min/median/max) |
+| 1 | HTTP 503 on first 2 requests | after | jdk8 | succeeds on third request, 5/5 per JDK | PASS; primary-path requests: 3 | 5 PASS / 0 FAIL; primary-path requests per run: 3,3,3,3,3; wall 19.7/22.9/36.9 s (min/median/max) |
+| 2 | Connection reset on first 4 requests | before | jdk8 | fails after four attempts, 5/5 per JDK | FAIL; primary-path requests: 4 | 0 PASS / 5 FAIL; primary-path requests per run: 4,4,4,4,4; wall 5.1/6.4/11.4 s (min/median/max) |
+| 2 | Connection reset on first 4 requests | after | jdk8 | succeeds on fifth, 5/5 per JDK | PASS; primary-path requests: 5 | 5 PASS / 0 FAIL; primary-path requests per run: 5,5,5,5,5; wall 10.0/13.0/16.1 s (min/median/max) |
+| 3 | HTTP 429 on first 2 requests | before | jdk8 | closed-stream error after receiving 200, 5/5 per JDK; unlike the PR | FAIL; primary-path requests: 3 | 0 PASS / 5 FAIL; primary-path requests per run: 3,3,3,3,3; `Attempted read from closed stream` in 5/5; wall 20.2/21.9/26.6 s (min/median/max) |
+| 3 | HTTP 429 on first 2 requests | after | jdk8 | succeeds, 5/5 per JDK | PASS; primary-path requests: 3 | 5 PASS / 0 FAIL; primary-path requests per run: 3,3,3,3,3; wall 20.1/27.7/31.5 s (min/median/max) |
+| 4 | First response body cut off halfway | before | jdk8 | fails, 5/5 per JDK | FAIL; primary-path requests: 1 | 0 PASS / 5 FAIL; primary-path requests per run: 1,1,1,1,1; wall 5.2/9.1/11.5 s (min/median/max) |
+| 4 | First response body cut off halfway | after | jdk8 | fails without retry, 5/5 per JDK; earlier JDK 11 hang not reproduced | FAIL; primary-path requests: 1 | 0 PASS / 5 FAIL; primary-path requests per run: 1,1,1,1,1; wall 5.0/6.8/12.3 s (min/median/max) |
+| 5 | Wrapper jar 429 for 30 s | before | jdk8 | five attempts; main class not found, 5/5 per JDK | FAIL; primary-path requests: 0; wrapper-jar requests 5, last at 20.5 s | 0 PASS / 5 FAIL; primary-path requests per run: 0,0,0,0,0; wrapper-jar requests per run: 5,5,5,5,5, last at 20.2-20.9 s; main class not found in 5/5; wall 20.6/21.3/22.9 s (min/median/max) |
+| 5 | Wrapper jar 429 for 30 s | after | jdk8 | fourth attempt succeeds, 5/5 per JDK | PASS; primary-path requests: 1; wrapper-jar requests 4, last at 35.6 s | 5 PASS / 0 FAIL; primary-path requests per run: 1,1,1,1,1; wrapper-jar requests per run: 4,4,4,4,4, last at 35.2-35.3 s; wall 46.0/47.6/54.0 s (min/median/max) |
+| 3 (variant) | HTTP 429 with empty body on first 2 requests (not a Table 1 row) | before | jdk8 | - (not in Table 1) | PASS; primary-path requests: 4 | 5 PASS / 0 FAIL; primary-path requests per run: 4,4,4,4,4; checksum-triggered re-download in 5/5; wall 86.1/89.8/91.6 s (min/median/max) |
+| 3 (variant) | HTTP 429 with empty body on first 2 requests (not a Table 1 row) | after | jdk8 | - (not in Table 1) | not run | 5 PASS / 0 FAIL; primary-path requests per run: 3,3,3,3,3; wall 20.6/23.0/26.5 s (min/median/max) |
+| 1 | HTTP 503 on first 2 requests | before | jdk11 | fails on first 503, 5/5 per JDK | FAIL; primary-path requests: 1 | 0 PASS / 5 FAIL; primary-path requests per run: 1,1,1,1,1; wall 5.1/6.2/8.2 s (min/median/max) |
+| 1 | HTTP 503 on first 2 requests | after | jdk11 | succeeds on third request, 5/5 per JDK | PASS; primary-path requests: 3 | 5 PASS / 0 FAIL; primary-path requests per run: 3,3,3,3,3; wall 19.2/22.5/24.1 s (min/median/max) |
+| 2 | Connection reset on first 4 requests | before | jdk11 | fails after four attempts, 5/5 per JDK | FAIL; primary-path requests: 4 | 0 PASS / 5 FAIL; primary-path requests per run: 4,4,4,4,4; wall 5.0/6.6/7.9 s (min/median/max) |
+| 2 | Connection reset on first 4 requests | after | jdk11 | succeeds on fifth, 5/5 per JDK | PASS; primary-path requests: 5 | 5 PASS / 0 FAIL; primary-path requests per run: 5,5,5,5,5; wall 9.3/11.8/13.2 s (min/median/max) |
+| 3 | HTTP 429 on first 2 requests | before | jdk11 | closed-stream error after receiving 200, 5/5 per JDK; unlike the PR | FAIL; primary-path requests: 3 | 0 PASS / 5 FAIL; primary-path requests per run: 3,3,3,3,3; `Attempted read from closed stream` in 5/5; wall 20.0/22.6/23.8 s (min/median/max) |
+| 3 | HTTP 429 on first 2 requests | after | jdk11 | succeeds, 5/5 per JDK | PASS; primary-path requests: 3 | 5 PASS / 0 FAIL; primary-path requests per run: 3,3,3,3,3; wall 20.9/23.0/28.2 s (min/median/max) |
+| 4 | First response body cut off halfway | before | jdk11 | fails, 5/5 per JDK | FAIL; primary-path requests: 1 | 0 PASS / 5 FAIL; primary-path requests per run: 1,1,1,1,1; wall 5.5/7.0/7.4 s (min/median/max) |
+| 4 | First response body cut off halfway | after | jdk11 | fails without retry, 5/5 per JDK; earlier JDK 11 hang not reproduced | FAIL; primary-path requests: 1 | 0 PASS / 5 FAIL; primary-path requests per run: 1,1,1,1,1; wall 5.4/5.6/7.0 s (min/median/max) |
+| 5 | Wrapper jar 429 for 30 s | before | jdk11 | five attempts; main class not found, 5/5 per JDK | FAIL; primary-path requests: 0; wrapper-jar requests 5, last at 20.2 s | 0 PASS / 5 FAIL; primary-path requests per run: 0,0,0,0,0; wrapper-jar requests per run: 5,5,5,5,5, last at 20.2-20.2 s; main class not found in 5/5; wall 20.7/20.8/21.0 s (min/median/max) |
+| 5 | Wrapper jar 429 for 30 s | after | jdk11 | fourth attempt succeeds, 5/5 per JDK | PASS; primary-path requests: 1; wrapper-jar requests 4, last at 35.2 s | 5 PASS / 0 FAIL; primary-path requests per run: 1,1,1,1,1; wrapper-jar requests per run: 4,4,4,4,4, last at 35.2-35.2 s; wall 44.7/49.1/55.1 s (min/median/max) |
+| 3 (variant) | HTTP 429 with empty body on first 2 requests (not a Table 1 row) | before | jdk11 | - (not in Table 1) | PASS; primary-path requests: 4 | 5 PASS / 0 FAIL; primary-path requests per run: 4,4,4,4,4; checksum-triggered re-download in 5/5; wall 84.7/87.0/93.0 s (min/median/max) |
+| 3 (variant) | HTTP 429 with empty body on first 2 requests (not a Table 1 row) | after | jdk11 | - (not in Table 1) | not run | 5 PASS / 0 FAIL; primary-path requests per run: 3,3,3,3,3; wall 19.4/22.5/25.7 s (min/median/max) |
 
 #### Part B (PR 12472)
 
-| Cell | PR 12472 | 2026-10-25 | 2026-10-26 |
-| --- | --- | --- | --- |
-| dev-hook-jdk8 | 15/20 failed | 20/20 failed | 17/20 failed |
-| dev-hook-jdk11 | 7/20 failed | 20/20 failed | 19/20 failed |
-| patch-hook-jdk8 | 0/20 failed | 0/20 failed | 0/20 failed |
-| patch-hook-jdk11 | 0/20 failed | 0/20 failed | 0/20 failed |
-| dev-nohook-contention-jdk8 | 0/50 failed (50/50 passed) | 0/50 failed | 0/50 failed |
-| dev-nohook-contention-jdk11 | 0/50 failed (50/50 passed) | 0/50 failed | 0/50 failed |
+| Cell | Article (25 Oct 2026 revision) | PR 12472 | 2026-10-25 | 2026-10-26 |
+| --- | --- | --- | --- | --- |
+| dev-hook-jdk8 | (text) 17/20 failures on unchanged dev with JDK 8 | 15/20 failed | 20/20 failed | 17/20 failed |
+| dev-hook-jdk11 | (text) 19/20 with JDK 11 | 7/20 failed | 20/20 failed | 19/20 failed |
+| patch-hook-jdk8 | (text) The patch failed 0/20 per JDK under different stalls | 0/20 failed | 0/20 failed | 0/20 failed |
+| patch-hook-jdk11 | (text) The patch failed 0/20 per JDK under different stalls | 0/20 failed | 0/20 failed | 0/20 failed |
+| dev-nohook-contention-jdk8 | (text) unhooked dev passed 50/50 under CPU contention | 0/50 failed (50/50 passed) | 0/50 failed | 0/50 failed |
+| dev-nohook-contention-jdk11 | (text) unhooked dev passed 50/50 under CPU contention | 0/50 failed (50/50 passed) | 0/50 failed | 0/50 failed |
 
 #### Part B sensitivity sweep (stall placed at <= N ms before `idleDeadlineMs`)
 
@@ -192,12 +202,12 @@ Pooled hook wake position vs failure, 2026-10-26 dev-hook loops:
 
 #### Part C (PR 12481; Table 1 rows 6-7)
 
-| Cell | Article (Table 1) | 2026-10-25 (n=5) | 2026-10-26 |
+| Cell | Article (Table 1, 25 Oct 2026 revision) | 2026-10-25 (n=5) | 2026-10-26 |
 | --- | --- | --- | --- |
-| flink-before | teardown threw in 5/5 records; 2/5 next jobs timed out at 150 s | teardown threw 5/5; next job exit 0 3/5; hung 2/5 | teardown threw 5/5; killed engine's containers absent after teardown 0/5; next job exit 0 2/5; timed out 3/5 |
-| flink-after | teardown completed and next job exited 0 in 5/5 records | teardown threw 0/5; next job exit 0 5/5; hung 0/5 | teardown threw 0/5; killed engine's containers absent after teardown 5/5; next job exit 0 5/5; timed out 0/5 |
-| spark-before | teardown threw in 5/5 records; all next jobs exited 0 | teardown threw 5/5; next job exit 0 5/5; hung 0/5 | teardown threw 5/5; killed engine's containers absent after teardown 0/5; next job exit 0 5/5; timed out 0/5 |
-| spark-after | teardown completed and next job exited 0 in 5/5 records | teardown threw 0/5; next job exit 0 5/5; hung 0/5 | teardown threw 0/5; killed engine's containers absent after teardown 5/5; next job exit 0 5/5; timed out 0/5 |
+| flink-before | teardown threw, containers left, 5/5; next job timed out at 150 s, 3/5 | teardown threw 5/5; next job exit 0 3/5; hung 2/5 | teardown threw 5/5; killed engine's containers absent after teardown 0/5; next job exit 0 2/5; timed out 3/5 |
+| flink-after | teardown completed, containers removed, next job exited 0, 5/5 | teardown threw 0/5; next job exit 0 5/5; hung 0/5 | teardown threw 0/5; killed engine's containers absent after teardown 5/5; next job exit 0 5/5; timed out 0/5 |
+| spark-before | Spark: teardown threw, master left, next job exited 0, 5/5 | teardown threw 5/5; next job exit 0 5/5; hung 0/5 | teardown threw 5/5; killed engine's containers absent after teardown 0/5; next job exit 0 5/5; timed out 0/5 |
+| spark-after | Spark: teardown completed, master removed, next job exited 0, 5/5 | teardown threw 0/5; next job exit 0 5/5; hung 0/5 | teardown threw 0/5; killed engine's containers absent after teardown 5/5; next job exit 0 5/5; timed out 0/5 |
 
 #### Part C assertions (PASS/FAIL counts per cell)
 
@@ -212,7 +222,7 @@ Pooled hook wake position vs failure, 2026-10-26 dev-hook loops:
 | next_job_time_bound | 2 PASS / 3 FAIL | 5 PASS / 0 FAIL | 5 PASS / 0 FAIL | 5 PASS / 0 FAIL |
 | post_run_no_leftover_containers | 5 PASS / 0 FAIL | 5 PASS / 0 FAIL | 5 PASS / 0 FAIL | 5 PASS / 0 FAIL |
 
-Cell-level checks (run by `harness/part_c.sh` after the JVM exited):
+Cell-level checks (run by `part_c.sh`, now `harness/historical-part-c/part_c.sh`, after the JVM exited):
 
 | Cell | Check | Result | Observed |
 | --- | --- | --- | --- |
@@ -240,15 +250,17 @@ Cell-level checks (run by `harness/part_c.sh` after the JVM exited):
 ### Reading the results
 
 - **Part A, rows 1, 2 and 4, and row 3 "after":** on both JDKs, every one of the 5 runs per cell
-  had the outcome and the primary-path request count of the 2026-10-25 run and of Table 1.
+  had the outcome stated in Table 1 and the outcome and primary-path request count of the
+  2026-10-25 run.
 - **Part A, row 3 "before" (HTTP 429 with a body):** FAIL in 5/5 runs per JDK. Each run made 3
   requests (429, 429, 200), and every run logged `Attempted read from closed stream`. This
   repeats the 2026-10-25 finding that the PR's "succeeds" does not reproduce for 429s with a body.
 - **Part A, row 5 (wrapper jar 429 for 30 s):** "before" made 5 wrapper-jar requests and failed
   with "main class not found" in 5/5 runs per JDK. The last request came at 20.2-20.2 s on JDK 11
   and at 20.2-20.9 s on JDK 8. The 20.9 s value (JDK 8, run 4, `logs/partA/jdk8_wrapper429s_before/r4.server.jsonl`)
-  lies outside the article's 20.2-20.5 s. "After" succeeded on the fourth request in 5/5 runs per
-  JDK, at 35.2-35.3 s (article: 35.2-35.6 s).
+  lies outside the 20.2-20.5 s of the 2026-10-25 runs. "After" succeeded on the fourth request in
+  5/5 runs per JDK, at 35.2-35.3 s (2026-10-25: 35.2-35.6 s). The article's Table 1 gives no
+  request times for this row.
 - **Empty-body 429 variant:** "before" passed in 5/5 runs per JDK, with 4 requests per path and a
   checksum-triggered re-download (`Checksum validation failed`) in every run. "After" passed in
   5/5 runs per JDK with 3 requests and no checksum failure.
@@ -290,7 +302,9 @@ Cell-level checks (run by `harness/part_c.sh` after the JVM exited):
 ## Interpretations and deviations
 
 Interpretations 1-21 carry over from the 2026-10-25 bundle; some are updated, and the updates are
-marked. Interpretations 22-34 are new.
+marked. Interpretations 22-34 are new. File paths below are those of the runs; since the fourth
+revision the Part C files (`part_c.sh`, `parse_part_c.py`, `java/ReplayKillTeardownTest.java`) are
+in `harness/historical-part-c/`, and `replay.sh` no longer builds or runs Part C.
 
 Part A
 
@@ -442,16 +456,18 @@ the bundle's `work/` directory. `results.json` stores only bundle-relative paths
 
 ## Files
 
-- `replay.sh`: the entry point.
+- `replay.sh`: the entry point (Parts A and B).
 - `harness/part_a.py`, `harness/fault_mirror.py`, `harness/tiny-pom.xml`,
   `harness/settings-mirror.template.xml`, `harness/settings-empty.xml`: Part A.
 - `harness/part_b.sh`, `harness/hook-dev-deb16a3c3-stall45.patch`,
   `harness/hook-patch-87ed0afe0-stalls.patch`, `harness/java/RepeatMethod.java`: Part B.
-- `harness/part_c.sh`, `harness/parse_part_c.py`, `harness/java/ReplayKillTeardownTest.java`:
-  Part C.
+- `harness/historical-part-c/`: the Part C scripts (`part_c.sh`, `parse_part_c.py`,
+  `java/ReplayKillTeardownTest.java`, `selftest_part_c_guards.sh`) and a `README.md`. Kept for
+  inspection, not for execution; `make_results.py` imports `parse_part_c.py` to validate the
+  recorded Part C logs.
 - `harness/make_results.py`, `harness/tables.py`: validation, `results.json` and the tables above.
-- `harness/selftest_validation.py`, `harness/selftest_part_c_guards.sh`: self-tests of the
-  validation and of the Part C safety rules (third revision; they execute no experiment).
+- `harness/selftest_validation.py`: self-test of the validation (third revision; it executes no
+  experiment).
 - `logs/setup/`: toolchain records, setup logs and consoles of every invocation.
 - `logs/partA/<cell>/r<k>.mvn.txt` and `r<k>.server.jsonl`, `logs/partA/runs.jsonl`,
   `logs/partA/warm-repo-build.txt`, `logs/partA/maven-version.txt`, `logs/partA/console.txt`.
@@ -514,3 +530,74 @@ start is removed, the four other engine containers are kept with their reasons l
 (`session_label_mismatch` twice, `not_cell_engine_image`, `created_before_cell_start`), the
 `postgres:16` container is not considered, and the cell fails (exit 1); a harness abort (JVM exit 3)
 fails the cell (exit 1); `/tmp/seatunnel_mnt` created during the cell fails it (exit 1).
+
+## Revision (2026-10-25, fourth revision after the runs)
+
+This revision changes no recorded run, log or count. It takes Part C off the replay entry point
+and makes the "Article" columns quote the current article.
+
+**Part C is no longer run.** Part C executed SeaTunnel's real end-to-end teardown against the
+host's Docker daemon, not in a sandbox, and that teardown deletes the host path
+`/tmp/seatunnel_mnt` (both revisions delete it with `FileUtils.deleteFile`). The
+checks of the third revision refuse unsafe starting states but do not isolate the host: a path or
+container created by another process during a cell is not protected. `replay.sh` therefore no
+longer runs Part C. `./replay.sh --part C` (with or without `--prepare-only` or `--runs`) prints
+why and exits 0 before it creates, clones, builds or contacts anything, and writes no invocation
+record; `./replay.sh --part all` prints the same reason and runs Parts A and B only. The Part C
+preparation (engine image pulls, the end-to-end module build, the copy of the harness into
+`connector-fake-e2e`) and the Docker lines of the toolchain record were removed from `replay.sh`.
+The 20 recorded Part C runs are historical records: their logs stay under `logs/partC/`, their
+sha256 values and results in `results.json`, and `make_results.py` still validates them from
+those logs.
+
+The Part C scripts were moved, unchanged, to `harness/historical-part-c/`, which has its own
+`README.md`: they are kept for inspection, not for execution. In `results.json` each moved file is
+listed at its new path with `path_as_run` giving the old one; its `sha256` is unchanged, and
+`sha256_as_run` and `revised_after_runs` are kept, with a note on the move added.
+
+| File | Change | sha256 now | sha256_as_run |
+| --- | --- | --- | --- |
+| `harness/historical-part-c/part_c.sh` (was `harness/part_c.sh`) | moved, content unchanged | `b7757fbd6360...` | `a75658e64990...` |
+| `harness/historical-part-c/java/ReplayKillTeardownTest.java` (was `harness/java/ReplayKillTeardownTest.java`) | moved, content unchanged | `b715134750ac...` | `e0049c6c63c1...` |
+| `harness/historical-part-c/parse_part_c.py` (was `harness/parse_part_c.py`) | moved, content unchanged; still imported by `make_results.py` (it only reads logs) | `1bafe4d218af...` | `bdad4ea98f03...` |
+| `harness/historical-part-c/selftest_part_c_guards.sh` (was `harness/selftest_part_c_guards.sh`) | moved, content unchanged | `cd6f9d9da31f...` | - |
+| `harness/historical-part-c/README.md` | new | `ef0b37461e1f...` | - |
+| `replay.sh` | Part C taken off as described above | `4b612c5de438...` | `6e85b1415659...` |
+| `harness/make_results.py` | imports `parse_part_c` from `harness/historical-part-c`; reads `--part all` as Parts A and B; records `path_as_run` for the moved files and the as-run hash of `tables.py` | `e040312d67d6...` | `0176e7b397d5...` |
+| `harness/tables.py` | the "Article" columns quote the current article (below); the Part B table gains an "Article" column | `734492705072...` | `1e4db5170a6a...` (the version published with the runs) |
+
+**"Article" columns.** The comparison tables above quote, word for word, Table 1 and the PR 12472
+stall counts of the article revision of 25 October 2026 that cites these records at commit
+`fe561f6`. In that revision, Table 1 reports this bundle's runs (five per cell), and the stall
+counts (17/20 on JDK 8 and 19/20 on JDK 11 for hooked `dev`, 20/20 each in the first
+reconstruction, 0/20 per JDK for the patch, 50/50 passes under contention) are in its text on the
+test system; its checkpoint section gives no stall counts. Before this revision the column quoted
+an earlier article text, whose Table 1 reported the 2026-10-25 runs ("teardown threw in 5/5
+records; 2/5 next jobs timed out at 150 s"; wrapper request times 20.2-20.5 s and 35.2-35.6 s), and
+the Part B table quoted only the pull request. "Reading the results" now compares the wrapper
+request times with the 2026-10-25 runs, from which those ranges came. Only the "Article" columns
+and their headers changed; every 2026-10-25 and 2026-10-26 cell is as before.
+
+Checks (run on 2026-10-25, no new executions):
+
+- `python3 harness/make_results.py` over the recorded logs: `validation PASS; A 120 valid runs, B 12
+  valid loops, C 20 valid runs, 289 log files hashed`. Compared with the previous `results.json`,
+  only `generated` and the `harness` list differ; every per-cell summary, per-run record,
+  validation block and log hash is identical.
+- Hashes recomputed from the files: 289 of 289 log hashes match and no file under `logs/` is
+  unlisted; 18 of 18 harness hashes match (every file under `harness/` and `replay.sh` is listed);
+  272 of 272 per-run log hash references match; each of the 6 `sha256_as_run` values matches the
+  file at its `path_as_run` in commit `4877661`; the Part C cell log headers carry
+  `e0049c6c63c1...`, the `sha256_as_run` of `ReplayKillTeardownTest.java`. The 62 hashes in
+  `../model-queries-2026-10-25/results.json` match.
+- `python3 harness/selftest_validation.py`: 14 of 14 cases as expected.
+- `replay.sh` in a copy of this directory, with a `docker` on `PATH` that records every call:
+  `--part C`, `--part C --prepare-only` and `--part C --runs 5` each printed the reason and exited
+  0, created no file and no `work/` directory, and called `docker` 0 times. `--part all` printed
+  the reason, wrote its invocation and toolchain records, and stopped at the clone (exit 4, the
+  clone URL was pointed at a missing path for this check); `docker` was called 0 times.
+- A copy without `logs/partA`, `logs/partB`, their `logs/setup` files and `results.json` validates
+  with `C 20 valid runs`, as "Exact commands" states.
+
+Not done: Part C was not executed in a disposable environment, and no revised Part C script has
+been executed against Docker. Parts A and B were not re-run.

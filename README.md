@@ -5,9 +5,48 @@ This repository holds the reconstruction records for the SeaTunnel cases of the 
 
 | Location | Contents |
 | --- | --- |
-| Repository root: this README (the part after the horizontal rule), [`harness/`](harness/), [`logs/`](logs/), [`results.json`](results.json) | The first reconstruction, 2026-10-25: one run per Part A cell. Kept as published. |
-| [`replay-2026-10-26/`](replay-2026-10-26/) | The second reconstruction: a portable replay bundle with one entry point (`replay.sh --part A\|B\|C\|all --runs N`). It clones apache/seatunnel at the pinned commits into `work/`, builds, and runs 5 runs per Part A and Part C cell, one more loop per Part B cell, and explicit teardown assertions. It has its own [README](replay-2026-10-26/README.md), `results.json` (with the sha256 of every log) and `logs/`, and its README compares each cell with the article and with 2026-10-25. |
+| Repository root: this README (the part after the horizontal rule), [`harness/`](harness/), [`logs/`](logs/), [`results.json`](results.json) | The first reconstruction, 2026-10-25: one run per Part A cell. Kept as published, except for the column labels and wording noted under "Revision" below. |
+| [`replay-2026-10-26/`](replay-2026-10-26/) | The second reconstruction: 5 runs per Part A and Part C cell, one more loop per Part B cell, and explicit teardown assertions. Its entry point (`replay.sh --part A\|B\|all --runs N`) clones apache/seatunnel at the pinned commits into `work/`, builds and runs Parts A and B. Part C is not run by it: Part C executed SeaTunnel's real end-to-end teardown against the host's Docker daemon, which deletes the host path `/tmp/seatunnel_mnt`; its recorded runs are kept as historical records and its scripts, for inspection only, in [`harness/historical-part-c/`](replay-2026-10-26/harness/historical-part-c/). The bundle has its own [README](replay-2026-10-26/README.md), `results.json` (with the sha256 of every log) and `logs/`, and its README compares each cell with the current article and with 2026-10-25. |
 | [`ci-evidence/`](ci-evidence/) | Saved GitHub Actions records of apache/seatunnel that the article cites inline: the nightly run list for 2 to 23 October 2026, the job time-limit annotations, the 22 October manual cancellation, the September push/nightly run records and the Windows job excerpt. Run ids and retrieval times are as saved. |
+
+## Comparison with the current article
+
+The article revision of 25 October 2026 that cites these records at commit `fe561f6` reports the
+second reconstruction (`replay-2026-10-26/`). The "Article" column below quotes it word for word:
+its Table 1, and, where marked "(text)", its text on the test system (the stall counts; its
+checkpoint section gives no stall counts). Each value is traced to the
+fields of `replay-2026-10-26/results.json` that hold it (Part A cells `jdk8_<fault>_<config>` and
+`jdk11_<fault>_<config>` under `partA.cells`); the per-run records there name the log of each run.
+The same values appear, cell by cell, in the "Article" columns of
+[`replay-2026-10-26/README.md`](replay-2026-10-26/README.md). The "Article" columns of the first
+reconstruction's text below the horizontal rule quote an earlier article text (24 October 2026);
+they are historical.
+
+| Table 1 row or topic | Article, 25 Oct 2026 revision | Records (2026-10-26 bundle unless stated) | Result fields |
+| --- | --- | --- | --- |
+| HTTP 503, before | fails on first 503, 5/5 per JDK | FAIL 5 of 5 runs on each JDK; 1 primary-path request per run | `partA.cells.*_503x2_before`: `fail`, `primary_attempts` |
+| HTTP 503, after | succeeds on third request, 5/5 per JDK | PASS 5 of 5 on each JDK; 3 requests per run | `partA.cells.*_503x2_after`: `pass`, `primary_attempts` |
+| Connection reset, before | fails after four attempts, 5/5 per JDK | FAIL 5 of 5 on each JDK; 4 requests per run | `partA.cells.*_reset4_before`: `fail`, `primary_attempts` |
+| Connection reset, after | succeeds on fifth, 5/5 per JDK | PASS 5 of 5 on each JDK; 5 requests per run | `partA.cells.*_reset4_after`: `pass`, `primary_attempts` |
+| HTTP 429, before | closed-stream error after receiving 200, 5/5 per JDK; unlike the PR | FAIL 5 of 5 on each JDK; `Attempted read from closed stream` in 5 of 5; 3 requests (429, 429, 200) per run | `partA.cells.*_429x2_before`: `fail`, `closed_stream_error`, `primary_actions` |
+| HTTP 429, after | succeeds, 5/5 per JDK | PASS 5 of 5 on each JDK | `partA.cells.*_429x2_after`: `pass` |
+| Body cut off halfway, before | fails, 5/5 per JDK | FAIL 5 of 5 on each JDK | `partA.cells.*_truncate1_before`: `fail` |
+| Body cut off halfway, after | fails without retry, 5/5 per JDK; earlier JDK 11 hang not reproduced | FAIL 5 of 5 on each JDK; 1 request per run; timed out 0 of 5 | `partA.cells.*_truncate1_after`: `fail`, `primary_attempts`, `timed_out` |
+| Wrapper jar 429 for 30 s, before | five attempts; main class not found, 5/5 per JDK | FAIL 5 of 5 on each JDK; 5 wrapper-jar requests per run; main class not found in 5 of 5 | `partA.cells.*_wrapper429s_before`: `fail`, `wrapper_jar_attempts`, `main_class_not_found` |
+| Wrapper jar 429 for 30 s, after | fourth attempt succeeds, 5/5 per JDK | PASS 5 of 5 on each JDK; 4 wrapper-jar requests per run | `partA.cells.*_wrapper429s_after`: `pass`, `wrapper_jar_attempts` |
+| Empty-body 429 variant, before (not a Table 1 row) | - (not in Table 1) | PASS 5 of 5 on each JDK; `Checksum validation failed` in 5 of 5; 4 requests per run | `partA.cells.*_429x2nobody_before`: `pass`, `checksum_validation_failed`, `primary_attempts` |
+| Empty-body 429 variant, after (not a Table 1 row) | - (not in Table 1) | PASS 5 of 5 on each JDK; checksum failure in 0 of 5; 3 requests per run | `partA.cells.*_429x2nobody_after`: `pass`, `checksum_validation_failed`, `primary_attempts` |
+| Flink TaskManager killed, before | teardown threw, containers left, 5/5; next job timed out at 150 s, 3/5 | teardown threw 5 of 5; `containers_absent_after_teardown` FAIL 5 of 5; next job timed out 3 of 5 | `partC.cells.flink-before`: `teardown_threw`, `assertions.containers_absent_after_teardown`, `next_job_timed_out` |
+| Flink TaskManager killed, after | teardown completed, containers removed, next job exited 0, 5/5 | teardown threw 0 of 5; containers absent 5 of 5; next job exit 0 in 5 of 5 | `partC.cells.flink-after`: `teardown_threw`, `assertions.containers_absent_after_teardown`, `next_job_exit_zero` |
+| Spark master killed, before | Spark: teardown threw, master left, next job exited 0, 5/5 | teardown threw 5 of 5; containers absent 0 of 5; next job exit 0 in 5 of 5 | `partC.cells.spark-before`: same fields |
+| Spark master killed, after | Spark: teardown completed, master removed, next job exited 0, 5/5 | teardown threw 0 of 5; containers absent 5 of 5; next job exit 0 in 5 of 5 | `partC.cells.spark-after`: same fields |
+| Zeta server killed | Zeta: historical throw, not re-run / Zeta: historical warning and next-job exit 0, not re-run | not run | `not_run` |
+| Stall hook, unchanged `dev`, JDK 8 | (text) 17/20 failures on unchanged dev with JDK 8 | 17 of 20 iterations failed | `partB.cells.dev-hook-jdk8`: `per_loop_failed`, `iterations_per_loop` |
+| Stall hook, unchanged `dev`, JDK 11 | (text) 19/20 with JDK 11 | 19 of 20 failed | `partB.cells.dev-hook-jdk11`: same fields |
+| Stall hook, first reconstruction | (text) versus 20/20 each in the first reconstruction | first reconstruction: 20 of 20 failed on JDK 8 and on JDK 11 | `results.json` at the repository root, `cells` entries `dev-hook-jdk8` and `dev-hook-jdk11`: `failed`, `iterations` |
+| Patched test with stalls | (text) The patch failed 0/20 per JDK under different stalls | 0 of 20 failed on each JDK | `partB.cells.patch-hook-jdk8`, `patch-hook-jdk11`: `per_loop_failed` |
+| Unhooked `dev` under contention | (text) unhooked dev passed 50/50 under CPU contention | 0 of 50 failed on each JDK | `partB.cells.dev-nohook-contention-jdk8`, `-jdk11`: `per_loop_failed`, `iterations_per_loop` |
+| Other hook positions | (text) No hook position reproduces the PR’s 15/20 and 7/20 | failures per position 35/45/55/65 ms: JDK 8 17, 18, 10, 4 of 20; JDK 11 19, 16, 11, 4 of 20 (first reconstruction: JDK 8 20, 17, 11, 7; JDK 11 20, 18, 11, 2) | `partB.cells.dev-hook-jdk8`, `dev-hook-lead45-jdk8`, ... `dev-hook-lead65-jdk11`: `per_loop_failed` |
 
 ## Access
 
@@ -41,6 +80,21 @@ is unchanged. No number, log or harness file of the first reconstruction changed
 of the two bundles are described in their own READMEs (`replay-2026-10-26/README.md`, section
 "Revision (2026-10-25, third revision after the runs)"; `model-queries-2026-10-25/README.md`,
 section "Revision (2026-10-25, after the runs)").
+
+## Revision (2026-10-25, fourth revision)
+
+- The section "Comparison with the current article" is new. It quotes, word for word, Table 1 and
+  the stall counts of the article revision of 25 October 2026 that cites these records at commit
+  `fe561f6`, and names the field of `replay-2026-10-26/results.json` (or, for the first
+  reconstruction's 20/20, of this directory's `results.json`) behind each value.
+- In the first reconstruction's text below, the "Article" headers of the three result tables now
+  read "Article (24 Oct 2026 text, historical)". Those columns quote the article text of
+  24 October 2026, written before either reconstruction; they do not describe the current article.
+  No value, match judgement, number, log or harness file of the first reconstruction changed.
+- The `replay-2026-10-26/` entry above now states that its replay script runs Parts A and B only.
+  The bundle's README, section "Revision (2026-10-25, fourth revision after the runs)", describes
+  that change, the move of the Part C scripts to `replay-2026-10-26/harness/historical-part-c/` and
+  the updated "Article" columns of its comparison tables.
 
 ---
 
@@ -117,7 +171,7 @@ for `junit/junit/4.13.2/junit-4.13.2.pom` (the first fault target); the same pat
 other junit path (`junit-4.13.2.jar`, `junit-3.8.1.pom/.jar`, `junit-3.8.2.pom`, pulled in by the
 dependency plugin).
 
-| Row | Fault | Config | Article | JDK 8 replay | JDK 11 replay | Match |
+| Row | Fault | Config | Article (24 Oct 2026 text, historical) | JDK 8 replay | JDK 11 replay | Match |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | HTTP 503 on first 2 requests | before | fails on the first 503 | FAIL; 1 request (503); 5.0 s | FAIL; 1 request (503); 10.2 s | yes |
 | 1 | | after | succeeds on the third request | PASS; 3 requests (503, 503, 200), 1.0 s apart; 19.5 s | PASS; same pattern; 19.6 s (second attempt, see invalid run) | yes |
@@ -159,7 +213,7 @@ One JVM per cell, the single method run N times through the JUnit Platform launc
 (`harness/java/RepeatMethod.java`), as the PR describes. Every iteration's outcome and duration is
 in the cell's log.
 
-| Cell | Code | Article / PR | JDK 8u172 replay | JDK 11.0.19 replay | Match |
+| Cell | Code | Article (24 Oct 2026 text, historical) / PR | JDK 8u172 replay | JDK 11.0.19 replay | Match |
 | --- | --- | --- | --- | --- | --- |
 | Hook as reconstructed (one 45 ms sleep at the first evaluation of the first Awaitility loop that is <= 35 ms before the test's `idleDeadlineMs`) | `deb16a3c3` + `hook-dev-deb16a3c3-stall45.patch` | 15/20 and 7/20 failed | **20/20 failed** | **20/20 failed** | no (direction yes, rate no) |
 | Patch with stalls (45 ms before close step, 700 ms after close, 700 ms after rediscovery) | `87ed0afe0` + `hook-patch-87ed0afe0-stalls.patch` | 0/20 and 0/20 failed | 0/20 failed | 0/20 failed | yes |
@@ -200,7 +254,7 @@ run `/fake_to_assert.conf` with a 150 s limit. 5 runs per cell. Run order (wall 
 Flink after run 1 00:50-00:52; Flink before runs 1-5 00:53-01:05; Flink after runs 2-5 01:05-01:12;
 Spark before 01:12-01:16; Spark after 01:16-01:21.
 
-| Row | Scenario | Revision | Article | Replay (5 runs) | Match |
+| Row | Scenario | Revision | Article (24 Oct 2026 text, historical) | Replay (5 runs) | Match |
 | --- | --- | --- | --- | --- | --- |
 | 6 | Flink 1.18 TaskManager killed, teardown, next job | before (`7ba68325c` teardown classes) | on dev, teardown threw in 11 of 11 runs; in 6 of them the next job hung > 120 s | teardown threw in **5/5** (`ConflictException: Status 409 ... is not running`); first JobManager left running in 5/5; new TaskManager registered with the **leaked** JobManager in 2/5 (REST `/overview`: 0 at its own, 1 at the leaked one) and in those 2 the next job hung past the 150 s limit, the JobManager logging `Missing resources ... numberOfRequiredSlots=1 / Current resources: (none)`; in the other 3/5 the next job exited 0 | yes (pattern; 2/5 vs 6/11 hang share) |
 | 6 | | after (merge `0e4cf5289`) | final shared revision: 2 of 2 completed, next job exit 0 | teardown completed **5/5**; both first containers removed 5/5; new TaskManager at its own JobManager (4/4 measured; run 1 used the IP check, inconclusive); next job exit 0 in **5/5** | yes |
