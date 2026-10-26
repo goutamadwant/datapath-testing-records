@@ -471,3 +471,105 @@ Model-written `regexp_like` queries planned on Apache DataFusion before and afte
 ## fail-before-2026-10-26
 
 Fail-before / pass-after runs of every regression test the article names: the PR's test change applied to the parent commit (before) and the merge commit as is (after), with per-case logs, patches and `results.json`. See `fail-before-2026-10-26/README.md`.
+
+## Reconstruction provenance and interpretation
+
+The bundle READMEs document the procedures behind the article. These are retained
+observations, not a validated clean-machine reproduction recipe. No clean-machine
+or independent-host replay was executed. JDKs, images and Maven dependencies were
+reused. Dependency and image identities are recorded but not enforced; the query
+harness uses ambient Rust and an unpinned dependency graph. Hash checks do not
+recompile reconstruction Java. Mutable image tags and build drift can alter results.
+
+### Regression-test transplants
+
+See `fail-before-2026-10-26/README.md`, `run.sh`, patches and per-case logs. The
+unmodified DataFusion 24193 test fails before and passes after. The 24917 plan-shape
+test passes both; diagnostic plans match despite different planning times. SeaTunnel
+12038 reader/factory tests cannot compile before and pass after. Dropping the new
+constructor argument lets the reader run: 6/9 fail before and 9/9 pass after. Three
+failures concern parse behavior; three exercise the absent skip option. SeaTunnel
+12360 passes 14/14 both and changes no production code. SeaTunnel 12472 cannot
+compile before without the new clock constructor and passes after. Neither 12481
+class compiles before; dropping `@Override` lets the Flink tests run, with 5/5 failing
+before and 5/5 passing after. Four failures concern teardown; the fifth is a
+shim-only `hostVolumeDeleted` flag. The 12 base-container tests pass after only.
+SeaTunnel 12467/12468 have no committed regression tests.
+
+These interface shims do not make mocked containers validate real Docker. Unfixed
+Flink teardown deletes `/tmp/seatunnel_mnt`; an absence check does not establish
+ownership. Use a disposable environment. Docker end-to-end suites,
+`EdgeAgentFileToEngineIT` and Windows were not run. The clock build error and an
+interrupted after attempt are retained; the interrupted attempt has no registry row
+and is not a completed run. Concurrent builds affect durations, and runner edits
+caused console errors after completed cases. Logs retain workstation paths.
+The transplant parser can accept a missing comparison or an ignored-only Rust test;
+the runner does not reliably propagate setup failures. Archived outcomes must be
+checked against individual logs, not inferred from the runner exit status.
+
+### Clock and Maven interpretation
+
+No hook position reproduces the original 15/20 and 7/20 clock failures; placement is
+ambiguous and original logs are missing. The patch failed 0/20 per JDK under different
+stalls; unhooked dev passed 50/50 under CPU contention. Unequal stalls and waits support
+a lost-line mechanism, not clock effectiveness or Windows failure rates. The original
+200/200 stress run and mutations removing rediscovery or idle close were not re-run.
+The patched merge includes longer timeouts; its stalls were 45 milliseconds before
+close and 700 milliseconds after close and rediscovery. Stall records lack capacity,
+warm-up, reset and run order. Each group shared a JVM with JDK 8-compiled classes.
+
+Maven faults targeted junit and plugin dependencies, excluding checksums; repetitions
+used fresh mirrors, projects and empty repositories. Empty-body 429 responses needed
+checksum-triggered redownloads before, not after. The original response body is
+unknown. Neither transport nor resolver retries repaired truncated bodies. Wrapper
+timing starts at the first request; curl replaced CI's wget, the distribution was
+cached, and Windows has no retry loop. Maven overlapped other builds and teardown,
+so wall times include that load.
+
+### Teardown records and safety
+
+The before condition replaced merge-build teardown classes with parent classes.
+The executed scripts could delete unrelated containers and host files. The supported
+`replay.sh` runs downloads and clocks only; a teardown request exits before setup.
+The 20 teardown runs remain historical. Scripts in
+`replay-2026-10-26/harness/historical-part-c/` are for inspection, not execution.
+They reject existing engine containers, `/tmp/seatunnel_mnt` or an unlistable daemon;
+cleanup selects new containers by image and JVM session label. Host isolation is
+unenforced: another process could create the deleted path or reuse the label.
+Do not execute historical scripts. Revised scripts have simulated-Docker and
+self-test evidence only, without real-engine or clean-environment validation.
+
+The first reconstruction retains an invalid Maven attempt and two teardown setup
+failures. Deleted smoke logs, inconclusive Flink registration, an all-error removal
+check, suppressed cleanup errors and unchecked isolation limit those records; logs
+could be overwritten and incomplete execution hidden. Timestamped invocation logs
+record matrix provenance, but toolchain/build logs can be overwritten. The second
+reconstruction validator rejects missing cells or repetitions, incomplete loops,
+undelivered faults and failed validity checks; it revalidates observations, not new
+executions. Hashes distinguish script and timeout-reader revisions; separately
+compiled teardown code overrides the module copy. End-of-cell cleanup removed
+nothing, so no cleanup files exist. The first Flink reconstruction timed out in 2/5
+next jobs, versus 3/5 in the second.
+
+### Planning measurements
+
+The generated queries contain no all-literal call and never exercise the targeted
+constant-folding path. Counts describe selected batched prompts, one sample per
+generator, one empty-table schema and one machine; generation is not repeatable.
+Malformed lines were discarded, repeats retained, and some first repetitions were
+slower. The analyzer requires every repetition but classifies only `regexp_like`,
+treating constant expressions as nonliteral. Regex, schema/type, unsupported-function
+and SQL errors remain in the records. The issue control needed a missing quote;
+nested repetitions missed the predicted theme. Debug timings are excluded. Original
+planning records lack hardware, timer boundaries, warm-up, context reuse and run
+order. The exploratory issue-date build upgraded regex dependencies and confounds
+source history with library changes. The original one-second stall, debug/fuzz-build
+explanations and a reduction in stall frequency remain untested. Execution, including
+deferred compilation, was not measured. Worst-case planning time remains unknown.
+
+### Access to the cited snapshot
+
+On 26 October 2026 at 04:35 UTC, unauthenticated checks returned HTTP 200 for the
+`d059baf95c8a21850a0b5d9d08ef07128d636ed2` tree, root README, replay README,
+fail-before README, replay results, model-query results, fail-before results and CI
+README. This is a dated access observation, not a claim of permanent availability.
