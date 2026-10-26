@@ -5,9 +5,42 @@ This repository holds the reconstruction records for the SeaTunnel cases of the 
 
 | Location | Contents |
 | --- | --- |
-| Repository root: this README (from the next heading on), [`harness/`](harness/), [`logs/`](logs/), [`results.json`](results.json) | The first reconstruction, 2026-10-25: one run per Part A cell. Kept as published. |
+| Repository root: this README (the part after the horizontal rule), [`harness/`](harness/), [`logs/`](logs/), [`results.json`](results.json) | The first reconstruction, 2026-10-25: one run per Part A cell. Kept as published. |
 | [`replay-2026-10-26/`](replay-2026-10-26/) | The second reconstruction: a portable replay bundle with one entry point (`replay.sh --part A\|B\|C\|all --runs N`). It clones apache/seatunnel at the pinned commits into `work/`, builds, and runs 5 runs per Part A and Part C cell, one more loop per Part B cell, and explicit teardown assertions. It has its own [README](replay-2026-10-26/README.md), `results.json` (with the sha256 of every log) and `logs/`, and its README compares each cell with the article and with 2026-10-25. |
 | [`ci-evidence/`](ci-evidence/) | Saved GitHub Actions records of apache/seatunnel that the article cites inline: the nightly run list for 2 to 23 October 2026, the job time-limit annotations, the 22 October manual cancellation, the September push/nightly run records and the Windows job excerpt. Run ids and retrieval times are as saved. |
+
+## Access
+
+The repository is public. Unauthenticated read access was checked on 2026-10-26 at 01:01:39 UTC
+(2026-10-25 18:01 UTC-7) from a shell with `GH_TOKEN` and `GITHUB_TOKEN` unset, an empty `HOME`,
+no netrc and a new, empty cookie jar (`curl -s -o /dev/null -w '%{http_code}'`), at commit
+`fe561f6e366787b36161b79e038404ed120f02ca`, which added this revision of the records:
+
+| URL | HTTP status |
+| --- | --- |
+| `https://raw.githubusercontent.com/goutamadwant/datapath-testing-records/fe561f6e366787b36161b79e038404ed120f02ca/README.md` | 200 |
+| `https://raw.githubusercontent.com/goutamadwant/datapath-testing-records/fe561f6e366787b36161b79e038404ed120f02ca/replay-2026-10-26/README.md` | 200 |
+| `https://raw.githubusercontent.com/goutamadwant/datapath-testing-records/fe561f6e366787b36161b79e038404ed120f02ca/model-queries-2026-10-25/README.md` | 200 |
+| `https://raw.githubusercontent.com/goutamadwant/datapath-testing-records/fe561f6e366787b36161b79e038404ed120f02ca/replay-2026-10-26/results.json` | 200 |
+| `https://github.com/goutamadwant/datapath-testing-records` | 200 |
+| `https://github.com/goutamadwant/datapath-testing-records/tree/fe561f6e366787b36161b79e038404ed120f02ca` | 200 |
+| `https://github.com/goutamadwant/datapath-testing-records/commit/fe561f6e366787b36161b79e038404ed120f02ca` | 200 |
+
+`git ls-remote https://github.com/goutamadwant/datapath-testing-records refs/heads/master`, run
+with no credential helper, listed `fe561f6e366787b36161b79e038404ed120f02ca`. At 01:01:52 UTC the
+tree of the previous commit `f1d0a742b185c42b8165f4b832774e0133ca3746` and its
+`replay-2026-10-26/README.md` and `model-queries-2026-10-25/README.md` raw files also returned 200.
+The commit that adds this section changes only this README.
+
+## Revision (2026-10-25)
+
+In the first reconstruction's text below, interpretation 6 and the "Repetitions for Part A" item
+under "Not re-run" were reworded in commit `fe561f6e366787b36161b79e038404ed120f02ca` to remove an
+internal tracking identifier; what they state (one run per Part A cell, at least 5 not run here)
+is unchanged. No number, log or harness file of the first reconstruction changed. The revisions
+of the two bundles are described in their own READMEs (`replay-2026-10-26/README.md`, section
+"Revision (2026-10-25, third revision after the runs)"; `model-queries-2026-10-25/README.md`,
+section "Revision (2026-10-25, after the runs)").
 
 ---
 
