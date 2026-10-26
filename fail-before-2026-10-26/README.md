@@ -6,7 +6,8 @@ pull request that added it:
 - **before**: the first parent of the pull request's merge commit, with only the pull request's
   test change applied on top (whole test files copied from the merge commit; for DataFusion PR
   24193, whose test lives in the same file as the fix, only the hunks inside `mod tests`, see
-  `patches/df24193-tests-only.patch`). Production code is the unfixed code.
+  `patches/df24193-tests-only.patch`; likewise for the PR 24917 planning-budget tests,
+  `patches/df24917-budget-tests-only.patch`). Production code is the unfixed code.
 - **after**: the merge commit as is.
 
 The same command runs on both trees. Every outcome below is parsed by `make_results.py` from a log
@@ -17,7 +18,9 @@ Failed and interrupted runs are kept.
 Runs executed on 2026-10-25 between 19:02 and 19:51 local time (UTC-7) on an Apple M1 Pro,
 16 GB, macOS 27.0 (Darwin 27.0.0 arm64). The directory name gives the bundle date, not the run
 date. Toolchains: rustc/cargo 1.97.0 (pinned by DataFusion's `rust-toolchain.toml`); JDK
-1.8.0_172 with the Maven wrapper of each SeaTunnel commit.
+1.8.0_172 with the Maven wrapper of each SeaTunnel commit. The `df24917-budget` case was run
+later, on 2026-10-26 between 01:54 and 01:56 local time (UTC-7), on the same machine with the
+same Rust toolchain and with no other build running.
 
 ## Results
 
@@ -25,7 +28,9 @@ Outcome codes: FAIL / PASS = the test named in the command was executed; COMPILE
 test sources of the module under test did not compile against that tree, so the test could not
 run; NO_TESTS_RUN = the filter selected nothing, or every selected test was ignored or skipped;
 UNKNOWN = the log does not establish an outcome (no summary line, a summary that disagrees with
-the per-test lines, or the named test absent from the executed tests).
+the per-test lines, or the named test absent from the executed tests); SETUP_ERROR = the side was
+never run because a setup step (clone, checkout, transplant or patch apply, missing JDK, refusal)
+failed (no recorded run has this outcome).
 
 Parser revision (2026-10-26). The first `make_results.py` would have reported PASS for a cargo run
 whose only selected test was `ignored`, and did not check that the named test was among the
@@ -35,12 +40,15 @@ per-test lines as UNKNOWN, and marks a case without both a before and an after r
 `comparison: incomplete` in `results.json`. No recorded run was affected: every outcome, test
 list and log hash in `results.json` is the same under both parsers (the logs are unchanged;
 `results.json` gains the `parser`, `expected_test` and `comparisons` fields). The checks are in
-`test_make_results.py` (`python3 -I test_make_results.py`).
+`test_make_results.py` (`python3 -I test_make_results.py`). A third revision adds the SETUP_ERROR
+outcome and the requested-sides check described under "Run record"; it changes no earlier outcome,
+test list, comparison or log hash either.
 
 | PR | Test | Before commit | After commit | Before outcome | After outcome | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | DataFusion 24193 | `repartition::tests::unbounded_input_emits_before_batch_size` (`datafusion-physical-plan`) | `d5868e683435` | `047f531488f6` | **FAIL** (1/1): panicked `unbounded repartition withheld a partial batch: Elapsed(())` after the 5 s timeout (`finished in 5.01s`) | **PASS** (1/1) | Fails before, passes after. Only the test-module hunks were applied on the parent |
 | DataFusion 24917 | `optimizer::expensive_regexp_like_is_deferred_to_execution` (`datafusion`, `--test core_integration`) | `408527ae58b5` | `3dfa245d61dd` | **PASS** (1/1) | **PASS** (1/1) | The test does not fail on the unfixed code. A diagnostic run (`df24917-diag`, same test with the plans and the planning time printed, 3 runs per tree) shows identical logical plans on both trees: `Projection: Utf8("aaaaa") ~ Utf8("a{5}{5}{5}{5}{5}{5}{5}{5}")` and `Projection: Boolean(NULL)`. Only the planning time of the literal query differs: 550.5 / 488.2 / 478.7 ms before, 31.6 / 12.1 / 10.0 ms after (unoptimized `ci` profile). The test asserts the plan shape, which the fix does not change; it does not assert time |
+| DataFusion 24917 | `test_constant_regex_respects_planning_budget` in `simplify_expressions::expr_simplifier::tests` (`datafusion-optimizer`) and in `simplifier::tests` (`datafusion-physical-expr`), `--lib` | `408527ae58b5` | `3dfa245d61dd` | **COMPILE_ERROR**, 2 errors: `error[E0407]: method should_evaluate_const is not a member of trait ScalarUDFImpl`, once in each package (the test UDFs implement the hook the pull request added) | **PASS** (2/2: 1/1 per package) | Not runnable against the unfixed code; no shim. Only the hunks that add the two tests (and the physical test's imports) were applied on the parent. See below |
 | SeaTunnel 12038 | `AmazonSqsSourceReaderTest` (9 methods, `connector-amazonsqs`) | `9ebb27e8f920` | `1e450e11f7c8` | **COMPILE_ERROR**: `no suitable constructor found for AmazonSqsSourceConfig(String,String,<null>,<null>,<null>,boolean,boolean,<null>)` (the pull request added `ignoreParseErrors` to the all-arguments constructor) | **PASS** (9/9) | Not runnable unmodified against the unfixed code. With a one-line shim (`patches/st12038-reader-test-drop-ignore-arg.patch`, drops that constructor argument): before **FAIL 6/9**, after **PASS 9/9**; see below |
 | SeaTunnel 12038 | `AmazonSqsSourceFactoryTest#testOptionRule` (extended by the same PR) | `9ebb27e8f920` | `1e450e11f7c8` | **COMPILE_ERROR**: `cannot find symbol` for `AmazonSqsSourceOptions.IGNORE_PARSE_ERRORS` (and the reader-test error above) | **PASS** (1/1) | The test checks the new option itself; not runnable against the unfixed code. No shim |
 | SeaTunnel 12360 | `IncrementalSourceReaderTest` (14 methods, `connector-cdc-base`) | `4648c9956ec8` | `eb76f81c823a` | **PASS** (14/14) | **PASS** (14/14) | The pull request changed only this test file (415 insertions), so before-with-test and after are the same source tree. No production change exists that the test could detect; this matches the article's negative result. A fail-before comparison is not applicable |
@@ -48,6 +56,23 @@ list and log hash in `results.json` is the same under both parsers (the logs are
 | SeaTunnel 12481 | `AbstractTestContainerTest` (12 methods) and `AbstractTestFlinkContainerTest` (5 methods) (`seatunnel-e2e-common`) | `7ba68325cb7e` | `0e4cf52896ee` | **COMPILE_ERROR**, 9 errors: `cannot find symbol` for the static helpers the pull request added (`removeContainerVolumeMountPath`, `deleteHostPath`, ...), and `method does not override or implement a method from a supertype` for the test doubles' `deleteHostVolumeMountPath()` (2 in `AbstractTestContainerTest`, 1 in `AbstractTestFlinkContainerTest`) | **PASS** (17/17) | Not runnable unmodified. `AbstractTestContainerTest` calls the new helpers directly; no shim. With a one-line shim for the Flink test only (`patches/st12481-flink-test-drop-override.patch`, drops one `@Override`): before **FAIL 5/5**, after **PASS 5/5**; see below. No Docker container is started by these tests (mocked containers) |
 | SeaTunnel 12467 | none | `c8c497376030` | `7ba68325cb7e` | not applicable | not applicable | Workflow concurrency-group change; the pull request adds no test |
 | SeaTunnel 12468 | none | `a1084015eeb3` | `ae7c919bcb78` | not applicable | not applicable | `.mvn/maven.config` and `mvnw` change; the pull request adds no test (fault-injection reconstructions are in the 2026-10-26 replay bundle) |
+
+### DataFusion 24917 planning-budget tests on the parent
+
+Pull request 24917 also added `test_constant_regex_respects_planning_budget` to the logical
+expression simplifier and to the physical expression simplifier. Both tests check that the
+constant pattern `a{5}{5}{5}{5}{5}{5}`, valid under the runtime regex size limit but over the new
+256 KiB planning limit, is left unevaluated during simplification (as a regex operator, under an
+alias, and for the physical simplifier also as `regexp_like` with a flag argument), that a small
+pattern is still folded, and that the new `ScalarUDFImpl::should_evaluate_const` hook works: in
+the logical test a UDF opts out of constant evaluation through it, in the physical test the hook
+is not consulted for a call with a column argument. Each test defines its own UDF implementing that hook,
+so on the parent neither test compiles: the log shows one `E0407` error in each package and no
+test runs. On the merge commit both tests pass. The regex assertions, which do not use the hook,
+were therefore never executed against the unfixed code; this run establishes neither a failure
+nor a pass for them before the fix. No shim was applied: the missing member is the extension point
+the fix introduces, and removing it would mean deleting a three-line method from each test, not a
+one-line adaptation.
 
 ### Shimmed runs, per method
 
@@ -96,6 +121,9 @@ refuses this case while that path exists; it did not exist before or after the r
 
 ## What could not be run, and why
 
+- **Fail-before for the DataFusion 24917 planning-budget tests**: both tests implement the
+  `should_evaluate_const` hook the pull request added and do not compile against the unfixed code;
+  no shim, for the reason given above.
 - **Unmodified fail-before for SeaTunnel 12038, 12472 and 12481**: the transplanted tests do not
   compile against the unfixed code because they call constructors, options or methods the pull
   requests added. These tests are not runnable against the unfixed code as written. One-line shims
@@ -112,16 +140,19 @@ refuses this case while that path exists; it did not exist before or after the r
 ```
 ./run.sh                       # all cases, in order
 ./run.sh df24193 st12038-shim  # selected cases
+./run.sh df24917-budget        # the PR 24917 planning-budget tests
 python3 make_results.py        # parse logs/runs.jsonl and the logs, write results.json
 ```
 
-Cases: `df24193`, `df24917`, `df24917-diag`, `st12038`, `st12038-shim`, `st12038-factory`,
+Cases: `df24193`, `df24917`, `df24917-diag`, `df24917-budget`, `st12038`, `st12038-shim`, `st12038-factory`,
 `st12360`, `st12472`, `st12481`, `st12481-shim`. Per run the script prepares a git worktree at the
 commit (hard reset, `git clean -fdx`), applies the transplant, writes a log header (commits,
 `git status`, `git diff --stat`, toolchain, command, start/end, exit code) and runs:
 
 - DataFusion: `cargo test --locked --profile ci -p datafusion-physical-plan --lib unbounded_input_emits_before_batch_size`
   and `cargo test --locked --profile ci -p datafusion --test core_integration expensive_regexp_like_is_deferred_to_execution`
+  and `cargo test --locked --profile ci --no-fail-fast -p datafusion-optimizer -p datafusion-physical-expr --lib test_constant_regex_respects_planning_budget`
+  (`--no-fail-fast` so that a failure in one package does not stop the other's test)
   (`ci` is DataFusion's own profile without debug info; chosen to fit the available disk). One
   shared cargo target directory.
 - SeaTunnel (JDK 8): `./mvnw -B -ntp -pl <module> -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=<selector> -DfailIfNoTests=false clean package`.
@@ -132,6 +163,26 @@ Git), `DATAFUSION_REPO` and `SEATUNNEL_REPO` (existing local clones to add workt
 the script clones apache/datafusion and apache/seatunnel), `JAVA8_HOME`.
 
 ## Run record, including failed attempts
+
+Requested cases and setup errors. Before any build, `run.sh` appends the requested cases and sides
+(before and after of every case) with an invocation id and a timestamp to `logs/requested.json`,
+and every record it then writes to `logs/runs.jsonl` carries that id. When a setup step fails
+(clone, checkout, transplant or patch apply, missing JDK 8, or the `/tmp/seatunnel_mnt` refusal of
+`st12481-shim`), the side is not skipped: the runner writes a log with the failed step and its
+output and a record with `setup_error` naming the step, which `make_results.py` reports as
+SETUP_ERROR; the other side is still attempted. At the end the runner exits 1 if any requested side
+has no record from that invocation or only a setup-error record (exit 2 for an unknown case name);
+a failing test is an outcome and does not change the exit status. `make_results.py` marks a case
+`comparison: incomplete` when a side is missing or SETUP_ERROR, or when the latest invocation that
+requested the case has no record for a requested side (listed under `missing`). The runs of
+2026-10-25 predate this check and have no invocation id; their runner skipped a case whose setup
+failed without writing a record, so for those runs completeness rests on `runs.jsonl` and the
+individual logs, which hold a before and an after record for every case. The only invocation in
+`logs/requested.json` is the `df24917-budget` run; both of its sides are recorded.
+
+- `logs/df24917-budget/`: in these two logs the absolute path of the local scratch work directory
+  (`FAILBEFORE_WORK`) was replaced by the literal `$FAILBEFORE_WORK` before hashing; nothing else
+  in them was changed.
 
 - `logs/st12472/before.log`: first attempt with `clean test` instead of `clean package`; the
   build stopped in the upstream module `seatunnel-config-shade` (`cannot find symbol` in its main
@@ -157,5 +208,8 @@ the script clones apache/datafusion and apache/seatunnel), `JAVA8_HOME`.
   duration and log hash; hashes of all logs and patches.
 - `patches/df24193-tests-only.patch`: the test-module hunks of PR 24193.
 - `patches/df24917-diagnostic-print-plan.patch`: prints the plans and planning time (diagnostic).
+- `patches/df24917-budget-tests-only.patch`: the hunks of PR 24917 that add the two
+  planning-budget tests (and the physical test's imports).
 - `patches/st12038-reader-test-drop-ignore-arg.patch`, `patches/st12481-flink-test-drop-override.patch`: the one-line shims.
-- `logs/<case>/<side>.log` (+ `.surefire/` for Maven), `logs/runs.jsonl`, `logs/console/`.
+- `logs/<case>/<side>.log` (+ `.surefire/` for Maven), `logs/runs.jsonl`, `logs/console/`,
+  `logs/requested.json` (requested cases and sides per invocation).

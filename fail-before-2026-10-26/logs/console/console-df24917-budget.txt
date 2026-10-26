@@ -1,0 +1,5 @@
+invocation 20261026T085452Z-83727: df24917-budget
+/dev/disk3s5   926Gi   853Gi    15Gi    99%     21M  154M   12%   /System/Volumes/Data
+[df24917-budget/before] exit 101 in 53 s -> logs/df24917-budget/before.log
+[df24917-budget/after] exit 0 in 31 s -> logs/df24917-budget/after.log
+invocation 20261026T085452Z-83727: 2/2 requested sides ran

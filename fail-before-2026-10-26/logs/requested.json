@@ -1,0 +1,19 @@
+[
+  {
+    "invocation": "20261026T085452Z-83727",
+    "requested_at": "2026-10-26T01:54:52-0700",
+    "cases": [
+      "df24917-budget"
+    ],
+    "sides": [
+      {
+        "case": "df24917-budget",
+        "side": "before"
+      },
+      {
+        "case": "df24917-budget",
+        "side": "after"
+      }
+    ]
+  }
+]

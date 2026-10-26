@@ -1,6 +1,6 @@
 {
   "description": "Fail-before / pass-after runs of the regression tests named in the article. before = first parent of the merge commit plus only the pull request's test change; after = merge commit. Outcomes are parsed from the logs listed here.",
-  "parser": "make_results.py rev 2 (2026-10-26): PASS requires the named test to have been executed; ignored-only or skipped-only runs are NO_TESTS_RUN; a summary line that disagrees with the per-test lines is UNKNOWN; every case needs a before and an after record",
+  "parser": "make_results.py rev 3 (2026-10-26): PASS requires the named test to have been executed; ignored-only or skipped-only runs are NO_TESTS_RUN; a summary line that disagrees with the per-test lines is UNKNOWN; every case needs a before and an after record; a record with setup_error is SETUP_ERROR and leaves its case incomplete; a case is also incomplete when the latest invocation in logs/requested.json that requested it has no record for a requested side",
   "runs": [
     {
       "case": "st12472",
@@ -943,6 +943,60 @@
         "IncrementalSourceReaderTest"
       ],
       "log_sha256": "4700dc6b23e1aee5e7ef07e39c99ba169f0603f482c137e39822d9a52eb058e4"
+    },
+    {
+      "case": "df24917-budget",
+      "side": "before",
+      "before_commit": "408527ae58b5b706f5c02df8c37e096122cd8c78",
+      "after_commit": "3dfa245d61dde362e2c077761783bc735931659c",
+      "tree_head": "408527ae58b5b706f5c02df8c37e096122cd8c78",
+      "transplant": "patches/df24917-budget-tests-only.patch applied (test-module hunks only)",
+      "command": "cargo test --locked --profile ci --no-fail-fast -p datafusion-optimizer -p datafusion-physical-expr --lib test_constant_regex_respects_planning_budget",
+      "exit_code": 101,
+      "started_epoch": 1793004893.527054,
+      "ended_epoch": 1793004946.881963,
+      "duration_s": 53.4,
+      "log": "logs/df24917-budget/before.log",
+      "invocation": "20261026T085452Z-83727",
+      "outcome": "COMPILE_ERROR",
+      "tests": [],
+      "detail": [
+        "error[E0407]: method `should_evaluate_const` is not a member of trait `ScalarUDFImpl`",
+        "error: could not compile `datafusion-physical-expr` (lib test) due to 1 previous error",
+        "error[E0407]: method `should_evaluate_const` is not a member of trait `ScalarUDFImpl`",
+        "error: could not compile `datafusion-optimizer` (lib test) due to 1 previous error"
+      ],
+      "expected_test": "test_constant_regex_respects_planning_budget",
+      "log_sha256": "48e373fbf56812e9f74ea01ae31acab447071dea941881b348c64edbf5eb363b"
+    },
+    {
+      "case": "df24917-budget",
+      "side": "after",
+      "before_commit": "408527ae58b5b706f5c02df8c37e096122cd8c78",
+      "after_commit": "3dfa245d61dde362e2c077761783bc735931659c",
+      "tree_head": "3dfa245d61dde362e2c077761783bc735931659c",
+      "transplant": "none (merge commit as is)",
+      "command": "cargo test --locked --profile ci --no-fail-fast -p datafusion-optimizer -p datafusion-physical-expr --lib test_constant_regex_respects_planning_budget",
+      "exit_code": 0,
+      "started_epoch": 1793004947.3948858,
+      "ended_epoch": 1793004978.4736981,
+      "duration_s": 31.1,
+      "log": "logs/df24917-budget/after.log",
+      "invocation": "20261026T085452Z-83727",
+      "outcome": "PASS",
+      "tests": [
+        {
+          "name": "simplify_expressions::expr_simplifier::tests::test_constant_regex_respects_planning_budget",
+          "result": "PASS"
+        },
+        {
+          "name": "simplifier::tests::test_constant_regex_respects_planning_budget",
+          "result": "PASS"
+        }
+      ],
+      "detail": [],
+      "expected_test": "test_constant_regex_respects_planning_budget",
+      "log_sha256": "eccd981a6f218ec042e1cdc4d60314755ec877f3f5763de5da5527d077896167"
     }
   ],
   "comparisons": {
@@ -995,19 +1049,28 @@
       "before": "PASS",
       "after": "PASS",
       "comparison": "complete"
+    },
+    "df24917-budget": {
+      "before": "COMPILE_ERROR",
+      "after": "PASS",
+      "comparison": "complete"
     }
   },
   "log_files": {
     "logs/console/console-df.txt": "6ea23e39b820f52cfcca71d132c2d251fcb36a43d86b77d0a4c2abcac07757c0",
+    "logs/console/console-df24917-budget.txt": "f9c689ee4fcd2eba5a0cbed2f862b1cd5681caed349fe53e6397a03bd17f155e",
     "logs/console/console-st-shim.txt": "4de238690dd836952fa29c2f3f5eab2aedf08817b40be8908c2ccceb21ab3dc6",
     "logs/console/console-st.txt": "5abec5579cc13cfef4479b3e737b30c1a5bb459254bd790b73065c223c1f0131",
     "logs/df24193/after.log": "8a7d27eb6f588019a1bf913b1ffe0afe7e3343d0215d926b28c2105c51f956d9",
     "logs/df24193/before.log": "0dd123b8397bab08e6a51be2880c831b0527f7ecebb00b8b0fcb024a7995065b",
     "logs/df24917/after.log": "ba92c08085e112ce9187dda8b5ea9a08577b01c659fa120adfb4bdbe65cf0970",
     "logs/df24917/before.log": "d10e07207c6dba8182deecfb1c04cb87cd34b341ae735f812e41879ff68a1f4d",
+    "logs/df24917-budget/after.log": "eccd981a6f218ec042e1cdc4d60314755ec877f3f5763de5da5527d077896167",
+    "logs/df24917-budget/before.log": "48e373fbf56812e9f74ea01ae31acab447071dea941881b348c64edbf5eb363b",
     "logs/df24917-diag/after.log": "12534cdb59657a1d3e2df16fbe00059cdd2fc5fded1d330ebac8f3512cc73f5a",
     "logs/df24917-diag/before.log": "8bdfdfa778f6ed95eebbbbba8c3781657ebac3258b147b4acc040620c8eebf90",
-    "logs/runs.jsonl": "418822a83e9dd9ecba5e01cd0ae30e62209868a6c436d6e50e45ab9bc6734ac0",
+    "logs/requested.json": "279bca50920c920992ca5795d6093a2adcbed0d26bbd703311075ca2cb357d58",
+    "logs/runs.jsonl": "e61ebf5e4dbe5d10e27e342a5b64eabd032ae1d078282c9446cbeeecac516f9b",
     "logs/st12038/after.log": "8b1c23af27505caa071b6c5ce9b540921f25ac0240d9586ea3b677e605b83fc3",
     "logs/st12038/after.surefire/TEST-org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest.xml": "c5b330cd76feccadceb91f0115ebd0dc739d28f48219b3ff5f258e03af5f11a1",
     "logs/st12038/before.log": "638db6445f4571d0277eab906876da05be0f11bf47e7063d7c2d47de53cf4d7c",
@@ -1038,6 +1101,7 @@
   },
   "patches": {
     "patches/df24193-tests-only.patch": "7f5606b3d3357fee8c12d86cd1e73911a79d2fef03aa1fb5f0e2f878ac7f445b",
+    "patches/df24917-budget-tests-only.patch": "666419d87f8a32541a8000419681a0ec6a7593009ab57a587a36449691c52b06",
     "patches/df24917-diagnostic-print-plan.patch": "a4c7b9d39f1c5badfd8d23e29c442054dfda31021436ef5ba614a61884755c11",
     "patches/st12038-reader-test-drop-ignore-arg.patch": "b2c1edd8e2af643f807a0dc59192243d1c183e3f1ed042f8ed04d4482b228174",
     "patches/st12481-flink-test-drop-override.patch": "9baa5ed5af5bb3c77ad1cf3786de556e7652e9df6a0ec7e63e23c7bab20c2ce4"

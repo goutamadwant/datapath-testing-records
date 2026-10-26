@@ -2,7 +2,8 @@
 # Fail-before / pass-after runs for the regression tests named in the article.
 #
 # Usage: ./run.sh [case ...]
-#   cases: df24193 df24917 df24917-diag st12038 st12038-shim st12038-factory st12360 st12472 st12481 st12481-shim
+#   cases: df24193 df24917 df24917-diag df24917-budget st12038 st12038-shim st12038-factory st12360
+#          st12472 st12481 st12481-shim
 #   (default: all cases, in that order)
 #
 # For each case:
@@ -13,6 +14,14 @@
 # The same test command runs on both trees. Every run writes a full log under logs/<case>/ and
 # appends one record to logs/runs.jsonl; logs are never overwritten (a repeated run gets a suffix).
 # python3 make_results.py then derives the outcome of every run from its log and writes results.json.
+#
+# Completion: before any build, the requested cases and sides (before and after of every case) are
+# appended to logs/requested.json under an invocation id; every record this invocation writes to
+# logs/runs.jsonl carries that id. A side whose setup fails (clone, checkout, transplant or patch
+# apply, missing JDK, refusal) gets a log and a record with "setup_error" naming the failed step;
+# make_results.py reports it as SETUP_ERROR. At the end the script exits 1 if any requested side has
+# no record from this invocation or only a setup-error record, and 2 for an unknown case name.
+# A failing test is an outcome, not a runner error, and does not change the exit status.
 #
 # Environment (all optional):
 #   FAILBEFORE_WORK   scratch directory for worktrees and the cargo target dir (default ./work)
@@ -28,6 +37,10 @@ WORK=${FAILBEFORE_WORK:-$HERE/work}
 LOGS=$HERE/logs
 PATCHES=$HERE/patches
 mkdir -p "$WORK/trees" "$LOGS"
+INVOCATION=$(date -u '+%Y%m%dT%H%M%SZ')-$$
+SETUP_OUT=$WORK/setup-$INVOCATION.out
+DF_URL=https://github.com/apache/datafusion.git
+ST_URL=https://github.com/apache/seatunnel.git
 
 DF_REPO=${DATAFUSION_REPO:-$WORK/datafusion.git}
 ST_REPO=${SEATUNNEL_REPO:-$WORK/seatunnel.git}
@@ -49,6 +62,31 @@ prep_tree() {
     git -C "$dir" checkout -q --detach --force "$commit" || return 1
     git -C "$dir" clean -q -fdx || return 1
     TREE=$dir
+}
+
+now() { python3 -c 'import time; print(time.time())'; }
+
+# begin_side: start the setup of one side; step <description> <cmd...>: run one setup step, its
+# output kept in $SETUP_OUT; on failure the step and its exit code are remembered for setup_error.
+begin_side() {
+    : > "$SETUP_OUT"
+    SETUP_STEP=""
+    SETUP_RC=0
+    TREE=""
+    SIDE_START=$(now)
+    SIDE_START_DATE=$(date '+%Y-%m-%dT%H:%M:%S%z')
+}
+step() {
+    local desc=$1 rc
+    shift
+    echo "\$ $desc" >> "$SETUP_OUT"
+    "$@" >> "$SETUP_OUT" 2>&1
+    rc=$?
+    if [ "$rc" -ne 0 ]; then
+        SETUP_STEP=$desc
+        SETUP_RC=$rc
+    fi
+    return "$rc"
 }
 
 next_log() { # case side -> unused log path
@@ -99,38 +137,97 @@ run_one() {
         mkdir -p "${log%.log}.surefire"
         cp "$TREE/$module"/target/surefire-reports/TEST-*.xml "${log%.log}.surefire/" 2>/dev/null || true
     fi
-    python3 - "$LOGS/runs.jsonl" "$case" "$side" "$before" "$after" "$(git -C "$TREE" rev-parse HEAD)" \
-        "$transplant" "$*" "$rc" "$start" "$end" "$rel" <<'EOF'
-import json, sys
-f, case, side, before, after, head, transplant, cmd, rc, start, end, log = sys.argv[1:]
-rec = dict(case=case, side=side, before_commit=before, after_commit=after, tree_head=head,
-           transplant=transplant, command=cmd, exit_code=int(rc),
-           started_epoch=float(start), ended_epoch=float(end),
-           duration_s=round(float(end) - float(start), 1), log=log)
-with open(f, "a") as fh:
-    fh.write(json.dumps(rec) + "\n")
-EOF
+    append_record "$case" "$side" "$before" "$after" "$(git -C "$TREE" rev-parse HEAD)" \
+        "$transplant" "$*" "$rc" "$start" "$end" "$rel" ""
     echo "[$case/$side] exit $rc in $(python3 -c "print(round($end-$start))") s -> $rel"
 }
 
+# setup_error <case> <side> <before_commit> <after_commit> <transplant text> <cmd...>
+# Records a side whose setup failed: a log with the failed step and its output, and a record in
+# logs/runs.jsonl with "setup_error" set. <cmd> is the test command that was not run.
+setup_error() {
+    local case=$1 side=$2 before=$3 after=$4 transplant=$5 log rel end head=""
+    shift 5
+    log=$(next_log "$case" "$side")
+    rel=${log#"$HERE"/}
+    [ -n "$TREE" ] && head=$(git -C "$TREE" rev-parse HEAD 2>/dev/null)
+    end=$(now)
+    {
+        echo "# case: $case"
+        echo "# side: $side"
+        echo "# before commit (first parent): $before"
+        echo "# after commit (merge): $after"
+        echo "# tree HEAD: ${head:-none}"
+        echo "# transplant: $transplant"
+        echo "# host: $(uname -srm)"
+        echo "# command (not run): $*"
+        echo "# start: $SIDE_START_DATE"
+        echo "# setup error: step failed: $SETUP_STEP (exit $SETUP_RC)"
+        echo "# setup output:"
+        sed 's/^/#   /' "$SETUP_OUT"
+        echo "# end: $(date '+%Y-%m-%dT%H:%M:%S%z')"
+        echo "# exit code: $SETUP_RC"
+    } > "$log"
+    append_record "$case" "$side" "$before" "$after" "$head" "$transplant" "$*" "$SETUP_RC" \
+        "$SIDE_START" "$end" "$rel" "$SETUP_STEP"
+    echo "[$case/$side] SETUP_ERROR at '$SETUP_STEP' (exit $SETUP_RC) -> $rel"
+}
+
+# append_record <case> <side> <before> <after> <tree_head> <transplant> <command> <rc> <start> <end>
+#               <log> <setup_error or empty>
+append_record() {
+    python3 - "$LOGS/runs.jsonl" "$INVOCATION" "$@" <<'EOF'
+import json, sys
+f, inv, case, side, before, after, head, transplant, cmd, rc, start, end, log, setup = sys.argv[1:]
+rec = dict(case=case, side=side, before_commit=before, after_commit=after, tree_head=head,
+           transplant=transplant, command=cmd, exit_code=int(rc),
+           started_epoch=float(start), ended_epoch=float(end),
+           duration_s=round(float(end) - float(start), 1), log=log, invocation=inv)
+if setup:
+    rec["setup_error"] = setup
+with open(f, "a") as fh:
+    fh.write(json.dumps(rec) + "\n")
+EOF
+}
+
 # ---------------------------------------------------------------- DataFusion
+df_tree() { # commit: clone if needed, then worktree "df" at <commit>
+    step "clone $DF_URL" ensure_repo "$DF_URL" "$DF_REPO" &&
+        step "check out $1" prep_tree "$DF_REPO" df "$1"
+}
+
+df_transplant() { # kind arg after_commit: apply the test change to $TREE
+    if [ "$1" = patch ]; then
+        step "apply patches/$2" git -C "$TREE" apply "$PATCHES/$2"
+    else
+        step "copy $2 from $3" git -C "$TREE" checkout "$3" -- "$2"
+    fi
+}
+
 df_case() { # case before after test_cmd transplant_kind transplant_arg
     local case=$1 before=$2 after=$3 cmd=$4 kind=$5 arg=$6 text
-    ensure_repo https://github.com/apache/datafusion.git "$DF_REPO"
-    df -h "$WORK" | tail -1
-    prep_tree "$DF_REPO" df "$before" || return 1
     if [ "$kind" = patch ]; then
-        git -C "$TREE" apply "$PATCHES/$arg" || return 1
         text="patches/$arg applied (test-module hunks only)"
     else
-        git -C "$TREE" checkout "$after" -- "$arg" || return 1
         text="$arg copied from $after"
     fi
-    # shellcheck disable=SC2086
-    run_one "$case" before "$before" "$after" "$text" - $cmd
-    prep_tree "$DF_REPO" df "$after" || return 1
-    # shellcheck disable=SC2086
-    run_one "$case" after "$before" "$after" "none (merge commit as is)" - $cmd
+    df -h "$WORK" | tail -1
+    begin_side
+    if df_tree "$before" && df_transplant "$kind" "$arg" "$after"; then
+        # shellcheck disable=SC2086
+        run_one "$case" before "$before" "$after" "$text" - $cmd
+    else
+        # shellcheck disable=SC2086
+        setup_error "$case" before "$before" "$after" "$text" $cmd
+    fi
+    begin_side
+    if df_tree "$after"; then
+        # shellcheck disable=SC2086
+        run_one "$case" after "$before" "$after" "none (merge commit as is)" - $cmd
+    else
+        # shellcheck disable=SC2086
+        setup_error "$case" after "$before" "$after" "none (merge commit as is)" $cmd
+    fi
 }
 
 case_df24193() {
@@ -152,15 +249,32 @@ case_df24917-diag() {
     local before=408527ae58b5b706f5c02df8c37e096122cd8c78 after=3dfa245d61dde362e2c077761783bc735931659c
     local t=datafusion/core/tests/optimizer/mod.rs p=df24917-diagnostic-print-plan.patch
     local cmd="cargo test --locked --profile ci -p datafusion --test core_integration expensive_regexp_like_is_deferred_to_execution -- --nocapture"
-    ensure_repo https://github.com/apache/datafusion.git "$DF_REPO"
-    prep_tree "$DF_REPO" df "$before" || return 1
-    git -C "$TREE" checkout "$after" -- "$t" && git -C "$TREE" apply "$PATCHES/$p" || return 1
-    run_one df24917-diag before "$before" "$after" "$t copied from $after; then patches/$p applied" - \
-        sh -c "rc=0; for i in 1 2 3; do $cmd || rc=1; done; exit \$rc"
-    prep_tree "$DF_REPO" df "$after" || return 1
-    git -C "$TREE" apply "$PATCHES/$p" || return 1
-    run_one df24917-diag after "$before" "$after" "patches/$p applied" - \
-        sh -c "rc=0; for i in 1 2 3; do $cmd || rc=1; done; exit \$rc"
+    local loop="rc=0; for i in 1 2 3; do $cmd || rc=1; done; exit \$rc"
+    local text="$t copied from $after; then patches/$p applied"
+    begin_side
+    if df_tree "$before" && step "copy $t from $after" git -C "$TREE" checkout "$after" -- "$t" &&
+        step "apply patches/$p" git -C "$TREE" apply "$PATCHES/$p"; then
+        run_one df24917-diag before "$before" "$after" "$text" - sh -c "$loop"
+    else
+        setup_error df24917-diag before "$before" "$after" "$text" sh -c "$loop"
+    fi
+    begin_side
+    if df_tree "$after" && step "apply patches/$p" git -C "$TREE" apply "$PATCHES/$p"; then
+        run_one df24917-diag after "$before" "$after" "patches/$p applied" - sh -c "$loop"
+    else
+        setup_error df24917-diag after "$before" "$after" "patches/$p applied" sh -c "$loop"
+    fi
+}
+
+# PR 24917 also added test_constant_regex_respects_planning_budget to the logical expression
+# simplifier (datafusion-optimizer) and to the physical expression simplifier
+# (datafusion-physical-expr). Both live in the files that hold the fix, so only the hunks that add
+# these tests (and the imports of the physical test) are applied on the parent
+# (patches/df24917-budget-tests-only.patch). --no-fail-fast: run both packages' tests even if one fails.
+case_df24917-budget() {
+    df_case df24917-budget 408527ae58b5b706f5c02df8c37e096122cd8c78 3dfa245d61dde362e2c077761783bc735931659c \
+        "cargo test --locked --profile ci --no-fail-fast -p datafusion-optimizer -p datafusion-physical-expr --lib test_constant_regex_respects_planning_budget" \
+        patch df24917-budget-tests-only.patch
 }
 
 # ---------------------------------------------------------------- SeaTunnel
@@ -170,32 +284,58 @@ mvn_cmd() { # module test-selector
     echo "./mvnw -B -ntp -pl $1 -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=$2 -DfailIfNoTests=false clean package"
 }
 
+# st_tree <tree> <commit>: JDK 8 present, refusal guard (ST_REFUSE_IF_EXISTS), clone, worktree
+st_tree() {
+    step "find JDK 8 (JAVA8_HOME=$JAVA8_HOME)" test -n "$JAVA8_HOME" -a -x "$JAVA8_HOME/bin/javac" &&
+        { [ -z "${ST_REFUSE_IF_EXISTS:-}" ] ||
+            step "refuse: $ST_REFUSE_IF_EXISTS exists and unfixed teardown would delete it" \
+                test ! -e "$ST_REFUSE_IF_EXISTS"; } &&
+        step "clone $ST_URL" ensure_repo "$ST_URL" "$ST_REPO" &&
+        step "check out $2" prep_tree "$ST_REPO" "$1" "$2"
+}
+
 # st_case <case> <tree> <before> <after> <module> <selector> <sides> <patch or -> <test files...>
 st_case() {
-    local case=$1 tree=$2 before=$3 after=$4 module=$5 sel=$6 sides=$7 patch=$8 f text
+    local case=$1 tree=$2 before=$3 after=$4 module=$5 sel=$6 sides=$7 patch=$8 f text cmd
     shift 8
-    [ -n "$JAVA8_HOME" ] && [ -x "$JAVA8_HOME/bin/javac" ] || { echo "JDK 8 not found (JAVA8_HOME)"; return 1; }
     export JAVA_HOME=$JAVA8_HOME
-    ensure_repo https://github.com/apache/seatunnel.git "$ST_REPO"
+    cmd=$(mvn_cmd "$module" "$sel")
     if [[ $sides == *before* ]]; then
-        prep_tree "$ST_REPO" "$tree" "$before" || return 1
         text=""
         for f in "$@"; do
-            git -C "$TREE" checkout "$after" -- "$f" || return 1
             text="$text$f copied from $after; "
         done
         if [ "$patch" != - ]; then
-            git -C "$TREE" apply "$PATCHES/$patch" || return 1
             text="${text}then patches/$patch applied"
         fi
-        # shellcheck disable=SC2046
-        run_one "$case" before "$before" "$after" "$text" "$module" $(mvn_cmd "$module" "$sel")
+        begin_side
+        if st_tree "$tree" "$before" && st_copy "$after" "$@" &&
+            { [ "$patch" = - ] || step "apply patches/$patch" git -C "$TREE" apply "$PATCHES/$patch"; }; then
+            # shellcheck disable=SC2086
+            run_one "$case" before "$before" "$after" "$text" "$module" $cmd
+        else
+            # shellcheck disable=SC2086
+            setup_error "$case" before "$before" "$after" "$text" $cmd
+        fi
     fi
     if [[ $sides == *after* ]]; then
-        prep_tree "$ST_REPO" "$tree" "$after" || return 1
-        # shellcheck disable=SC2046
-        run_one "$case" after "$before" "$after" "none (merge commit as is)" "$module" $(mvn_cmd "$module" "$sel")
+        begin_side
+        if st_tree "$tree" "$after"; then
+            # shellcheck disable=SC2086
+            run_one "$case" after "$before" "$after" "none (merge commit as is)" "$module" $cmd
+        else
+            # shellcheck disable=SC2086
+            setup_error "$case" after "$before" "$after" "none (merge commit as is)" $cmd
+        fi
     fi
+}
+
+st_copy() { # after_commit files...: copy the test files from the merge commit into $TREE
+    local after=$1 f
+    shift
+    for f in "$@"; do
+        step "copy $f from $after" git -C "$TREE" checkout "$after" -- "$f" || return 1
+    done
 }
 
 SQS=seatunnel-connectors-v2/connector-amazonsqs
@@ -244,18 +384,55 @@ case_st12481() {
 # One-line shim: the Flink test's helper overrides deleteHostVolumeMountPath(), a method the pull
 # request added; dropping the @Override annotation lets the test compile against the unfixed code.
 # Unfixed tearDown() then deletes the host path /tmp/seatunnel_mnt itself, so the run refuses to
-# start while that path exists.
+# start while that path exists (recorded as a setup error of both sides).
 case_st12481-shim() {
-    if [ -e /tmp/seatunnel_mnt ]; then
-        echo "refusing st12481-shim: /tmp/seatunnel_mnt exists and unfixed teardown would delete it"
-        return 1
-    fi
+    local ST_REFUSE_IF_EXISTS=/tmp/seatunnel_mnt
     st_case st12481-shim st12481 7ba68325cb7ea1bf1a28f56c4f9c20695d221df3 0e4cf52896ee3604a8e7899d7736ffd914ee6ce7 \
         "$E2E" AbstractTestFlinkContainerTest before,after st12481-flink-test-drop-override.patch \
         "$E2E_T/flink/AbstractTestFlinkContainerTest.java"
 }
 
-ALL="df24193 df24917 df24917-diag st12038 st12038-shim st12038-factory st12360 st12472 st12481 st12481-shim"
-for c in ${@:-$ALL}; do
-    "case_$c" || echo "[$c] setup failed"
+ALL="df24193 df24917 df24917-diag df24917-budget st12038 st12038-shim st12038-factory st12360 st12472 st12481 st12481-shim"
+CASES=${*:-$ALL}
+for c in $CASES; do
+    declare -F "case_$c" > /dev/null || { echo "unknown case: $c (cases: $ALL)" >&2; exit 2; }
 done
+
+# Requested cases and sides, written before any build.
+# shellcheck disable=SC2086
+python3 - "$LOGS/requested.json" "$INVOCATION" "$(date '+%Y-%m-%dT%H:%M:%S%z')" $CASES <<'EOF' || exit 1
+import json, os, sys
+f, inv, ts, *cases = sys.argv[1:]
+hist = json.load(open(f)) if os.path.exists(f) else []
+hist.append({"invocation": inv, "requested_at": ts, "cases": cases,
+             "sides": [{"case": c, "side": s} for c in cases for s in ("before", "after")]})
+with open(f + ".tmp", "w") as fh:
+    fh.write(json.dumps(hist, indent=2) + "\n")
+os.replace(f + ".tmp", f)
+EOF
+echo "invocation $INVOCATION: $CASES"
+
+for c in $CASES; do
+    "case_$c" || echo "[$c] case returned non-zero"
+done
+rm -f "$SETUP_OUT"
+
+# Completion check: every requested side needs a record from this invocation that is not a setup error.
+python3 - "$LOGS/requested.json" "$LOGS/runs.jsonl" "$INVOCATION" <<'EOF'
+import json, os, sys
+req_f, runs_f, inv = sys.argv[1:]
+req = next(r for r in json.load(open(req_f)) if r["invocation"] == inv)
+runs = [json.loads(l) for l in open(runs_f) if l.strip()] if os.path.exists(runs_f) else []
+mine = {(r["case"], r["side"]): r for r in runs if r.get("invocation") == inv}
+bad = 0
+for s in req["sides"]:
+    r = mine.get((s["case"], s["side"]))
+    if r is None:
+        print(f"INCOMPLETE {s['case']}/{s['side']}: no record from invocation {inv}")
+        bad += 1
+    elif r.get("setup_error"):
+        print(f"INCOMPLETE {s['case']}/{s['side']}: setup error at {r['setup_error']!r} ({r['log']})")
+        bad += 1
+print(f"invocation {inv}: {len(req['sides']) - bad}/{len(req['sides'])} requested sides ran")
+sys.exit(1 if bad else 0)
+EOF

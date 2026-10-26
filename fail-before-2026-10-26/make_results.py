@@ -14,10 +14,16 @@ next to the log), never from the exit code alone:
                  was ignored or skipped
   UNKNOWN        none of the above could be established from the log, or the log is
                  internally inconsistent (summary line disagrees with the per-test lines)
+  SETUP_ERROR    the side was never run: a setup step (clone, checkout, transplant or patch
+                 apply, missing JDK, refusal) failed; the record names the step and the log holds
+                 its output
 
 A run is PASS only if the test named in its command (the cargo filter or the Maven -Dtest value)
 was actually executed and every executed case passed. Each case must have a completed before
-and after record; a case with one side missing is reported as comparison "incomplete".
+and after record; a case is reported as comparison "incomplete" when a side has no record, when
+a side's latest record is SETUP_ERROR, or when the latest invocation that requested the case
+(logs/requested.json, written by run.sh before any build) has no record for a requested side
+(listed under "missing").
 
 Usage: python3 make_results.py
 """
@@ -129,35 +135,85 @@ def sha256(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def setup_outcome(record, text):
+    """A side whose setup failed: the failed step and the last lines of its setup output."""
+    lines = text.splitlines()
+    try:
+        output = lines[lines.index("# setup output:") + 1:]
+    except ValueError:
+        output = []
+    output = [l[4:] if l.startswith("#   ") else l for l in output if not l.startswith("# end:")
+              and not l.startswith("# exit code:")]
+    return "SETUP_ERROR", [], [f"setup step failed: {record['setup_error']}"] + output[-10:]
+
+
+def derive(record, text, surefire_dir):
+    """(outcome, tests, detail, expected test) of one record, from its log."""
+    command = record["command"]
+    if "cargo test" in command:
+        expected = expected_cargo_test(command)
+    else:
+        expected = expected_maven_tests(command)
+    if record.get("setup_error"):
+        return (*setup_outcome(record, text), expected)
+    if "cargo test" in command:
+        return (*cargo_outcome(text, expected), expected)
+    module = re.search(r"-pl (\S+)", command).group(1)
+    return (*maven_outcome(text, surefire_dir, module, expected), expected)
+
+
+def compare(runs, requests):
+    """Per case: the latest outcome of each side, missing requested sides, complete/incomplete."""
+    comparisons = {}
+    for r in runs:
+        comparisons.setdefault(r["case"], {})[r["side"]] = r["outcome"]
+    latest = {}  # case -> (invocation, sides) of the latest invocation that requested it
+    for req in requests:
+        sides = {}
+        for s in req["sides"]:
+            sides.setdefault(s["case"], []).append(s["side"])
+        for case, ss in sides.items():
+            latest[case] = (req["invocation"], ss)
+    for case, (inv, ss) in latest.items():
+        have = {r["side"] for r in runs if r["case"] == case and r.get("invocation") == inv}
+        missing = [s for s in ss if s not in have]
+        entry = comparisons.setdefault(case, {})
+        if missing:
+            entry["missing"] = [f"{s} (invocation {inv})" for s in missing]
+    for case, sides in comparisons.items():
+        ok = (
+            {"before", "after"} <= set(sides)
+            and "SETUP_ERROR" not in (sides["before"], sides["after"])
+            and not sides.get("missing")
+        )
+        sides["comparison"] = "complete" if ok else "incomplete"
+    return comparisons
+
+
 def main():
     runs = [json.loads(line) for line in (LOGS / "runs.jsonl").read_text().splitlines() if line.strip()]
+    req_file = LOGS / "requested.json"
+    requests = json.loads(req_file.read_text()) if req_file.exists() else []
     out = []
     for r in runs:
         log = HERE / r["log"]
         text = log.read_text(errors="replace")
-        if "cargo test" in r["command"]:
-            expected = expected_cargo_test(r["command"])
-            outcome, tests, detail = cargo_outcome(text, expected)
-        else:
-            module = re.search(r"-pl (\S+)", r["command"]).group(1)
-            expected = expected_maven_tests(r["command"])
-            outcome, tests, detail = maven_outcome(text, log.with_suffix(".surefire"), module, expected)
+        outcome, tests, detail, expected = derive(r, text, log.with_suffix(".surefire"))
         r = dict(r, outcome=outcome, tests=tests, detail=detail, expected_test=expected,
                  log_sha256=sha256(log))
         out.append(r)
-    comparisons = {}
-    for r in out:
-        comparisons.setdefault(r["case"], {})[r["side"]] = r["outcome"]
-    for case, sides in comparisons.items():
-        sides["comparison"] = "complete" if {"before", "after"} <= set(sides) else "incomplete"
+    comparisons = compare(out, requests)
     files = sorted(p for p in LOGS.rglob("*") if p.is_file())
     result = {
         "description": "Fail-before / pass-after runs of the regression tests named in the article. "
         "before = first parent of the merge commit plus only the pull request's test change; "
         "after = merge commit. Outcomes are parsed from the logs listed here.",
-        "parser": "make_results.py rev 2 (2026-10-26): PASS requires the named test to have been "
+        "parser": "make_results.py rev 3 (2026-10-26): PASS requires the named test to have been "
         "executed; ignored-only or skipped-only runs are NO_TESTS_RUN; a summary line that disagrees "
-        "with the per-test lines is UNKNOWN; every case needs a before and an after record",
+        "with the per-test lines is UNKNOWN; every case needs a before and an after record; a record "
+        "with setup_error is SETUP_ERROR and leaves its case incomplete; a case is also incomplete "
+        "when the latest invocation in logs/requested.json that requested it has no record for a "
+        "requested side",
         "runs": out,
         "comparisons": comparisons,
         "log_files": {str(p.relative_to(HERE)): sha256(p) for p in files},
@@ -168,7 +224,9 @@ def main():
         print(f"{r['case']:18} {r['side']:6} {r['outcome']:14} {r['duration_s']:>8} s  {r['log']}")
     for case, sides in comparisons.items():
         if sides["comparison"] != "complete":
-            print(f"{case:18} comparison INCOMPLETE: sides {sorted(k for k in sides if k != 'comparison')}")
+            present = sorted(k for k in sides if k not in ("comparison", "missing"))
+            print(f"{case:18} comparison INCOMPLETE: sides {present}"
+                  + (f", missing {sides['missing']}" if sides.get("missing") else ""))
 
 
 if __name__ == "__main__":

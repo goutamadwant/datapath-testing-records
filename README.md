@@ -476,7 +476,7 @@ Model-written `regexp_like` queries planned on Apache DataFusion before and afte
 
 ## fail-before-2026-10-26
 
-Fail-before / pass-after runs of every regression test the article names: the PR's test change applied to the parent commit (before) and the merge commit as is (after), with per-case logs, patches and `results.json`. See `fail-before-2026-10-26/README.md`.
+Fail-before / pass-after runs of every regression test the article names: the PR's test change applied to the parent commit (before) and the merge commit as is (after), with per-case logs, patches and `results.json`. It includes the two `test_constant_regex_respects_planning_budget` tests of DataFusion PR 24917, which do not compile on the parent and pass on the merge commit. The runner records the requested cases and sides in `logs/requested.json` before any build, records setup failures as SETUP_ERROR, and exits non-zero when a requested side did not run. See `fail-before-2026-10-26/README.md`.
 
 ## Reconstruction provenance and interpretation
 
@@ -491,7 +491,9 @@ recompile reconstruction Java. Mutable image tags and build drift can alter resu
 
 See `fail-before-2026-10-26/README.md`, `run.sh`, patches and per-case logs. The
 unmodified DataFusion 24193 test fails before and passes after. The 24917 plan-shape
-test passes both; diagnostic plans match despite different planning times. SeaTunnel
+test passes both; diagnostic plans match despite different planning times. The PR's two
+planning-budget tests do not compile on the parent (they implement the new
+`should_evaluate_const` hook) and pass after; no shim. SeaTunnel
 12038 reader/factory tests cannot compile before and pass after. Dropping the new
 constructor argument lets the reader run: 6/9 fail before and 9/9 pass after. Three
 failures concern parse behavior; three exercise the absent skip option. SeaTunnel
@@ -511,9 +513,13 @@ and is not a completed run. Concurrent builds affect durations, and runner edits
 caused console errors after completed cases. Logs retain workstation paths.
 The first transplant parser could have accepted a missing comparison or an ignored-only
 Rust test; the 2026-10-26 revision of `fail-before-2026-10-26/make_results.py` rejects
-both (see that README, "Parser revision"), and no recorded outcome changed. The runner
-does not reliably propagate setup failures. Archived outcomes must be checked against
-individual logs, not inferred from the runner exit status.
+both (see that README, "Parser revision"), and no recorded outcome changed. The revised
+runner writes the requested cases and sides to `logs/requested.json` before any build,
+records a failed clone, checkout, transplant or patch apply as a SETUP_ERROR run with its
+own log instead of skipping the side, and exits non-zero when a requested side has no
+record from that invocation or only a setup error; `make_results.py` then marks the case
+incomplete. The 2026-10-25 runs predate this check, so their completeness rests on
+`runs.jsonl` and the individual logs, which hold both sides of every case.
 
 ### Clock and Maven interpretation
 
