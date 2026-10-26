@@ -1,0 +1,100 @@
+# case: df24917-diag
+# side: before
+# before commit (first parent): 408527ae58b5b706f5c02df8c37e096122cd8c78
+# after commit (merge): 3dfa245d61dde362e2c077761783bc735931659c
+# tree HEAD: 408527ae58b5b706f5c02df8c37e096122cd8c78
+# transplant: datafusion/core/tests/optimizer/mod.rs copied from 3dfa245d61dde362e2c077761783bc735931659c; then patches/df24917-diagnostic-print-plan.patch applied
+# git status --porcelain:
+#   MM datafusion/core/tests/optimizer/mod.rs
+# git diff --stat HEAD:
+#    datafusion/core/tests/optimizer/mod.rs | 26 +++++++++++++++++++++++++-
+#    1 file changed, 25 insertions(+), 1 deletion(-)
+# host: Darwin 27.0.0 arm64
+# toolchain: rustc 1.97.0 (2d8144b78 2026-07-07) / cargo 1.97.0 (c980f4866 2026-06-30)
+# command: sh -c rc=0; for i in 1 2 3; do cargo test --locked --profile ci -p datafusion --test core_integration expensive_regexp_like_is_deferred_to_execution -- --nocapture || rc=1; done; exit $rc
+# start: 2026-10-25T19:20:58-0700
+   Compiling datafusion-expr v55.0.0 (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/df/datafusion/expr)
+   Compiling datafusion-physical-expr v55.0.0 (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/df/datafusion/physical-expr)
+   Compiling datafusion-execution v55.0.0 (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/df/datafusion/execution)
+   Compiling datafusion-functions v55.0.0 (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/df/datafusion/functions)
+   Compiling datafusion-functions-aggregate v55.0.0 (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/df/datafusion/functions-aggregate)
+   Compiling datafusion-optimizer v55.0.0 (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/df/datafusion/optimizer)
+   Compiling datafusion-functions-window v55.0.0 (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/df/datafusion/functions-window)
+   Compiling datafusion-physical-plan v55.0.0 (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/df/datafusion/physical-plan)
+   Compiling datafusion-physical-expr-adapter v55.0.0 (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/df/datafusion/physical-expr-adapter)
+   Compiling datafusion-functions-nested v55.0.0 (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/df/datafusion/functions-nested)
+   Compiling datafusion-sql v55.0.0 (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/df/datafusion/sql)
+   Compiling datafusion-session v55.0.0 (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/df/datafusion/session)
+   Compiling datafusion-datasource v55.0.0 (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/df/datafusion/datasource)
+   Compiling datafusion-catalog v55.0.0 (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/df/datafusion/catalog)
+   Compiling datafusion-pruning v55.0.0 (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/df/datafusion/pruning)
+   Compiling datafusion-datasource-csv v55.0.0 (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/df/datafusion/datasource-csv)
+   Compiling datafusion-datasource-arrow v55.0.0 (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/df/datafusion/datasource-arrow)
+   Compiling datafusion-datasource-json v55.0.0 (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/df/datafusion/datasource-json)
+   Compiling datafusion-datasource-parquet v55.0.0 (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/df/datafusion/datasource-parquet)
+   Compiling datafusion-physical-optimizer v55.0.0 (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/df/datafusion/physical-optimizer)
+   Compiling datafusion-catalog-listing v55.0.0 (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/df/datafusion/catalog-listing)
+   Compiling datafusion-functions-table v55.0.0 (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/df/datafusion/functions-table)
+   Compiling datafusion v55.0.0 (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/df/datafusion/core)
+warning: linker stderr: ld: __eh_frame section too large (max 16MB) to encode dwarf unwind offsets in compact unwind table, performance of exception handling might be affected
+  |
+  = note: `#[warn(linker_messages)]` on by default
+
+warning: `datafusion` (test "core_integration") generated 1 warning
+    Finished `ci` profile [unoptimized] target(s) in 3m 00s
+     Running tests/core_integration.rs (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/df-target/ci/deps/core_integration-c25f5cd9d9651930)
+
+running 1 test
+DIAG planning time literal input: 550.514875ms
+DIAG plan literal input:
+Projection: Utf8("aaaaa") ~ Utf8("a{5}{5}{5}{5}{5}{5}{5}{5}") AS regexp_like(Utf8("aaaaa"),Utf8("a{5}{5}{5}{5}{5}{5}{5}{5}"))
+  EmptyRelation: rows=1
+DIAG plan NULL input:
+Projection: Boolean(NULL) AS regexp_like(NULL,Utf8("a{5}{5}{5}{5}{5}{5}{5}{5}"))
+  EmptyRelation: rows=1
+test optimizer::expensive_regexp_like_is_deferred_to_execution ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 1110 filtered out; finished in 0.55s
+
+warning: linker stderr: ld: __eh_frame section too large (max 16MB) to encode dwarf unwind offsets in compact unwind table, performance of exception handling might be affected
+  |
+  = note: `#[warn(linker_messages)]` on by default
+
+warning: `datafusion` (test "core_integration") generated 1 warning
+    Finished `ci` profile [unoptimized] target(s) in 1.34s
+     Running tests/core_integration.rs (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/df-target/ci/deps/core_integration-c25f5cd9d9651930)
+
+running 1 test
+DIAG planning time literal input: 488.207041ms
+DIAG plan literal input:
+Projection: Utf8("aaaaa") ~ Utf8("a{5}{5}{5}{5}{5}{5}{5}{5}") AS regexp_like(Utf8("aaaaa"),Utf8("a{5}{5}{5}{5}{5}{5}{5}{5}"))
+  EmptyRelation: rows=1
+DIAG plan NULL input:
+Projection: Boolean(NULL) AS regexp_like(NULL,Utf8("a{5}{5}{5}{5}{5}{5}{5}{5}"))
+  EmptyRelation: rows=1
+test optimizer::expensive_regexp_like_is_deferred_to_execution ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 1110 filtered out; finished in 0.49s
+
+warning: linker stderr: ld: __eh_frame section too large (max 16MB) to encode dwarf unwind offsets in compact unwind table, performance of exception handling might be affected
+  |
+  = note: `#[warn(linker_messages)]` on by default
+
+warning: `datafusion` (test "core_integration") generated 1 warning
+    Finished `ci` profile [unoptimized] target(s) in 0.32s
+     Running tests/core_integration.rs (/Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/df-target/ci/deps/core_integration-c25f5cd9d9651930)
+
+running 1 test
+DIAG planning time literal input: 478.6735ms
+DIAG plan literal input:
+Projection: Utf8("aaaaa") ~ Utf8("a{5}{5}{5}{5}{5}{5}{5}{5}") AS regexp_like(Utf8("aaaaa"),Utf8("a{5}{5}{5}{5}{5}{5}{5}{5}"))
+  EmptyRelation: rows=1
+DIAG plan NULL input:
+Projection: Boolean(NULL) AS regexp_like(NULL,Utf8("a{5}{5}{5}{5}{5}{5}{5}{5}"))
+  EmptyRelation: rows=1
+test optimizer::expensive_regexp_like_is_deferred_to_execution ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 1110 filtered out; finished in 0.48s
+
+# end: 2026-10-25T19:24:08-0700
+# exit code: 0

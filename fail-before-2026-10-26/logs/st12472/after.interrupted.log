@@ -1,0 +1,16 @@
+# case: st12472
+# side: after
+# before commit (first parent): e1a7e64b6733d2b2cd4682190c753a81fac93bc2
+# after commit (merge): 87ed0afe0f783eda1b1f3ac6f0ac9fadedcb4f98
+# tree HEAD: 87ed0afe0f783eda1b1f3ac6f0ac9fadedcb4f98
+# transplant: none (merge commit as is)
+# git status --porcelain:
+# git diff --stat HEAD:
+# host: Darwin 27.0.0 arm64
+# toolchain: java version "1.8.0_172"
+# command: ./mvnw -B -ntp -pl seatunnel-edge-agent/seatunnel-edge-agent-connector -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dtest=FileCollectReaderBehaviorTest#rediscoversFileAfterInactiveCursorClosed -DfailIfNoTests=false clean test
+# start: 2026-10-25T19:04:08-0700
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0 75 58727   75 44155    0     0   154k      0 --:--:-- --:--:-- --:--:--  154k100 58727  100 58727    0     0   200k      0 --:--:-- --:--:-- --:--:--  199k
+[INFO] Scanning for projects...

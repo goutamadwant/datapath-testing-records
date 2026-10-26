@@ -1,0 +1,13 @@
+[st12472/before] exit 1 in 67 s -> logs/st12472/before.log
+[st12472/before] exit 1 in 270 s -> logs/st12472/before-2.log
+[st12472/after] exit 0 in 128 s -> logs/st12472/after.log
+[st12481/before] exit 1 in 145 s -> logs/st12481/before.log
+[st12481/after] exit 0 in 145 s -> logs/st12481/after.log
+[st12481-shim/before] exit 1 in 197 s -> logs/st12481-shim/before.log
+[st12481-shim/after] exit 0 in 293 s -> logs/st12481-shim/after.log
+[st12038/before] exit 1 in 120 s -> logs/st12038/before.log
+[st12038/after] exit 0 in 184 s -> logs/st12038/after.log
+[st12038-factory/before] exit 1 in 333 s -> logs/st12038-factory/before.log
+[st12038-factory/after] exit 0 in 186 s -> logs/st12038-factory/after.log
+[st12360/before] exit 0 in 478 s -> logs/st12360/before.log
+[st12360/after] exit 0 in 221 s -> logs/st12360/after.log

@@ -1,0 +1,753 @@
+# case: st12038-shim
+# side: before
+# before commit (first parent): 9ebb27e8f92059dee76d71029adbfbaa1c099285
+# after commit (merge): 1e450e11f7c8e3ef78d186b0a407148d5faed939
+# tree HEAD: 9ebb27e8f92059dee76d71029adbfbaa1c099285
+# transplant: seatunnel-connectors-v2/connector-amazonsqs/src/test/java/org/apache/seatunnel/connectors/seatunnel/amazonsqs/source/AmazonSqsSourceReaderTest.java copied from 1e450e11f7c8e3ef78d186b0a407148d5faed939; then patches/st12038-reader-test-drop-ignore-arg.patch applied
+# git status --porcelain:
+#   AM seatunnel-connectors-v2/connector-amazonsqs/src/test/java/org/apache/seatunnel/connectors/seatunnel/amazonsqs/source/AmazonSqsSourceReaderTest.java
+# git diff --stat HEAD:
+#    .../source/AmazonSqsSourceReaderTest.java          | 456 +++++++++++++++++++++
+#    1 file changed, 456 insertions(+)
+# host: Darwin 27.0.0 arm64
+# toolchain: java version "1.8.0_172"
+# command: ./mvnw -B -ntp -pl seatunnel-connectors-v2/connector-amazonsqs -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=AmazonSqsSourceReaderTest -DfailIfNoTests=false clean package
+# start: 2026-10-25T19:39:02-0700
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 58727  100 58727    0     0   148k      0 --:--:-- --:--:-- --:--:--  148k
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] SeaTunnel :                                                        [pom]
+[INFO] SeaTunnel : Config :                                               [pom]
+[INFO] SeaTunnel : Config : Base                                          [jar]
+[INFO] SeaTunnel : Config : Shade                                         [jar]
+[INFO] SeaTunnel : Common                                                 [jar]
+[INFO] SeaTunnel : Api                                                    [jar]
+[INFO] SeaTunnel : Connectors V2 :                                        [pom]
+[INFO] SeaTunnel : Connectors V2 : Common                                 [jar]
+[INFO] SeaTunnel : Formats :                                              [pom]
+[INFO] SeaTunnel : Formats : Json                                         [jar]
+[INFO] SeaTunnel : Formats : Text                                         [jar]
+[INFO] SeaTunnel : Formats : Compatible Debezium Json                     [jar]
+[INFO] SeaTunnel : Formats : Compatible Kafka Connect Json                [jar]
+[INFO] SeaTunnel : Connectors V2 : Amazon SQS                             [jar]
+[INFO] 
+[INFO] -------------------< org.apache.seatunnel:seatunnel >-------------------
+[INFO] Building SeaTunnel : 3.0.0-SNAPSHOT                               [1/14]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ seatunnel ---
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:clean (flatten.clean) @ seatunnel ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ seatunnel ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ seatunnel ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] 
+[INFO] --- spotless-maven-plugin:2.29.0:check (spotless-check) @ seatunnel ---
+[INFO] Spotless check skipped
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ seatunnel ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel ---
+[INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel:pom:3.0.0-SNAPSHOT...
+[INFO] 
+[INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel ---
+[INFO] No site descriptor found: nothing to attach.
+[INFO] 
+[INFO] ---------------< org.apache.seatunnel:seatunnel-config >----------------
+[INFO] Building SeaTunnel : Config : 3.0.0-SNAPSHOT                      [2/14]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ seatunnel-config ---
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:clean (flatten.clean) @ seatunnel-config ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ seatunnel-config ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ seatunnel-config ---
+[INFO] 
+[INFO] --- spotless-maven-plugin:2.29.0:check (spotless-check) @ seatunnel-config ---
+[INFO] Spotless check skipped
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ seatunnel-config ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-config ---
+[INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-config:pom:3.0.0-SNAPSHOT...
+[INFO] 
+[INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-config ---
+[INFO] No site descriptor found: nothing to attach.
+[INFO] 
+[INFO] -------------< org.apache.seatunnel:seatunnel-config-base >-------------
+[INFO] Building SeaTunnel : Config : Base 3.0.0-SNAPSHOT                 [3/14]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ seatunnel-config-base ---
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:clean (flatten.clean) @ seatunnel-config-base ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ seatunnel-config-base ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ seatunnel-config-base ---
+[INFO] 
+[INFO] --- spotless-maven-plugin:2.29.0:check (spotless-check) @ seatunnel-config-base ---
+[INFO] Spotless check skipped
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ seatunnel-config-base ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-config-base ---
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-config/seatunnel-config-base/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-config-base ---
+[INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-config-base:jar:3.0.0-SNAPSHOT...
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-config-base ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-config-base ---
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-config/seatunnel-config-base/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-config-base ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-config-base ---
+[INFO] 
+[INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-config-base ---
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-config/seatunnel-config-base/target/seatunnel-config-base-3.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-config-base ---
+[INFO] Skipping because packaging 'jar' is not pom.
+[INFO] 
+[INFO] --- maven-shade-plugin:3.5.1:shade (default) @ seatunnel-config-base ---
+[INFO] Including com.typesafe:config:jar:1.3.3 in the shaded jar.
+[INFO] Including io.prometheus:simpleclient:jar:0.16.0 in the shaded jar.
+[INFO] Including io.prometheus:simpleclient_tracer_otel:jar:0.16.0 in the shaded jar.
+[INFO] Including io.prometheus:simpleclient_tracer_common:jar:0.16.0 in the shaded jar.
+[INFO] Including io.prometheus:simpleclient_tracer_otel_agent:jar:0.16.0 in the shaded jar.
+[INFO] Including io.prometheus:simpleclient_hotspot:jar:0.16.0 in the shaded jar.
+[INFO] Including io.prometheus:simpleclient_httpserver:jar:0.16.0 in the shaded jar.
+[INFO] Including io.prometheus:simpleclient_common:jar:0.16.0 in the shaded jar.
+[INFO] Excluding org.slf4j:slf4j-api:jar:1.7.36 from the shaded jar.
+[INFO] Excluding org.apache.logging.log4j:log4j-slf4j-impl:jar:2.17.1 from the shaded jar.
+[INFO] Excluding org.apache.logging.log4j:log4j-api:jar:2.17.1 from the shaded jar.
+[INFO] Excluding org.apache.logging.log4j:log4j-core:jar:2.17.1 from the shaded jar.
+[INFO] Excluding org.slf4j:jcl-over-slf4j:jar:1.7.36 from the shaded jar.
+[INFO] Excluding org.apache.logging.log4j:log4j-1.2-api:jar:2.17.1 from the shaded jar.
+[INFO] Minimizing jar org.apache.seatunnel:seatunnel-config-base:jar:3.0.0-SNAPSHOT
+[WARNING] seatunnel-config-base-3.0.0-SNAPSHOT.jar, simpleclient-0.16.0.jar, simpleclient_common-0.16.0.jar, simpleclient_hotspot-0.16.0.jar, simpleclient_httpserver-0.16.0.jar, simpleclient_tracer_common-0.16.0.jar, simpleclient_tracer_otel-0.16.0.jar, simpleclient_tracer_otel_agent-0.16.0.jar define 1 overlapping resource: 
+[WARNING]   - META-INF/MANIFEST.MF
+[WARNING] maven-shade-plugin has detected that some files are
+[WARNING] present in two or more JARs. When this happens, only one
+[WARNING] single version of the file is copied to the uber jar.
+[WARNING] Usually this is not harmful and you can skip these warnings,
+[WARNING] otherwise try to manually exclude artifacts based on
+[WARNING] mvn dependency:tree -Ddetail=true and the above output.
+[WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
+[INFO] Minimized 265 -> 175 (66%)
+[WARNING] simpleclient-0.16.0-sources.jar, simpleclient_common-0.16.0-sources.jar, simpleclient_hotspot-0.16.0-sources.jar, simpleclient_httpserver-0.16.0-sources.jar, simpleclient_tracer_common-0.16.0-sources.jar, simpleclient_tracer_otel-0.16.0-sources.jar, simpleclient_tracer_otel_agent-0.16.0-sources.jar define 1 overlapping resource: 
+[WARNING]   - META-INF/MANIFEST.MF
+[WARNING] maven-shade-plugin has detected that some files are
+[WARNING] present in two or more JARs. When this happens, only one
+[WARNING] single version of the file is copied to the uber jar.
+[WARNING] Usually this is not harmful and you can skip these warnings,
+[WARNING] otherwise try to manually exclude artifacts based on
+[WARNING] mvn dependency:tree -Ddetail=true and the above output.
+[WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
+[INFO] Minimized 424 -> 334 (78%)
+[INFO] Replacing original artifact with shaded artifact.
+[INFO] Replacing /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-config/seatunnel-config-base/target/seatunnel-config-base-3.0.0-SNAPSHOT.jar with /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-config/seatunnel-config-base/target/seatunnel-config-base-3.0.0-SNAPSHOT-shaded.jar
+[INFO] Replacing original source artifact with shaded source artifact.
+[INFO] Replacing /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-config/seatunnel-config-base/target/seatunnel-config-base-3.0.0-SNAPSHOT-sources.jar with /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-config/seatunnel-config-base/target/seatunnel-config-base-3.0.0-SNAPSHOT-shaded-sources.jar
+[INFO] 
+[INFO] --- build-helper-maven-plugin:3.2.0:attach-artifact (compile) @ seatunnel-config-base ---
+[INFO] 
+[INFO] ------------< org.apache.seatunnel:seatunnel-config-shade >-------------
+[INFO] Building SeaTunnel : Config : Shade 3.0.0-SNAPSHOT                [4/14]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ seatunnel-config-shade ---
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:clean (flatten.clean) @ seatunnel-config-shade ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ seatunnel-config-shade ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ seatunnel-config-shade ---
+[INFO] 
+[INFO] --- spotless-maven-plugin:2.29.0:check (spotless-check) @ seatunnel-config-shade ---
+[INFO] Spotless check skipped
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ seatunnel-config-shade ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-config-shade ---
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-config/seatunnel-config-shade/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-config-shade ---
+[INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-config-shade:jar:3.0.0-SNAPSHOT...
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-config-shade ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 10 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-config/seatunnel-config-shade/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-config-shade ---
+[INFO] Copying 8 resources from src/test/resources to target/test-classes
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-config-shade ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 7 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-config/seatunnel-config-shade/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-config-shade ---
+[INFO] 
+[INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-config-shade ---
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-config/seatunnel-config-shade/target/seatunnel-config-shade-3.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-config-shade ---
+[INFO] Skipping because packaging 'jar' is not pom.
+[INFO] 
+[INFO] --- build-helper-maven-plugin:3.2.0:attach-artifact (compile) @ seatunnel-config-shade ---
+[INFO] 
+[INFO] ---------------< org.apache.seatunnel:seatunnel-common >----------------
+[INFO] Building SeaTunnel : Common 3.0.0-SNAPSHOT                        [5/14]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ seatunnel-common ---
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:clean (flatten.clean) @ seatunnel-common ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ seatunnel-common ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ seatunnel-common ---
+[INFO] 
+[INFO] --- spotless-maven-plugin:2.29.0:check (spotless-check) @ seatunnel-common ---
+[INFO] Spotless check skipped
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ seatunnel-common ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-common ---
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-common/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-common ---
+[INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-common:jar:3.0.0-SNAPSHOT...
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-common ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 44 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-common/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-common ---
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-common/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-common ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 19 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-common/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-common ---
+[INFO] 
+[INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-common ---
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-common/target/seatunnel-common-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] 
+[INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-common ---
+[INFO] Skipping because packaging 'jar' is not pom.
+[INFO] 
+[INFO] -----------------< org.apache.seatunnel:seatunnel-api >-----------------
+[INFO] Building SeaTunnel : Api 3.0.0-SNAPSHOT                           [6/14]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ seatunnel-api ---
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:clean (flatten.clean) @ seatunnel-api ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ seatunnel-api ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ seatunnel-api ---
+[INFO] 
+[INFO] --- spotless-maven-plugin:2.29.0:check (spotless-check) @ seatunnel-api ---
+[INFO] Spotless check skipped
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ seatunnel-api ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-api ---
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-api/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-api ---
+[INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-api:jar:3.0.0-SNAPSHOT...
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-api ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 272 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-api/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-api ---
+[INFO] Copying 20 resources from src/test/resources to target/test-classes
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-api ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 36 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-api/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-api ---
+[INFO] 
+[INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-api ---
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-api/target/seatunnel-api-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] 
+[INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-api ---
+[INFO] Skipping because packaging 'jar' is not pom.
+[INFO] 
+[INFO] ------------< org.apache.seatunnel:seatunnel-connectors-v2 >------------
+[INFO] Building SeaTunnel : Connectors V2 : 3.0.0-SNAPSHOT               [7/14]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ seatunnel-connectors-v2 ---
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:clean (flatten.clean) @ seatunnel-connectors-v2 ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ seatunnel-connectors-v2 ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ seatunnel-connectors-v2 ---
+[INFO] 
+[INFO] --- spotless-maven-plugin:2.29.0:check (spotless-check) @ seatunnel-connectors-v2 ---
+[INFO] Spotless check skipped
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ seatunnel-connectors-v2 ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-connectors-v2 ---
+[INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-connectors-v2:pom:3.0.0-SNAPSHOT...
+[INFO] 
+[INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-connectors-v2 ---
+[INFO] No site descriptor found: nothing to attach.
+[INFO] 
+[INFO] --- maven-shade-plugin:3.5.1:shade (default) @ seatunnel-connectors-v2 ---
+[INFO] Including io.prometheus:simpleclient:jar:0.16.0 in the shaded jar.
+[INFO] Including io.prometheus:simpleclient_tracer_otel:jar:0.16.0 in the shaded jar.
+[INFO] Including io.prometheus:simpleclient_tracer_common:jar:0.16.0 in the shaded jar.
+[INFO] Including io.prometheus:simpleclient_tracer_otel_agent:jar:0.16.0 in the shaded jar.
+[INFO] Including io.prometheus:simpleclient_hotspot:jar:0.16.0 in the shaded jar.
+[INFO] Including io.prometheus:simpleclient_httpserver:jar:0.16.0 in the shaded jar.
+[INFO] Including io.prometheus:simpleclient_common:jar:0.16.0 in the shaded jar.
+[INFO] Excluding org.slf4j:slf4j-api:jar:1.7.36 from the shaded jar.
+[INFO] Excluding org.apache.logging.log4j:log4j-slf4j-impl:jar:2.17.1 from the shaded jar.
+[INFO] Excluding org.apache.logging.log4j:log4j-api:jar:2.17.1 from the shaded jar.
+[INFO] Excluding org.apache.logging.log4j:log4j-core:jar:2.17.1 from the shaded jar.
+[INFO] Excluding org.slf4j:jcl-over-slf4j:jar:1.7.36 from the shaded jar.
+[INFO] Excluding org.apache.logging.log4j:log4j-1.2-api:jar:2.17.1 from the shaded jar.
+[INFO] Dependency-reduced POM written at: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-connectors-v2/dependency-reduced-pom.xml
+[WARNING] simpleclient-0.16.0.jar, simpleclient_common-0.16.0.jar, simpleclient_hotspot-0.16.0.jar, simpleclient_httpserver-0.16.0.jar, simpleclient_tracer_common-0.16.0.jar, simpleclient_tracer_otel-0.16.0.jar, simpleclient_tracer_otel_agent-0.16.0.jar define 1 overlapping resource: 
+[WARNING]   - META-INF/MANIFEST.MF
+[WARNING] maven-shade-plugin has detected that some files are
+[WARNING] present in two or more JARs. When this happens, only one
+[WARNING] single version of the file is copied to the uber jar.
+[WARNING] Usually this is not harmful and you can skip these warnings,
+[WARNING] otherwise try to manually exclude artifacts based on
+[WARNING] mvn dependency:tree -Ddetail=true and the above output.
+[WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
+[INFO] Replacing original artifact with shaded artifact.
+[INFO] 
+[INFO] ---------------< org.apache.seatunnel:connector-common >----------------
+[INFO] Building SeaTunnel : Connectors V2 : Common 3.0.0-SNAPSHOT        [8/14]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ connector-common ---
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:clean (flatten.clean) @ connector-common ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ connector-common ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ connector-common ---
+[INFO] 
+[INFO] --- spotless-maven-plugin:2.29.0:check (spotless-check) @ connector-common ---
+[INFO] Spotless check skipped
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ connector-common ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ connector-common ---
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-connectors-v2/connector-common/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ connector-common ---
+[INFO] Generating flattened POM of project org.apache.seatunnel:connector-common:jar:3.0.0-SNAPSHOT...
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ connector-common ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 43 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-connectors-v2/connector-common/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ connector-common ---
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-connectors-v2/connector-common/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ connector-common ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 5 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-connectors-v2/connector-common/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ connector-common ---
+[INFO] 
+[INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ connector-common ---
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-connectors-v2/connector-common/target/connector-common-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] 
+[INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ connector-common ---
+[INFO] Skipping because packaging 'jar' is not pom.
+[INFO] 
+[INFO] --- maven-shade-plugin:3.5.1:shade (default) @ connector-common ---
+[INFO] Shading has been skipped.
+[INFO] 
+[INFO] --- maven-jar-plugin:3.3.0:test-jar (default) @ connector-common ---
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-connectors-v2/connector-common/target/connector-common-3.0.0-SNAPSHOT-2.12.15-tests.jar
+[INFO] 
+[INFO] ---------------< org.apache.seatunnel:seatunnel-formats >---------------
+[INFO] Building SeaTunnel : Formats : 3.0.0-SNAPSHOT                     [9/14]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ seatunnel-formats ---
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:clean (flatten.clean) @ seatunnel-formats ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ seatunnel-formats ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ seatunnel-formats ---
+[INFO] 
+[INFO] --- spotless-maven-plugin:2.29.0:check (spotless-check) @ seatunnel-formats ---
+[INFO] Spotless check skipped
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ seatunnel-formats ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-formats ---
+[INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-formats:pom:3.0.0-SNAPSHOT...
+[INFO] 
+[INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-formats ---
+[INFO] No site descriptor found: nothing to attach.
+[INFO] 
+[INFO] -------------< org.apache.seatunnel:seatunnel-format-json >-------------
+[INFO] Building SeaTunnel : Formats : Json 3.0.0-SNAPSHOT               [10/14]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ seatunnel-format-json ---
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:clean (flatten.clean) @ seatunnel-format-json ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ seatunnel-format-json ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ seatunnel-format-json ---
+[INFO] 
+[INFO] --- spotless-maven-plugin:2.29.0:check (spotless-check) @ seatunnel-format-json ---
+[INFO] Spotless check skipped
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ seatunnel-format-json ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-format-json ---
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-formats/seatunnel-format-json/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-format-json ---
+[INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-format-json:jar:3.0.0-SNAPSHOT...
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-format-json ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 21 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-formats/seatunnel-format-json/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-format-json ---
+[INFO] Copying 8 resources from src/test/resources to target/test-classes
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-format-json ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 6 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-formats/seatunnel-format-json/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-format-json ---
+[INFO] 
+[INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-format-json ---
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-formats/seatunnel-format-json/target/seatunnel-format-json-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] 
+[INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-format-json ---
+[INFO] Skipping because packaging 'jar' is not pom.
+[INFO] 
+[INFO] -------------< org.apache.seatunnel:seatunnel-format-text >-------------
+[INFO] Building SeaTunnel : Formats : Text 3.0.0-SNAPSHOT               [11/14]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ seatunnel-format-text ---
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:clean (flatten.clean) @ seatunnel-format-text ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ seatunnel-format-text ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ seatunnel-format-text ---
+[INFO] 
+[INFO] --- spotless-maven-plugin:2.29.0:check (spotless-check) @ seatunnel-format-text ---
+[INFO] Spotless check skipped
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ seatunnel-format-text ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-format-text ---
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-formats/seatunnel-format-text/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-format-text ---
+[INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-format-text:jar:3.0.0-SNAPSHOT...
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-format-text ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 7 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-formats/seatunnel-format-text/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-format-text ---
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-formats/seatunnel-format-text/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-format-text ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 2 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-formats/seatunnel-format-text/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-format-text ---
+[INFO] 
+[INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-format-text ---
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-formats/seatunnel-format-text/target/seatunnel-format-text-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] 
+[INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-format-text ---
+[INFO] Skipping because packaging 'jar' is not pom.
+[INFO] 
+[INFO] ---< org.apache.seatunnel:seatunnel-format-compatible-debezium-json >---
+[INFO] Building SeaTunnel : Formats : Compatible Debezium Json 3.0.0-SNAPSHOT [12/14]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ seatunnel-format-compatible-debezium-json ---
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:clean (flatten.clean) @ seatunnel-format-compatible-debezium-json ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ seatunnel-format-compatible-debezium-json ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ seatunnel-format-compatible-debezium-json ---
+[INFO] 
+[INFO] --- spotless-maven-plugin:2.29.0:check (spotless-check) @ seatunnel-format-compatible-debezium-json ---
+[INFO] Spotless check skipped
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ seatunnel-format-compatible-debezium-json ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-format-compatible-debezium-json ---
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-formats/seatunnel-format-compatible-debezium-json/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-format-compatible-debezium-json ---
+[INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-format-compatible-debezium-json:jar:3.0.0-SNAPSHOT...
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-format-compatible-debezium-json ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 3 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-formats/seatunnel-format-compatible-debezium-json/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-format-compatible-debezium-json ---
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-formats/seatunnel-format-compatible-debezium-json/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-format-compatible-debezium-json ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 3 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-formats/seatunnel-format-compatible-debezium-json/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-format-compatible-debezium-json ---
+[INFO] 
+[INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-format-compatible-debezium-json ---
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-formats/seatunnel-format-compatible-debezium-json/target/seatunnel-format-compatible-debezium-json-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] 
+[INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-format-compatible-debezium-json ---
+[INFO] Skipping because packaging 'jar' is not pom.
+[INFO] 
+[INFO] ---< org.apache.seatunnel:seatunnel-format-compatible-connect-json >----
+[INFO] Building SeaTunnel : Formats : Compatible Kafka Connect Json 3.0.0-SNAPSHOT [13/14]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ seatunnel-format-compatible-connect-json ---
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:clean (flatten.clean) @ seatunnel-format-compatible-connect-json ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ seatunnel-format-compatible-connect-json ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ seatunnel-format-compatible-connect-json ---
+[INFO] 
+[INFO] --- spotless-maven-plugin:2.29.0:check (spotless-check) @ seatunnel-format-compatible-connect-json ---
+[INFO] Spotless check skipped
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ seatunnel-format-compatible-connect-json ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-format-compatible-connect-json ---
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-formats/seatunnel-format-compatible-connect-json/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-format-compatible-connect-json ---
+[INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-format-compatible-connect-json:jar:3.0.0-SNAPSHOT...
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-format-compatible-connect-json ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 3 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-formats/seatunnel-format-compatible-connect-json/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-format-compatible-connect-json ---
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-formats/seatunnel-format-compatible-connect-json/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-format-compatible-connect-json ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-format-compatible-connect-json ---
+[INFO] 
+[INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-format-compatible-connect-json ---
+[INFO] Building jar: /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-formats/seatunnel-format-compatible-connect-json/target/seatunnel-format-compatible-connect-json-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] 
+[INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-format-compatible-connect-json ---
+[INFO] Skipping because packaging 'jar' is not pom.
+[INFO] 
+[INFO] --------------< org.apache.seatunnel:connector-amazonsqs >--------------
+[INFO] Building SeaTunnel : Connectors V2 : Amazon SQS 3.0.0-SNAPSHOT   [14/14]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ connector-amazonsqs ---
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:clean (flatten.clean) @ connector-amazonsqs ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ connector-amazonsqs ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ connector-amazonsqs ---
+[INFO] 
+[INFO] --- spotless-maven-plugin:2.29.0:check (spotless-check) @ connector-amazonsqs ---
+[INFO] Spotless check skipped
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ connector-amazonsqs ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ connector-amazonsqs ---
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-connectors-v2/connector-amazonsqs/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ connector-amazonsqs ---
+[INFO] Generating flattened POM of project org.apache.seatunnel:connector-amazonsqs:jar:3.0.0-SNAPSHOT...
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ connector-amazonsqs ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 14 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-connectors-v2/connector-amazonsqs/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ connector-amazonsqs ---
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-connectors-v2/connector-amazonsqs/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ connector-amazonsqs ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 2 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-connectors-v2/connector-amazonsqs/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ connector-amazonsqs ---
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest
+[ERROR] Tests run: 9, Failures: 4, Errors: 2, Skipped: 0, Time elapsed: 3.526 s <<< FAILURE! - in org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest
+[ERROR] shouldNotDeleteMessageWhenDeserializerReturnsNull  Time elapsed: 0.061 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected org.apache.seatunnel.connectors.seatunnel.amazonsqs.exception.AmazonSqsConnectorException to be thrown, but nothing was thrown.
+	at org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest.shouldNotDeleteMessageWhenDeserializerReturnsNull(AmazonSqsSourceReaderTest.java:95)
+
+[ERROR] shouldSkipFailedMessageAndContinueWhenParseErrorsIgnored  Time elapsed: 0.006 s  <<< ERROR!
+java.lang.NullPointerException
+	at org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest.shouldSkipFailedMessageAndContinueWhenParseErrorsIgnored(AmazonSqsSourceReaderTest.java:196)
+
+[ERROR] shouldKeepIgnoredNullMessageWhenDeletionDisabled  Time elapsed: 0.007 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest.shouldKeepIgnoredNullMessageWhenDeletionDisabled(AmazonSqsSourceReaderTest.java:213)
+
+[ERROR] shouldNotDeleteMessageWhenDeserializationThrows  Time elapsed: 0.004 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected org.apache.seatunnel.connectors.seatunnel.amazonsqs.exception.AmazonSqsConnectorException to be thrown, but nothing was thrown.
+	at org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest.shouldNotDeleteMessageWhenDeserializationThrows(AmazonSqsSourceReaderTest.java:74)
+
+[ERROR] shouldApplyIgnoreParseErrorsToJsonMessagesCreatedByFactory  Time elapsed: 1.349 s  <<< ERROR!
+org.apache.seatunnel.common.exception.SeaTunnelRuntimeException: ErrorCode:[COMMON-02], ErrorDescription:[Common JSON convert/parse 'invalid' operation failed.]
+	at org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest.shouldApplyIgnoreParseErrorsToJsonMessagesCreatedByFactory(AmazonSqsSourceReaderTest.java:249)
+Caused by: org.apache.seatunnel.shade.com.fasterxml.jackson.core.JsonParseException: 
+Unrecognized token 'invalid': was expecting (JSON String, Number, Array, Object or token 'null', 'true' or 'false')
+ at [Source: (byte[])"invalid"; line: 1, column: 8]
+	at org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest.shouldApplyIgnoreParseErrorsToJsonMessagesCreatedByFactory(AmazonSqsSourceReaderTest.java:249)
+
+[ERROR] shouldStopBatchAtFailedMessageWithoutDeletingItOrLaterMessages  Time elapsed: 0.006 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected org.apache.seatunnel.connectors.seatunnel.amazonsqs.exception.AmazonSqsConnectorException to be thrown, but nothing was thrown.
+	at org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest.shouldStopBatchAtFailedMessageWithoutDeletingItOrLaterMessages(AmazonSqsSourceReaderTest.java:166)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   AmazonSqsSourceReaderTest.shouldKeepIgnoredNullMessageWhenDeletionDisabled:213 expected: <true> but was: <false>
+[ERROR]   AmazonSqsSourceReaderTest.shouldNotDeleteMessageWhenDeserializationThrows:74 Expected org.apache.seatunnel.connectors.seatunnel.amazonsqs.exception.AmazonSqsConnectorException to be thrown, but nothing was thrown.
+[ERROR]   AmazonSqsSourceReaderTest.shouldNotDeleteMessageWhenDeserializerReturnsNull:95 Expected org.apache.seatunnel.connectors.seatunnel.amazonsqs.exception.AmazonSqsConnectorException to be thrown, but nothing was thrown.
+[ERROR]   AmazonSqsSourceReaderTest.shouldStopBatchAtFailedMessageWithoutDeletingItOrLaterMessages:166 Expected org.apache.seatunnel.connectors.seatunnel.amazonsqs.exception.AmazonSqsConnectorException to be thrown, but nothing was thrown.
+[ERROR] Errors: 
+[ERROR]   AmazonSqsSourceReaderTest.shouldApplyIgnoreParseErrorsToJsonMessagesCreatedByFactory:249 » SeaTunnelRuntime
+[ERROR]   AmazonSqsSourceReaderTest.shouldSkipFailedMessageAndContinueWhenParseErrorsIgnored:196 » NullPointer
+[INFO] 
+[ERROR] Tests run: 9, Failures: 4, Errors: 2, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for SeaTunnel : 3.0.0-SNAPSHOT:
+[INFO] 
+[INFO] SeaTunnel : ........................................ SUCCESS [ 28.254 s]
+[INFO] SeaTunnel : Config : ............................... SUCCESS [  1.943 s]
+[INFO] SeaTunnel : Config : Base .......................... SUCCESS [ 24.290 s]
+[INFO] SeaTunnel : Config : Shade ......................... SUCCESS [ 47.403 s]
+[INFO] SeaTunnel : Common ................................. SUCCESS [ 41.521 s]
+[INFO] SeaTunnel : Api .................................... SUCCESS [02:03 min]
+[INFO] SeaTunnel : Connectors V2 : ........................ SUCCESS [  1.942 s]
+[INFO] SeaTunnel : Connectors V2 : Common ................. SUCCESS [ 11.238 s]
+[INFO] SeaTunnel : Formats : .............................. SUCCESS [  0.920 s]
+[INFO] SeaTunnel : Formats : Json ......................... SUCCESS [  7.845 s]
+[INFO] SeaTunnel : Formats : Text ......................... SUCCESS [  5.587 s]
+[INFO] SeaTunnel : Formats : Compatible Debezium Json ..... SUCCESS [  3.928 s]
+[INFO] SeaTunnel : Formats : Compatible Kafka Connect Json  SUCCESS [  2.824 s]
+[INFO] SeaTunnel : Connectors V2 : Amazon SQS ............. FAILURE [ 16.971 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  05:51 min
+[INFO] Finished at: 2026-10-25T19:45:05-07:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.22.2:test (default-test) on project connector-amazonsqs: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12038/seatunnel-connectors-v2/connector-amazonsqs/target/surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :connector-amazonsqs
+# end: 2026-10-25T19:45:05-0700
+# exit code: 1

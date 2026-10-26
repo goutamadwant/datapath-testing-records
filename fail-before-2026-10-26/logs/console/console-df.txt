@@ -1,0 +1,11 @@
+/dev/disk3s5   926Gi   847Gi    18Gi    98%     20M  188M   10%   /System/Volumes/Data
+[df24193/before] exit 101 in 150 s -> logs/df24193/before.log
+[df24193/after] exit 0 in 44 s -> logs/df24193/after.log
+/dev/disk3s5   926Gi   848Gi    17Gi    99%     20M  175M   10%   /System/Volumes/Data
+[df24917/before] exit 0 in 298 s -> logs/df24917/before.log
+[df24917/after] exit 0 in 146 s -> logs/df24917/after.log
+./run.sh: line 233: inerTest: command not found
+./run.sh: line 235: syntax error near unexpected token `}'
+./run.sh: line 235: `}'
+[df24917-diag/before] exit 0 in 190 s -> logs/df24917-diag/before.log
+[df24917-diag/after] exit 0 in 140 s -> logs/df24917-diag/after.log

@@ -1,0 +1,12 @@
+diff --git a/seatunnel-connectors-v2/connector-amazonsqs/src/test/java/org/apache/seatunnel/connectors/seatunnel/amazonsqs/source/AmazonSqsSourceReaderTest.java b/seatunnel-connectors-v2/connector-amazonsqs/src/test/java/org/apache/seatunnel/connectors/seatunnel/amazonsqs/source/AmazonSqsSourceReaderTest.java
+index ed7cb3d..477570d 100644
+--- a/seatunnel-connectors-v2/connector-amazonsqs/src/test/java/org/apache/seatunnel/connectors/seatunnel/amazonsqs/source/AmazonSqsSourceReaderTest.java
++++ b/seatunnel-connectors-v2/connector-amazonsqs/src/test/java/org/apache/seatunnel/connectors/seatunnel/amazonsqs/source/AmazonSqsSourceReaderTest.java
+@@ -276,7 +276,6 @@ class AmazonSqsSourceReaderTest {
+                         null,
+                         null,
+                         deleteMessage,
+-                        ignoreParseErrors,
+                         null);
+         AmazonSqsSourceReader reader =
+                 new AmazonSqsSourceReader(

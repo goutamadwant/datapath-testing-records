@@ -1,0 +1,22 @@
+diff --git a/datafusion/core/tests/optimizer/mod.rs b/datafusion/core/tests/optimizer/mod.rs
+index 2275939..d26b584 100644
+--- a/datafusion/core/tests/optimizer/mod.rs
++++ b/datafusion/core/tests/optimizer/mod.rs
+@@ -141,13 +141,17 @@ fn concat_ws_literals() -> Result<()> {
+ #[test]
+ fn expensive_regexp_like_is_deferred_to_execution() -> Result<()> {
+     let pattern = "a{5}{5}{5}{5}{5}{5}{5}{5}";
++    let started = std::time::Instant::now();
+     let plan = test_sql(&format!("SELECT regexp_like('aaaaa', '{pattern}')"))?;
++    println!("DIAG planning time literal input: {:?}", started.elapsed());
+     let plan = plan.display_indent().to_string();
++    println!("DIAG plan literal input:\n{plan}");
+ 
+     assert_contains!(&plan, &format!("Utf8(\"{pattern}\")"));
+     assert_contains!(&plan, " ~ ");
+ 
+     let null_plan = test_sql(&format!("SELECT regexp_like(NULL, '{pattern}')"))?;
++    println!("DIAG plan NULL input:\n{}", null_plan.display_indent());
+     assert_contains!(
+         &null_plan.display_indent().to_string(),
+         "Projection: Boolean(NULL)"

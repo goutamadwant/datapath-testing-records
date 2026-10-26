@@ -1,0 +1,939 @@
+{
+  "description": "Fail-before / pass-after runs of the regression tests named in the article. before = first parent of the merge commit plus only the pull request's test change; after = merge commit. Outcomes are parsed from the logs listed here.",
+  "runs": [
+    {
+      "case": "st12472",
+      "side": "before",
+      "before_commit": "e1a7e64b6733d2b2cd4682190c753a81fac93bc2",
+      "after_commit": "87ed0afe0f783eda1b1f3ac6f0ac9fadedcb4f98",
+      "tree_head": "e1a7e64b6733d2b2cd4682190c753a81fac93bc2",
+      "transplant": "seatunnel-edge-agent/seatunnel-edge-agent-connector/src/test/java/org/apache/seatunnel/edge/agent/connector/file/FileCollectReaderBehaviorTest.java copied from 87ed0afe0f783eda1b1f3ac6f0ac9fadedcb4f98; ",
+      "command": "./mvnw -B -ntp -pl seatunnel-edge-agent/seatunnel-edge-agent-connector -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dtest=FileCollectReaderBehaviorTest#rediscoversFileAfterInactiveCursorClosed -DfailIfNoTests=false clean test",
+      "exit_code": 1,
+      "started_epoch": 1792980179.7493398,
+      "ended_epoch": 1792980246.319367,
+      "duration_s": 66.6,
+      "log": "logs/st12472/before.log",
+      "outcome": "BUILD_ERROR",
+      "tests": [],
+      "detail": [
+        "seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[4,53] error: cannot find symbol",
+        "seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[5,53] error: cannot find symbol",
+        "seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[19,53] error: cannot find symbol",
+        "seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[19,11] error: cannot find symbol",
+        "seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/Path.java:[7,53] error: cannot find symbol"
+      ],
+      "log_sha256": "d4d6e9712f2309f8436f01bbe4ac1bfbb02ca72c80383cd2d9ff0e2dbb91b8eb"
+    },
+    {
+      "case": "df24193",
+      "side": "before",
+      "before_commit": "d5868e683435042aa5fa72465a8a2d667d8cc468",
+      "after_commit": "047f531488f6617e88c76769baf2e2d6ac8e1c0e",
+      "tree_head": "d5868e683435042aa5fa72465a8a2d667d8cc468",
+      "transplant": "patches/df24193-tests-only.patch applied (test-module hunks only)",
+      "command": "cargo test --locked --profile ci -p datafusion-physical-plan --lib unbounded_input_emits_before_batch_size",
+      "exit_code": 101,
+      "started_epoch": 1792980146.094209,
+      "ended_epoch": 1792980296.359484,
+      "duration_s": 150.3,
+      "log": "logs/df24193/before.log",
+      "outcome": "FAIL",
+      "tests": [
+        {
+          "name": "repartition::tests::unbounded_input_emits_before_batch_size",
+          "result": "FAILED"
+        }
+      ],
+      "detail": [],
+      "log_sha256": "0dd123b8397bab08e6a51be2880c831b0527f7ecebb00b8b0fcb024a7995065b"
+    },
+    {
+      "case": "df24193",
+      "side": "after",
+      "before_commit": "d5868e683435042aa5fa72465a8a2d667d8cc468",
+      "after_commit": "047f531488f6617e88c76769baf2e2d6ac8e1c0e",
+      "tree_head": "047f531488f6617e88c76769baf2e2d6ac8e1c0e",
+      "transplant": "none (merge commit as is)",
+      "command": "cargo test --locked --profile ci -p datafusion-physical-plan --lib unbounded_input_emits_before_batch_size",
+      "exit_code": 0,
+      "started_epoch": 1792980296.97372,
+      "ended_epoch": 1792980340.8193731,
+      "duration_s": 43.8,
+      "log": "logs/df24193/after.log",
+      "outcome": "PASS",
+      "tests": [
+        {
+          "name": "repartition::tests::unbounded_input_emits_before_batch_size",
+          "result": "PASS"
+        }
+      ],
+      "detail": [],
+      "log_sha256": "8a7d27eb6f588019a1bf913b1ffe0afe7e3343d0215d926b28c2105c51f956d9"
+    },
+    {
+      "case": "st12472",
+      "side": "before",
+      "before_commit": "e1a7e64b6733d2b2cd4682190c753a81fac93bc2",
+      "after_commit": "87ed0afe0f783eda1b1f3ac6f0ac9fadedcb4f98",
+      "tree_head": "e1a7e64b6733d2b2cd4682190c753a81fac93bc2",
+      "transplant": "seatunnel-edge-agent/seatunnel-edge-agent-connector/src/test/java/org/apache/seatunnel/edge/agent/connector/file/FileCollectReaderBehaviorTest.java copied from 87ed0afe0f783eda1b1f3ac6f0ac9fadedcb4f98; ",
+      "command": "./mvnw -B -ntp -pl seatunnel-edge-agent/seatunnel-edge-agent-connector -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=FileCollectReaderBehaviorTest#rediscoversFileAfterInactiveCursorClosed -DfailIfNoTests=false clean package",
+      "exit_code": 1,
+      "started_epoch": 1792980285.3197708,
+      "ended_epoch": 1792980555.2977622,
+      "duration_s": 270.0,
+      "log": "logs/st12472/before-2.log",
+      "outcome": "COMPILE_ERROR",
+      "tests": [],
+      "detail": [
+        "seatunnel-edge-agent/seatunnel-edge-agent-connector/src/test/java/org/apache/seatunnel/edge/agent/connector/file/FileCollectReaderBehaviorTest.java:[68,16] error: constructor FileCollectReader in class FileCollectReader cannot be applied to given types;"
+      ],
+      "log_sha256": "4bf9c40b77831e7c5d68ba7f477682fc5a5deb01d88b8bea1e542e614b444ff4"
+    },
+    {
+      "case": "df24917",
+      "side": "before",
+      "before_commit": "408527ae58b5b706f5c02df8c37e096122cd8c78",
+      "after_commit": "3dfa245d61dde362e2c077761783bc735931659c",
+      "tree_head": "408527ae58b5b706f5c02df8c37e096122cd8c78",
+      "transplant": "datafusion/core/tests/optimizer/mod.rs copied from 3dfa245d61dde362e2c077761783bc735931659c",
+      "command": "cargo test --locked --profile ci -p datafusion --test core_integration expensive_regexp_like_is_deferred_to_execution",
+      "exit_code": 0,
+      "started_epoch": 1792980344.781474,
+      "ended_epoch": 1792980642.359675,
+      "duration_s": 297.6,
+      "log": "logs/df24917/before.log",
+      "outcome": "PASS",
+      "tests": [
+        {
+          "name": "optimizer::expensive_regexp_like_is_deferred_to_execution",
+          "result": "PASS"
+        }
+      ],
+      "detail": [],
+      "log_sha256": "d10e07207c6dba8182deecfb1c04cb87cd34b341ae735f812e41879ff68a1f4d"
+    },
+    {
+      "case": "st12472",
+      "side": "after",
+      "before_commit": "e1a7e64b6733d2b2cd4682190c753a81fac93bc2",
+      "after_commit": "87ed0afe0f783eda1b1f3ac6f0ac9fadedcb4f98",
+      "tree_head": "87ed0afe0f783eda1b1f3ac6f0ac9fadedcb4f98",
+      "transplant": "none (merge commit as is)",
+      "command": "./mvnw -B -ntp -pl seatunnel-edge-agent/seatunnel-edge-agent-connector -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=FileCollectReaderBehaviorTest#rediscoversFileAfterInactiveCursorClosed -DfailIfNoTests=false clean package",
+      "exit_code": 0,
+      "started_epoch": 1792980557.994048,
+      "ended_epoch": 1792980685.610483,
+      "duration_s": 127.6,
+      "log": "logs/st12472/after.log",
+      "outcome": "PASS",
+      "tests": [
+        {
+          "name": "org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest#rediscoversFileAfterInactiveCursorClosed",
+          "result": "PASS",
+          "time_s": 3.568
+        }
+      ],
+      "detail": [],
+      "log_sha256": "ab299eb802d2fcd168937b5429d8d3841ae12262c64077fd6dc507ab7489baca"
+    },
+    {
+      "case": "df24917",
+      "side": "after",
+      "before_commit": "408527ae58b5b706f5c02df8c37e096122cd8c78",
+      "after_commit": "3dfa245d61dde362e2c077761783bc735931659c",
+      "tree_head": "3dfa245d61dde362e2c077761783bc735931659c",
+      "transplant": "none (merge commit as is)",
+      "command": "cargo test --locked --profile ci -p datafusion --test core_integration expensive_regexp_like_is_deferred_to_execution",
+      "exit_code": 0,
+      "started_epoch": 1792980643.482205,
+      "ended_epoch": 1792980789.410895,
+      "duration_s": 145.9,
+      "log": "logs/df24917/after.log",
+      "outcome": "PASS",
+      "tests": [
+        {
+          "name": "optimizer::expensive_regexp_like_is_deferred_to_execution",
+          "result": "PASS"
+        }
+      ],
+      "detail": [],
+      "log_sha256": "ba92c08085e112ce9187dda8b5ea9a08577b01c659fa120adfb4bdbe65cf0970"
+    },
+    {
+      "case": "st12481",
+      "side": "before",
+      "before_commit": "7ba68325cb7ea1bf1a28f56c4f9c20695d221df3",
+      "after_commit": "0e4cf52896ee3604a8e7899d7736ffd914ee6ce7",
+      "tree_head": "7ba68325cb7ea1bf1a28f56c4f9c20695d221df3",
+      "transplant": "seatunnel-e2e/seatunnel-e2e-common/src/test/java/org/apache/seatunnel/e2e/common/container/AbstractTestContainerTest.java copied from 0e4cf52896ee3604a8e7899d7736ffd914ee6ce7; seatunnel-e2e/seatunnel-e2e-common/src/test/java/org/apache/seatunnel/e2e/common/container/flink/AbstractTestFlinkContainerTest.java copied from 0e4cf52896ee3604a8e7899d7736ffd914ee6ce7; ",
+      "command": "./mvnw -B -ntp -pl seatunnel-e2e/seatunnel-e2e-common -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=AbstractTestContainerTest,AbstractTestFlinkContainerTest -DfailIfNoTests=false clean package",
+      "exit_code": 1,
+      "started_epoch": 1792980695.300858,
+      "ended_epoch": 1792980840.301118,
+      "duration_s": 145.0,
+      "log": "logs/st12481/before.log",
+      "outcome": "COMPILE_ERROR",
+      "tests": [],
+      "detail": [
+        "seatunnel-e2e/seatunnel-e2e-common/src/test/java/org/apache/seatunnel/e2e/common/container/AbstractTestContainerTest.java:[44,52] error: cannot find symbol",
+        "seatunnel-e2e/seatunnel-e2e-common/src/test/java/org/apache/seatunnel/e2e/common/container/AbstractTestContainerTest.java:[56,52] error: cannot find symbol",
+        "seatunnel-e2e/seatunnel-e2e-common/src/test/java/org/apache/seatunnel/e2e/common/container/AbstractTestContainerTest.java:[67,51] error: cannot find symbol",
+        "seatunnel-e2e/seatunnel-e2e-common/src/test/java/org/apache/seatunnel/e2e/common/container/AbstractTestContainerTest.java:[86,56] error: cannot find symbol",
+        "seatunnel-e2e/seatunnel-e2e-common/src/test/java/org/apache/seatunnel/e2e/common/container/AbstractTestContainerTest.java:[91,51] error: cannot find symbol",
+        "seatunnel-e2e/seatunnel-e2e-common/src/test/java/org/apache/seatunnel/e2e/common/container/AbstractTestContainerTest.java:[198,43] error: cannot find symbol",
+        "seatunnel-e2e/seatunnel-e2e-common/src/test/java/org/apache/seatunnel/e2e/common/container/AbstractTestContainerTest.java:[234,8] error: method does not override or implement a method from a supertype",
+        "seatunnel-e2e/seatunnel-e2e-common/src/test/java/org/apache/seatunnel/e2e/common/container/AbstractTestContainerTest.java:[249,8] error: method does not override or implement a method from a supertype",
+        "seatunnel-e2e/seatunnel-e2e-common/src/test/java/org/apache/seatunnel/e2e/common/container/flink/AbstractTestFlinkContainerTest.java:[153,8] error: method does not override or implement a method from a supertype"
+      ],
+      "log_sha256": "0bee847bb45a349de2b7cb20878111ffc33d5254e60d98c8a81b4cadcb7f899d"
+    },
+    {
+      "case": "st12481",
+      "side": "after",
+      "before_commit": "7ba68325cb7ea1bf1a28f56c4f9c20695d221df3",
+      "after_commit": "0e4cf52896ee3604a8e7899d7736ffd914ee6ce7",
+      "tree_head": "0e4cf52896ee3604a8e7899d7736ffd914ee6ce7",
+      "transplant": "none (merge commit as is)",
+      "command": "./mvnw -B -ntp -pl seatunnel-e2e/seatunnel-e2e-common -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=AbstractTestContainerTest,AbstractTestFlinkContainerTest -DfailIfNoTests=false clean package",
+      "exit_code": 0,
+      "started_epoch": 1792980847.78163,
+      "ended_epoch": 1792980992.713331,
+      "duration_s": 144.9,
+      "log": "logs/st12481/after.log",
+      "outcome": "PASS",
+      "tests": [
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.AbstractTestContainerTest#shouldCleanVolumeAndStopRunningSeaTunnelServer",
+          "result": "PASS",
+          "time_s": 0.453
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.AbstractTestContainerTest#shouldStopSeaTunnelServerWhenItStopsBeforeVolumeCleanup",
+          "result": "PASS",
+          "time_s": 0.031
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.AbstractTestContainerTest#shouldRethrowSeaTunnelServerStopFailure",
+          "result": "PASS",
+          "time_s": 0.018
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.AbstractTestContainerTest#shouldStopAllContainersAndKeepInterruptWhenItIsNotTheFirstFailure",
+          "result": "PASS",
+          "time_s": 0.01
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.AbstractTestContainerTest#shouldStopSeaTunnelServerWhenItIsNotRunning",
+          "result": "PASS",
+          "time_s": 0.015
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.AbstractTestContainerTest#shouldRunVolumeCleanupOnRunningContainer",
+          "result": "PASS",
+          "time_s": 0.005
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.AbstractTestContainerTest#shouldNotThrowWhenVolumeCleanupFails",
+          "result": "PASS",
+          "time_s": 0.018
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.AbstractTestContainerTest#shouldStopSparkMasterWhenItStopsBeforeVolumeCleanup",
+          "result": "PASS",
+          "time_s": 0.017
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.AbstractTestContainerTest#shouldCleanVolumeAndStopRunningSparkMaster",
+          "result": "PASS",
+          "time_s": 0.003
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.AbstractTestContainerTest#shouldSkipVolumeCleanupWhenContainerIsNotRunning",
+          "result": "PASS",
+          "time_s": 0.008
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.AbstractTestContainerTest#shouldReportHostPathThatCannotBeDeleted{Path}",
+          "result": "PASS",
+          "time_s": 0.102
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.AbstractTestContainerTest#shouldStopSparkMasterWhenItIsNotRunning",
+          "result": "PASS",
+          "time_s": 0.005
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldNotFailWhenVolumeCleanupExitsWithError",
+          "result": "PASS",
+          "time_s": 6.619
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldNotFailWhenTaskManagerStopsBeforeVolumeCleanup",
+          "result": "PASS",
+          "time_s": 0.089
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldKeepFirstFailureAndSuppressLaterOnes",
+          "result": "PASS",
+          "time_s": 0.028
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldStopJobManagerWhenTaskManagerIsNotRunning",
+          "result": "PASS",
+          "time_s": 0.013
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldStopJobManagerAndRethrowWhenVolumeCleanupIsInterrupted",
+          "result": "PASS",
+          "time_s": 0.016
+        }
+      ],
+      "detail": [],
+      "log_sha256": "2b239d64fb11b7ff03b23847a05de605ba57d1876952d9fc193dd5f0169966fe"
+    },
+    {
+      "case": "st12481-shim",
+      "side": "before",
+      "before_commit": "7ba68325cb7ea1bf1a28f56c4f9c20695d221df3",
+      "after_commit": "0e4cf52896ee3604a8e7899d7736ffd914ee6ce7",
+      "tree_head": "7ba68325cb7ea1bf1a28f56c4f9c20695d221df3",
+      "transplant": "seatunnel-e2e/seatunnel-e2e-common/src/test/java/org/apache/seatunnel/e2e/common/container/flink/AbstractTestFlinkContainerTest.java copied from 0e4cf52896ee3604a8e7899d7736ffd914ee6ce7; then patches/st12481-flink-test-drop-override.patch applied",
+      "command": "./mvnw -B -ntp -pl seatunnel-e2e/seatunnel-e2e-common -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=AbstractTestFlinkContainerTest -DfailIfNoTests=false clean package",
+      "exit_code": 1,
+      "started_epoch": 1792980994.669418,
+      "ended_epoch": 1792981191.398939,
+      "duration_s": 196.7,
+      "log": "logs/st12481-shim/before.log",
+      "outcome": "FAIL",
+      "tests": [
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldNotFailWhenVolumeCleanupExitsWithError",
+          "result": "FAIL",
+          "time_s": 13.037,
+          "failure": "org.opentest4j.AssertionFailedError: expected: <true> but was: <false>"
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldNotFailWhenTaskManagerStopsBeforeVolumeCleanup",
+          "result": "FAIL",
+          "time_s": 0.031,
+          "failure": "org.opentest4j.AssertionFailedError: Unexpected exception thrown: java.lang.IllegalStateException: container is not running"
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldKeepFirstFailureAndSuppressLaterOnes",
+          "result": "FAIL",
+          "time_s": 0.082,
+          "failure": "org.opentest4j.AssertionFailedError: array lengths differ, expected: <1> but was: <0>"
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldStopJobManagerWhenTaskManagerIsNotRunning",
+          "result": "FAIL",
+          "time_s": 0.325,
+          "failure": "org.mockito.exceptions.verification.NeverWantedButInvoked: \ngenericContainer.execInContainer(\n    \"rm\",\n    \"-rf\",\n    \"/tmp/seatunnel_mnt\"\n);\nNever wanted here:\n-> at org.testcontainers.containers.ContainerState.execInContainer(ContainerState.java:252)\nBut invoked here:\n-> at org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainer.tearDown(AbstractTestFlinkContainer.java:163) with arguments: [rm, -rf, /tmp/seatunnel_mnt]\n"
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldStopJobManagerAndRethrowWhenVolumeCleanupIsInterrupted",
+          "result": "FAIL",
+          "time_s": 0.115,
+          "failure": "org.mockito.exceptions.verification.WantedButNotInvoked: \nWanted but not invoked:\ngenericContainer.stop();\n-> at org.testcontainers.containers.GenericContainer.stop(GenericContainer.java:643)\n\nHowever, there was exactly 1 interaction with this mock:\ngenericContainer.execInContainer(\n    \"rm\",\n    \"-rf\",\n    \"/tmp/seatunnel_mnt\"\n);\n-> at org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainer.tearDown(AbstractTestFlinkContainer.java:16"
+        }
+      ],
+      "detail": [],
+      "log_sha256": "b5fdcafa12f8b5723ff0dc57518e4d5886030c20b135997221dfd81b87ec073d"
+    },
+    {
+      "case": "df24917-diag",
+      "side": "before",
+      "before_commit": "408527ae58b5b706f5c02df8c37e096122cd8c78",
+      "after_commit": "3dfa245d61dde362e2c077761783bc735931659c",
+      "tree_head": "408527ae58b5b706f5c02df8c37e096122cd8c78",
+      "transplant": "datafusion/core/tests/optimizer/mod.rs copied from 3dfa245d61dde362e2c077761783bc735931659c; then patches/df24917-diagnostic-print-plan.patch applied",
+      "command": "sh -c rc=0; for i in 1 2 3; do cargo test --locked --profile ci -p datafusion --test core_integration expensive_regexp_like_is_deferred_to_execution -- --nocapture || rc=1; done; exit $rc",
+      "exit_code": 0,
+      "started_epoch": 1792981258.701652,
+      "ended_epoch": 1792981448.7540202,
+      "duration_s": 190.1,
+      "log": "logs/df24917-diag/before.log",
+      "outcome": "PASS",
+      "tests": [
+        {
+          "name": "optimizer::expensive_regexp_like_is_deferred_to_execution",
+          "result": "PASS"
+        },
+        {
+          "name": "optimizer::expensive_regexp_like_is_deferred_to_execution",
+          "result": "PASS"
+        },
+        {
+          "name": "optimizer::expensive_regexp_like_is_deferred_to_execution",
+          "result": "PASS"
+        }
+      ],
+      "detail": [],
+      "log_sha256": "8bdfdfa778f6ed95eebbbbba8c3781657ebac3258b147b4acc040620c8eebf90"
+    },
+    {
+      "case": "st12481-shim",
+      "side": "after",
+      "before_commit": "7ba68325cb7ea1bf1a28f56c4f9c20695d221df3",
+      "after_commit": "0e4cf52896ee3604a8e7899d7736ffd914ee6ce7",
+      "tree_head": "0e4cf52896ee3604a8e7899d7736ffd914ee6ce7",
+      "transplant": "none (merge commit as is)",
+      "command": "./mvnw -B -ntp -pl seatunnel-e2e/seatunnel-e2e-common -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=AbstractTestFlinkContainerTest -DfailIfNoTests=false clean package",
+      "exit_code": 0,
+      "started_epoch": 1792981195.3829792,
+      "ended_epoch": 1792981488.2310221,
+      "duration_s": 292.8,
+      "log": "logs/st12481-shim/after.log",
+      "outcome": "PASS",
+      "tests": [
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldNotFailWhenVolumeCleanupExitsWithError",
+          "result": "PASS",
+          "time_s": 11.149
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldNotFailWhenTaskManagerStopsBeforeVolumeCleanup",
+          "result": "PASS",
+          "time_s": 0.107
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldKeepFirstFailureAndSuppressLaterOnes",
+          "result": "PASS",
+          "time_s": 0.043
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldStopJobManagerWhenTaskManagerIsNotRunning",
+          "result": "PASS",
+          "time_s": 0.015
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldStopJobManagerAndRethrowWhenVolumeCleanupIsInterrupted",
+          "result": "PASS",
+          "time_s": 0.008
+        }
+      ],
+      "detail": [],
+      "log_sha256": "9f920315b1a74452aa67b0cb8fce8ebff5612151514d4617fbcd1c97a6e0967c"
+    },
+    {
+      "case": "df24917-diag",
+      "side": "after",
+      "before_commit": "408527ae58b5b706f5c02df8c37e096122cd8c78",
+      "after_commit": "3dfa245d61dde362e2c077761783bc735931659c",
+      "tree_head": "3dfa245d61dde362e2c077761783bc735931659c",
+      "transplant": "patches/df24917-diagnostic-print-plan.patch applied",
+      "command": "sh -c rc=0; for i in 1 2 3; do cargo test --locked --profile ci -p datafusion --test core_integration expensive_regexp_like_is_deferred_to_execution -- --nocapture || rc=1; done; exit $rc",
+      "exit_code": 0,
+      "started_epoch": 1792981449.7943912,
+      "ended_epoch": 1792981589.799527,
+      "duration_s": 140.0,
+      "log": "logs/df24917-diag/after.log",
+      "outcome": "PASS",
+      "tests": [
+        {
+          "name": "optimizer::expensive_regexp_like_is_deferred_to_execution",
+          "result": "PASS"
+        },
+        {
+          "name": "optimizer::expensive_regexp_like_is_deferred_to_execution",
+          "result": "PASS"
+        },
+        {
+          "name": "optimizer::expensive_regexp_like_is_deferred_to_execution",
+          "result": "PASS"
+        }
+      ],
+      "detail": [],
+      "log_sha256": "12534cdb59657a1d3e2df16fbe00059cdd2fc5fded1d330ebac8f3512cc73f5a"
+    },
+    {
+      "case": "st12038",
+      "side": "before",
+      "before_commit": "9ebb27e8f92059dee76d71029adbfbaa1c099285",
+      "after_commit": "1e450e11f7c8e3ef78d186b0a407148d5faed939",
+      "tree_head": "9ebb27e8f92059dee76d71029adbfbaa1c099285",
+      "transplant": "seatunnel-connectors-v2/connector-amazonsqs/src/test/java/org/apache/seatunnel/connectors/seatunnel/amazonsqs/source/AmazonSqsSourceReaderTest.java copied from 1e450e11f7c8e3ef78d186b0a407148d5faed939; ",
+      "command": "./mvnw -B -ntp -pl seatunnel-connectors-v2/connector-amazonsqs -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=AmazonSqsSourceReaderTest -DfailIfNoTests=false clean package",
+      "exit_code": 1,
+      "started_epoch": 1792981498.721025,
+      "ended_epoch": 1792981618.7251132,
+      "duration_s": 120.0,
+      "log": "logs/st12038/before.log",
+      "outcome": "COMPILE_ERROR",
+      "tests": [],
+      "detail": [
+        "seatunnel-connectors-v2/connector-amazonsqs/src/test/java/org/apache/seatunnel/connectors/seatunnel/amazonsqs/source/AmazonSqsSourceReaderTest.java:[272,16] error: no suitable constructor found for AmazonSqsSourceConfig(String,String,<null>,<null>,<null>,boolean,boolean,<null>)"
+      ],
+      "log_sha256": "638db6445f4571d0277eab906876da05be0f11bf47e7063d7c2d47de53cf4d7c"
+    },
+    {
+      "case": "st12038",
+      "side": "after",
+      "before_commit": "9ebb27e8f92059dee76d71029adbfbaa1c099285",
+      "after_commit": "1e450e11f7c8e3ef78d186b0a407148d5faed939",
+      "tree_head": "1e450e11f7c8e3ef78d186b0a407148d5faed939",
+      "transplant": "none (merge commit as is)",
+      "command": "./mvnw -B -ntp -pl seatunnel-connectors-v2/connector-amazonsqs -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=AmazonSqsSourceReaderTest -DfailIfNoTests=false clean package",
+      "exit_code": 0,
+      "started_epoch": 1792981621.6374772,
+      "ended_epoch": 1792981805.235552,
+      "duration_s": 183.6,
+      "log": "logs/st12038/after.log",
+      "outcome": "PASS",
+      "tests": [
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldKeepMessageAfterSuccessfulCollectionWhenDeletionDisabled",
+          "result": "PASS",
+          "time_s": 1.435
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldNotDeleteMessageWhenDeserializerReturnsNull",
+          "result": "PASS",
+          "time_s": 0.431
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldNotDeleteMessageWhenCollectionFails",
+          "result": "PASS",
+          "time_s": 0.004
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldSkipFailedMessageAndContinueWhenParseErrorsIgnored",
+          "result": "PASS",
+          "time_s": 0.007
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldKeepIgnoredNullMessageWhenDeletionDisabled",
+          "result": "PASS",
+          "time_s": 0.001
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldNotDeleteMessageWhenDeserializationThrows",
+          "result": "PASS",
+          "time_s": 0.0
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldDeleteMessageAfterSuccessfulCollectionWhenEnabled",
+          "result": "PASS",
+          "time_s": 0.008
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldApplyIgnoreParseErrorsToJsonMessagesCreatedByFactory",
+          "result": "PASS",
+          "time_s": 0.535
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldStopBatchAtFailedMessageWithoutDeletingItOrLaterMessages",
+          "result": "PASS",
+          "time_s": 0.002
+        }
+      ],
+      "detail": [],
+      "log_sha256": "8b1c23af27505caa071b6c5ce9b540921f25ac0240d9586ea3b677e605b83fc3"
+    },
+    {
+      "case": "st12038-factory",
+      "side": "before",
+      "before_commit": "9ebb27e8f92059dee76d71029adbfbaa1c099285",
+      "after_commit": "1e450e11f7c8e3ef78d186b0a407148d5faed939",
+      "tree_head": "9ebb27e8f92059dee76d71029adbfbaa1c099285",
+      "transplant": "seatunnel-connectors-v2/connector-amazonsqs/src/test/java/org/apache/seatunnel/connectors/seatunnel/amazonsqs/source/AmazonSqsSourceReaderTest.java copied from 1e450e11f7c8e3ef78d186b0a407148d5faed939; seatunnel-connectors-v2/connector-amazonsqs/src/test/java/org/apache/seatunnel/connectors/seatunnel/amazonsqs/AmazonSqsSourceFactoryTest.java copied from 1e450e11f7c8e3ef78d186b0a407148d5faed939; ",
+      "command": "./mvnw -B -ntp -pl seatunnel-connectors-v2/connector-amazonsqs -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=AmazonSqsSourceFactoryTest -DfailIfNoTests=false clean package",
+      "exit_code": 1,
+      "started_epoch": 1792981807.662383,
+      "ended_epoch": 1792982140.4846258,
+      "duration_s": 332.8,
+      "log": "logs/st12038-factory/before.log",
+      "outcome": "COMPILE_ERROR",
+      "tests": [],
+      "detail": [
+        "seatunnel-connectors-v2/connector-amazonsqs/src/test/java/org/apache/seatunnel/connectors/seatunnel/amazonsqs/source/AmazonSqsSourceReaderTest.java:[272,16] error: no suitable constructor found for AmazonSqsSourceConfig(String,String,<null>,<null>,<null>,boolean,boolean,<null>)",
+        "seatunnel-connectors-v2/connector-amazonsqs/src/test/java/org/apache/seatunnel/connectors/seatunnel/amazonsqs/AmazonSqsSourceFactoryTest.java:[39,56] error: cannot find symbol",
+        "seatunnel-connectors-v2/connector-amazonsqs/src/test/java/org/apache/seatunnel/connectors/seatunnel/amazonsqs/AmazonSqsSourceFactoryTest.java:[40,53] error: cannot find symbol"
+      ],
+      "log_sha256": "e51662f79dfe451e86b4798bbf9a7c2963cd2a25535c2d809e12b8a35ca0d07b"
+    },
+    {
+      "case": "st12038-factory",
+      "side": "after",
+      "before_commit": "9ebb27e8f92059dee76d71029adbfbaa1c099285",
+      "after_commit": "1e450e11f7c8e3ef78d186b0a407148d5faed939",
+      "tree_head": "1e450e11f7c8e3ef78d186b0a407148d5faed939",
+      "transplant": "none (merge commit as is)",
+      "command": "./mvnw -B -ntp -pl seatunnel-connectors-v2/connector-amazonsqs -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=AmazonSqsSourceFactoryTest -DfailIfNoTests=false clean package",
+      "exit_code": 0,
+      "started_epoch": 1792982145.061557,
+      "ended_epoch": 1792982330.927468,
+      "duration_s": 185.9,
+      "log": "logs/st12038-factory/after.log",
+      "outcome": "PASS",
+      "tests": [
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.AmazonSqsSourceFactoryTest#testOptionRule",
+          "result": "PASS",
+          "time_s": 0.171
+        }
+      ],
+      "detail": [],
+      "log_sha256": "e37d594af08d304a5353dfc55ab3da1765218291a23ebf16c1052298ccf8614d"
+    },
+    {
+      "case": "st12038-shim",
+      "side": "before",
+      "before_commit": "9ebb27e8f92059dee76d71029adbfbaa1c099285",
+      "after_commit": "1e450e11f7c8e3ef78d186b0a407148d5faed939",
+      "tree_head": "9ebb27e8f92059dee76d71029adbfbaa1c099285",
+      "transplant": "seatunnel-connectors-v2/connector-amazonsqs/src/test/java/org/apache/seatunnel/connectors/seatunnel/amazonsqs/source/AmazonSqsSourceReaderTest.java copied from 1e450e11f7c8e3ef78d186b0a407148d5faed939; then patches/st12038-reader-test-drop-ignore-arg.patch applied",
+      "command": "./mvnw -B -ntp -pl seatunnel-connectors-v2/connector-amazonsqs -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=AmazonSqsSourceReaderTest -DfailIfNoTests=false clean package",
+      "exit_code": 1,
+      "started_epoch": 1792982342.174025,
+      "ended_epoch": 1792982705.5716329,
+      "duration_s": 363.4,
+      "log": "logs/st12038-shim/before.log",
+      "outcome": "FAIL",
+      "tests": [
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldKeepMessageAfterSuccessfulCollectionWhenDeletionDisabled",
+          "result": "PASS",
+          "time_s": 2.002
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldNotDeleteMessageWhenDeserializerReturnsNull",
+          "result": "FAIL",
+          "time_s": 0.061,
+          "failure": "org.opentest4j.AssertionFailedError: Expected org.apache.seatunnel.connectors.seatunnel.amazonsqs.exception.AmazonSqsConnectorException to be thrown, but nothing was thrown."
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldNotDeleteMessageWhenCollectionFails",
+          "result": "PASS",
+          "time_s": 0.019
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldSkipFailedMessageAndContinueWhenParseErrorsIgnored",
+          "result": "FAIL",
+          "time_s": 0.006,
+          "failure": "java.lang.NullPointerException: "
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldKeepIgnoredNullMessageWhenDeletionDisabled",
+          "result": "FAIL",
+          "time_s": 0.007,
+          "failure": "org.opentest4j.AssertionFailedError: expected: <true> but was: <false>"
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldNotDeleteMessageWhenDeserializationThrows",
+          "result": "FAIL",
+          "time_s": 0.004,
+          "failure": "org.opentest4j.AssertionFailedError: Expected org.apache.seatunnel.connectors.seatunnel.amazonsqs.exception.AmazonSqsConnectorException to be thrown, but nothing was thrown."
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldDeleteMessageAfterSuccessfulCollectionWhenEnabled",
+          "result": "PASS",
+          "time_s": 0.014
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldApplyIgnoreParseErrorsToJsonMessagesCreatedByFactory",
+          "result": "FAIL",
+          "time_s": 1.349,
+          "failure": "org.apache.seatunnel.common.exception.SeaTunnelRuntimeException: ErrorCode:[COMMON-02], ErrorDescription:[Common JSON convert/parse 'invalid' operation failed.]"
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldStopBatchAtFailedMessageWithoutDeletingItOrLaterMessages",
+          "result": "FAIL",
+          "time_s": 0.006,
+          "failure": "org.opentest4j.AssertionFailedError: Expected org.apache.seatunnel.connectors.seatunnel.amazonsqs.exception.AmazonSqsConnectorException to be thrown, but nothing was thrown."
+        }
+      ],
+      "detail": [],
+      "log_sha256": "f2a8f8ca93a3611b9c0d4a5b701071279696592cfc7c3e671f6b75267ced3af2"
+    },
+    {
+      "case": "st12360",
+      "side": "before",
+      "before_commit": "4648c9956ec88dec560a4af27cbd610568f47a60",
+      "after_commit": "eb76f81c823af25c9f4d75ba41b986bc8a0dab57",
+      "tree_head": "4648c9956ec88dec560a4af27cbd610568f47a60",
+      "transplant": "seatunnel-connectors-v2/connector-cdc/connector-cdc-base/src/test/java/org/apache/seatunnel/connectors/cdc/base/source/reader/IncrementalSourceReaderTest.java copied from eb76f81c823af25c9f4d75ba41b986bc8a0dab57; ",
+      "command": "./mvnw -B -ntp -pl seatunnel-connectors-v2/connector-cdc/connector-cdc-base -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=IncrementalSourceReaderTest -DfailIfNoTests=false clean package",
+      "exit_code": 0,
+      "started_epoch": 1792982345.385337,
+      "ended_epoch": 1792982823.5724,
+      "duration_s": 478.2,
+      "log": "logs/st12360/before.log",
+      "outcome": "PASS",
+      "tests": [
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#restoreCheckpointStateIgnoresEmptyLegacyState",
+          "result": "PASS",
+          "time_s": 13.063
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#testFetcherFailureDuringSnapshotRestoresOnlyEmittedPosition",
+          "result": "PASS",
+          "time_s": 21.223
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#restoreCheckpointStateSkipsLegacyCheckpointDataTypeWithoutRecoverableTableIdentity",
+          "result": "PASS",
+          "time_s": 0.082
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#testFetcherFailureWithPartiallyEmittedFetchRestoresRemainingRecords",
+          "result": "PASS",
+          "time_s": 0.252
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#restoreCheckpointStateRestoresLegacyMultipleCheckpointTables",
+          "result": "PASS",
+          "time_s": 0.353
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#testFetcherFailureBeforeHandoffRestoresUnemittedBatch",
+          "result": "PASS",
+          "time_s": 0.233
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#testAddSplitsKeepsRestoredSplitWhenDiscoveryReturnsEmpty",
+          "result": "PASS",
+          "time_s": 3.185
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#testHealthySnapshotDoesNotCheckpointQueuedRecords",
+          "result": "PASS",
+          "time_s": 0.242
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#testAddSplitsEnqueuesPrunedRestoredIncrementalSplit",
+          "result": "PASS",
+          "time_s": 0.255
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#restoreCheckpointStateRestoresTablesAndHistoryFromNewCheckpointFormat",
+          "result": "PASS",
+          "time_s": 2.887
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#testCheckpointLockExcludesSnapshotDuringBatchHandoff",
+          "result": "PASS",
+          "time_s": 1.525
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#testAddSplitsKeepsRestoredSplitWhenDiscoveryFails",
+          "result": "PASS",
+          "time_s": 0.186
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#restoreCheckpointStateRestoresLegacyCheckpointDataType",
+          "result": "PASS",
+          "time_s": 0.091
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#testAddSplitsDiscoversCapturedTablesOnlyOncePerBatch",
+          "result": "PASS",
+          "time_s": 0.046
+        }
+      ],
+      "detail": [],
+      "log_sha256": "acff252b3b35dcd744a4d34316ae1b5989bcae64d291dd7052477d95b10f8a4d"
+    },
+    {
+      "case": "st12038-shim",
+      "side": "after",
+      "before_commit": "9ebb27e8f92059dee76d71029adbfbaa1c099285",
+      "after_commit": "1e450e11f7c8e3ef78d186b0a407148d5faed939",
+      "tree_head": "1e450e11f7c8e3ef78d186b0a407148d5faed939",
+      "transplant": "none (merge commit as is)",
+      "command": "./mvnw -B -ntp -pl seatunnel-connectors-v2/connector-amazonsqs -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=AmazonSqsSourceReaderTest -DfailIfNoTests=false clean package",
+      "exit_code": 0,
+      "started_epoch": 1792982707.704849,
+      "ended_epoch": 1792983005.521184,
+      "duration_s": 297.8,
+      "log": "logs/st12038-shim/after.log",
+      "outcome": "PASS",
+      "tests": [
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldKeepMessageAfterSuccessfulCollectionWhenDeletionDisabled",
+          "result": "PASS",
+          "time_s": 1.693
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldNotDeleteMessageWhenDeserializerReturnsNull",
+          "result": "PASS",
+          "time_s": 0.416
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldNotDeleteMessageWhenCollectionFails",
+          "result": "PASS",
+          "time_s": 0.007
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldSkipFailedMessageAndContinueWhenParseErrorsIgnored",
+          "result": "PASS",
+          "time_s": 0.012
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldKeepIgnoredNullMessageWhenDeletionDisabled",
+          "result": "PASS",
+          "time_s": 0.006
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldNotDeleteMessageWhenDeserializationThrows",
+          "result": "PASS",
+          "time_s": 0.006
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldDeleteMessageAfterSuccessfulCollectionWhenEnabled",
+          "result": "PASS",
+          "time_s": 0.001
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldApplyIgnoreParseErrorsToJsonMessagesCreatedByFactory",
+          "result": "PASS",
+          "time_s": 0.598
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest#shouldStopBatchAtFailedMessageWithoutDeletingItOrLaterMessages",
+          "result": "PASS",
+          "time_s": 0.005
+        }
+      ],
+      "detail": [],
+      "log_sha256": "22fd96bb3f5b7fbce5340e5ef3ad570b3ddb1f6ec80de659507e5fd537daab37"
+    },
+    {
+      "case": "st12360",
+      "side": "after",
+      "before_commit": "4648c9956ec88dec560a4af27cbd610568f47a60",
+      "after_commit": "eb76f81c823af25c9f4d75ba41b986bc8a0dab57",
+      "tree_head": "eb76f81c823af25c9f4d75ba41b986bc8a0dab57",
+      "transplant": "none (merge commit as is)",
+      "command": "./mvnw -B -ntp -pl seatunnel-connectors-v2/connector-cdc/connector-cdc-base -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=IncrementalSourceReaderTest -DfailIfNoTests=false clean package",
+      "exit_code": 0,
+      "started_epoch": 1792982832.117733,
+      "ended_epoch": 1792983053.136518,
+      "duration_s": 221.0,
+      "log": "logs/st12360/after.log",
+      "outcome": "PASS",
+      "tests": [
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#restoreCheckpointStateIgnoresEmptyLegacyState",
+          "result": "PASS",
+          "time_s": 6.579
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#testFetcherFailureDuringSnapshotRestoresOnlyEmittedPosition",
+          "result": "PASS",
+          "time_s": 5.294
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#restoreCheckpointStateSkipsLegacyCheckpointDataTypeWithoutRecoverableTableIdentity",
+          "result": "PASS",
+          "time_s": 0.05
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#testFetcherFailureWithPartiallyEmittedFetchRestoresRemainingRecords",
+          "result": "PASS",
+          "time_s": 0.131
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#restoreCheckpointStateRestoresLegacyMultipleCheckpointTables",
+          "result": "PASS",
+          "time_s": 0.122
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#testFetcherFailureBeforeHandoffRestoresUnemittedBatch",
+          "result": "PASS",
+          "time_s": 0.129
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#testAddSplitsKeepsRestoredSplitWhenDiscoveryReturnsEmpty",
+          "result": "PASS",
+          "time_s": 0.638
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#testHealthySnapshotDoesNotCheckpointQueuedRecords",
+          "result": "PASS",
+          "time_s": 0.106
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#testAddSplitsEnqueuesPrunedRestoredIncrementalSplit",
+          "result": "PASS",
+          "time_s": 0.136
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#restoreCheckpointStateRestoresTablesAndHistoryFromNewCheckpointFormat",
+          "result": "PASS",
+          "time_s": 0.475
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#testCheckpointLockExcludesSnapshotDuringBatchHandoff",
+          "result": "PASS",
+          "time_s": 0.296
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#testAddSplitsKeepsRestoredSplitWhenDiscoveryFails",
+          "result": "PASS",
+          "time_s": 0.056
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#restoreCheckpointStateRestoresLegacyCheckpointDataType",
+          "result": "PASS",
+          "time_s": 0.033
+        },
+        {
+          "name": "org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest#testAddSplitsDiscoversCapturedTablesOnlyOncePerBatch",
+          "result": "PASS",
+          "time_s": 0.011
+        }
+      ],
+      "detail": [],
+      "log_sha256": "4700dc6b23e1aee5e7ef07e39c99ba169f0603f482c137e39822d9a52eb058e4"
+    }
+  ],
+  "log_files": {
+    "logs/console/console-df.txt": "6ea23e39b820f52cfcca71d132c2d251fcb36a43d86b77d0a4c2abcac07757c0",
+    "logs/console/console-st-shim.txt": "4de238690dd836952fa29c2f3f5eab2aedf08817b40be8908c2ccceb21ab3dc6",
+    "logs/console/console-st.txt": "5abec5579cc13cfef4479b3e737b30c1a5bb459254bd790b73065c223c1f0131",
+    "logs/df24193/after.log": "8a7d27eb6f588019a1bf913b1ffe0afe7e3343d0215d926b28c2105c51f956d9",
+    "logs/df24193/before.log": "0dd123b8397bab08e6a51be2880c831b0527f7ecebb00b8b0fcb024a7995065b",
+    "logs/df24917/after.log": "ba92c08085e112ce9187dda8b5ea9a08577b01c659fa120adfb4bdbe65cf0970",
+    "logs/df24917/before.log": "d10e07207c6dba8182deecfb1c04cb87cd34b341ae735f812e41879ff68a1f4d",
+    "logs/df24917-diag/after.log": "12534cdb59657a1d3e2df16fbe00059cdd2fc5fded1d330ebac8f3512cc73f5a",
+    "logs/df24917-diag/before.log": "8bdfdfa778f6ed95eebbbbba8c3781657ebac3258b147b4acc040620c8eebf90",
+    "logs/runs.jsonl": "418822a83e9dd9ecba5e01cd0ae30e62209868a6c436d6e50e45ab9bc6734ac0",
+    "logs/st12038/after.log": "8b1c23af27505caa071b6c5ce9b540921f25ac0240d9586ea3b677e605b83fc3",
+    "logs/st12038/after.surefire/TEST-org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest.xml": "c5b330cd76feccadceb91f0115ebd0dc739d28f48219b3ff5f258e03af5f11a1",
+    "logs/st12038/before.log": "638db6445f4571d0277eab906876da05be0f11bf47e7063d7c2d47de53cf4d7c",
+    "logs/st12038-factory/after.log": "e37d594af08d304a5353dfc55ab3da1765218291a23ebf16c1052298ccf8614d",
+    "logs/st12038-factory/after.surefire/TEST-org.apache.seatunnel.connectors.seatunnel.amazonsqs.AmazonSqsSourceFactoryTest.xml": "5dfa6decd8eebc741a586203c63248dcc66bd1f2db99ea9cd94e9a4e79d9ab21",
+    "logs/st12038-factory/before.log": "e51662f79dfe451e86b4798bbf9a7c2963cd2a25535c2d809e12b8a35ca0d07b",
+    "logs/st12038-shim/after.log": "22fd96bb3f5b7fbce5340e5ef3ad570b3ddb1f6ec80de659507e5fd537daab37",
+    "logs/st12038-shim/after.surefire/TEST-org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest.xml": "7f3bd86fd9de08abe964b9e328050c9f75a4a709d65ef0e52a4e4de4a56eebae",
+    "logs/st12038-shim/before.log": "f2a8f8ca93a3611b9c0d4a5b701071279696592cfc7c3e671f6b75267ced3af2",
+    "logs/st12038-shim/before.surefire/TEST-org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest.xml": "469e2398d43ff3b5e1e25e8770f8d42696ffbcc17649311a15cb4ee548ab9d5e",
+    "logs/st12360/after.log": "4700dc6b23e1aee5e7ef07e39c99ba169f0603f482c137e39822d9a52eb058e4",
+    "logs/st12360/after.surefire/TEST-org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest.xml": "0dea13245ed6b591c69f383f5464db4cfdfce110936aa3a2e2d615ec4d9a4744",
+    "logs/st12360/before.log": "acff252b3b35dcd744a4d34316ae1b5989bcae64d291dd7052477d95b10f8a4d",
+    "logs/st12360/before.surefire/TEST-org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest.xml": "45d1dec96fb765abc1e4d53cb876528b78b1f5adf872d423f65591aa11b8e14a",
+    "logs/st12472/after.interrupted.log": "5e1c0ca278132802650ef6bc6d2217bf8501b49147ca1428f5c6e68e040f74e8",
+    "logs/st12472/after.log": "ab299eb802d2fcd168937b5429d8d3841ae12262c64077fd6dc507ab7489baca",
+    "logs/st12472/after.surefire/TEST-org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest.xml": "ee97f7f01f57034952dcf54d789811cc8e39ce10ec281d282931b5d577a68b5e",
+    "logs/st12472/before-2.log": "4bf9c40b77831e7c5d68ba7f477682fc5a5deb01d88b8bea1e542e614b444ff4",
+    "logs/st12472/before.log": "d4d6e9712f2309f8436f01bbe4ac1bfbb02ca72c80383cd2d9ff0e2dbb91b8eb",
+    "logs/st12481/after.log": "2b239d64fb11b7ff03b23847a05de605ba57d1876952d9fc193dd5f0169966fe",
+    "logs/st12481/after.surefire/TEST-org.apache.seatunnel.e2e.common.container.AbstractTestContainerTest.xml": "a6a1e47cdb7b85ea45affce4b6882529c868fcf037c6dd2dc226a752f37b8958",
+    "logs/st12481/after.surefire/TEST-org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest.xml": "b081f5b01cbdc1723123e261f6a2f19794a49d9c752dfceb6855890b46251a10",
+    "logs/st12481/before.log": "0bee847bb45a349de2b7cb20878111ffc33d5254e60d98c8a81b4cadcb7f899d",
+    "logs/st12481-shim/after.log": "9f920315b1a74452aa67b0cb8fce8ebff5612151514d4617fbcd1c97a6e0967c",
+    "logs/st12481-shim/after.surefire/TEST-org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest.xml": "313b6cdcfead0f3e027ed19651f95305ac69125b77c52334396473216330ed4a",
+    "logs/st12481-shim/before.log": "b5fdcafa12f8b5723ff0dc57518e4d5886030c20b135997221dfd81b87ec073d",
+    "logs/st12481-shim/before.surefire/TEST-org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest.xml": "4f6dce02cce583124bf9b0036ee21093f39ee708970646efa56891d8db00be6d"
+  },
+  "patches": {
+    "patches/df24193-tests-only.patch": "7f5606b3d3357fee8c12d86cd1e73911a79d2fef03aa1fb5f0e2f878ac7f445b",
+    "patches/df24917-diagnostic-print-plan.patch": "a4c7b9d39f1c5badfd8d23e29c442054dfda31021436ef5ba614a61884755c11",
+    "patches/st12038-reader-test-drop-ignore-arg.patch": "b2c1edd8e2af643f807a0dc59192243d1c183e3f1ed042f8ed04d4482b228174",
+    "patches/st12481-flink-test-drop-override.patch": "9baa5ed5af5bb3c77ad1cf3786de556e7652e9df6a0ec7e63e23c7bab20c2ce4"
+  }
+}

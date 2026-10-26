@@ -1,0 +1,148 @@
+# Fail-before / pass-after runs of the regression tests named in the article
+
+This bundle runs every regression test the article names against the code before and after the
+pull request that added it:
+
+- **before**: the first parent of the pull request's merge commit, with only the pull request's
+  test change applied on top (whole test files copied from the merge commit; for DataFusion PR
+  24193, whose test lives in the same file as the fix, only the hunks inside `mod tests`, see
+  `patches/df24193-tests-only.patch`). Production code is the unfixed code.
+- **after**: the merge commit as is.
+
+The same command runs on both trees. Every outcome below is parsed by `make_results.py` from a log
+under `logs/` that an executed run wrote; `results.json` lists every run, its outcome, the per-test
+results, the commands, the commit hashes, the durations and the sha256 of every log and patch.
+Failed and interrupted runs are kept.
+
+Runs executed on 2026-10-25 between 19:02 and 19:51 local time (UTC-7) on an Apple M1 Pro,
+16 GB, macOS 27.0 (Darwin 27.0.0 arm64). The directory name gives the bundle date, not the run
+date. Toolchains: rustc/cargo 1.97.0 (pinned by DataFusion's `rust-toolchain.toml`); JDK
+1.8.0_172 with the Maven wrapper of each SeaTunnel commit.
+
+## Results
+
+Outcome codes: FAIL / PASS = the test ran; COMPILE_ERROR = the test sources of the module under
+test did not compile against that tree, so the test could not run.
+
+| PR | Test | Before commit | After commit | Before outcome | After outcome | Notes |
+| --- | --- | --- | --- | --- | --- | --- |
+| DataFusion 24193 | `repartition::tests::unbounded_input_emits_before_batch_size` (`datafusion-physical-plan`) | `d5868e683435` | `047f531488f6` | **FAIL** (1/1): panicked `unbounded repartition withheld a partial batch: Elapsed(())` after the 5 s timeout (`finished in 5.01s`) | **PASS** (1/1) | Fails before, passes after. Only the test-module hunks were applied on the parent |
+| DataFusion 24917 | `optimizer::expensive_regexp_like_is_deferred_to_execution` (`datafusion`, `--test core_integration`) | `408527ae58b5` | `3dfa245d61dd` | **PASS** (1/1) | **PASS** (1/1) | The test does not fail on the unfixed code. A diagnostic run (`df24917-diag`, same test with the plans and the planning time printed, 3 runs per tree) shows identical logical plans on both trees: `Projection: Utf8("aaaaa") ~ Utf8("a{5}{5}{5}{5}{5}{5}{5}{5}")` and `Projection: Boolean(NULL)`. Only the planning time of the literal query differs: 550.5 / 488.2 / 478.7 ms before, 31.6 / 12.1 / 10.0 ms after (unoptimized `ci` profile). The test asserts the plan shape, which the fix does not change; it does not assert time |
+| SeaTunnel 12038 | `AmazonSqsSourceReaderTest` (9 methods, `connector-amazonsqs`) | `9ebb27e8f920` | `1e450e11f7c8` | **COMPILE_ERROR**: `no suitable constructor found for AmazonSqsSourceConfig(String,String,<null>,<null>,<null>,boolean,boolean,<null>)` (the pull request added `ignoreParseErrors` to the all-arguments constructor) | **PASS** (9/9) | Not runnable unmodified against the unfixed code. With a one-line shim (`patches/st12038-reader-test-drop-ignore-arg.patch`, drops that constructor argument): before **FAIL 6/9**, after **PASS 9/9**; see below |
+| SeaTunnel 12038 | `AmazonSqsSourceFactoryTest#testOptionRule` (extended by the same PR) | `9ebb27e8f920` | `1e450e11f7c8` | **COMPILE_ERROR**: `cannot find symbol` for `AmazonSqsSourceOptions.IGNORE_PARSE_ERRORS` (and the reader-test error above) | **PASS** (1/1) | The test checks the new option itself; not runnable against the unfixed code. No shim |
+| SeaTunnel 12360 | `IncrementalSourceReaderTest` (14 methods, `connector-cdc-base`) | `4648c9956ec8` | `eb76f81c823a` | **PASS** (14/14) | **PASS** (14/14) | The pull request changed only this test file (415 insertions), so before-with-test and after are the same source tree. No production change exists that the test could detect; this matches the article's negative result. A fail-before comparison is not applicable |
+| SeaTunnel 12472 | `FileCollectReaderBehaviorTest#rediscoversFileAfterInactiveCursorClosed` (`seatunnel-edge-agent-connector`) | `e1a7e64b6733` | `87ed0afe0f78` | **COMPILE_ERROR**: `constructor FileCollectReader in class FileCollectReader cannot be applied to given types` (the test passes a clock through the constructor the pull request added) | **PASS** (1/1) | Not runnable against the unfixed code. No shim: the missing constructor is the production change itself. The pull request made the test deterministic; it did not fix reader behavior |
+| SeaTunnel 12481 | `AbstractTestContainerTest` (12 methods) and `AbstractTestFlinkContainerTest` (5 methods) (`seatunnel-e2e-common`) | `7ba68325cb7e` | `0e4cf52896ee` | **COMPILE_ERROR**, 9 errors: `cannot find symbol` for the static helpers the pull request added (`removeContainerVolumeMountPath`, `deleteHostPath`, ...), and `method does not override or implement a method from a supertype` for the test doubles' `deleteHostVolumeMountPath()` (2 in `AbstractTestContainerTest`, 1 in `AbstractTestFlinkContainerTest`) | **PASS** (17/17) | Not runnable unmodified. `AbstractTestContainerTest` calls the new helpers directly; no shim. With a one-line shim for the Flink test only (`patches/st12481-flink-test-drop-override.patch`, drops one `@Override`): before **FAIL 5/5**, after **PASS 5/5**; see below. No Docker container is started by these tests (mocked containers) |
+| SeaTunnel 12467 | none | `c8c497376030` | `7ba68325cb7e` | not applicable | not applicable | Workflow concurrency-group change; the pull request adds no test |
+| SeaTunnel 12468 | none | `a1084015eeb3` | `ae7c919bcb78` | not applicable | not applicable | `.mvn/maven.config` and `mvnw` change; the pull request adds no test (fault-injection reconstructions are in the 2026-10-26 replay bundle) |
+
+### Shimmed runs, per method
+
+These runs modify the transplanted test by one line so that it compiles against the unfixed code.
+They are reported separately from the unmodified runs above; the shim is in `patches/`.
+
+**SeaTunnel 12038, `AmazonSqsSourceReaderTest` with `st12038-reader-test-drop-ignore-arg.patch`**
+(before = `9ebb27e8f920` + test + shim; after = `1e450e11f7c8` unmodified; the same applies to the
+12481 shim below)
+
+| Method | Before | After | Failing line before |
+| --- | --- | --- | --- |
+| shouldNotDeleteMessageWhenDeserializationThrows | FAIL: expected `AmazonSqsConnectorException`, nothing thrown | PASS | 74 (`assertThrows`) |
+| shouldNotDeleteMessageWhenDeserializerReturnsNull | FAIL: expected `AmazonSqsConnectorException`, nothing thrown | PASS | 95 (`assertThrows`) |
+| shouldStopBatchAtFailedMessageWithoutDeletingItOrLaterMessages | FAIL: expected `AmazonSqsConnectorException`, nothing thrown | PASS | 166 (`assertThrows`) |
+| shouldSkipFailedMessageAndContinueWhenParseErrorsIgnored | FAIL: `NullPointerException` reading collected values | PASS | 196 |
+| shouldKeepIgnoredNullMessageWhenDeletionDisabled | FAIL: `expected: <true> but was: <false>` (collector not empty) | PASS | 213 |
+| shouldApplyIgnoreParseErrorsToJsonMessagesCreatedByFactory | FAIL: `SeaTunnelRuntimeException ... COMMON-02 ... 'invalid'` | PASS | 249 (`pollNext`) |
+| shouldDeleteMessageAfterSuccessfulCollectionWhenEnabled | PASS | PASS | |
+| shouldKeepMessageAfterSuccessfulCollectionWhenDeletionDisabled | PASS | PASS | |
+| shouldNotDeleteMessageWhenCollectionFails | PASS | PASS | |
+
+The first three failures are the behavior the pull request fixed (a failed parse did not raise, so
+the message could be deleted). The next three request `ignoreParseErrors=true`, an option the
+unfixed reader does not have; with the shim they run with the unfixed reader's only behavior, so
+their failures show the absent option and the null row reaching the collector, not a separate
+defect. The three passing methods cover successful collection and collector failure, which the
+pull request did not change.
+
+**SeaTunnel 12481, `AbstractTestFlinkContainerTest` with `st12481-flink-test-drop-override.patch`**
+
+| Method | Before | After | Failing line before |
+| --- | --- | --- | --- |
+| shouldStopJobManagerWhenTaskManagerIsNotRunning | FAIL: `NeverWantedButInvoked` `execInContainer("rm", "-rf", "/tmp/seatunnel_mnt")` on the TaskManager that is not running | PASS | 43 |
+| shouldNotFailWhenTaskManagerStopsBeforeVolumeCleanup | FAIL: tearDown threw `IllegalStateException: container is not running` | PASS | 63 (`assertDoesNotThrow`) |
+| shouldStopJobManagerAndRethrowWhenVolumeCleanupIsInterrupted | FAIL: `WantedButNotInvoked` TaskManager `stop()` | PASS | 101 |
+| shouldKeepFirstFailureAndSuppressLaterOnes | FAIL: `array lengths differ, expected: <1> but was: <0>` (JobManager stop failure not recorded; JobManager stop not reached) | PASS | 120 |
+| shouldNotFailWhenVolumeCleanupExitsWithError | FAIL: `expected: <true> but was: <false>` | PASS | 85 (`hostVolumeDeleted`) |
+
+Four failures are at assertions on teardown behavior (lines 43, 63, 101, 120). The fifth fails only
+at the `hostVolumeDeleted` flag (line 85), which the unfixed teardown cannot set because it deletes
+the host path itself instead of calling the overridable method the pull request added; every
+behavioral assertion before line 85 passed. That failure is an artifact of the shim, not evidence
+of the defect. Because the unfixed teardown deletes the host path `/tmp/seatunnel_mnt`, `run.sh`
+refuses this case while that path exists; it did not exist before or after the run.
+
+## What could not be run, and why
+
+- **Unmodified fail-before for SeaTunnel 12038, 12472 and 12481**: the transplanted tests do not
+  compile against the unfixed code because they call constructors, options or methods the pull
+  requests added. These tests are not runnable against the unfixed code as written. One-line shims
+  were applied only where the change was a compile adapter (12038 reader test, 12481 Flink test);
+  none was applied where the missing symbol is the fix itself (12472 clock constructor, 12481
+  `AbstractTestContainerTest` helpers, 12038 factory test option).
+- **SeaTunnel 12360**: no production change, so there is nothing for the test to fail against.
+- **SeaTunnel 12467 and 12468**: no regression test in the pull requests.
+- **`seatunnel-edge-agent-e2e` (`EdgeAgentFileToEngineIT`)** and the engine-container E2E suites:
+  need Docker E2E images; not run here. Windows behavior was not run.
+
+## Exact commands
+
+```
+./run.sh                       # all cases, in order
+./run.sh df24193 st12038-shim  # selected cases
+python3 make_results.py        # parse logs/runs.jsonl and the logs, write results.json
+```
+
+Cases: `df24193`, `df24917`, `df24917-diag`, `st12038`, `st12038-shim`, `st12038-factory`,
+`st12360`, `st12472`, `st12481`, `st12481-shim`. Per run the script prepares a git worktree at the
+commit (hard reset, `git clean -fdx`), applies the transplant, writes a log header (commits,
+`git status`, `git diff --stat`, toolchain, command, start/end, exit code) and runs:
+
+- DataFusion: `cargo test --locked --profile ci -p datafusion-physical-plan --lib unbounded_input_emits_before_batch_size`
+  and `cargo test --locked --profile ci -p datafusion --test core_integration expensive_regexp_like_is_deferred_to_execution`
+  (`ci` is DataFusion's own profile without debug info; chosen to fit the available disk). One
+  shared cargo target directory.
+- SeaTunnel (JDK 8): `./mvnw -B -ntp -pl <module> -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=<selector> -DfailIfNoTests=false clean package`.
+  Surefire XML reports are copied next to each log (`*.surefire/`).
+
+Environment (optional): `FAILBEFORE_WORK` (worktrees and cargo target, default `./work`, ignored by
+Git), `DATAFUSION_REPO` and `SEATUNNEL_REPO` (existing local clones to add worktrees from; by default
+the script clones apache/datafusion and apache/seatunnel), `JAVA8_HOME`.
+
+## Run record, including failed attempts
+
+- `logs/st12472/before.log`: first attempt with `clean test` instead of `clean package`; the
+  build stopped in the upstream module `seatunnel-config-shade` (`cannot find symbol` in its main
+  sources) because the reactor needs that module's shaded jar, which only `package` builds.
+  Classified BUILD_ERROR; a harness problem, not a test outcome. `run.sh` was switched to
+  `clean package` and the case re-run (`before-2.log`).
+- `logs/st12472/after.interrupted.log`: the after run of that first attempt, stopped by hand when
+  the harness problem was found; it has no record in `runs.jsonl`.
+- `logs/console/`: consoles of the invocations. `run.sh` gained cases while the first DataFusion
+  invocation was running; after its last case that shell read the edited file at an old offset and
+  printed `inerTest: command not found` and a syntax error. All of its runs had completed and are
+  recorded; later edits replaced the file atomically.
+- DataFusion and SeaTunnel invocations overlapped in time, so durations include contention from
+  the other build. The timing figures for PR 24917 above come from the diagnostic run only and are
+  descriptive.
+- Raw logs contain local paths of the machine they ran on.
+
+## Files
+
+- `run.sh`: the runner (relative paths only).
+- `make_results.py`: outcome parser; writes `results.json`.
+- `results.json`: every run with outcome, per-test results, failure messages, commits, command,
+  duration and log hash; hashes of all logs and patches.
+- `patches/df24193-tests-only.patch`: the test-module hunks of PR 24193.
+- `patches/df24917-diagnostic-print-plan.patch`: prints the plans and planning time (diagnostic).
+- `patches/st12038-reader-test-drop-ignore-arg.patch`, `patches/st12481-flink-test-drop-override.patch`: the one-line shims.
+- `logs/<case>/<side>.log` (+ `.surefire/` for Maven), `logs/runs.jsonl`, `logs/console/`.

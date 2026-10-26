@@ -1,0 +1,78 @@
+diff --git a/datafusion/physical-plan/src/repartition/mod.rs b/datafusion/physical-plan/src/repartition/mod.rs
+index 2863524f..51e350b2 100644
+--- a/datafusion/physical-plan/src/repartition/mod.rs
++++ b/datafusion/physical-plan/src/repartition/mod.rs
+@@ -2239,6 +2242,7 @@ mod tests {
+     use super::*;
+     use crate::empty::EmptyExec;
+     use crate::projection::ProjectionExpr;
++    use crate::streaming::{PartitionStream, StreamingTableExec};
+     use crate::test::TestMemoryExec;
+     use crate::{
+         test::{
+@@ -2263,6 +2267,27 @@ mod tests {
+     use datafusion_physical_expr::{PhysicalSortExpr, RangePartitioning, SplitPoint};
+     use insta::assert_snapshot;
+ 
++    #[derive(Debug)]
++    struct UnboundedTestPartition {
++        schema: SchemaRef,
++        batch: RecordBatch,
++    }
++
++    impl PartitionStream for UnboundedTestPartition {
++        fn schema(&self) -> &SchemaRef {
++            &self.schema
++        }
++
++        fn execute(&self, _ctx: Arc<TaskContext>) -> SendableRecordBatchStream {
++            let stream = futures::stream::iter([Ok(self.batch.clone())])
++                .chain(futures::stream::pending());
++            Box::pin(RecordBatchStreamAdapter::new(
++                Arc::clone(&self.schema),
++                stream,
++            ))
++        }
++    }
++
+     #[test]
+     fn strength_reduced_u64_remainder_matches_modulo() {
+         let divisors = [
+@@ -3007,6 +3032,37 @@ mod tests {
+         Ok(())
+     }
+ 
++    #[tokio::test]
++    async fn unbounded_input_emits_before_batch_size() -> Result<()> {
++        let schema = test_schema(false);
++        let batch = create_batch();
++        let source = Arc::new(StreamingTableExec::try_new(
++            Arc::clone(&schema),
++            vec![Arc::new(UnboundedTestPartition {
++                schema: Arc::clone(&schema),
++                batch: batch.clone(),
++            })],
++            None,
++            vec![],
++            true,
++            None,
++        )?);
++        let exec = RepartitionExec::try_new(source, Partitioning::RoundRobinBatch(1))?;
++        let session_config = SessionConfig::new().with_batch_size(batch.num_rows() * 2);
++        let task_ctx =
++            Arc::new(TaskContext::default().with_session_config(session_config));
++
++        let mut stream = exec.execute(0, task_ctx)?;
++        let output =
++            tokio::time::timeout(std::time::Duration::from_secs(5), stream.next())
++                .await
++                .expect("unbounded repartition withheld a partial batch")
++                .expect("unbounded input ended unexpectedly")?;
++
++        assert_eq!(batch, output);
++        Ok(())
++    }
++
+     fn test_schema(nullable: bool) -> Arc<Schema> {
+         Arc::new(Schema::new(vec![Field::new(
+             "c0",

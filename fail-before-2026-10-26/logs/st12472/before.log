@@ -1,0 +1,769 @@
+# case: st12472
+# side: before
+# before commit (first parent): e1a7e64b6733d2b2cd4682190c753a81fac93bc2
+# after commit (merge): 87ed0afe0f783eda1b1f3ac6f0ac9fadedcb4f98
+# tree HEAD: e1a7e64b6733d2b2cd4682190c753a81fac93bc2
+# transplant: seatunnel-edge-agent/seatunnel-edge-agent-connector/src/test/java/org/apache/seatunnel/edge/agent/connector/file/FileCollectReaderBehaviorTest.java copied from 87ed0afe0f783eda1b1f3ac6f0ac9fadedcb4f98; 
+# git status --porcelain:
+#   M  seatunnel-edge-agent/seatunnel-edge-agent-connector/src/test/java/org/apache/seatunnel/edge/agent/connector/file/FileCollectReaderBehaviorTest.java
+# git diff --stat HEAD:
+#    .../file/FileCollectReaderBehaviorTest.java        | 43 +++++++++-------------
+#    1 file changed, 18 insertions(+), 25 deletions(-)
+# host: Darwin 27.0.0 arm64
+# toolchain: java version "1.8.0_172"
+# command: ./mvnw -B -ntp -pl seatunnel-edge-agent/seatunnel-edge-agent-connector -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dtest=FileCollectReaderBehaviorTest#rediscoversFileAfterInactiveCursorClosed -DfailIfNoTests=false clean test
+# start: 2026-10-25T19:02:59-0700
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 58727  100 58727    0     0   132k      0 --:--:-- --:--:-- --:--:--  132k
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] SeaTunnel :                                                        [pom]
+[INFO] SeaTunnel : Config :                                               [pom]
+[INFO] SeaTunnel : Config : Base                                          [jar]
+[INFO] SeaTunnel : Config : Shade                                         [jar]
+[INFO] SeaTunnel : Common                                                 [jar]
+[INFO] SeaTunnel : Api                                                    [jar]
+[INFO] SeaTunnel : Edge Agent :                                           [pom]
+[INFO] SeaTunnel : Edge Agent : Connector                                 [jar]
+[INFO] 
+[INFO] -------------------< org.apache.seatunnel:seatunnel >-------------------
+[INFO] Building SeaTunnel : 3.0.0-SNAPSHOT                                [1/8]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ seatunnel ---
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:clean (flatten.clean) @ seatunnel ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ seatunnel ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ seatunnel ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] 
+[INFO] --- spotless-maven-plugin:2.29.0:check (spotless-check) @ seatunnel ---
+[INFO] Spotless check skipped
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ seatunnel ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel ---
+[INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel:pom:3.0.0-SNAPSHOT...
+[INFO] 
+[INFO] ---------------< org.apache.seatunnel:seatunnel-config >----------------
+[INFO] Building SeaTunnel : Config : 3.0.0-SNAPSHOT                       [2/8]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ seatunnel-config ---
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:clean (flatten.clean) @ seatunnel-config ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ seatunnel-config ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ seatunnel-config ---
+[INFO] 
+[INFO] --- spotless-maven-plugin:2.29.0:check (spotless-check) @ seatunnel-config ---
+[INFO] Spotless check skipped
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ seatunnel-config ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-config ---
+[INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-config:pom:3.0.0-SNAPSHOT...
+[INFO] 
+[INFO] -------------< org.apache.seatunnel:seatunnel-config-base >-------------
+[INFO] Building SeaTunnel : Config : Base 3.0.0-SNAPSHOT                  [3/8]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ seatunnel-config-base ---
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:clean (flatten.clean) @ seatunnel-config-base ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ seatunnel-config-base ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ seatunnel-config-base ---
+[INFO] 
+[INFO] --- spotless-maven-plugin:2.29.0:check (spotless-check) @ seatunnel-config-base ---
+[INFO] Spotless check skipped
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ seatunnel-config-base ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-config-base ---
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-base/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-config-base ---
+[INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-config-base:jar:3.0.0-SNAPSHOT...
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-config-base ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-config-base ---
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-base/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-config-base ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-config-base ---
+[INFO] 
+[INFO] ------------< org.apache.seatunnel:seatunnel-config-shade >-------------
+[INFO] Building SeaTunnel : Config : Shade 3.0.0-SNAPSHOT                 [4/8]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ seatunnel-config-shade ---
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:clean (flatten.clean) @ seatunnel-config-shade ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ seatunnel-config-shade ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ seatunnel-config-shade ---
+[INFO] 
+[INFO] --- spotless-maven-plugin:2.29.0:check (spotless-check) @ seatunnel-config-shade ---
+[INFO] Spotless check skipped
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ seatunnel-config-shade ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-config-shade ---
+[INFO] skip non existing resourceDirectory /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-config-shade ---
+[INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-config-shade:jar:3.0.0-SNAPSHOT...
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-config-shade ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 10 source files to /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/target/classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[4,53] error: cannot find symbol
+  symbol:   class ConfigException
+  location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[5,53] error: cannot find symbol
+  symbol:   class ConfigOrigin
+  location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[19,53] error: cannot find symbol
+  symbol:   class ConfigOrigin
+  location: class PropertiesParser
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[19,11] error: cannot find symbol
+  symbol:   class AbstractConfigObject
+  location: class PropertiesParser
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/Path.java:[7,53] error: cannot find symbol
+  symbol:   class ConfigException
+  location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[49,47] error: cannot find symbol
+  symbol:   class ConfigOrigin
+  location: class PropertiesParser
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[49,11] error: cannot find symbol
+  symbol:   class AbstractConfigObject
+  location: class PropertiesParser
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[54,12] error: cannot find symbol
+  symbol:   class ConfigOrigin
+  location: class PropertiesParser
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[53,26] error: cannot find symbol
+  symbol:   class AbstractConfigObject
+  location: class PropertiesParser
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[79,46] error: cannot find symbol
+  symbol:   class ConfigOrigin
+  location: class PropertiesParser
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[79,11] error: cannot find symbol
+  symbol:   class AbstractConfigObject
+  location: class PropertiesParser
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[83,44] error: cannot find symbol
+  symbol:   class ConfigOrigin
+  location: class PropertiesParser
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[83,11] error: cannot find symbol
+  symbol:   class AbstractConfigObject
+  location: class PropertiesParser
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[98,12] error: cannot find symbol
+  symbol:   class ConfigOrigin
+  location: class PropertiesParser
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[97,19] error: cannot find symbol
+  symbol:   class AbstractConfigObject
+  location: class PropertiesParser
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[7,53] error: cannot find symbol
+  symbol:   class Config
+  location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[8,53] error: cannot find symbol
+  symbol:   class ConfigException
+  location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[9,53] error: cannot find symbol
+  symbol:   class ConfigIncluder
+  location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[10,53] error: cannot find symbol
+  symbol:   class ConfigMemorySize
+  location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[11,53] error: cannot find symbol
+  symbol:   class ConfigObject
+  location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[12,53] error: cannot find symbol
+  symbol:   class ConfigOrigin
+  location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[14,53] error: cannot find symbol
+  symbol:   class ConfigParseable
+  location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[15,53] error: cannot find symbol
+  symbol:   class ConfigValue
+  location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[86,53] error: cannot find symbol
+  symbol:   class Config
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[85,18] error: cannot find symbol
+  symbol:   class Config
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[123,18] error: cannot find symbol
+  symbol:   class ConfigObject
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[129,18] error: cannot find symbol
+  symbol:   class ConfigObject
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[135,18] error: cannot find symbol
+  symbol:   class ConfigObject
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[140,11] error: cannot find symbol
+  symbol:   class AbstractConfigObject
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[146,18] error: cannot find symbol
+  symbol:   class Config
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[150,38] error: cannot find symbol
+  symbol:   class ConfigOrigin
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[150,11] error: cannot find symbol
+  symbol:   class AbstractConfigObject
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[155,25] error: cannot find symbol
+  symbol:   class ConfigOrigin
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[157,25] error: cannot find symbol
+  symbol:   class ConfigBoolean
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[159,25] error: cannot find symbol
+  symbol:   class ConfigBoolean
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[161,25] error: cannot find symbol
+  symbol:   class ConfigNull
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[162,25] error: cannot find symbol
+  symbol:   class SimpleConfigList
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[7,53] error: cannot find symbol
+  symbol:   class ConfigException
+  location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[8,53] error: cannot find symbol
+  symbol:   class ConfigObject
+  location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[9,53] error: cannot find symbol
+  symbol:   class ConfigOrigin
+  location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[10,53] error: cannot find symbol
+  symbol:   class ConfigRenderOptions
+  location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[11,53] error: cannot find symbol
+  symbol:   class ConfigValue
+  location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[28,39] error: cannot find symbol
+  symbol: class AbstractConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[167,46] error: cannot find symbol
+  symbol:   class ConfigOrigin
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[167,19] error: cannot find symbol
+  symbol:   class SimpleConfigList
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[172,52] error: cannot find symbol
+  symbol:   class ConfigOrigin
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[172,19] error: cannot find symbol
+  symbol:   class AbstractConfigObject
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[179,19] error: cannot find symbol
+  symbol:   class ConfigOrigin
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[184,18] error: cannot find symbol
+  symbol:   class ConfigValue
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[189,18] error: cannot find symbol
+  symbol:   class ConfigObject
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[195,57] error: cannot find symbol
+  symbol:   class ConfigOrigin
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[195,78] error: cannot find symbol
+  symbol:   class FromMapMode
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[195,11] error: cannot find symbol
+  symbol:   class AbstractConfigValue
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[273,11] error: cannot find symbol
+  symbol:   class ConfigIncluder
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[292,19] error: cannot find symbol
+  symbol:   class AbstractConfigObject
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[306,11] error: cannot find symbol
+  symbol:   class AbstractConfigObject
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[314,18] error: cannot find symbol
+  symbol:   class Config
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[324,19] error: cannot find symbol
+  symbol:   class AbstractConfigObject
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[332,11] error: cannot find symbol
+  symbol:   class AbstractConfigObject
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[340,18] error: cannot find symbol
+  symbol:   class Config
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[350,18] error: cannot find symbol
+  symbol:   class Config
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[447,38] error: package ConfigException does not exist
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[446,26] error: package ConfigException does not exist
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[456,18] error: cannot find symbol
+  symbol:   class ConfigOrigin
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[464,18] error: cannot find symbol
+  symbol:   class ConfigOrigin
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[468,18] error: cannot find symbol
+  symbol:   class ConfigOrigin
+  location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/ConfigParseOptions.java:[25,10] error: cannot find symbol
+  symbol:   class ConfigSyntax
+  location: class ConfigParseOptions
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/ConfigParseOptions.java:[28,10] error: cannot find symbol
+  symbol:   class ConfigIncluder
+  location: class ConfigParseOptions
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/ConfigParseOptions.java:[32,12] error: cannot find symbol
+  symbol:   class ConfigSyntax
+  location: class ConfigParseOptions
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/ConfigParseOptions.java:[35,12] error: cannot find symbol
+  symbol:   class ConfigIncluder
+  location: class ConfigParseOptions
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/ConfigParseOptions.java:[61,40] error: cannot find symbol
+  symbol:   class ConfigSyntax
+  location: class ConfigParseOptions
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/ConfigParseOptions.java:[79,11] error: cannot find symbol
+  symbol:   class ConfigSyntax
+  location: class ConfigParseOptions
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/ConfigParseOptions.java:[165,42] error: cannot find symbol
+  symbol:   class ConfigIncluder
+  location: class ConfigParseOptions
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/ConfigParseOptions.java:[186,46] error: cannot find symbol
+  symbol:   class ConfigIncluder
+  location: class ConfigParseOptions
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/ConfigParseOptions.java:[206,45] error: cannot find symbol
+  symbol:   class ConfigIncluder
+  location: class ConfigParseOptions
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/ConfigParseOptions.java:[224,11] error: cannot find symbol
+  symbol:   class ConfigIncluder
+  location: class ConfigParseOptions
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[30,30] error: cannot find symbol
+  symbol:   class AbstractConfigValue
+  location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[38,12] error: cannot find symbol
+  symbol:   class ConfigOrigin
+  location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[39,24] error: cannot find symbol
+  symbol:   class AbstractConfigValue
+  location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[40,12] error: cannot find symbol
+  symbol:   class ResolveStatus
+  location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[55,23] error: cannot find symbol
+  symbol:   class ConfigOrigin
+  location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[55,56] error: cannot find symbol
+  symbol:   class AbstractConfigValue
+  location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[135,52] error: cannot find symbol
+  symbol:   class ConfigValue
+  location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[156,44] error: cannot find symbol
+  symbol:   class ConfigValue
+  location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[177,14] error: cannot find symbol
+  symbol:   class AbstractConfigValue
+  location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[182,12] error: cannot find symbol
+  symbol:   class ResolveStatus
+  location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[182,37] error: cannot find symbol
+  symbol:   class ConfigOrigin
+  location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[186,41] error: cannot find symbol
+  symbol:   class ResolveStatus
+  location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[186,66] error: cannot find symbol
+  symbol:   class ConfigOrigin
+  location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[196,4] error: cannot find symbol
+  symbol:   class ResolveStatus
+  location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[201,12] error: cannot find symbol
+  symbol:   class AbstractConfigValue
+  location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[201,39] error: cannot find symbol
+  symbol:   class AbstractConfigValue
+  location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[228,33] error: cannot find symbol
+  symbol:   class AbstractConfigValue
+  location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[271,50] error: cannot find symbol
+  symbol:   class AbstractConfigObject
+  location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[324,38] error: cannot find symbol
+  symbol:   class NoExceptionsModifier
+  location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[334,46] error: cannot find symbol
+  symbol:   class Modifier
+  location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[383,12] error: cannot find symbol
+  symbol:   class ResolveContext
+  location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[383,36] error: cannot find symbol
+  symbol:   class ResolveSource
+  location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[382,4] error: cannot find symbol
+  symbol:   class ResolveResult
+  location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[382,28] error: cannot find symbol
+  symbol:   class AbstractConfigObject
+  location: class SimpleConfigObject
+[INFO] 100 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for SeaTunnel : 3.0.0-SNAPSHOT:
+[INFO] 
+[INFO] SeaTunnel : ........................................ SUCCESS [ 10.273 s]
+[INFO] SeaTunnel : Config : ............................... SUCCESS [  1.122 s]
+[INFO] SeaTunnel : Config : Base .......................... SUCCESS [  3.841 s]
+[INFO] SeaTunnel : Config : Shade ......................... FAILURE [ 13.490 s]
+[INFO] SeaTunnel : Common ................................. SKIPPED
+[INFO] SeaTunnel : Api .................................... SKIPPED
+[INFO] SeaTunnel : Edge Agent : ........................... SKIPPED
+[INFO] SeaTunnel : Edge Agent : Connector ................. SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  50.500 s
+[INFO] Finished at: 2026-10-25T19:04:06-07:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.10.1:compile (default-compile) on project seatunnel-config-shade: Compilation failure: Compilation failure: 
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[4,53] error: cannot find symbol
+[ERROR]   symbol:   class ConfigException
+[ERROR]   location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[5,53] error: cannot find symbol
+[ERROR]   symbol:   class ConfigOrigin
+[ERROR]   location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[19,53] error: cannot find symbol
+[ERROR]   symbol:   class ConfigOrigin
+[ERROR]   location: class PropertiesParser
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[19,11] error: cannot find symbol
+[ERROR]   symbol:   class AbstractConfigObject
+[ERROR]   location: class PropertiesParser
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/Path.java:[7,53] error: cannot find symbol
+[ERROR]   symbol:   class ConfigException
+[ERROR]   location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[49,47] error: cannot find symbol
+[ERROR]   symbol:   class ConfigOrigin
+[ERROR]   location: class PropertiesParser
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[49,11] error: cannot find symbol
+[ERROR]   symbol:   class AbstractConfigObject
+[ERROR]   location: class PropertiesParser
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[54,12] error: cannot find symbol
+[ERROR]   symbol:   class ConfigOrigin
+[ERROR]   location: class PropertiesParser
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[53,26] error: cannot find symbol
+[ERROR]   symbol:   class AbstractConfigObject
+[ERROR]   location: class PropertiesParser
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[79,46] error: cannot find symbol
+[ERROR]   symbol:   class ConfigOrigin
+[ERROR]   location: class PropertiesParser
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[79,11] error: cannot find symbol
+[ERROR]   symbol:   class AbstractConfigObject
+[ERROR]   location: class PropertiesParser
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[83,44] error: cannot find symbol
+[ERROR]   symbol:   class ConfigOrigin
+[ERROR]   location: class PropertiesParser
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[83,11] error: cannot find symbol
+[ERROR]   symbol:   class AbstractConfigObject
+[ERROR]   location: class PropertiesParser
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[98,12] error: cannot find symbol
+[ERROR]   symbol:   class ConfigOrigin
+[ERROR]   location: class PropertiesParser
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[97,19] error: cannot find symbol
+[ERROR]   symbol:   class AbstractConfigObject
+[ERROR]   location: class PropertiesParser
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[7,53] error: cannot find symbol
+[ERROR]   symbol:   class Config
+[ERROR]   location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[8,53] error: cannot find symbol
+[ERROR]   symbol:   class ConfigException
+[ERROR]   location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[9,53] error: cannot find symbol
+[ERROR]   symbol:   class ConfigIncluder
+[ERROR]   location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[10,53] error: cannot find symbol
+[ERROR]   symbol:   class ConfigMemorySize
+[ERROR]   location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[11,53] error: cannot find symbol
+[ERROR]   symbol:   class ConfigObject
+[ERROR]   location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[12,53] error: cannot find symbol
+[ERROR]   symbol:   class ConfigOrigin
+[ERROR]   location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[14,53] error: cannot find symbol
+[ERROR]   symbol:   class ConfigParseable
+[ERROR]   location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[15,53] error: cannot find symbol
+[ERROR]   symbol:   class ConfigValue
+[ERROR]   location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[86,53] error: cannot find symbol
+[ERROR]   symbol:   class Config
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[85,18] error: cannot find symbol
+[ERROR]   symbol:   class Config
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[123,18] error: cannot find symbol
+[ERROR]   symbol:   class ConfigObject
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[129,18] error: cannot find symbol
+[ERROR]   symbol:   class ConfigObject
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[135,18] error: cannot find symbol
+[ERROR]   symbol:   class ConfigObject
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[140,11] error: cannot find symbol
+[ERROR]   symbol:   class AbstractConfigObject
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[146,18] error: cannot find symbol
+[ERROR]   symbol:   class Config
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[150,38] error: cannot find symbol
+[ERROR]   symbol:   class ConfigOrigin
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[150,11] error: cannot find symbol
+[ERROR]   symbol:   class AbstractConfigObject
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[155,25] error: cannot find symbol
+[ERROR]   symbol:   class ConfigOrigin
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[157,25] error: cannot find symbol
+[ERROR]   symbol:   class ConfigBoolean
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[159,25] error: cannot find symbol
+[ERROR]   symbol:   class ConfigBoolean
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[161,25] error: cannot find symbol
+[ERROR]   symbol:   class ConfigNull
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[162,25] error: cannot find symbol
+[ERROR]   symbol:   class SimpleConfigList
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[7,53] error: cannot find symbol
+[ERROR]   symbol:   class ConfigException
+[ERROR]   location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[8,53] error: cannot find symbol
+[ERROR]   symbol:   class ConfigObject
+[ERROR]   location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[9,53] error: cannot find symbol
+[ERROR]   symbol:   class ConfigOrigin
+[ERROR]   location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[10,53] error: cannot find symbol
+[ERROR]   symbol:   class ConfigRenderOptions
+[ERROR]   location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[11,53] error: cannot find symbol
+[ERROR]   symbol:   class ConfigValue
+[ERROR]   location: package org.apache.seatunnel.shade.com.typesafe.config
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[28,39] error: cannot find symbol
+[ERROR]   symbol: class AbstractConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[167,46] error: cannot find symbol
+[ERROR]   symbol:   class ConfigOrigin
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[167,19] error: cannot find symbol
+[ERROR]   symbol:   class SimpleConfigList
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[172,52] error: cannot find symbol
+[ERROR]   symbol:   class ConfigOrigin
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[172,19] error: cannot find symbol
+[ERROR]   symbol:   class AbstractConfigObject
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[179,19] error: cannot find symbol
+[ERROR]   symbol:   class ConfigOrigin
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[184,18] error: cannot find symbol
+[ERROR]   symbol:   class ConfigValue
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[189,18] error: cannot find symbol
+[ERROR]   symbol:   class ConfigObject
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[195,57] error: cannot find symbol
+[ERROR]   symbol:   class ConfigOrigin
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[195,78] error: cannot find symbol
+[ERROR]   symbol:   class FromMapMode
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[195,11] error: cannot find symbol
+[ERROR]   symbol:   class AbstractConfigValue
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[273,11] error: cannot find symbol
+[ERROR]   symbol:   class ConfigIncluder
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[292,19] error: cannot find symbol
+[ERROR]   symbol:   class AbstractConfigObject
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[306,11] error: cannot find symbol
+[ERROR]   symbol:   class AbstractConfigObject
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[314,18] error: cannot find symbol
+[ERROR]   symbol:   class Config
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[324,19] error: cannot find symbol
+[ERROR]   symbol:   class AbstractConfigObject
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[332,11] error: cannot find symbol
+[ERROR]   symbol:   class AbstractConfigObject
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[340,18] error: cannot find symbol
+[ERROR]   symbol:   class Config
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[350,18] error: cannot find symbol
+[ERROR]   symbol:   class Config
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[447,38] error: package ConfigException does not exist
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[446,26] error: package ConfigException does not exist
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[456,18] error: cannot find symbol
+[ERROR]   symbol:   class ConfigOrigin
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[464,18] error: cannot find symbol
+[ERROR]   symbol:   class ConfigOrigin
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/ConfigImpl.java:[468,18] error: cannot find symbol
+[ERROR]   symbol:   class ConfigOrigin
+[ERROR]   location: class ConfigImpl
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/ConfigParseOptions.java:[25,10] error: cannot find symbol
+[ERROR]   symbol:   class ConfigSyntax
+[ERROR]   location: class ConfigParseOptions
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/ConfigParseOptions.java:[28,10] error: cannot find symbol
+[ERROR]   symbol:   class ConfigIncluder
+[ERROR]   location: class ConfigParseOptions
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/ConfigParseOptions.java:[32,12] error: cannot find symbol
+[ERROR]   symbol:   class ConfigSyntax
+[ERROR]   location: class ConfigParseOptions
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/ConfigParseOptions.java:[35,12] error: cannot find symbol
+[ERROR]   symbol:   class ConfigIncluder
+[ERROR]   location: class ConfigParseOptions
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/ConfigParseOptions.java:[61,40] error: cannot find symbol
+[ERROR]   symbol:   class ConfigSyntax
+[ERROR]   location: class ConfigParseOptions
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/ConfigParseOptions.java:[79,11] error: cannot find symbol
+[ERROR]   symbol:   class ConfigSyntax
+[ERROR]   location: class ConfigParseOptions
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/ConfigParseOptions.java:[165,42] error: cannot find symbol
+[ERROR]   symbol:   class ConfigIncluder
+[ERROR]   location: class ConfigParseOptions
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/ConfigParseOptions.java:[186,46] error: cannot find symbol
+[ERROR]   symbol:   class ConfigIncluder
+[ERROR]   location: class ConfigParseOptions
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/ConfigParseOptions.java:[206,45] error: cannot find symbol
+[ERROR]   symbol:   class ConfigIncluder
+[ERROR]   location: class ConfigParseOptions
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/ConfigParseOptions.java:[224,11] error: cannot find symbol
+[ERROR]   symbol:   class ConfigIncluder
+[ERROR]   location: class ConfigParseOptions
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[30,30] error: cannot find symbol
+[ERROR]   symbol:   class AbstractConfigValue
+[ERROR]   location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[38,12] error: cannot find symbol
+[ERROR]   symbol:   class ConfigOrigin
+[ERROR]   location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[39,24] error: cannot find symbol
+[ERROR]   symbol:   class AbstractConfigValue
+[ERROR]   location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[40,12] error: cannot find symbol
+[ERROR]   symbol:   class ResolveStatus
+[ERROR]   location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[55,23] error: cannot find symbol
+[ERROR]   symbol:   class ConfigOrigin
+[ERROR]   location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[55,56] error: cannot find symbol
+[ERROR]   symbol:   class AbstractConfigValue
+[ERROR]   location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[135,52] error: cannot find symbol
+[ERROR]   symbol:   class ConfigValue
+[ERROR]   location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[156,44] error: cannot find symbol
+[ERROR]   symbol:   class ConfigValue
+[ERROR]   location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[177,14] error: cannot find symbol
+[ERROR]   symbol:   class AbstractConfigValue
+[ERROR]   location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[182,12] error: cannot find symbol
+[ERROR]   symbol:   class ResolveStatus
+[ERROR]   location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[182,37] error: cannot find symbol
+[ERROR]   symbol:   class ConfigOrigin
+[ERROR]   location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[186,41] error: cannot find symbol
+[ERROR]   symbol:   class ResolveStatus
+[ERROR]   location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[186,66] error: cannot find symbol
+[ERROR]   symbol:   class ConfigOrigin
+[ERROR]   location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[196,4] error: cannot find symbol
+[ERROR]   symbol:   class ResolveStatus
+[ERROR]   location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[201,12] error: cannot find symbol
+[ERROR]   symbol:   class AbstractConfigValue
+[ERROR]   location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[201,39] error: cannot find symbol
+[ERROR]   symbol:   class AbstractConfigValue
+[ERROR]   location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[228,33] error: cannot find symbol
+[ERROR]   symbol:   class AbstractConfigValue
+[ERROR]   location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[271,50] error: cannot find symbol
+[ERROR]   symbol:   class AbstractConfigObject
+[ERROR]   location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[324,38] error: cannot find symbol
+[ERROR]   symbol:   class NoExceptionsModifier
+[ERROR]   location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[334,46] error: cannot find symbol
+[ERROR]   symbol:   class Modifier
+[ERROR]   location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[383,12] error: cannot find symbol
+[ERROR]   symbol:   class ResolveContext
+[ERROR]   location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[383,36] error: cannot find symbol
+[ERROR]   symbol:   class ResolveSource
+[ERROR]   location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[382,4] error: cannot find symbol
+[ERROR]   symbol:   class ResolveResult
+[ERROR]   location: class SimpleConfigObject
+[ERROR] /Users/goutamadwant/Documents/ResearchPaper/runtime/replay/failbefore/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/SimpleConfigObject.java:[382,28] error: cannot find symbol
+[ERROR]   symbol:   class AbstractConfigObject
+[ERROR]   location: class SimpleConfigObject
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :seatunnel-config-shade
+# end: 2026-10-25T19:04:06-0700
+# exit code: 1

@@ -1,0 +1,2 @@
+[st12038-shim/before] exit 1 in 363 s -> logs/st12038-shim/before.log
+[st12038-shim/after] exit 0 in 298 s -> logs/st12038-shim/after.log

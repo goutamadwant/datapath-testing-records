@@ -467,3 +467,7 @@ Absolute paths in `results.json` and the logs refer to the workstation where the
 ## model-queries-2026-10-25
 
 Model-written `regexp_like` queries planned on Apache DataFusion before and after PR 24917 (issue 22185): pre-registration, prompts, raw generator outputs, harness, logs and `results.json`. See `model-queries-2026-10-25/README.md`.
+
+## fail-before-2026-10-26
+
+Fail-before / pass-after runs of every regression test the article names: the PR's test change applied to the parent commit (before) and the merge commit as is (after), with per-case logs, patches and `results.json`. See `fail-before-2026-10-26/README.md`.
