@@ -21,8 +21,21 @@ date. Toolchains: rustc/cargo 1.97.0 (pinned by DataFusion's `rust-toolchain.tom
 
 ## Results
 
-Outcome codes: FAIL / PASS = the test ran; COMPILE_ERROR = the test sources of the module under
-test did not compile against that tree, so the test could not run.
+Outcome codes: FAIL / PASS = the test named in the command was executed; COMPILE_ERROR = the
+test sources of the module under test did not compile against that tree, so the test could not
+run; NO_TESTS_RUN = the filter selected nothing, or every selected test was ignored or skipped;
+UNKNOWN = the log does not establish an outcome (no summary line, a summary that disagrees with
+the per-test lines, or the named test absent from the executed tests).
+
+Parser revision (2026-10-26). The first `make_results.py` would have reported PASS for a cargo run
+whose only selected test was `ignored`, and did not check that the named test was among the
+executed ones. The revised parser requires the named test to have executed, treats ignored-only
+and skipped-only runs as NO_TESTS_RUN, reports a log whose summary line disagrees with its
+per-test lines as UNKNOWN, and marks a case without both a before and an after record as
+`comparison: incomplete` in `results.json`. No recorded run was affected: every outcome, test
+list and log hash in `results.json` is the same under both parsers (the logs are unchanged;
+`results.json` gains the `parser`, `expected_test` and `comparisons` fields). The checks are in
+`test_make_results.py` (`python3 -I test_make_results.py`).
 
 | PR | Test | Before commit | After commit | Before outcome | After outcome | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -139,7 +152,7 @@ the script clones apache/datafusion and apache/seatunnel), `JAVA8_HOME`.
 ## Files
 
 - `run.sh`: the runner (relative paths only).
-- `make_results.py`: outcome parser; writes `results.json`.
+- `make_results.py`: outcome parser; writes `results.json`. `test_make_results.py`: its checks.
 - `results.json`: every run with outcome, per-test results, failure messages, commits, command,
   duration and log hash; hashes of all logs and patches.
 - `patches/df24193-tests-only.patch`: the test-module hunks of PR 24193.

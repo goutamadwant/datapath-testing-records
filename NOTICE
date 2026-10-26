@@ -1,0 +1,16 @@
+datapath-testing-records
+Copyright 2026 Goutam Adwant
+
+This repository is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+It redistributes, as patches and transplanted test sources, portions of two
+Apache Software Foundation projects, each licensed under the Apache License,
+Version 2.0 and copyright The Apache Software Foundation:
+
+  Apache DataFusion   https://github.com/apache/datafusion
+  Apache SeaTunnel    https://github.com/apache/seatunnel
+
+The patches under fail-before-2026-10-26/patches/ and the hook and test sources
+under replay-2026-10-26/harness/ are derived from pull requests to those projects; the upstream pull request
+numbers are recorded in the bundle READMEs. The harness scripts, logs and
+results in this repository are the author's own work.

@@ -49,6 +49,11 @@ they are historical.
 | Unhooked `dev` under contention | (text) unhooked dev passed 50/50 under CPU contention | 0 of 50 failed on each JDK | `partB.cells.dev-nohook-contention-jdk8`, `-jdk11`: `per_loop_failed`, `iterations_per_loop` |
 | Other hook positions | (text) No hook position reproduces the PR’s 15/20 and 7/20 | failures per position 35/45/55/65 ms: JDK 8 17, 18, 10, 4 of 20; JDK 11 19, 16, 11, 4 of 20 (first reconstruction: JDK 8 20, 17, 11, 7; JDK 11 20, 18, 11, 2) | `partB.cells.dev-hook-jdk8`, `dev-hook-lead45-jdk8`, ... `dev-hook-lead65-jdk11`: `per_loop_failed` |
 
+## License
+
+Apache License 2.0 (`LICENSE`); `NOTICE` names the Apache DataFusion and Apache SeaTunnel
+sources that the patches and transplanted tests derive from.
+
 ## Access
 
 The repository is public. Unauthenticated read access was checked on 2026-10-26 at 02:09:29 UTC
@@ -504,9 +509,11 @@ ownership. Use a disposable environment. Docker end-to-end suites,
 interrupted after attempt are retained; the interrupted attempt has no registry row
 and is not a completed run. Concurrent builds affect durations, and runner edits
 caused console errors after completed cases. Logs retain workstation paths.
-The transplant parser can accept a missing comparison or an ignored-only Rust test;
-the runner does not reliably propagate setup failures. Archived outcomes must be
-checked against individual logs, not inferred from the runner exit status.
+The first transplant parser could have accepted a missing comparison or an ignored-only
+Rust test; the 2026-10-26 revision of `fail-before-2026-10-26/make_results.py` rejects
+both (see that README, "Parser revision"), and no recorded outcome changed. The runner
+does not reliably propagate setup failures. Archived outcomes must be checked against
+individual logs, not inferred from the runner exit status.
 
 ### Clock and Maven interpretation
 

@@ -1,5 +1,6 @@
 {
   "description": "Fail-before / pass-after runs of the regression tests named in the article. before = first parent of the merge commit plus only the pull request's test change; after = merge commit. Outcomes are parsed from the logs listed here.",
+  "parser": "make_results.py rev 2 (2026-10-26): PASS requires the named test to have been executed; ignored-only or skipped-only runs are NO_TESTS_RUN; a summary line that disagrees with the per-test lines is UNKNOWN; every case needs a before and an after record",
   "runs": [
     {
       "case": "st12472",
@@ -22,6 +23,9 @@
         "seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[19,53] error: cannot find symbol",
         "seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/PropertiesParser.java:[19,11] error: cannot find symbol",
         "seatunnel-config/seatunnel-config-shade/src/main/java/org/apache/seatunnel/shade/com/typesafe/config/impl/Path.java:[7,53] error: cannot find symbol"
+      ],
+      "expected_test": [
+        "FileCollectReaderBehaviorTest#rediscoversFileAfterInactiveCursorClosed"
       ],
       "log_sha256": "d4d6e9712f2309f8436f01bbe4ac1bfbb02ca72c80383cd2d9ff0e2dbb91b8eb"
     },
@@ -46,6 +50,7 @@
         }
       ],
       "detail": [],
+      "expected_test": "unbounded_input_emits_before_batch_size",
       "log_sha256": "0dd123b8397bab08e6a51be2880c831b0527f7ecebb00b8b0fcb024a7995065b"
     },
     {
@@ -69,6 +74,7 @@
         }
       ],
       "detail": [],
+      "expected_test": "unbounded_input_emits_before_batch_size",
       "log_sha256": "8a7d27eb6f588019a1bf913b1ffe0afe7e3343d0215d926b28c2105c51f956d9"
     },
     {
@@ -88,6 +94,9 @@
       "tests": [],
       "detail": [
         "seatunnel-edge-agent/seatunnel-edge-agent-connector/src/test/java/org/apache/seatunnel/edge/agent/connector/file/FileCollectReaderBehaviorTest.java:[68,16] error: constructor FileCollectReader in class FileCollectReader cannot be applied to given types;"
+      ],
+      "expected_test": [
+        "FileCollectReaderBehaviorTest#rediscoversFileAfterInactiveCursorClosed"
       ],
       "log_sha256": "4bf9c40b77831e7c5d68ba7f477682fc5a5deb01d88b8bea1e542e614b444ff4"
     },
@@ -112,6 +121,7 @@
         }
       ],
       "detail": [],
+      "expected_test": "expensive_regexp_like_is_deferred_to_execution",
       "log_sha256": "d10e07207c6dba8182deecfb1c04cb87cd34b341ae735f812e41879ff68a1f4d"
     },
     {
@@ -136,6 +146,9 @@
         }
       ],
       "detail": [],
+      "expected_test": [
+        "FileCollectReaderBehaviorTest#rediscoversFileAfterInactiveCursorClosed"
+      ],
       "log_sha256": "ab299eb802d2fcd168937b5429d8d3841ae12262c64077fd6dc507ab7489baca"
     },
     {
@@ -159,6 +172,7 @@
         }
       ],
       "detail": [],
+      "expected_test": "expensive_regexp_like_is_deferred_to_execution",
       "log_sha256": "ba92c08085e112ce9187dda8b5ea9a08577b01c659fa120adfb4bdbe65cf0970"
     },
     {
@@ -186,6 +200,10 @@
         "seatunnel-e2e/seatunnel-e2e-common/src/test/java/org/apache/seatunnel/e2e/common/container/AbstractTestContainerTest.java:[234,8] error: method does not override or implement a method from a supertype",
         "seatunnel-e2e/seatunnel-e2e-common/src/test/java/org/apache/seatunnel/e2e/common/container/AbstractTestContainerTest.java:[249,8] error: method does not override or implement a method from a supertype",
         "seatunnel-e2e/seatunnel-e2e-common/src/test/java/org/apache/seatunnel/e2e/common/container/flink/AbstractTestFlinkContainerTest.java:[153,8] error: method does not override or implement a method from a supertype"
+      ],
+      "expected_test": [
+        "AbstractTestContainerTest",
+        "AbstractTestFlinkContainerTest"
       ],
       "log_sha256": "0bee847bb45a349de2b7cb20878111ffc33d5254e60d98c8a81b4cadcb7f899d"
     },
@@ -291,6 +309,10 @@
         }
       ],
       "detail": [],
+      "expected_test": [
+        "AbstractTestContainerTest",
+        "AbstractTestFlinkContainerTest"
+      ],
       "log_sha256": "2b239d64fb11b7ff03b23847a05de605ba57d1876952d9fc193dd5f0169966fe"
     },
     {
@@ -340,6 +362,9 @@
         }
       ],
       "detail": [],
+      "expected_test": [
+        "AbstractTestFlinkContainerTest"
+      ],
       "log_sha256": "b5fdcafa12f8b5723ff0dc57518e4d5886030c20b135997221dfd81b87ec073d"
     },
     {
@@ -371,6 +396,7 @@
         }
       ],
       "detail": [],
+      "expected_test": "expensive_regexp_like_is_deferred_to_execution",
       "log_sha256": "8bdfdfa778f6ed95eebbbbba8c3781657ebac3258b147b4acc040620c8eebf90"
     },
     {
@@ -415,6 +441,9 @@
         }
       ],
       "detail": [],
+      "expected_test": [
+        "AbstractTestFlinkContainerTest"
+      ],
       "log_sha256": "9f920315b1a74452aa67b0cb8fce8ebff5612151514d4617fbcd1c97a6e0967c"
     },
     {
@@ -446,6 +475,7 @@
         }
       ],
       "detail": [],
+      "expected_test": "expensive_regexp_like_is_deferred_to_execution",
       "log_sha256": "12534cdb59657a1d3e2df16fbe00059cdd2fc5fded1d330ebac8f3512cc73f5a"
     },
     {
@@ -465,6 +495,9 @@
       "tests": [],
       "detail": [
         "seatunnel-connectors-v2/connector-amazonsqs/src/test/java/org/apache/seatunnel/connectors/seatunnel/amazonsqs/source/AmazonSqsSourceReaderTest.java:[272,16] error: no suitable constructor found for AmazonSqsSourceConfig(String,String,<null>,<null>,<null>,boolean,boolean,<null>)"
+      ],
+      "expected_test": [
+        "AmazonSqsSourceReaderTest"
       ],
       "log_sha256": "638db6445f4571d0277eab906876da05be0f11bf47e7063d7c2d47de53cf4d7c"
     },
@@ -530,6 +563,9 @@
         }
       ],
       "detail": [],
+      "expected_test": [
+        "AmazonSqsSourceReaderTest"
+      ],
       "log_sha256": "8b1c23af27505caa071b6c5ce9b540921f25ac0240d9586ea3b677e605b83fc3"
     },
     {
@@ -551,6 +587,9 @@
         "seatunnel-connectors-v2/connector-amazonsqs/src/test/java/org/apache/seatunnel/connectors/seatunnel/amazonsqs/source/AmazonSqsSourceReaderTest.java:[272,16] error: no suitable constructor found for AmazonSqsSourceConfig(String,String,<null>,<null>,<null>,boolean,boolean,<null>)",
         "seatunnel-connectors-v2/connector-amazonsqs/src/test/java/org/apache/seatunnel/connectors/seatunnel/amazonsqs/AmazonSqsSourceFactoryTest.java:[39,56] error: cannot find symbol",
         "seatunnel-connectors-v2/connector-amazonsqs/src/test/java/org/apache/seatunnel/connectors/seatunnel/amazonsqs/AmazonSqsSourceFactoryTest.java:[40,53] error: cannot find symbol"
+      ],
+      "expected_test": [
+        "AmazonSqsSourceFactoryTest"
       ],
       "log_sha256": "e51662f79dfe451e86b4798bbf9a7c2963cd2a25535c2d809e12b8a35ca0d07b"
     },
@@ -576,6 +615,9 @@
         }
       ],
       "detail": [],
+      "expected_test": [
+        "AmazonSqsSourceFactoryTest"
+      ],
       "log_sha256": "e37d594af08d304a5353dfc55ab3da1765218291a23ebf16c1052298ccf8614d"
     },
     {
@@ -646,6 +688,9 @@
         }
       ],
       "detail": [],
+      "expected_test": [
+        "AmazonSqsSourceReaderTest"
+      ],
       "log_sha256": "f2a8f8ca93a3611b9c0d4a5b701071279696592cfc7c3e671f6b75267ced3af2"
     },
     {
@@ -735,6 +780,9 @@
         }
       ],
       "detail": [],
+      "expected_test": [
+        "IncrementalSourceReaderTest"
+      ],
       "log_sha256": "acff252b3b35dcd744a4d34316ae1b5989bcae64d291dd7052477d95b10f8a4d"
     },
     {
@@ -799,6 +847,9 @@
         }
       ],
       "detail": [],
+      "expected_test": [
+        "AmazonSqsSourceReaderTest"
+      ],
       "log_sha256": "22fd96bb3f5b7fbce5340e5ef3ad570b3ddb1f6ec80de659507e5fd537daab37"
     },
     {
@@ -888,9 +939,64 @@
         }
       ],
       "detail": [],
+      "expected_test": [
+        "IncrementalSourceReaderTest"
+      ],
       "log_sha256": "4700dc6b23e1aee5e7ef07e39c99ba169f0603f482c137e39822d9a52eb058e4"
     }
   ],
+  "comparisons": {
+    "st12472": {
+      "before": "COMPILE_ERROR",
+      "after": "PASS",
+      "comparison": "complete"
+    },
+    "df24193": {
+      "before": "FAIL",
+      "after": "PASS",
+      "comparison": "complete"
+    },
+    "df24917": {
+      "before": "PASS",
+      "after": "PASS",
+      "comparison": "complete"
+    },
+    "st12481": {
+      "before": "COMPILE_ERROR",
+      "after": "PASS",
+      "comparison": "complete"
+    },
+    "st12481-shim": {
+      "before": "FAIL",
+      "after": "PASS",
+      "comparison": "complete"
+    },
+    "df24917-diag": {
+      "before": "PASS",
+      "after": "PASS",
+      "comparison": "complete"
+    },
+    "st12038": {
+      "before": "COMPILE_ERROR",
+      "after": "PASS",
+      "comparison": "complete"
+    },
+    "st12038-factory": {
+      "before": "COMPILE_ERROR",
+      "after": "PASS",
+      "comparison": "complete"
+    },
+    "st12038-shim": {
+      "before": "FAIL",
+      "after": "PASS",
+      "comparison": "complete"
+    },
+    "st12360": {
+      "before": "PASS",
+      "after": "PASS",
+      "comparison": "complete"
+    }
+  },
   "log_files": {
     "logs/console/console-df.txt": "6ea23e39b820f52cfcca71d132c2d251fcb36a43d86b77d0a4c2abcac07757c0",
     "logs/console/console-st-shim.txt": "4de238690dd836952fa29c2f3f5eab2aedf08817b40be8908c2ccceb21ab3dc6",
