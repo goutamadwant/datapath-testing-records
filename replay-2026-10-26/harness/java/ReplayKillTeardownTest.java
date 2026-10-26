@@ -14,8 +14,10 @@
  * replay.teardownBoundSec (default 60).
  *
  * Assertions (one "ASSERT <engine> run=<n> name=<name> result=PASS|FAIL expected=<..> observed=<..>"
- * line each; a FAIL is recorded, never thrown, so every run completes and every check is logged):
+ * line each; a FAIL is recorded, never thrown, so every run completes and every check is logged;
+ * the one exception is pre_run_no_engine_containers, see below):
  *   pre_run_no_engine_containers      no container of the engine image exists before the run
+ *                                     (a FAIL aborts the cell: JVM exit status 3)
  *   teardown_no_exception             tearDown() of the killed engine returned normally
  *   teardown_time_bound               tearDown() returned within replay.teardownBoundSec
  *   containers_absent_after_teardown  every container of the killed engine is gone after tearDown()
@@ -26,6 +28,14 @@
  * A container counts as removed only when the Docker API answers 404 (NotFoundException); any
  * other inspection error is reported as "inspect-error" and fails the absence checks. Cleanup
  * errors other than 404 are printed.
+ *
+ * Revision (2026-10-25, after the recorded runs): a failed pre_run_no_engine_containers check
+ * aborts the cell. The harness prints "RESULT <engine> run=<n> aborted: ..." and exits the JVM
+ * with status 3 before starting any container, so a container it did not create is never
+ * started next to, inspected as, or removed as one of its own. Each test method also prints
+ * "RESULT testcontainers_session=<id>", the Testcontainers session label of the containers this
+ * JVM creates; part_c.sh removes leftovers only if they carry that label. The harness itself
+ * force-removes only the container ids it obtained from the containers it started.
  */
 package org.apache.seatunnel.e2e.connector.fake;
 
@@ -72,6 +82,18 @@ public class ReplayKillTeardownTest {
 
     private static void out(String s) {
         System.out.println("RESULT " + s);
+        System.out.flush();
+    }
+
+    /** Pre-run safety check failed: record it and stop the JVM before any container is started. */
+    private static void abort(String engine, int run, String reason) {
+        System.out.println("RESULT " + engine + " run=" + run + " aborted: " + reason.replace('\n', ' '));
+        System.out.flush();
+        System.exit(3);
+    }
+
+    private static void session() {
+        System.out.println("RESULT testcontainers_session=" + DockerClientFactory.SESSION_ID);
         System.out.flush();
     }
 
@@ -211,10 +233,14 @@ public class ReplayKillTeardownTest {
     void flink118TaskManagerKilled() throws Exception {
         DockerClient docker = DockerClientFactory.instance().client();
         final String e = "flink118";
+        session();
         for (int run = 1; run <= RUNS; run++) {
             String p = "flink118 run=" + run + " ";
             java.util.List<String> pre = engineContainers(docker, FLINK_IMAGE);
             check(e, run, "pre_run_no_engine_containers", pre.isEmpty(), "none", pre.toString());
+            if (!pre.isEmpty()) {
+                abort(e, run, "containers of " + FLINK_IMAGE + " exist before the run " + pre);
+            }
             ReplayFlink18 c1 = new ReplayFlink18();
             long t0 = System.nanoTime();
             c1.startUp();
@@ -300,10 +326,14 @@ public class ReplayKillTeardownTest {
     void spark3MasterKilled() throws Exception {
         DockerClient docker = DockerClientFactory.instance().client();
         final String e = "spark3";
+        session();
         for (int run = 1; run <= RUNS; run++) {
             String p = "spark3 run=" + run + " ";
             java.util.List<String> pre = engineContainers(docker, SPARK_IMAGE);
             check(e, run, "pre_run_no_engine_containers", pre.isEmpty(), "none", pre.toString());
+            if (!pre.isEmpty()) {
+                abort(e, run, "containers of " + SPARK_IMAGE + " exist before the run " + pre);
+            }
             ReplaySpark3 c1 = new ReplaySpark3();
             long t0 = System.nanoTime();
             c1.startUp();

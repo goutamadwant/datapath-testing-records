@@ -97,9 +97,11 @@ patterns were classified with `regex-syntax` 0.8.11 and `regex` 1.13.1 inside th
 | longest pattern 21-50 bytes | 207 | 1.5 / 2.3 / 2.9 | 1.5 / 2.3 / 2.7 | 0 / 0 |
 | longest pattern > 50 bytes | 66 | 1.4 / 2.3 / 2.8 | 1.4 / 2.2 / 2.7 | 0 / 0 |
 
-No query stalled before the fix, so the result is "not triggered in this sample". The
-rule-of-three 95 % upper bound on the per-query stall rate is 3/375 = 0.8 % pooled (G1 3/189 =
-1.6 %, G2 3/186 = 1.6 %). It holds for this schema, these 20 prompts and these two models.
+No query stalled before the fix, so the result is "not triggered in this sample": 0 of the 375
+queries planned at both builds (0 of 189 G1, 0 of 186 G2) took more than 1 s, before or after. No
+confidence bound is given. The queries come in batches from 20 prompts chosen by the
+experimenter, so they are not independent draws from a defined population, and the rule-of-three
+bound proposed in `PREREGISTRATION.md` has no justified sampling model here (see "Revision").
 
 Planning errors were identical at both builds: 37 queries, 22 G1 and 15 G2. 22 failed in the
 `simplify_expressions` rule with "Invalid regex", because the patterns use syntax the Rust regex
@@ -211,7 +213,8 @@ Log files contain the workstation paths printed by the tools.
 * `logs/generation/`: raw responses per call, `summary.json`, and the `/v1/models` listing
 * `logs/measure/`: `classify.jsonl`, `runs.jsonl`; `logs/tables.md` is the printed tables
 * `logs/exploratory/`: issue-date series runs and summary
-* `results.json`: per-query outcomes, summaries, strata, controls, exploratory summary, sha256 of logs
+* `results.json`: per-query outcomes, summaries (counts and planning-time distributions), strata,
+  controls, exploratory summary, sha256 of logs, validation result and revision note
 
 ## Commands
 
@@ -226,3 +229,27 @@ Log files contain the workstation paths printed by the tools.
 `measure` skips (query, build, repetition) runs that are already in `logs/measure/runs.jsonl`,
 and `explore` refuses to overwrite `logs/exploratory/runs.jsonl`. A fresh replay therefore starts
 from a copy of this directory without `logs/measure/`, `logs/exploratory/` and `results.json`.
+
+## Revision (2026-10-25, after the runs)
+
+The analysis no longer reports a confidence bound, and `harness/analyze.py` now refuses
+incomplete measurements. No run, log, query or count changed.
+
+* `README.md`: the rule-of-three 95 % upper bound (0.8 % pooled, 1.6 % per generator) was removed
+  from the results. The queries are batched and come from 20 selected prompts, so the independence
+  that the bound assumes is not justified. The results are the raw counts: 0 of 375 queries
+  planned at both builds stalled before or after the fix.
+* `PREREGISTRATION.md` is unchanged and still proposes that bound (section "Reported outcomes").
+  It is kept as the record of the plan; the bound is not part of the accepted analysis.
+* `harness/analyze.py` (sha256 now `a58480d18b7c8aebe5781469ebe7dfe317716f787856a7561d129f011036d815`,
+  `sha256_as_run` `d3d460e05a5424b21924a2ec06d1d55b09548c0d82e83c43a13577c33fe4afb2`, the version
+  that produced the first published `results.json`): it no longer writes `rule_of_three_upper_95`.
+  It also checks that every query and control has exactly 3 repetitions (numbered 1 to 3) per
+  build and that every log line parses. Otherwise it lists the problems, does not write
+  `results.json` and exits 1. Removing one repetition record, or duplicating one, in a temporary
+  copy of `logs/measure/runs.jsonl` made it exit 1 with the item named.
+* `results.json` was regenerated with `./run.sh results` from the recorded logs (no new
+  measurement). Compared with the first published file, the only differences are the 10 removed
+  `rule_of_three_upper_95` fields (3 summaries, 7 strata) and the added `validation` and
+  `revisions` entries (`revisions` holds the hashes above). The printed tables are identical to
+  `logs/tables.md`.

@@ -44,8 +44,7 @@
     "over_1s": 0
    },
    "stall_before": 0,
-   "stall_after": 0,
-   "rule_of_three_upper_95": 0.0159
+   "stall_after": 0
   },
   "g2": {
    "queries": 201,
@@ -80,8 +79,7 @@
     "over_1s": 0
    },
    "stall_before": 0,
-   "stall_after": 0,
-   "rule_of_three_upper_95": 0.0161
+   "stall_after": 0
   },
   "pooled": {
    "queries": 412,
@@ -116,8 +114,7 @@
     "over_1s": 0
    },
    "stall_before": 0,
-   "stall_after": 0,
-   "rule_of_three_upper_95": 0.008
+   "stall_after": 0
   }
  },
  "strata": {
@@ -155,8 +152,7 @@
      "over_1s": 0
     },
     "stall_before": 0,
-    "stall_after": 0,
-    "rule_of_three_upper_95": 0.0091
+    "stall_after": 0
    },
    "True": {
     "queries": 47,
@@ -191,8 +187,7 @@
      "over_1s": 0
     },
     "stall_before": 0,
-    "stall_after": 0,
-    "rule_of_three_upper_95": 0.0667
+    "stall_after": 0
    }
   },
   "pattern_len_bucket": {
@@ -229,8 +224,7 @@
      "over_1s": 0
     },
     "stall_before": 0,
-    "stall_after": 0,
-    "rule_of_three_upper_95": 0.0145
+    "stall_after": 0
    },
    "<=20": {
     "queries": 127,
@@ -265,8 +259,7 @@
      "over_1s": 0
     },
     "stall_before": 0,
-    "stall_after": 0,
-    "rule_of_three_upper_95": 0.0294
+    "stall_after": 0
    },
    ">50": {
     "queries": 69,
@@ -301,8 +294,7 @@
      "over_1s": 0
     },
     "stall_before": 0,
-    "stall_after": 0,
-    "rule_of_three_upper_95": 0.0455
+    "stall_after": 0
    },
    "None": {
     "queries": 1,
@@ -327,8 +319,7 @@
      "n": 0
     },
     "stall_before": 0,
-    "stall_after": 0,
-    "rule_of_three_upper_95": null
+    "stall_after": 0
    }
   },
   "all_literal_regexp_like": {
@@ -365,8 +356,7 @@
      "over_1s": 0
     },
     "stall_before": 0,
-    "stall_after": 0,
-    "rule_of_three_upper_95": 0.008
+    "stall_after": 0
    }
   }
  },
@@ -19171,6 +19161,18 @@
   "queries/g1.jsonl": "ca3b31972888ea3c0ab7ee1ce72cb78e08fd945f6dfbbd0f954712109209879b",
   "queries/g2.jsonl": "71fddcaf2d05ad32a475ffc18237aa2cc4a074e0cfca37d848205540db2f4bc4"
  },
+ "validation": {
+  "result": "PASS",
+  "rule": "3 repetitions (1..3) per query and control and build; every log line parses"
+ },
+ "revisions": [
+  {
+   "path": "harness/analyze.py",
+   "sha256_as_run": "d3d460e05a5424b21924a2ec06d1d55b09548c0d82e83c43a13577c33fe4afb2",
+   "revised_after_runs": "2026-10-25: rule_of_three_upper_95 removed from the summaries (no justified independent-query sampling model); fail-closed check of REPS repetitions per (query, build). Re-running it over the recorded logs changes no count, time or status; the only difference in results.json is the removed field and this note.",
+   "sha256": "a58480d18b7c8aebe5781469ebe7dfe317716f787856a7561d129f011036d815"
+  }
+ ],
  "exploratory_not_preregistered": {
   "note": "decided after the positive control stayed below 1 s; builds: issuedate = b426232b8a13c641a522bba414e932914f3b79f5 (last main commit before issue 22185), before, after; median of 3 repetitions in ms",
   "summary": {

@@ -5,14 +5,19 @@
 #
 #   --part A   PR 12468 Maven retry under injected faults (Table 1 rows 1-5)
 #   --part B   PR 12472 stall injection (FileCollectReaderBehaviorTest)
-#   --part C   PR 12481 killed-container teardown (Table 1 rows 6-7, Docker)
+#   --part C   PR 12481 killed-container teardown (Table 1 rows 6-7, Docker). Not a sandbox: run
+#              it only on a host with no other SeaTunnel/Flink/Spark/Zeta containers and without
+#              /tmp/seatunnel_mnt; harness/part_c.sh refuses to start otherwise.
 #   --runs N   A and C: runs per cell (default 5). B: repetitions of each 20-iteration
 #              (50 for the contention cells) loop (default 1).
 #   --prepare-only   toolchain check, clone, worktrees and builds only; no runs.
 #   --cells    restrict a part to the named cells (see harness/part_*.{py,sh} for names).
 #
 # Everything is created under ./work (override with REPLAY_WORK); logs go to ./logs and
-# ./results.json is regenerated from the per-run records after every invocation.
+# ./results.json is regenerated from the per-run records after every invocation. The
+# regeneration validates the requested matrix first (harness/make_results.py): a missing or
+# unparsable log, or fewer valid runs than requested, makes this script exit 1 and leaves
+# results.json unchanged.
 # Environment (all optional):
 #   JAVA8_HOME, JAVA11_HOME  JDK homes (default: discovered with /usr/libexec/java_home or
 #                            /usr/lib/jvm; a JDK must contain bin/javac)
@@ -32,11 +37,12 @@ while [ $# -gt 0 ]; do
     --runs) RUNS="$2"; shift 2 ;;
     --prepare-only) PREPARE_ONLY=1; shift ;;
     --cells) CELLS="$2"; shift 2 ;;
-    -h|--help) sed -n '2,25p' "$0"; exit 0 ;;
+    -h|--help) sed -n '2,30p' "$0"; exit 0 ;;
     *) echo "unknown argument: $1" >&2; exit 2 ;;
   esac
 done
 case "$PART" in A|B|C|all) ;; *) echo "usage: $0 --part A|B|C|all [--runs N]" >&2; exit 2 ;; esac
+case "$RUNS" in '') ;; *[!0-9]*|0*) echo "--runs must be a positive integer (got '$RUNS')" >&2; exit 2 ;; esac
 
 STAMP="$(date +%Y%m%dT%H%M%S)"
 mkdir -p logs/setup "$REPLAY_WORK"
@@ -281,6 +287,9 @@ if [ "$PART" = C ] || [ "$PART" = all ]; then
   prepare_c
   [ "$PREPARE_ONLY" = 0 ] && { bash harness/part_c.sh "${RUNS:-5}" $CELLS || RC=1; }
 fi
-python3 harness/make_results.py || RC=1
+if ! python3 harness/make_results.py; then
+  log "validation failed: results.json not regenerated (the problems are listed above)"
+  RC=1
+fi
 log "done rc=$RC"
 exit $RC

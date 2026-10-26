@@ -37,9 +37,23 @@ From a checkout of this directory (bash, git, curl, python3, patch, shasum; JDK 
 ./replay.sh --part A --runs 5          # one part; --runs = runs per cell (A, C) or loops per cell (B)
 ./replay.sh --part C --prepare-only    # toolchain check, clone, worktrees, builds, images; no runs
 ./replay.sh --part B --cells "dev-hook-jdk8 patch-hook-jdk8"   # a subset of cells
-python3 harness/make_results.py        # regenerate results.json from logs/part*/runs.jsonl
+python3 harness/make_results.py        # validate the recorded runs, then regenerate results.json
 python3 harness/tables.py --old <2026-10-25 results.json>      # print the comparison tables
+python3 harness/selftest_validation.py # negative tests of the validation (temporary copies)
+bash harness/selftest_part_c_guards.sh # Part C safety rules against a simulated Docker
 ```
+
+**Part C is not a sandbox.** It drives the host's Docker daemon, and the SeaTunnel teardown it
+tests deletes the contents of the host path `/tmp/seatunnel_mnt`. Run Part C (and `--part all`)
+only on a host with no other SeaTunnel, Flink, Spark or Zeta containers, running or stopped, and
+without `/tmp/seatunnel_mnt`; a disposable VM is the safe choice. `harness/part_c.sh` enforces
+what it can (see "Revision (2026-10-25, third revision after the runs)" below): it refuses to start a cell while
+`/tmp/seatunnel_mnt` exists or while any container of `tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27`,
+`tyrantlucifer/spark:3.3.0` or `seatunnelhub/openjdk:8u342` exists, fails and stops when the path
+or an engine container is still there after a cell, and removes a leftover container only when it
+can attribute it to the cell. It cannot tell apart a container that another process creates
+during the cell from the same image with the same Testcontainers session label, which is why the
+host requirement above stays.
 
 Optional environment: `JAVA8_HOME`, `JAVA11_HOME` (otherwise found with `/usr/libexec/java_home`
 or under `/usr/lib/jvm`, and a JDK must contain `javac`), `REPLAY_WORK` (default `./work`),
@@ -47,6 +61,14 @@ or under `/usr/lib/jvm`, and a JDK must contain `javac`), `REPLAY_WORK` (default
 default: Maven's own), `REPLAY_PULL_ZETA=1`. Part A skips runs that are already recorded in `logs/partA/runs.jsonl`. Parts B and C add new
 logs (`loop2.txt`, `<cell>-2.txt`) next to the existing ones. A fresh replay therefore starts from
 a copy of this directory without `logs/` and `results.json`.
+
+`results.json` is written only if validation passes. The requested matrix is read from the
+invocation records (`logs/setup/setup-part*-*.txt`, first line, `prepare_only=0`): the cells
+named there (all cells by default) and `--runs` (Part A: runs per cell; Part B: loops added per
+cell; Part C: runs added per cell). A missing or unparsable run log, a record that disagrees with
+its log, or fewer recorded or valid runs than requested is listed on stderr, `results.json` is left
+unchanged, and `replay.sh` exits 1. Each cell in `results.json` has `runs_requested`,
+`runs_recorded` and `runs_valid`.
 
 The invocations that produced this bundle, in order (consoles in `logs/setup/` and
 `logs/partA/console.txt`):
@@ -427,7 +449,9 @@ the bundle's `work/` directory. `results.json` stores only bundle-relative paths
   `harness/hook-patch-87ed0afe0-stalls.patch`, `harness/java/RepeatMethod.java`: Part B.
 - `harness/part_c.sh`, `harness/parse_part_c.py`, `harness/java/ReplayKillTeardownTest.java`:
   Part C.
-- `harness/make_results.py`, `harness/tables.py`: `results.json` and the tables above.
+- `harness/make_results.py`, `harness/tables.py`: validation, `results.json` and the tables above.
+- `harness/selftest_validation.py`, `harness/selftest_part_c_guards.sh`: self-tests of the
+  validation and of the Part C safety rules (third revision; they execute no experiment).
 - `logs/setup/`: toolchain records, setup logs and consoles of every invocation.
 - `logs/partA/<cell>/r<k>.mvn.txt` and `r<k>.server.jsonl`, `logs/partA/runs.jsonl`,
   `logs/partA/warm-repo-build.txt`, `logs/partA/maven-version.txt`, `logs/partA/console.txt`.
@@ -439,6 +463,54 @@ the bundle's `work/` directory. `results.json` stores only bundle-relative paths
 
 ## Revision after the runs (2026-10-25)
 
-`harness/part_c.sh` originally removed every container built from the engine image at the end of a cell (`docker ps -aq --filter ancestor=$IMAGE`), which would also remove unrelated containers on a developer's machine. The published script now records the containers present before the cell and removes only those created during it. The recorded runs were executed with the original line; its removals are in `logs/partC/*.cleanup.txt`, and `results.json` keeps the executed script's hash as `sha256_as_run`.
+`harness/part_c.sh` originally removed every container built from the engine image at the end of a cell (`docker ps -aq --filter ancestor=$IMAGE`), which would also remove unrelated containers on a developer's machine. The published script now records the containers present before the cell and removes only those created during it. The recorded runs were executed with the original line, and `results.json` keeps the executed script's hash as `sha256_as_run`. Correction (2026-10-25, third revision): this paragraph said the original line's removals are in `logs/partC/*.cleanup.txt`. No such file exists. The original line appended the output of each `docker rm -f` to `<cell>.txt.cleanup.txt`, so the missing files show that it removed nothing, which agrees with `no_engine_container_after_cell` (PASS, observed `none`) in all four cells.
 
 Second revision (2026-10-25): `harness/part_c.sh` now refuses to start when `/tmp/seatunnel_mnt` already exists on the host. SeaTunnel's end-to-end teardown (`deleteHostVolumeMountPath`) deletes the contents of that path, so a pre-existing directory could have lost unrelated data. The recorded runs were executed on a host where the path did not exist (the `host_tmp_seatunnel_mnt_absent` check passed in every cell).
+
+## Revision (2026-10-25, third revision after the runs)
+
+This revision changes no recorded run, log or count. It makes the Part C driver refuse unsafe
+hosts and scope its cleanup, and makes the aggregation fail when runs are missing or invalid. None
+of the revised scripts has been executed against Docker: the revised Part C path is exercised only
+by `harness/selftest_part_c_guards.sh` with a simulated `docker` and JVM, not in a disposable
+environment with the real images. The 20 recorded Part C runs were made with the as-run versions.
+`results.json` lists, for every revised file, the current `sha256`, the `sha256_as_run` and a
+`revised_after_runs` note.
+
+| File | Change | sha256 now | sha256_as_run |
+| --- | --- | --- | --- |
+| `harness/part_c.sh` | (a) Before the build steps and before every cell, refuses to start (exit 2, reason on stderr) if `/tmp/seatunnel_mnt` exists, if Docker cannot be listed, or if any container, running or stopped, of the Flink, Spark or Zeta image exists. (b) After every cell, considers every container of the engine images and removes one only if it did not exist before the cell, was created at or after the cell's start time (`docker inspect` `.Created`), runs the cell's engine image, and carries the Testcontainers session label that the cell's JVM printed. Each container considered is written to the cell log as a `CLEANUP` line with the decision and the reasons. (c) A non-zero JVM exit fails `harness_jvm_completed`. (d) `/tmp/seatunnel_mnt` present after the cell, an engine container left after the cell or after cleanup (new check `no_engine_container_after_cleanup`), or incomplete run records fail the cell; the script then writes `# cell_result=FAIL`, starts no further cell and exits 1. The log header gains the driver's sha256 and the pre-cell guard result. | `b7757fbd6360...` | `a75658e64990...` (the version that ran; the published `59fbd0c8eb78...` of the second revision is superseded) |
+| `harness/java/ReplayKillTeardownTest.java` | A failed `pre_run_no_engine_containers` check is still recorded, then the harness prints `RESULT <engine> run=<n> aborted: ...` and exits the JVM with status 3 before starting any container (it previously logged the failure and continued). Each test method prints `RESULT testcontainers_session=<id>` for the cleanup rule above. The harness still force-removes only the container ids of the containers it started. | `b715134750ac...` | `e0049c6c63c1...` (in every Part C cell log header) |
+| `harness/parse_part_c.py` | Importable `parse()`; a missing or unreadable log, a missing header or trailer, no runs, fewer runs than the header's `runs=N`, a missing or duplicated assertion, a failed harness validity check (`pre_run_no_engine_containers`, `post_run_no_leftover_containers`, any `ASSERT-CELL` check) or an aborted run is listed on stderr with exit status 1. The records it prints are unchanged. | `1bafe4d218af...` | `bdad4ea98f03...` (the version that wrote `logs/partC/runs.jsonl`, interpretation 25) |
+| `harness/make_results.py` | Fail-closed validation as described under "Exact commands": requested matrix from the invocation records; every run log must exist, parse and agree with its record; Part A runs are valid only if the mirror was reached, the requested fault was the first response for the fault target and the Maven log has its trailer, and a repetition may be valid only once; Part B loops only if the JVM exited 0 with exactly the requested iterations, every hooked `dev` iteration logged its stall, and the contention loops logged their busy loops; Part C as in `parse_part_c.py`. Per-cell `runs_requested`, `runs_recorded`, `runs_valid`; summaries over the valid runs; the as-run hashes are kept in the script so that a regeneration keeps them. | `5a781d8e56c1...` | `0176e7b397d5...` (the version that wrote the published `results.json`) |
+| `replay.sh` | `--runs` must be a positive integer (`--runs 0` would have requested nothing); a failed validation is reported and the exit status is 1. The help text states the Part C host requirement. | `613d4434bcb7...` | `6e85b1415659...` (as published with the runs; see interpretation 26) |
+| `harness/selftest_validation.py`, `harness/selftest_part_c_guards.sh` | New. | `c45d833be3b3...`, `cd6f9d9da31f...` | - |
+
+Revalidation over the recorded logs (no new executions). `python3 harness/make_results.py` was
+re-run over the existing `logs/`. It reported `validation PASS; A 120 valid runs, B 12 valid
+loops, C 20 valid runs, 289 log files hashed`. Every requested cell has `runs_requested`,
+`runs_recorded` and `runs_valid` equal: 5/5/5 for the 24 Part A cells and the 4 Part C cells,
+1/1/1 for the 12 Part B cells (requests read from `logs/setup/setup-partA-20261025T132617.txt`,
+`setup-partB-20261025T141709.txt` and `setup-partC-20261025T133629.txt`). Compared with the
+previously published `results.json`, every per-cell summary, per-run record, the pooled hook table
+and the log hash list are identical; the differences are the added count fields, the `validation`
+block, the generation time and the harness hashes. `harness/tables.py` prints the same tables as
+before. Re-parsing the four Part C cell logs with the revised `parse_part_c.py` reproduces
+`logs/partC/runs.jsonl` byte for byte. No number changed, so no second output is kept.
+
+Self-tests (run on 2026-10-25). `python3 harness/selftest_validation.py`: 14 of 14 cases as
+expected. The unmodified copy passes; each of the following makes `make_results.py` exit 1 without
+writing `results.json`: a Part A repetition removed, a Part A repetition duplicated, a Part A Maven
+log missing, a Part A server log line unparsable, the Part A fault not delivered, a Part B loop
+truncated, a Part B loop log missing, a Part C run removed from its cell log, a Part C cell log
+missing, a failed `pre_run_no_engine_containers`, `/tmp/seatunnel_mnt` recorded as present after a
+cell, a `runs.jsonl` line that is not JSON, and the Part C records missing.
+`bash harness/selftest_part_c_guards.sh`: 8 of 8 checks as expected, against the simulated Docker:
+a pre-existing stopped Flink container stops the script before any cell (exit 2, container
+untouched, no cell log); an unreachable Docker daemon and an existing `/tmp/seatunnel_mnt` stop it
+(exit 2); a clean cell passes (exit 0); with six containers created during the cell, only the one
+carrying the cell JVM's session label, the cell's engine image and a creation time after the cell
+start is removed, the four other engine containers are kept with their reasons logged
+(`session_label_mismatch` twice, `not_cell_engine_image`, `created_before_cell_start`), the
+`postgres:16` container is not considered, and the cell fails (exit 1); a harness abort (JVM exit 3)
+fails the cell (exit 1); `/tmp/seatunnel_mnt` created during the cell fails it (exit 1).

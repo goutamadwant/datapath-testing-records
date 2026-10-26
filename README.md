@@ -263,8 +263,8 @@ Part A
    was curl (`-f`), not wget.
 5. The tiny project resolves `junit:junit:4.13.2`; plugin versions come from the Maven 3.8.4 super
    POM (maven-dependency-plugin 2.8).
-6. One run per cell, as in the PR; no repetitions. Review item DOM-02-003 asks for at least 5; that
-   was not done for Part A within the time box.
+6. One run per cell, as in the PR; no repetitions. At least 5 runs per row would be needed for a
+   statement about repeatability; that was not done here (the 2026-10-26 bundle has 5 per cell).
 7. Invalid run kept: the first `jdk11_503x2_after` run (order 12) never reached the mirror because
    a stale port file from a 00:17 smoke test pointed `settings.xml` at a dead port (`No plugin found
    for prefix 'dependency'`). The driver was fixed (port file removed before start) and the cell
@@ -330,8 +330,8 @@ General
 - **Table 1 row 6, Flink-only intermediate revision of PR 12481 ("teardown completed in 12 of 12
   runs"):** not re-run; that revision is not in the merged history (only the parent and the merge
   were run).
-- **Repetitions for Part A:** one run per cell, as in the PR and as requested; review item
-  DOM-02-003 asks for at least 5 per row, which was not done for rows 1-5.
+- **Repetitions for Part A:** one run per cell, as in the PR; at least 5 per row were not run
+  here for rows 1-5 (the 2026-10-26 bundle has 5 per cell).
 - **PR 12472 200/200 stress run and the two mutation checks:** not part of this task.
 - **Windows:** nothing here ran on Windows; Part B says nothing about Windows failure rates.
 

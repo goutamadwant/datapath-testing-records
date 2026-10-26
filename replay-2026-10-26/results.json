@@ -1,7 +1,16 @@
 {
  "bundle": "replay-2026-10-26",
- "generated": "2026-10-25T14:28:02-0700",
+ "generated": "2026-10-25T18:00:52-0700",
  "note": "Reconstruction runs. Every value below is parsed from a log under logs/; paths are relative to this file's directory.",
+ "validation": {
+  "result": "PASS",
+  "requested_from": [
+   "logs/setup/setup-partA-20261025T132617.txt",
+   "logs/setup/setup-partB-20261025T141709.txt",
+   "logs/setup/setup-partC-20261025T133629.txt"
+  ],
+  "rules": "requested matrix from the recorded invocations; every requested cell has at least runs_requested valid runs; every run log exists, parses and agrees with its record; summaries are computed over the valid runs (see harness/make_results.py)"
+ },
  "revisions": {
   "REV_A_BEFORE": "a1084015eeb390a6c7f53d3ce7391217e427e4d9",
   "REV_A_AFTER": "ae7c919bcb78f03446dbd2b754a2b9882602946a",
@@ -73,7 +82,10 @@
      6.19,
      11.7
     ],
-    "label": "Table 1 row 1"
+    "label": "Table 1 row 1",
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    },
    "jdk8_503x2_after": {
     "jdk": "jdk8",
@@ -146,7 +158,10 @@
      22.92,
      36.87
     ],
-    "label": "Table 1 row 1"
+    "label": "Table 1 row 1",
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    },
    "jdk8_reset4_before": {
     "jdk": "jdk8",
@@ -224,7 +239,10 @@
      6.39,
      11.38
     ],
-    "label": "Table 1 row 2"
+    "label": "Table 1 row 2",
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    },
    "jdk8_reset4_after": {
     "jdk": "jdk8",
@@ -307,7 +325,10 @@
      13.02,
      16.12
     ],
-    "label": "Table 1 row 2"
+    "label": "Table 1 row 2",
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    },
    "jdk8_429x2_before": {
     "jdk": "jdk8",
@@ -380,7 +401,10 @@
      21.95,
      26.56
     ],
-    "label": "Table 1 row 3"
+    "label": "Table 1 row 3",
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    },
    "jdk8_429x2_after": {
     "jdk": "jdk8",
@@ -453,7 +477,10 @@
      27.72,
      31.5
     ],
-    "label": "Table 1 row 3"
+    "label": "Table 1 row 3",
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    },
    "jdk8_truncate1_before": {
     "jdk": "jdk8",
@@ -516,7 +543,10 @@
      9.12,
      11.53
     ],
-    "label": "Table 1 row 4"
+    "label": "Table 1 row 4",
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    },
    "jdk8_truncate1_after": {
     "jdk": "jdk8",
@@ -579,7 +609,10 @@
      6.8,
      12.28
     ],
-    "label": "Table 1 row 4"
+    "label": "Table 1 row 4",
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    },
    "jdk8_wrapper429s_before": {
     "jdk": "jdk8",
@@ -662,7 +695,10 @@
      21.29,
      22.86
     ],
-    "label": "Table 1 row 5"
+    "label": "Table 1 row 5",
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    },
    "jdk8_wrapper429s_after": {
     "jdk": "jdk8",
@@ -750,7 +786,10 @@
      47.63,
      54.0
     ],
-    "label": "Table 1 row 5"
+    "label": "Table 1 row 5",
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    },
    "jdk8_429x2nobody_before": {
     "jdk": "jdk8",
@@ -828,7 +867,10 @@
      89.75,
      91.56
     ],
-    "label": "sensitivity variant (empty-body 429), not a Table 1 row"
+    "label": "sensitivity variant (empty-body 429), not a Table 1 row",
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    },
    "jdk8_429x2nobody_after": {
     "jdk": "jdk8",
@@ -901,7 +943,10 @@
      23.03,
      26.47
     ],
-    "label": "sensitivity variant (empty-body 429), not a Table 1 row"
+    "label": "sensitivity variant (empty-body 429), not a Table 1 row",
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    },
    "jdk11_503x2_before": {
     "jdk": "jdk11",
@@ -964,7 +1009,10 @@
      6.21,
      8.23
     ],
-    "label": "Table 1 row 1"
+    "label": "Table 1 row 1",
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    },
    "jdk11_503x2_after": {
     "jdk": "jdk11",
@@ -1037,7 +1085,10 @@
      22.52,
      24.09
     ],
-    "label": "Table 1 row 1"
+    "label": "Table 1 row 1",
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    },
    "jdk11_reset4_before": {
     "jdk": "jdk11",
@@ -1115,7 +1166,10 @@
      6.6,
      7.88
     ],
-    "label": "Table 1 row 2"
+    "label": "Table 1 row 2",
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    },
    "jdk11_reset4_after": {
     "jdk": "jdk11",
@@ -1198,7 +1252,10 @@
      11.81,
      13.24
     ],
-    "label": "Table 1 row 2"
+    "label": "Table 1 row 2",
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    },
    "jdk11_429x2_before": {
     "jdk": "jdk11",
@@ -1271,7 +1328,10 @@
      22.63,
      23.77
     ],
-    "label": "Table 1 row 3"
+    "label": "Table 1 row 3",
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    },
    "jdk11_429x2_after": {
     "jdk": "jdk11",
@@ -1344,7 +1404,10 @@
      23.04,
      28.21
     ],
-    "label": "Table 1 row 3"
+    "label": "Table 1 row 3",
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    },
    "jdk11_truncate1_before": {
     "jdk": "jdk11",
@@ -1407,7 +1470,10 @@
      7.01,
      7.38
     ],
-    "label": "Table 1 row 4"
+    "label": "Table 1 row 4",
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    },
    "jdk11_truncate1_after": {
     "jdk": "jdk11",
@@ -1470,7 +1536,10 @@
      5.59,
      6.96
     ],
-    "label": "Table 1 row 4"
+    "label": "Table 1 row 4",
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    },
    "jdk11_wrapper429s_before": {
     "jdk": "jdk11",
@@ -1553,7 +1622,10 @@
      20.84,
      21.02
     ],
-    "label": "Table 1 row 5"
+    "label": "Table 1 row 5",
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    },
    "jdk11_wrapper429s_after": {
     "jdk": "jdk11",
@@ -1641,7 +1713,10 @@
      49.15,
      55.07
     ],
-    "label": "Table 1 row 5"
+    "label": "Table 1 row 5",
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    },
    "jdk11_429x2nobody_before": {
     "jdk": "jdk11",
@@ -1719,7 +1794,10 @@
      87.03,
      93.03
     ],
-    "label": "sensitivity variant (empty-body 429), not a Table 1 row"
+    "label": "sensitivity variant (empty-body 429), not a Table 1 row",
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    },
    "jdk11_429x2nobody_after": {
     "jdk": "jdk11",
@@ -1792,7 +1870,10 @@
      22.46,
      25.67
     ],
-    "label": "sensitivity variant (empty-body 429), not a Table 1 row"
+    "label": "sensitivity variant (empty-body 429), not a Table 1 row",
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    }
   },
   "runs": [
@@ -9143,7 +9224,10 @@
     ],
     "incomplete_loops": 0,
     "failed_total": 17,
-    "iterations_total": 20
+    "iterations_total": 20,
+    "runs_requested": 1,
+    "runs_recorded": 1,
+    "runs_valid": 1
    },
    "dev-hook-jdk11": {
     "jdk": "jdk11",
@@ -9158,7 +9242,10 @@
     ],
     "incomplete_loops": 0,
     "failed_total": 19,
-    "iterations_total": 20
+    "iterations_total": 20,
+    "runs_requested": 1,
+    "runs_recorded": 1,
+    "runs_valid": 1
    },
    "patch-hook-jdk8": {
     "jdk": "jdk8",
@@ -9173,7 +9260,10 @@
     ],
     "incomplete_loops": 0,
     "failed_total": 0,
-    "iterations_total": 20
+    "iterations_total": 20,
+    "runs_requested": 1,
+    "runs_recorded": 1,
+    "runs_valid": 1
    },
    "patch-hook-jdk11": {
     "jdk": "jdk11",
@@ -9188,7 +9278,10 @@
     ],
     "incomplete_loops": 0,
     "failed_total": 0,
-    "iterations_total": 20
+    "iterations_total": 20,
+    "runs_requested": 1,
+    "runs_recorded": 1,
+    "runs_valid": 1
    },
    "dev-hook-lead45-jdk8": {
     "jdk": "jdk8",
@@ -9203,7 +9296,10 @@
     ],
     "incomplete_loops": 0,
     "failed_total": 18,
-    "iterations_total": 20
+    "iterations_total": 20,
+    "runs_requested": 1,
+    "runs_recorded": 1,
+    "runs_valid": 1
    },
    "dev-hook-lead45-jdk11": {
     "jdk": "jdk11",
@@ -9218,7 +9314,10 @@
     ],
     "incomplete_loops": 0,
     "failed_total": 16,
-    "iterations_total": 20
+    "iterations_total": 20,
+    "runs_requested": 1,
+    "runs_recorded": 1,
+    "runs_valid": 1
    },
    "dev-hook-lead55-jdk8": {
     "jdk": "jdk8",
@@ -9233,7 +9332,10 @@
     ],
     "incomplete_loops": 0,
     "failed_total": 10,
-    "iterations_total": 20
+    "iterations_total": 20,
+    "runs_requested": 1,
+    "runs_recorded": 1,
+    "runs_valid": 1
    },
    "dev-hook-lead55-jdk11": {
     "jdk": "jdk11",
@@ -9248,7 +9350,10 @@
     ],
     "incomplete_loops": 0,
     "failed_total": 11,
-    "iterations_total": 20
+    "iterations_total": 20,
+    "runs_requested": 1,
+    "runs_recorded": 1,
+    "runs_valid": 1
    },
    "dev-hook-lead65-jdk8": {
     "jdk": "jdk8",
@@ -9263,7 +9368,10 @@
     ],
     "incomplete_loops": 0,
     "failed_total": 4,
-    "iterations_total": 20
+    "iterations_total": 20,
+    "runs_requested": 1,
+    "runs_recorded": 1,
+    "runs_valid": 1
    },
    "dev-hook-lead65-jdk11": {
     "jdk": "jdk11",
@@ -9278,7 +9386,10 @@
     ],
     "incomplete_loops": 0,
     "failed_total": 4,
-    "iterations_total": 20
+    "iterations_total": 20,
+    "runs_requested": 1,
+    "runs_recorded": 1,
+    "runs_valid": 1
    },
    "dev-nohook-contention-jdk8": {
     "jdk": "jdk8",
@@ -9293,7 +9404,10 @@
     ],
     "incomplete_loops": 0,
     "failed_total": 0,
-    "iterations_total": 50
+    "iterations_total": 50,
+    "runs_requested": 1,
+    "runs_recorded": 1,
+    "runs_valid": 1
    },
    "dev-nohook-contention-jdk11": {
     "jdk": "jdk11",
@@ -9308,7 +9422,10 @@
     ],
     "incomplete_loops": 0,
     "failed_total": 0,
-    "iterations_total": 50
+    "iterations_total": 50,
+    "runs_requested": 1,
+    "runs_recorded": 1,
+    "runs_valid": 1
    }
   },
   "hook_wake_position_vs_failure_pooled_dev_hook": {
@@ -12112,7 +12229,10 @@
       "expected": "absent",
       "observed": "absent"
      }
-    ]
+    ],
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    },
    "flink-after": {
     "engine": "flink",
@@ -12200,7 +12320,10 @@
       "expected": "absent",
       "observed": "absent"
      }
-    ]
+    ],
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    },
    "spark-before": {
     "engine": "spark",
@@ -12284,7 +12407,10 @@
       "expected": "absent",
       "observed": "absent"
      }
-    ]
+    ],
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    },
    "spark-after": {
     "engine": "spark",
@@ -12368,7 +12494,10 @@
       "expected": "absent",
       "observed": "absent"
      }
-    ]
+    ],
+    "runs_requested": 5,
+    "runs_recorded": 5,
+    "runs_valid": 5
    }
   },
   "runs": [
@@ -16014,13 +16143,17 @@
   },
   {
    "path": "harness/make_results.py",
-   "bytes": 8753,
-   "sha256": "0176e7b397d565bf75e5b7fcde44bf6b1872512032c303e29ce5513d8f9527b8"
+   "bytes": 25632,
+   "sha256": "5a781d8e56c158b3195ec2b15d886aaab6f5fb74add7af2ed79a5844abb2950e",
+   "sha256_as_run": "0176e7b397d565bf75e5b7fcde44bf6b1872512032c303e29ce5513d8f9527b8",
+   "revised_after_runs": "2026-10-25: fail-closed validation of the requested matrix and per-cell runs_requested, runs_recorded, runs_valid; as-run hashes kept here. Re-running it over the recorded logs left every count and summary unchanged."
   },
   {
    "path": "harness/parse_part_c.py",
-   "bytes": 2686,
-   "sha256": "bdad4ea98f03da6f6321d2237d3d0e5f9c178064604190a8e38fda5e5568802d"
+   "bytes": 7895,
+   "sha256": "1bafe4d218af112170e7f373839d11e5d77cbd8db1e12b0d07dda11f09dfe752",
+   "sha256_as_run": "bdad4ea98f03da6f6321d2237d3d0e5f9c178064604190a8e38fda5e5568802d",
+   "revised_after_runs": "2026-10-25: validation added (missing or unparsable log, fewer runs than requested, missing assertions, failed validity checks make the exit status 1); record format unchanged. Re-parsing the four recorded cell logs with this version reproduces logs/partC/runs.jsonl byte for byte."
   },
   {
    "path": "harness/part_a.py",
@@ -16034,10 +16167,20 @@
   },
   {
    "path": "harness/part_c.sh",
-   "bytes": 6969,
-   "sha256": "59fbd0c8eb782d97fd6fe8048f61ffb167388fc17c2203941d6f8f941a25de57",
+   "bytes": 13032,
+   "sha256": "b7757fbd63600d4715781317cf49fbaba5f66de619a178e99453661a252aa865",
    "sha256_as_run": "a75658e64990ce934935601d2c3f380003e049f84bd80d52a3243e9844835cdb",
-   "revised_after_runs": "2026-10-25: cleanup scoped to containers created during the cell; the executed runs used the as-run version (sha256_as_run), whose removals are listed in logs/partC/*.cleanup.txt 2026-10-25 (second revision): refuses to start when /tmp/seatunnel_mnt already exists, because the SeaTunnel teardown deletes that path's contents on the host; the executed runs used the as-run version (sha256_as_run)."
+   "revised_after_runs": "2026-10-25 (first revision): cleanup scoped to containers that appeared during the cell. 2026-10-25 (second revision): refuses to start when /tmp/seatunnel_mnt exists. 2026-10-25 (third revision): refuses to start a cell while any container of the Flink, Spark or Zeta images exists; removes a leftover only if it did not exist before the cell, was created after the cell start, runs the cell's engine image and carries the cell JVM's Testcontainers session label, logging every container considered; a cell fails and the script stops when a cell-level check fails, including /tmp/seatunnel_mnt present after the cell. The executed runs used the as-run version; its cleanup loop wrote no logs/partC/*.cleanup.txt file, i.e. it removed nothing (no engine container remained after any cell)."
+  },
+  {
+   "path": "harness/selftest_part_c_guards.sh",
+   "bytes": 8642,
+   "sha256": "cd6f9d9da31fcc373e91643e073cf73f1fcb4a4f9b42eed399722f623eaddcf1"
+  },
+  {
+   "path": "harness/selftest_validation.py",
+   "bytes": 6040,
+   "sha256": "c45d833be3b3c74f519c76a336bd5923ec93664f754f14ea3f70269f3554367f"
   },
   {
    "path": "harness/settings-empty.xml",
@@ -16066,13 +16209,17 @@
   },
   {
    "path": "harness/java/ReplayKillTeardownTest.java",
-   "bytes": 17693,
-   "sha256": "e0049c6c63c15d6fa037ab6b57261139c54fdd9145b29365e0e2dfe5867be259"
+   "bytes": 19322,
+   "sha256": "b715134750acad0875701c717d2140563dd14f3c49928a6104f0457d9252caf5",
+   "sha256_as_run": "e0049c6c63c15d6fa037ab6b57261139c54fdd9145b29365e0e2dfe5867be259",
+   "revised_after_runs": "2026-10-25: a failed pre_run_no_engine_containers check aborts the cell (JVM exit 3) instead of being recorded and continued; prints the Testcontainers session id. The executed runs used the as-run version (its sha256 is in every Part C cell log header); the check passed in all 20 runs."
   },
   {
    "path": "replay.sh",
-   "bytes": 14374,
-   "sha256": "6e85b14156590e4dc5217668afd3287f5829e93c5aa9876c2973f31195ca0d0b"
+   "bytes": 14996,
+   "sha256": "613d4434bcb7f257bf22005bde934ca3bc0b5b1d63abae3d00266a9eb6c945f7",
+   "sha256_as_run": "6e85b14156590e4dc5217668afd3287f5829e93c5aa9876c2973f31195ca0d0b",
+   "revised_after_runs": "2026-10-25: --runs must be a positive integer; a failed validation is reported and the exit status is 1. sha256_as_run is the version published with the runs (interpretation 26: the maven-version block was added after Parts A and C had started)."
   }
  ]
 }

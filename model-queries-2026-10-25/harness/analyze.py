@@ -1,18 +1,62 @@
-"""Build results.json from queries/, logs/measure/ and logs/generation/, and print the tables."""
+"""Build results.json from queries/, logs/measure/ and logs/generation/, and print the tables.
+
+Revision 2026-10-25 (after the runs): (1) the rule-of-three 95 % upper bound is no longer computed
+or written. The batched queries from 20 selected prompts give no justified independent-query
+sampling model, so the results report counts only (the bound proposed in PREREGISTRATION.md is
+not part of the accepted analysis). (2) Validation: every query and control must have exactly
+REPS run records per build, with repetition numbers 1..REPS, and every log line must parse;
+otherwise the problems are listed, results.json is not written and the exit status is 1.
+"""
 import hashlib
 import json
 import math
 import pathlib
 import statistics
+import sys
 
 HERE = pathlib.Path(__file__).resolve().parent.parent
 STALL_MS = 1000.0
 TIMEOUT_MS = 20000.0
 BUILDS = ("before", "after")
+REPS = 3  # repetitions per (query, build), as pre-registered and as in harness/measure.py
+# Files changed after the runs; sha256_as_run identifies the version that produced the
+# published results of the runs.
+AS_RUN = [
+    {"path": "harness/analyze.py",
+     "sha256_as_run": "d3d460e05a5424b21924a2ec06d1d55b09548c0d82e83c43a13577c33fe4afb2",
+     "revised_after_runs": "2026-10-25: rule_of_three_upper_95 removed from the summaries (no justified "
+                           "independent-query sampling model); fail-closed check of REPS repetitions per "
+                           "(query, build). Re-running it over the recorded logs changes no count, time or "
+                           "status; the only difference in results.json is the removed field and this note."},
+]
+
+
+class Invalid(Exception):
+    pass
 
 
 def jl(path):
-    return [json.loads(l) for l in path.read_text().splitlines() if l.strip()]
+    if not path.is_file():
+        raise Invalid(f"{path.relative_to(HERE)}: missing")
+    out = []
+    for i, l in enumerate(path.read_text().splitlines(), 1):
+        if l.strip():
+            try:
+                out.append(json.loads(l))
+            except ValueError:
+                raise Invalid(f"{path.relative_to(HERE)} line {i}: not valid JSON")
+    return out
+
+
+def check_reps(items, runs):
+    """Every (item, build) must have exactly REPS records with repetition numbers 1..REPS."""
+    problems = []
+    for it in items:
+        for b in BUILDS:
+            reps = sorted(r.get("rep") for r in runs.get((it["query_id"], b), []))
+            if reps != list(range(1, REPS + 1)):
+                problems.append(f"{it['query_id']} {b}: repetitions recorded {reps}, expected 1..{REPS}")
+    return problems
 
 
 def p95(xs):
@@ -48,6 +92,14 @@ def outcome(runs):
 
 
 def main():
+    try:
+        return build()
+    except Invalid as e:
+        print(f"analyze.py: {e}; results.json not written", file=sys.stderr)
+        return 1
+
+
+def build():
     controls = jl(HERE / "harness/controls.jsonl")
     queries = []
     for f in sorted((HERE / "queries").glob("*.jsonl")):
@@ -57,6 +109,15 @@ def main():
     for r in jl(HERE / "logs/measure/runs.jsonl"):
         runs.setdefault((r["query_id"], r["build"]), []).append(r)
     gen_summary = json.loads((HERE / "logs/generation/summary.json").read_text())
+    problems = check_reps(controls + queries, runs)
+    known = {(it["query_id"], b) for it in controls + queries for b in BUILDS}
+    problems += [f"{q} {b}: run records for an item that is not in queries/ or controls"
+                 for (q, b) in sorted(set(runs) - known)]
+    if problems:
+        print(f"analyze.py: validation FAILED ({len(problems)} problems); results.json not written", file=sys.stderr)
+        for p in problems:
+            print(f"  - {p}", file=sys.stderr)
+        return 1
 
     def record(item):
         c = cls[item["query_id"]]
@@ -98,7 +159,6 @@ def main():
             s[f"dist_{b}"] = dist([r[b]["time_ms"] for r in plannable])
         s["stall_before"] = sum(r["before"]["status"] == "timeout" or (r["before"].get("time_ms", 0) > STALL_MS) for r in plannable)
         s["stall_after"] = sum(r["after"]["status"] == "timeout" or (r["after"].get("time_ms", 0) > STALL_MS) for r in plannable)
-        s["rule_of_three_upper_95"] = round(3 / len(plannable), 4) if plannable and s["stall_before"] == 0 else None
         return s
 
     groups = {"g1": [r for r in recs if r["generator"] == "g1"],
@@ -127,7 +187,11 @@ def main():
            "generation": {k: v for k, v in gen_summary.items() if k != "g1_models_listing"},
            "summary": summary, "strata": strata, "controls": ctl, "slow_queries": slow,
            "status_differs_between_builds": errors_differ, "nested_counted_queries": nested_list,
-           "queries": recs, "sha256": hashes}
+           "queries": recs, "sha256": hashes,
+           "validation": {"result": "PASS", "rule": f"{REPS} repetitions (1..{REPS}) per query and control "
+                                                     "and build; every log line parses"},
+           "revisions": [dict(a, sha256=hashlib.sha256((HERE / a["path"]).read_bytes()).hexdigest())
+                         for a in AS_RUN]}
     exp = HERE / "logs/exploratory/summary.json"
     if exp.exists():
         out["exploratory_not_preregistered"] = {
@@ -137,6 +201,7 @@ def main():
             "summary": json.loads(exp.read_text())}
     (HERE / "results.json").write_text(json.dumps(out, indent=1))
     print_tables(out)
+    return 0
 
 
 def fmt(d, k):
@@ -177,4 +242,4 @@ def print_tables(out):
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
