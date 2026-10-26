@@ -102,3 +102,7 @@ the point of recording it: a replay that passes the check used the toolchain of 
   activity on the host was not stopped or recorded. A second physical machine was not used.
 - Part B is one loop per cell, as in the published bundle.
 - Part C was not run (see `replay-2026-10-26/harness/historical-part-c/README.md`).
+
+## Note on one setup log (2026-10-26)
+
+`replay-clean/out/bundle/logs/setup/setup-partB-20261026T054604.txt` is 37 bytes longer than the length recorded for it in `out/bundle/results.json`: its closing line (`# 2026-10-26T06:06:03+0000 done rc=0`) was written after `results.json` had been generated. The first 8,647 bytes match the recorded sha256; nothing else differs.
