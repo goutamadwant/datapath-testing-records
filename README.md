@@ -50,10 +50,36 @@ they are historical.
 
 ## Access
 
-The repository is public. Unauthenticated read access was checked on 2026-10-26 at 01:01:39 UTC
+The repository is public. Unauthenticated read access was checked on 2026-10-26 at 02:09:29 UTC
+(2026-10-25 19:09 UTC-7) from a shell with an empty environment (no `GH_TOKEN` or `GITHUB_TOKEN`),
+an empty `HOME`, no netrc and a new, empty cookie jar (`curl -s -o /dev/null -w '%{http_code}'`),
+at commit `d67471f6dd2d518d5bd8689eb915d1c6ff686f10`, which added the fourth revision of the records:
+
+| URL | HTTP status |
+| --- | --- |
+| `https://raw.githubusercontent.com/goutamadwant/datapath-testing-records/d67471f6dd2d518d5bd8689eb915d1c6ff686f10/README.md` | 200 |
+| `https://raw.githubusercontent.com/goutamadwant/datapath-testing-records/d67471f6dd2d518d5bd8689eb915d1c6ff686f10/replay-2026-10-26/README.md` | 200 |
+| `https://raw.githubusercontent.com/goutamadwant/datapath-testing-records/d67471f6dd2d518d5bd8689eb915d1c6ff686f10/replay-2026-10-26/harness/historical-part-c/README.md` | 200 |
+| `https://raw.githubusercontent.com/goutamadwant/datapath-testing-records/d67471f6dd2d518d5bd8689eb915d1c6ff686f10/replay-2026-10-26/replay.sh` | 200 |
+| `https://raw.githubusercontent.com/goutamadwant/datapath-testing-records/d67471f6dd2d518d5bd8689eb915d1c6ff686f10/replay-2026-10-26/results.json` | 200 |
+| `https://raw.githubusercontent.com/goutamadwant/datapath-testing-records/d67471f6dd2d518d5bd8689eb915d1c6ff686f10/model-queries-2026-10-25/README.md` | 200 |
+| `https://github.com/goutamadwant/datapath-testing-records` | 200 |
+| `https://github.com/goutamadwant/datapath-testing-records/tree/d67471f6dd2d518d5bd8689eb915d1c6ff686f10` | 200 |
+| `https://github.com/goutamadwant/datapath-testing-records/commit/d67471f6dd2d518d5bd8689eb915d1c6ff686f10` | 200 |
+
+`git ls-remote https://github.com/goutamadwant/datapath-testing-records refs/heads/master`, run
+with no credential helper, listed `d67471f6dd2d518d5bd8689eb915d1c6ff686f10`. The served `replay-2026-10-26/results.json` and
+`replay-2026-10-26/replay.sh` had the sha256 of the committed files (`a4bbf17546af...` and
+`4b612c5de438...`). At 02:09:35 UTC the tree and the raw `README.md` of the previous commit
+`94c2581e1e798be894b568abea6921ea1b1eb1fa` also returned 200. The commit that adds this entry
+changes only this README.
+
+### Earlier check (commit `fe561f6`)
+
+Unauthenticated read access was checked on 2026-10-26 at 01:01:39 UTC
 (2026-10-25 18:01 UTC-7) from a shell with `GH_TOKEN` and `GITHUB_TOKEN` unset, an empty `HOME`,
 no netrc and a new, empty cookie jar (`curl -s -o /dev/null -w '%{http_code}'`), at commit
-`fe561f6e366787b36161b79e038404ed120f02ca`, which added this revision of the records:
+`fe561f6e366787b36161b79e038404ed120f02ca`, which added the third revision of the records:
 
 | URL | HTTP status |
 | --- | --- |
@@ -69,7 +95,7 @@ no netrc and a new, empty cookie jar (`curl -s -o /dev/null -w '%{http_code}'`),
 with no credential helper, listed `fe561f6e366787b36161b79e038404ed120f02ca`. At 01:01:52 UTC the
 tree of the previous commit `f1d0a742b185c42b8165f4b832774e0133ca3746` and its
 `replay-2026-10-26/README.md` and `model-queries-2026-10-25/README.md` raw files also returned 200.
-The commit that adds this section changes only this README.
+The commit that added this entry (`94c2581`) changed only this README.
 
 ## Revision (2026-10-25)
 
