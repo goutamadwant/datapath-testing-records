@@ -1,0 +1,6 @@
+{"event": "start", "fault": "wrapper429s", "port": 33697, "root": "/work/partA/warm-repo", "t_rel_s": 0.003, "wall": "2026-10-26T04:45:30.292"}
+{"method": "GET", "path": "/maven2/org/apache/maven/wrapper/maven-wrapper/3.1.0/maven-wrapper-3.1.0.jar", "n": 1, "target": false, "action": "429", "exists": true, "client": 56696, "t_rel_s": 0.092, "wall": "2026-10-26T04:45:30.381"}
+{"method": "GET", "path": "/maven2/org/apache/maven/wrapper/maven-wrapper/3.1.0/maven-wrapper-3.1.0.jar", "n": 2, "target": false, "action": "429", "exists": true, "client": 42094, "t_rel_s": 5.118, "wall": "2026-10-26T04:45:35.407"}
+{"method": "GET", "path": "/maven2/org/apache/maven/wrapper/maven-wrapper/3.1.0/maven-wrapper-3.1.0.jar", "n": 3, "target": false, "action": "429", "exists": true, "client": 42098, "t_rel_s": 10.14, "wall": "2026-10-26T04:45:40.429"}
+{"method": "GET", "path": "/maven2/org/apache/maven/wrapper/maven-wrapper/3.1.0/maven-wrapper-3.1.0.jar", "n": 4, "target": false, "action": "429", "exists": true, "client": 45456, "t_rel_s": 15.163, "wall": "2026-10-26T04:45:45.468"}
+{"method": "GET", "path": "/maven2/org/apache/maven/wrapper/maven-wrapper/3.1.0/maven-wrapper-3.1.0.jar", "n": 5, "target": false, "action": "429", "exists": true, "client": 45468, "t_rel_s": 20.181, "wall": "2026-10-26T04:45:50.487"}

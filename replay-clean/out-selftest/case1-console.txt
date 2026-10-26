@@ -1,0 +1,20 @@
+# 2026-10-26T06:08:41+0000 replay.sh --part A runs=default prepare_only=1 cells=all work=work
+# 2026-10-26T06:08:42+0000 toolchain ok: JDK8=/opt/jdk8 JDK11=/opt/jdk11 record=logs/setup/toolchain-partA-20261026T060841.txt
+# 2026-10-26T06:08:42+0000 checking the toolchain against /src/replay-2026-10-26/../replay-clean/toolchain.json (sha256 b7172748fe890c7ff3354caf14f7105ee800acfce08556b8cb5d1ed15f4d637d)
+# 2026-10-26T06:08:42+0000 toolchain manifest: jdk8_java_version matches
+# 2026-10-26T06:08:43+0000 toolchain manifest: jdk11_java_version matches
+# 2026-10-26T06:08:43+0000 toolchain manifest: python_version matches
+# 2026-10-26T06:08:43+0000 toolchain manifest: seatunnel_commits matches
+# 2026-10-26T06:08:43+0000 cloning https://github.com/apache/seatunnel.git (blobless) into work/seatunnel
+# 2026-10-26T06:08:47+0000 all six pinned commits present in work/seatunnel
+# 2026-10-26T06:08:48+0000 toolchain manifest: maven_distribution_url matches
+# 2026-10-26T06:08:48+0000 toolchain manifest: maven_distribution_url matches
+# 2026-10-26T06:08:48+0000 toolchain manifest: maven_distribution_url matches
+# 2026-10-26T06:08:48+0000 toolchain manifest: maven_distribution_url matches
+# 2026-10-26T06:08:49+0000 fetched org/apache/maven/wrapper/maven-wrapper/3.1.0/maven-wrapper-3.1.0.jar sha1=32f70e9f2cd92fd7629aba8214d1c9ae58a1e2fd (matches Central)
+# 2026-10-26T06:08:50+0000 fetched org/apache/maven/wrapper/maven-wrapper/3.1.0/maven-wrapper-3.1.0.pom sha1=70fa8386dc3208bbd2d17328c9d904f80bb258c5 (matches Central)
+# 2026-10-26T06:09:33+0000 warm repository built from Maven Central (log logs/partA/warm-repo-build.txt)
+# 2026-10-26T06:09:33+0000 toolchain manifest: maven_wrapper_jar_sha1 matches
+# 2026-10-26T06:09:33+0000 toolchain manifest: maven_distribution_sha256 matches
+results.json: validation PASS; A 120 valid runs, B 12 valid loops, C 20 valid runs, 291 log files hashed
+# 2026-10-26T06:09:34+0000 done rc=0

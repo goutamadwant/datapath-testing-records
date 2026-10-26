@@ -101,7 +101,9 @@ AS_RUN = {
             "every count and summary unchanged. "
             "2026-10-25 (fourth revision): imports parse_part_c from harness/historical-part-c; --part all "
             "requests Parts A and B only; harness entries of moved files carry path_as_run. Re-running it "
-            "over the recorded logs left every count, summary and log hash unchanged."},
+            "over the recorded logs left every count, summary and log hash unchanged. "
+            "2026-10-26 (fifth revision): the replay.sh note below records the --require-toolchain option; "
+            "re-running it over the recorded logs left every count, summary and log hash unchanged."},
     "replay.sh": {
         "sha256_as_run": "6e85b14156590e4dc5217668afd3287f5829e93c5aa9876c2973f31195ca0d0b",
         "revised_after_runs":
@@ -111,7 +113,12 @@ AS_RUN = {
             "2026-10-25 (fourth revision): Part C is no longer run. --part C prints why and exits 0 before "
             "creating, cloning, building or contacting anything; --part all prints the same reason and runs "
             "Parts A and B only. The Part C preparation (image pulls, e2e build) and the Docker lines of the "
-            "toolchain record were removed."},
+            "toolchain record were removed. "
+            "2026-10-26 (fifth revision): optional --require-toolchain <manifest> (for example "
+            "../replay-clean/toolchain.json) stops the script with exit status 3 unless the JDK, Python and "
+            "Maven wrapper identities and the pinned commits equal the manifest; without the option the "
+            "behaviour is unchanged. The clean-environment replay in ../replay-clean executed the fourth-revision "
+            "file (sha256 4b612c5de43833fb898b74467fec426204d556c6036db2f9339f156157a81642, commit d059baf)."},
     "harness/historical-part-c/selftest_part_c_guards.sh": {
         "path_as_run": "harness/selftest_part_c_guards.sh",
         "revised_after_runs":

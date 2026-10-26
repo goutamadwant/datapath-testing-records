@@ -1,0 +1,20 @@
+# run.sh start 2026-10-26T04:39:26Z commit=d059baf95c8a21850a0b5d9d08ef07128d636ed2 container=replay-clean-20261025T213926
+## host uname -a
+Darwin MacBook-Pro.local 27.0.0 Darwin Kernel Version 27.0.0: Tue Aug 11 21:22:49 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T6000 arm64
+Apple M1 Pro 10 17179869184 
+ProductName:		macOS
+ProductVersion:		27.0
+BuildVersion:		26A428
+## docker
+client 29.9.2 server 29.9.2 linux/arm64
+ncpu=10 mem_bytes=11471511552 os=Docker Desktop kernel=7.0.14-linuxkit
+## sha256 of the files that define the image and the run
+edc9673e263e1c3c3f7eae4f3f0d01e604a20a92d12ef00952cb9c7297583152  Dockerfile
+d0c8320735544a8e2752194715b04887ea6e8e3e901f73fdfec7a57c843cdf43  in_container.sh
+fae9ba9830c2a2fe0f55ad527282ea1f573519007c6f73e8f5bacbabcb75f958  run.sh
+## image
+image_id=sha256:ad8b78fb873f05420ec547cbfb8e93e5d93377eab3a2ceb47d83eda2f2e1a290 os=linux arch=arm64 created=2026-10-26T04:41:31.426684884Z
+base=ubuntu:24.04@sha256:68ee22004a9109b44973313b02ff7b1de250f1de0f5ecb628d73f579aaff33ac
+## docker run start 2026-10-26T04:42:03Z
++ docker run --rm --platform linux/arm64 --name replay-clean-20261025T213926 -v <replay-clean>/out:/out -e RECORDS_COMMIT=d059baf95c8a21850a0b5d9d08ef07128d636ed2 -e PARTS -e PART_A_TIMEOUT_S -e PART_B_TIMEOUT_S -e RECORDS_URL replay-clean:arm64
+## docker run end 2026-10-26T06:06:27Z exit=0

@@ -1,0 +1,58 @@
+{
+ "description": "Toolchain of the clean-environment replay of replay-2026-10-26 (Parts A and B) in the replay-clean container. replay.sh --require-toolchain <this file> compares the values under 'enforce' exactly and stops with exit status 3 on any difference. The other fields document where each value comes from.",
+ "image": {
+  "platform": "linux/arm64",
+  "base": "ubuntu:24.04@sha256:68ee22004a9109b44973313b02ff7b1de250f1de0f5ecb628d73f579aaff33ac",
+  "image_id_of_the_executed_build": "sha256:ad8b78fb873f05420ec547cbfb8e93e5d93377eab3a2ceb47d83eda2f2e1a290",
+  "image_id_note": "Local build of replay-clean/Dockerfile (Docker image config digest). apt package versions are not pinned; the installed set is listed in out/env/tools.txt, so a rebuild can differ in those packages and in its image id while the JDKs, Maven and the commits below are fixed.",
+  "dockerfile_sha256": "edc9673e263e1c3c3f7eae4f3f0d01e604a20a92d12ef00952cb9c7297583152"
+ },
+ "jdk8": {
+  "distribution": "Eclipse Temurin jdk8u504-b01, linux aarch64 (HotSpot)",
+  "archive_url": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u504-b01/OpenJDK8U-jdk_aarch64_linux_hotspot_8u504b01.tar.gz",
+  "archive_sha256": "57b7ed8af9d48542bb49ff7894448040b17bea0a48b41677d11ecaec6129768d",
+  "sha256_sources": [
+   "<archive_url>.sha256.txt on the release page",
+   "api.adoptium.net/v3/assets/latest/8/hotspot?architecture=aarch64&image_type=jdk&os=linux"
+  ],
+  "home_in_image": "/opt/jdk8"
+ },
+ "jdk11": {
+  "distribution": "Eclipse Temurin jdk-11.0.32.1+1, linux aarch64 (HotSpot)",
+  "archive_url": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.32.1%2B1/OpenJDK11U-jdk_aarch64_linux_hotspot_11.0.32.1_1.tar.gz",
+  "archive_sha256": "f27033e6f7523c1b0b2565a78e9c0e0abe5596a854ce00ca04ec1b06ece7a935",
+  "sha256_sources": [
+   "<archive_url>.sha256.txt on the release page",
+   "api.adoptium.net/v3/assets/latest/11/hotspot?architecture=aarch64&image_type=jdk&os=linux"
+  ],
+  "home_in_image": "/opt/jdk11"
+ },
+ "maven": {
+  "version": "3.8.4",
+  "via": "the Maven wrapper (mvnw, maven-wrapper 3.1.0) of each pinned apache/seatunnel revision; Maven itself is not installed",
+  "wrapper_jar": "org/apache/maven/wrapper/maven-wrapper/3.1.0/maven-wrapper-3.1.0.jar (sha1 checked against Maven Central's .sha1 by replay.sh)",
+  "resolver": "maven-resolver 1.6.3, wagon-http 3.4.3 (shaded); see out/bundle/logs/partA/maven-version.txt",
+  "distribution_zip_sha1": "765515b57d2f525bcb682de9ec702f1d8703e9b9",
+  "distribution_zip_note": "sha256 ccd67d1e... (enforce.maven_distribution_sha256) is the zip downloaded by the wrapper in the container (out/bundle/logs/partA/maven-version.txt) and in the published runs; its sha1 equals Maven Central's apache-maven-3.8.4-bin.zip.sha1 (checked 2026-10-26)."
+ },
+ "python": "Python 3.12.3 (Ubuntu 24.04 python3)",
+ "other_tools": "git 2.43.0, curl 8.5.0, GNU patch 2.7.6, GNU bash 5.2; wget not installed (out/env/tools.txt)",
+ "pinned_commits": {
+  "datapath-testing-records (replayed)": "d059baf95c8a21850a0b5d9d08ef07128d636ed2",
+  "apache/seatunnel PR 12468 before (parent)": "a1084015eeb390a6c7f53d3ce7391217e427e4d9",
+  "apache/seatunnel PR 12468 after (merge)": "ae7c919bcb78f03446dbd2b754a2b9882602946a",
+  "apache/seatunnel PR 12472 dev": "deb16a3c3152f0349a587a504dccc997a131a9d7",
+  "apache/seatunnel PR 12472 patched (merge)": "87ed0afe0f783eda1b1f3ac6f0ac9fadedcb4f98",
+  "apache/seatunnel PR 12481 before (parent; Part C, not run)": "7ba68325cb7ea1bf1a28f56c4f9c20695d221df3",
+  "apache/seatunnel PR 12481 after (merge; Part C, not run)": "0e4cf52896ee3604a8e7899d7736ffd914ee6ce7"
+ },
+ "enforce": {
+  "jdk8_java_version": "openjdk version \"1.8.0_504\"\nOpenJDK Runtime Environment (Temurin)(build 1.8.0_504-b01)\nOpenJDK 64-Bit Server VM (Temurin)(build 25.504-b01, mixed mode)",
+  "jdk11_java_version": "openjdk version \"11.0.32.1\" 2026-08-18\nOpenJDK Runtime Environment Temurin-11.0.32.1+1 (build 11.0.32.1+1)\nOpenJDK 64-Bit Server VM Temurin-11.0.32.1+1 (build 11.0.32.1+1, mixed mode)",
+  "python_version": "Python 3.12.3",
+  "seatunnel_commits": "a1084015eeb390a6c7f53d3ce7391217e427e4d9 ae7c919bcb78f03446dbd2b754a2b9882602946a deb16a3c3152f0349a587a504dccc997a131a9d7 87ed0afe0f783eda1b1f3ac6f0ac9fadedcb4f98 7ba68325cb7ea1bf1a28f56c4f9c20695d221df3 0e4cf52896ee3604a8e7899d7736ffd914ee6ce7",
+  "maven_distribution_url": "https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.8.4/apache-maven-3.8.4-bin.zip",
+  "maven_distribution_sha256": "ccd67d1ee4fd79339c9b6f95d1e5e1e0e0209a8c1b095d9291e009afa0a492a5",
+  "maven_wrapper_jar_sha1": "32f70e9f2cd92fd7629aba8214d1c9ae58a1e2fd"
+ }
+}

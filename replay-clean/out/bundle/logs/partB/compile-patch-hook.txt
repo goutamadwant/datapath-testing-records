@@ -1,0 +1,3 @@
+# hook hook-patch-87ed0afe0-stalls.patch applied to work/wt-patch/seatunnel-edge-agent/seatunnel-edge-agent-connector/src/test/java/org/apache/seatunnel/edge/agent/connector/file/FileCollectReaderBehaviorTest.java (copy), compiled with JDK 8
+patching file FileCollectReaderBehaviorTest.java
+# exit=0

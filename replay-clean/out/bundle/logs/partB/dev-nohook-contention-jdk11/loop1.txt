@@ -1,0 +1,59 @@
+# cell=dev-nohook-contention-jdk11 loop=1 start=2026-10-26T06:04:27+0000 rev=deb16a3c3152f0349a587a504dccc997a131a9d7
+# JAVA_HOME=/opt/jdk11 iterations=50 busy_loops=20 jvm_props=
+# hooked_test_classes=none
+# load_before:  06:04:27 up 1 day, 23:09,  0 user,  load average: 21.00, 9.49, 4.68
+# command: $JAVA_HOME/bin/java  -cp <classpath: hooked classes, runner, module test-classes, classes, test-classpath.txt, launcher> RepeatMethod org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest rediscoversFileAfterInactiveCursorClosed 50
+# load_with_busy_loops:  06:04:30 up 1 day, 23:09,  0 user,  load average: 21.40, 9.77, 4.80
+JVM 11.0.32.1 OpenJDK 64-Bit Server VM aarch64
+ITER 1 PASS 31177
+ITER 2 PASS 723
+ITER 3 PASS 631
+ITER 4 PASS 775
+ITER 5 PASS 731
+ITER 6 PASS 782
+ITER 7 PASS 742
+ITER 8 PASS 684
+ITER 9 PASS 780
+ITER 10 PASS 693
+ITER 11 PASS 666
+ITER 12 PASS 632
+ITER 13 PASS 895
+ITER 14 PASS 764
+ITER 15 PASS 772
+ITER 16 PASS 743
+ITER 17 PASS 746
+ITER 18 PASS 862
+ITER 19 PASS 732
+ITER 20 PASS 789
+ITER 21 PASS 736
+ITER 22 FAIL 4330 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+ITER 23 PASS 1229
+ITER 24 PASS 860
+ITER 25 PASS 1034
+ITER 26 PASS 798
+ITER 27 PASS 679
+ITER 28 PASS 700
+ITER 29 PASS 740
+ITER 30 FAIL 3897 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+ITER 31 PASS 795
+ITER 32 PASS 775
+ITER 33 PASS 653
+ITER 34 PASS 821
+ITER 35 PASS 724
+ITER 36 PASS 893
+ITER 37 PASS 762
+ITER 38 PASS 1025
+ITER 39 PASS 1393
+ITER 40 PASS 955
+ITER 41 PASS 1062
+ITER 42 PASS 1180
+ITER 43 PASS 1050
+ITER 44 PASS 915
+ITER 45 PASS 722
+ITER 46 PASS 719
+ITER 47 PASS 1190
+ITER 48 PASS 797
+ITER 49 PASS 869
+ITER 50 PASS 698
+SUMMARY failed=2/50
+# exit=0 wall_seconds=89 end=2026-10-26T06:05:59+0000

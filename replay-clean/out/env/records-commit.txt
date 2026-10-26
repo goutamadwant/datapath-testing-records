@@ -1,0 +1,18 @@
+url=https://github.com/goutamadwant/datapath-testing-records.git
+requested=d059baf95c8a21850a0b5d9d08ef07128d636ed2
+head=d059baf95c8a21850a0b5d9d08ef07128d636ed2
+commit_date=2026-10-25T20:47:58-07:00 subject=README: repository-relative paths and neutral wording in the first-reconstruction section; no number or log changed
+## sha256 of the executed entry point and harness (as checked out)
+4b612c5de43833fb898b74467fec426204d556c6036db2f9339f156157a81642  replay.sh
+409165de673b4043ed23b05c67a562c71b4bc1b1ec1075d81369183cc9b63f24  harness/fault_mirror.py
+e040312d67d6d0e5e8e4c61eba9c95b29b83c74d28383ac64d6c4f6974a5258f  harness/make_results.py
+067569a2461eb6c7a5929909cc44261a1bacab834d3c5341067b769e3a9056c7  harness/part_a.py
+c45d833be3b3c74f519c76a336bd5923ec93664f754f14ea3f70269f3554367f  harness/selftest_validation.py
+734492705072ab7f7160fb07312d592e1edbc4f2a390984cbe78cf39152cefe5  harness/tables.py
+03a06ea6122d174a1e4639a0d3984a88ab019616d3df6682e745a93343661d29  harness/part_b.sh
+1af3ab3e5903400db5ab4fdae3638f069f455c05a1080e2d77df43a90eb47695  harness/hook-dev-deb16a3c3-stall45.patch
+f847f33c69d632deba970758a3360bc38e869a692c3bc2a343b0d5150199cbc3  harness/hook-patch-87ed0afe0-stalls.patch
+86f220c496d49bcdf791f192e930836318b9413db0fc669c602ee0c60236af8b  harness/settings-empty.xml
+d1eaddc8530acba234257ad064e1563e68de3476cfbbdcd4ae3b966467e77d37  harness/settings-mirror.template.xml
+abc1aa7e4a6ec7b2e48586a1bbda5c6c5cc28182441380823656e02a168fbc3b  harness/tiny-pom.xml
+dd0a792181616d5d57a8750c97bc5e9bf1d70a8bb691e6c77a001355ff0968c9  harness/java/RepeatMethod.java

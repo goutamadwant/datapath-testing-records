@@ -1,0 +1,48 @@
+# cell=dev-hook-lead55-jdk8 loop=1 start=2026-10-26T06:00:35+0000 rev=deb16a3c3152f0349a587a504dccc997a131a9d7
+# JAVA_HOME=/opt/jdk8 iterations=20 busy_loops=0 jvm_props=-Dreplay.stall.lead.ms=55
+# hooked_test_classes=<work>/partB/classes/dev-hook
+# load_before:  06:00:35 up 1 day, 23:05,  0 user,  load average: 3.37, 2.39, 1.95
+# command: $JAVA_HOME/bin/java -Dreplay.stall.lead.ms=55 -cp <classpath: hooked classes, runner, module test-classes, classes, test-classpath.txt, launcher> RepeatMethod org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest rediscoversFileAfterInactiveCursorClosed 20
+JVM 1.8.0_504 OpenJDK 64-Bit Server VM aarch64
+REPLAY-HOOK stall45 at deadline-53ms, woke at deadline-4ms
+ITER 1 PASS 12719
+REPLAY-HOOK stall45 at deadline-46ms, woke at deadline0ms
+ITER 2 PASS 620
+REPLAY-HOOK stall45 at deadline-54ms, woke at deadline-8ms
+ITER 3 PASS 634
+REPLAY-HOOK stall45 at deadline-30ms, woke at deadline15ms
+ITER 4 FAIL 3790 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+REPLAY-HOOK stall45 at deadline-50ms, woke at deadline-5ms
+ITER 5 PASS 867
+REPLAY-HOOK stall45 at deadline-52ms, woke at deadline3ms
+ITER 6 PASS 1535
+REPLAY-HOOK stall45 at deadline-54ms, woke at deadline-5ms
+ITER 7 PASS 648
+REPLAY-HOOK stall45 at deadline-49ms, woke at deadline0ms
+ITER 8 PASS 647
+REPLAY-HOOK stall45 at deadline-43ms, woke at deadline3ms
+ITER 9 FAIL 3591 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+REPLAY-HOOK stall45 at deadline-51ms, woke at deadline-5ms
+ITER 10 PASS 652
+REPLAY-HOOK stall45 at deadline-38ms, woke at deadline8ms
+ITER 11 PASS 615
+REPLAY-HOOK stall45 at deadline-46ms, woke at deadline0ms
+ITER 12 PASS 654
+REPLAY-HOOK stall45 at deadline-49ms, woke at deadline-2ms
+ITER 13 PASS 758
+REPLAY-HOOK stall45 at deadline-52ms, woke at deadline-6ms
+ITER 14 PASS 679
+REPLAY-HOOK stall45 at deadline-51ms, woke at deadline-5ms
+ITER 15 PASS 600
+REPLAY-HOOK stall45 at deadline-34ms, woke at deadline14ms
+ITER 16 PASS 625
+REPLAY-HOOK stall45 at deadline-51ms, woke at deadline-5ms
+ITER 17 PASS 660
+REPLAY-HOOK stall45 at deadline-33ms, woke at deadline27ms
+ITER 18 PASS 672
+REPLAY-HOOK stall45 at deadline-31ms, woke at deadline15ms
+ITER 19 PASS 612
+REPLAY-HOOK stall45 at deadline-44ms, woke at deadline7ms
+ITER 20 PASS 678
+SUMMARY failed=2/20
+# exit=0 wall_seconds=37 end=2026-10-26T06:01:12+0000

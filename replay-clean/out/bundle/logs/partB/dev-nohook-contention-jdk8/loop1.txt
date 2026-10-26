@@ -1,0 +1,59 @@
+# cell=dev-nohook-contention-jdk8 loop=1 start=2026-10-26T06:02:37+0000 rev=deb16a3c3152f0349a587a504dccc997a131a9d7
+# JAVA_HOME=/opt/jdk8 iterations=50 busy_loops=20 jvm_props=
+# hooked_test_classes=none
+# load_before:  06:02:38 up 1 day, 23:07,  0 user,  load average: 3.64, 3.02, 2.25
+# command: $JAVA_HOME/bin/java  -cp <classpath: hooked classes, runner, module test-classes, classes, test-classpath.txt, launcher> RepeatMethod org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest rediscoversFileAfterInactiveCursorClosed 50
+# load_with_busy_loops:  06:02:40 up 1 day, 23:07,  0 user,  load average: 5.03, 3.32, 2.35
+JVM 1.8.0_504 OpenJDK 64-Bit Server VM aarch64
+ITER 1 PASS 31446
+ITER 2 PASS 1051
+ITER 3 PASS 1294
+ITER 4 PASS 815
+ITER 5 PASS 1327
+ITER 6 PASS 770
+ITER 7 PASS 978
+ITER 8 PASS 1965
+ITER 9 PASS 927
+ITER 10 PASS 750
+ITER 11 PASS 673
+ITER 12 PASS 815
+ITER 13 PASS 702
+ITER 14 PASS 703
+ITER 15 PASS 793
+ITER 16 PASS 799
+ITER 17 PASS 958
+ITER 18 PASS 964
+ITER 19 PASS 705
+ITER 20 PASS 715
+ITER 21 PASS 918
+ITER 22 PASS 1171
+ITER 23 PASS 803
+ITER 24 FAIL 4348 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+ITER 25 PASS 922
+ITER 26 PASS 790
+ITER 27 PASS 802
+ITER 28 PASS 695
+ITER 29 FAIL 3636 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause AssertionFailedError: expected: <1> but was: <0>
+ITER 30 PASS 731
+ITER 31 PASS 727
+ITER 32 FAIL 6881 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause TimeoutException: null
+ITER 33 PASS 774
+ITER 34 PASS 661
+ITER 35 PASS 744
+ITER 36 PASS 634
+ITER 37 PASS 719
+ITER 38 PASS 702
+ITER 39 PASS 750
+ITER 40 PASS 797
+ITER 41 PASS 721
+ITER 42 PASS 621
+ITER 43 PASS 816
+ITER 44 PASS 674
+ITER 45 PASS 695
+ITER 46 PASS 681
+ITER 47 PASS 770
+ITER 48 PASS 747
+ITER 49 PASS 704
+ITER 50 FAIL 3903 ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest that uses org.apache.seatunnel.edge.agent.connector.file.FileCollectReader expected: <1> but was: <0> within 3 seconds. | cause TimeoutException: null
+SUMMARY failed=4/50
+# exit=0 wall_seconds=107 end=2026-10-26T06:04:27+0000

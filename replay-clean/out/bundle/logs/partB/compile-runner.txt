@@ -1,0 +1,2 @@
+# javac (JDK 8) -cp <wt-dev test classpath> -d <work>/partB/runner harness/java/RepeatMethod.java
+# exit=0

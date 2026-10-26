@@ -1,0 +1,9 @@
+# du -sh of work directories at the end
+176K	/work/lib
+154M	/work/m2-partB
+19M	/work/mvn-home
+23M	/work/partA
+124K	/work/partB
+53M	/work/seatunnel
+123M	/work/wt-dev
+124M	/work/wt-patch

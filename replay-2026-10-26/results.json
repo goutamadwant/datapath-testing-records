@@ -1,6 +1,6 @@
 {
  "bundle": "replay-2026-10-26",
- "generated": "2026-10-25T19:08:36-0700",
+ "generated": "2026-10-25T21:46:25-0700",
  "note": "Reconstruction runs. Every value below is parsed from a log under logs/; paths are relative to this file's directory.",
  "validation": {
   "result": "PASS",
@@ -16143,10 +16143,10 @@
   },
   {
    "path": "harness/make_results.py",
-   "bytes": 28690,
-   "sha256": "e040312d67d6d0e5e8e4c61eba9c95b29b83c74d28383ac64d6c4f6974a5258f",
+   "bytes": 29441,
+   "sha256": "7e521ed6928cddc0ea03490d9a2791d1d10b12d2c30d61048a6008b566c54def",
    "sha256_as_run": "0176e7b397d565bf75e5b7fcde44bf6b1872512032c303e29ce5513d8f9527b8",
-   "revised_after_runs": "2026-10-25 (third revision): fail-closed validation of the requested matrix and per-cell runs_requested, runs_recorded, runs_valid; as-run hashes kept here. Re-running it over the recorded logs left every count and summary unchanged. 2026-10-25 (fourth revision): imports parse_part_c from harness/historical-part-c; --part all requests Parts A and B only; harness entries of moved files carry path_as_run. Re-running it over the recorded logs left every count, summary and log hash unchanged."
+   "revised_after_runs": "2026-10-25 (third revision): fail-closed validation of the requested matrix and per-cell runs_requested, runs_recorded, runs_valid; as-run hashes kept here. Re-running it over the recorded logs left every count and summary unchanged. 2026-10-25 (fourth revision): imports parse_part_c from harness/historical-part-c; --part all requests Parts A and B only; harness entries of moved files carry path_as_run. Re-running it over the recorded logs left every count, summary and log hash unchanged. 2026-10-26 (fifth revision): the replay.sh note below records the --require-toolchain option; re-running it over the recorded logs left every count, summary and log hash unchanged."
   },
   {
    "path": "harness/part_a.py",
@@ -16228,10 +16228,10 @@
   },
   {
    "path": "replay.sh",
-   "bytes": 13640,
-   "sha256": "4b612c5de43833fb898b74467fec426204d556c6036db2f9339f156157a81642",
+   "bytes": 16701,
+   "sha256": "96a75a75a21e6aeec460225b870d0ae873002dd3f5258cacc70d645e889cc35a",
    "sha256_as_run": "6e85b14156590e4dc5217668afd3287f5829e93c5aa9876c2973f31195ca0d0b",
-   "revised_after_runs": "2026-10-25: --runs must be a positive integer; a failed validation is reported and the exit status is 1. sha256_as_run is the version published with the runs (interpretation 26: the maven-version block was added after Parts A and C had started). 2026-10-25 (fourth revision): Part C is no longer run. --part C prints why and exits 0 before creating, cloning, building or contacting anything; --part all prints the same reason and runs Parts A and B only. The Part C preparation (image pulls, e2e build) and the Docker lines of the toolchain record were removed."
+   "revised_after_runs": "2026-10-25: --runs must be a positive integer; a failed validation is reported and the exit status is 1. sha256_as_run is the version published with the runs (interpretation 26: the maven-version block was added after Parts A and C had started). 2026-10-25 (fourth revision): Part C is no longer run. --part C prints why and exits 0 before creating, cloning, building or contacting anything; --part all prints the same reason and runs Parts A and B only. The Part C preparation (image pulls, e2e build) and the Docker lines of the toolchain record were removed. 2026-10-26 (fifth revision): optional --require-toolchain <manifest> (for example ../replay-clean/toolchain.json) stops the script with exit status 3 unless the JDK, Python and Maven wrapper identities and the pinned commits equal the manifest; without the option the behaviour is unchanged. The clean-environment replay in ../replay-clean executed the fourth-revision file (sha256 4b612c5de43833fb898b74467fec426204d556c6036db2f9339f156157a81642, commit d059baf)."
   }
  ]
 }

@@ -1,0 +1,24 @@
+## uname -a
+Linux 8ee9c0135d4f 7.0.14-linuxkit #1 SMP PREEMPT Fri Oct 16 11:55:50 UTC 2026 aarch64 aarch64 aarch64 GNU/Linux
+## /etc/os-release
+PRETTY_NAME="Ubuntu 24.04.5 LTS"
+NAME="Ubuntu"
+VERSION_ID="24.04"
+VERSION="24.04.5 LTS (Noble Numbat)"
+VERSION_CODENAME=noble
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=noble
+LOGO=ubuntu-logo
+## nproc
+10
+## memory (bytes)
+               total        used        free      shared  buff/cache   available
+Mem:     11471511552  2031218688   114253824      667648  9547247616  9440292864
+Swap:     1073737728           0  1073737728
+## user
+uid=0(root) gid=0(root) groups=0(root)

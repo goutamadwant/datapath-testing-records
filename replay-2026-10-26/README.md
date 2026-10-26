@@ -47,6 +47,7 @@ From a checkout of this directory (bash, git, curl, python3, patch, shasum; JDK 
 python3 harness/make_results.py        # validate the recorded runs, then regenerate results.json
 python3 harness/tables.py --old <2026-10-25 results.json>      # print the comparison tables
 python3 harness/selftest_validation.py # negative tests of the validation (temporary copies)
+./replay.sh --part all --require-toolchain ../replay-clean/toolchain.json  # optional: stop (exit 3) unless JDKs, Python, Maven wrapper and commits equal the manifest
 ```
 
 **Part C is not run.** `./replay.sh --part C` prints the following reason and exits 0 before it
@@ -428,6 +429,10 @@ New in this bundle
 33. "Clean checkout" here means that `work/` started empty. A second machine or a container was
     not used, so host state outside `work/` (JDKs, Docker images, the Maven local repository for
     the B and C builds) was not re-created.
+    Since 2026-10-26, `../replay-clean/` records a replay of Parts A and B of this directory (commit
+    `d059baf`) in a fresh linux/arm64 container with checksum-verified JDKs and an empty Maven
+    repository; its `COMPARISON.md` compares that replay with `results.json` cell by cell, and its
+    `toolchain.json` is the manifest for `replay.sh --require-toolchain`.
 34. The empty-body 429 variant (`429x2nobody`) is not a Table 1 row. Its `after` cell is new in
     this bundle.
 

@@ -1,0 +1,28 @@
+# cell=patch-hook-jdk11 loop=1 start=2026-10-26T05:57:49+0000 rev=87ed0afe0f783eda1b1f3ac6f0ac9fadedcb4f98
+# JAVA_HOME=/opt/jdk11 iterations=20 busy_loops=0 jvm_props=
+# hooked_test_classes=<work>/partB/classes/patch-hook
+# load_before:  05:57:49 up 1 day, 23:02,  0 user,  load average: 1.03, 1.61, 1.66
+# command: $JAVA_HOME/bin/java  -cp <classpath: hooked classes, runner, module test-classes, classes, test-classpath.txt, launcher> RepeatMethod org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest rediscoversFileAfterInactiveCursorClosed 20
+JVM 11.0.32.1 OpenJDK 64-Bit Server VM aarch64
+ITER 1 PASS 3890
+ITER 2 PASS 1520
+ITER 3 PASS 1558
+ITER 4 PASS 1503
+ITER 5 PASS 1490
+ITER 6 PASS 1487
+ITER 7 PASS 1489
+ITER 8 PASS 1480
+ITER 9 PASS 1489
+ITER 10 PASS 1503
+ITER 11 PASS 1499
+ITER 12 PASS 1490
+ITER 13 PASS 1492
+ITER 14 PASS 1492
+ITER 15 PASS 1485
+ITER 16 PASS 1515
+ITER 17 PASS 1535
+ITER 18 PASS 1540
+ITER 19 PASS 1506
+ITER 20 PASS 1503
+SUMMARY failed=0/20
+# exit=0 wall_seconds=34 end=2026-10-26T05:58:23+0000

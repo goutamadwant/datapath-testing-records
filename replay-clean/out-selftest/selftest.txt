@@ -1,0 +1,10 @@
+# 2026-10-26T06:08:35Z replay.sh sha256 96a75a75a21e6aeec460225b870d0ae873002dd3f5258cacc70d645e889cc35a
+# 2026-10-26T06:08:35Z toolchain.json sha256 b7172748fe890c7ff3354caf14f7105ee800acfce08556b8cb5d1ed15f4d637d
+# 2026-10-26T06:08:41Z case 1: matching manifest
+# 2026-10-26T06:09:34Z case 1 exit=0 (expected 0)
+  case 1 wrote logs/setup/setup-partA-20261026T060841.txt
+  case 1 wrote logs/setup/toolchain-partA-20261026T060841.txt
+# 2026-10-26T06:09:37Z case 2: manifest naming the JDK 8 of the published runs
+# 2026-10-26T06:09:38Z case 2 exit=3 (expected 3); work/seatunnel cloned: no
+  case 2 wrote logs/setup/setup-partA-20261026T060937.txt
+  case 2 wrote logs/setup/toolchain-partA-20261026T060937.txt

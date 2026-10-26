@@ -1,0 +1,9 @@
+# 2026-10-26T04:42:12+0000 replay.sh --part A runs=5 prepare_only=0 cells=all work=/work
+# 2026-10-26T04:42:12+0000 toolchain ok: JDK8=/opt/jdk8 JDK11=/opt/jdk11 record=logs/setup/toolchain-partA-20261026T044212.txt
+# 2026-10-26T04:42:12+0000 cloning https://github.com/apache/seatunnel.git (blobless) into work/seatunnel
+Cloning into '/work/seatunnel'...
+# 2026-10-26T04:42:18+0000 all six pinned commits present in work/seatunnel
+# 2026-10-26T04:42:19+0000 fetched org/apache/maven/wrapper/maven-wrapper/3.1.0/maven-wrapper-3.1.0.jar sha1=32f70e9f2cd92fd7629aba8214d1c9ae58a1e2fd (matches Central)
+# 2026-10-26T04:42:19+0000 fetched org/apache/maven/wrapper/maven-wrapper/3.1.0/maven-wrapper-3.1.0.pom sha1=70fa8386dc3208bbd2d17328c9d904f80bb258c5 (matches Central)
+# 2026-10-26T04:43:06+0000 warm repository built from Maven Central (log logs/partA/warm-repo-build.txt)
+# 2026-10-26T05:46:04+0000 done rc=0

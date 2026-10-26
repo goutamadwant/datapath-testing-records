@@ -1,0 +1,11 @@
+# 2026-10-26T04:42:07Z container start; RECORDS_URL=https://github.com/goutamadwant/datapath-testing-records.git RECORDS_COMMIT=d059baf95c8a21850a0b5d9d08ef07128d636ed2 PARTS=A B
+# 2026-10-26T04:42:08Z cloning https://github.com/goutamadwant/datapath-testing-records.git
+# 2026-10-26T04:42:12Z records repository at d059baf95c8a21850a0b5d9d08ef07128d636ed2
+# 2026-10-26T04:42:12Z fresh copy: removing logs/partA, logs/partB, the Part A/B files in logs/setup and results.json
+# 2026-10-26T04:42:12Z removed 274 tracked files (list in env/fresh-copy-git-status.txt)
+# 2026-10-26T04:42:12Z start ./replay.sh --part A --runs 5 (time box 5400s)
+# 2026-10-26T05:46:04Z end ./replay.sh --part A --runs 5 rc=0 wall_seconds=3832
+# 2026-10-26T05:46:04Z start ./replay.sh --part B (time box 5400s)
+# 2026-10-26T06:06:03Z end ./replay.sh --part B rc=0 wall_seconds=1199
+# 2026-10-26T06:06:03Z copying the bundle's logs and results.json to out/bundle
+# 2026-10-26T06:06:17Z container finished
