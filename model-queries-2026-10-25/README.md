@@ -42,6 +42,58 @@ and the three builds share one target directory. Resolved versions in all three 
 (first build, empty target directory), after 276 s and issuedate 395 s (sharing the already
 compiled dependencies) (`logs/build/`).
 
+## Locked replay (2026-10-29)
+
+`harness/plan_time/rust-toolchain.toml` declares `nightly-2026-07-17` with the minimal
+profile. Its compiler is `rustc 1.99.0-nightly (3d50c25bc 2026-07-16)`, the same compiler
+as the historical builds. The runner checks this exact version against
+`harness/plan_time/TOOLCHAIN.expected` and logs both the rustc and cargo versions from
+each build directory. Rustup selects the declared toolchain.
+
+The resolved harness dependency graphs are committed as
+`harness/plan_time/Cargo.lock.before` and `harness/plan_time/Cargo.lock.after`, with their
+sha256 values in `harness/plan_time/lockfiles.sha256`. `./run.sh build` verifies each
+lockfile, copies it into its build directory and enforces `cargo build --release --locked`.
+It checks that the lockfile hash is unchanged after building. Build logs retain the
+lockfile differences, dependency versions, build times and binary hashes, and add the
+toolchain and lockfile hashes. The builds still share one target directory.
+
+To create or deliberately refresh the resolved lockfiles, run `./run.sh resolve-locks`.
+This starts from each checkout's own `Cargo.lock`, builds without `--locked`, prints the
+lockfile differences, saves the resolved lockfiles and rewrites `lockfiles.sha256`.
+`build` stops if either resolved lockfile is missing and names this command.
+`./run.sh explore` uses a verified `Cargo.lock.issuedate` when present; otherwise it logs
+that it is using historical resolution from the issue-date checkout's lockfile.
+
+For a fresh measurement from an empty build state (`work/`, or the directory selected
+by `RUN_WORK`, absent or empty):
+
+```sh
+./run.sh build
+MEASURE_SET=measure-locked-2026-10-29 ./run.sh measure
+MEASURE_SET=measure-locked-2026-10-29 ./run.sh results
+./run.sh compare measure-locked-2026-10-29
+```
+
+`MEASURE_SET` defaults to `measure`; a named set keeps classification, process runs and
+tables together. The historical measurement in `logs/measure/` and `results.json` is
+unchanged. The locked replay's records are `logs/measure-locked-2026-10-29/`,
+`results-measure-locked-2026-10-29.json` and `COMPARISON-measure-locked-2026-10-29.md`.
+Analysis validates all expected process runs: (5 controls + 412 queries) × 2 builds ×
+3 repetitions = 2502, and records the expected count and completeness in the results.
+The comparison reports controls, pooled summaries and agreement of categorical outcomes;
+wall-clock values are not expected to be identical across runs or machines.
+
+Result of the locked replay run on 29 October 2026 (`logs/build/build-20261029T075258-12046.txt`,
+`logs/measure-locked-2026-10-29/`): both builds completed with the declared toolchain and
+unchanged lockfile hashes (385 s and 320 s from an empty target directory); all 2,502 process
+runs were recorded; every categorical pre-registered outcome agrees with the historical
+measurement (375 queries planned without error at both builds, no query over 1 s, no status
+difference between builds, 0 all-literal calls, 47 nested counted quantifiers); the positive
+control planned in 63.0 ms before and 2.3 ms after (historical: 61.6 and 2.0 ms), and the
+quoted variant in 57.1 and 2.1 ms (historical: 58.6 and 2.1 ms). Planning-time distributions
+differ between the two runs, as expected for wall-clock measurements.
+
 ## Generators
 
 | | G1 | G2 |
@@ -226,9 +278,9 @@ Log files contain the workstation paths printed by the tools.
 ./run.sh generate   # new queries (needs an LM Studio endpoint and the claude client; refuses to overwrite)
 ```
 
-`measure` skips (query, build, repetition) runs that are already in `logs/measure/runs.jsonl`,
-and `explore` refuses to overwrite `logs/exploratory/runs.jsonl`. A fresh replay therefore starts
-from a copy of this directory without `logs/measure/`, `logs/exploratory/` and `results.json`.
+`measure` skips (query, build, repetition) runs already in `logs/<MEASURE_SET>/runs.jsonl`
+(default `logs/measure/runs.jsonl`). Select a new `MEASURE_SET` for a fresh replay.
+`explore` refuses to overwrite `logs/exploratory/runs.jsonl`.
 
 ## Revision (2026-10-25, after the runs)
 

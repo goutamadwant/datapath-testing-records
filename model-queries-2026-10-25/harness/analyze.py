@@ -1,4 +1,7 @@
-"""Build results.json from queries/, logs/measure/ and logs/generation/, and print the tables.
+"""Build results from queries/, logs/<MEASURE_SET>/ and logs/generation/; print the tables.
+
+MEASURE_SET defaults to measure (results.json, logs/tables.md). Named sets write
+results-<MEASURE_SET>.json and logs/<MEASURE_SET>/tables.md.
 
 Revision 2026-10-25 (after the runs): (1) the rule-of-three 95 % upper bound is no longer computed
 or written. The batched queries from 20 selected prompts give no justified independent-query
@@ -7,18 +10,23 @@ not part of the accepted analysis). (2) Validation: every query and control must
 REPS run records per build, with repetition numbers 1..REPS, and every log line must parse;
 otherwise the problems are listed, results.json is not written and the exit status is 1.
 """
+import contextlib
 import hashlib
+import io
 import json
 import math
 import pathlib
 import statistics
 import sys
 
+from measurement_sets import (
+    BUILDS, REPS, EXPECTED_ITEMS, EXPECTED_PROCESS_RUNS, paths, write_output,
+)
+
 HERE = pathlib.Path(__file__).resolve().parent.parent
+OUT, RESULTS, TABLES = paths(HERE)
 STALL_MS = 1000.0
 TIMEOUT_MS = 20000.0
-BUILDS = ("before", "after")
-REPS = 3  # repetitions per (query, build), as pre-registered and as in harness/measure.py
 # Files changed after the runs; sha256_as_run identifies the version that produced the
 # published results of the runs.
 AS_RUN = [
@@ -59,6 +67,24 @@ def check_reps(items, runs):
     return problems
 
 
+def completeness(items, runs):
+    """Count process runs and check their item, build and repetition identities."""
+    problems = check_reps(items, runs)
+    if len(items) != EXPECTED_ITEMS:
+        problems.append(f"loaded {len(items)} items; expected {EXPECTED_ITEMS} "
+                        "(5 controls plus 412 queries)")
+    distinct = {(q, b, r.get("rep")) for (q, b), rs in runs.items() for r in rs}
+    if len(distinct) != EXPECTED_PROCESS_RUNS:
+        problems.append(f"recorded {len(distinct)} distinct process runs; "
+                        f"expected {EXPECTED_PROCESS_RUNS}")
+    known = {(it["query_id"], b) for it in items for b in BUILDS}
+    problems += [f"{q} {b}: run records for an item that is not in queries/ or controls"
+                 for (q, b) in sorted(set(runs) - known)]
+    return {"expected_process_runs": EXPECTED_PROCESS_RUNS,
+            "recorded_process_runs": sum(len(rs) for rs in runs.values()),
+            "complete": not problems}, problems
+
+
 def p95(xs):
     s = sorted(xs)
     return s[max(0, math.ceil(0.95 * len(s)) - 1)]
@@ -95,7 +121,7 @@ def main():
     try:
         return build()
     except Invalid as e:
-        print(f"analyze.py: {e}; results.json not written", file=sys.stderr)
+        print(f"analyze.py: {e}; {RESULTS.name} not written", file=sys.stderr)
         return 1
 
 
@@ -104,17 +130,17 @@ def build():
     queries = []
     for f in sorted((HERE / "queries").glob("*.jsonl")):
         queries += jl(f)
-    cls = {c["query_id"]: c for c in jl(HERE / "logs/measure/classify.jsonl")}
+    if len(controls) + len(queries) != EXPECTED_ITEMS:
+        raise Invalid(f"loaded {len(controls) + len(queries)} items; expected {EXPECTED_ITEMS} "
+                      "(5 controls plus 412 queries)")
+    cls = {c["query_id"]: c for c in jl(OUT / "classify.jsonl")}
     runs = {}
-    for r in jl(HERE / "logs/measure/runs.jsonl"):
+    for r in jl(OUT / "runs.jsonl"):
         runs.setdefault((r["query_id"], r["build"]), []).append(r)
     gen_summary = json.loads((HERE / "logs/generation/summary.json").read_text())
-    problems = check_reps(controls + queries, runs)
-    known = {(it["query_id"], b) for it in controls + queries for b in BUILDS}
-    problems += [f"{q} {b}: run records for an item that is not in queries/ or controls"
-                 for (q, b) in sorted(set(runs) - known)]
+    complete, problems = completeness(controls + queries, runs)
     if problems:
-        print(f"analyze.py: validation FAILED ({len(problems)} problems); results.json not written", file=sys.stderr)
+        print(f"analyze.py: validation FAILED ({len(problems)} problems); {RESULTS.name} not written", file=sys.stderr)
         for p in problems:
             print(f"  - {p}", file=sys.stderr)
         return 1
@@ -188,7 +214,7 @@ def build():
            "summary": summary, "strata": strata, "controls": ctl, "slow_queries": slow,
            "status_differs_between_builds": errors_differ, "nested_counted_queries": nested_list,
            "queries": recs, "sha256": hashes,
-           "validation": {"result": "PASS", "rule": f"{REPS} repetitions (1..{REPS}) per query and control "
+           "validation": {**complete, "result": "PASS", "rule": f"{REPS} repetitions (1..{REPS}) per query and control "
                                                      "and build; every log line parses"},
            "revisions": [dict(a, sha256=hashlib.sha256((HERE / a["path"]).read_bytes()).hexdigest())
                          for a in AS_RUN]}
@@ -199,8 +225,13 @@ def build():
                     "b426232b8a13c641a522bba414e932914f3b79f5 (last main commit before issue 22185), "
                     "before, after; median of 3 repetitions in ms",
             "summary": json.loads(exp.read_text())}
-    (HERE / "results.json").write_text(json.dumps(out, indent=1))
-    print_tables(out)
+    historical = RESULTS == HERE / "results.json"
+    write_output(RESULTS, json.dumps(out, indent=1), preserve=historical)
+    tables = io.StringIO()
+    with contextlib.redirect_stdout(tables):
+        print_tables(out)
+    write_output(TABLES, tables.getvalue(), preserve=historical)
+    print(tables.getvalue(), end="")
     return 0
 
 

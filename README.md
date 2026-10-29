@@ -1,5 +1,14 @@
 # Datapath-testing records
 
+## Status at this commit
+
+Reconstruction replays are retained at the root and in [`replay-2026-10-26/`](replay-2026-10-26/).
+The clean-container replay is in [`replay-clean/`](replay-clean/), and saved CI evidence is in [`ci-evidence/`](ci-evidence/).
+The repository also holds the [model-query experiment](model-queries-2026-10-25/) with its locked replay and the [`fail-before-2026-10-26/`](fail-before-2026-10-26/) test transplant records.
+The "Comparison with the current article" section and the article comparisons under "Results: reconstruction vs article, per cell" are historical.
+The dated access and revision sections and the reconstruction's commands and interpretation choices retain their historical context.
+The current container comparison is in [`replay-clean/COMPARISON.md`](replay-clean/COMPARISON.md).
+
 This repository holds the reconstruction records for the SeaTunnel cases of the article
 (Table 1 and the PR 12472 stall records) and the saved CI records it cites.
 
@@ -11,6 +20,8 @@ This repository holds the reconstruction records for the SeaTunnel cases of the 
 | [`ci-evidence/`](ci-evidence/) | Saved GitHub Actions records of apache/seatunnel that the article cites inline: the nightly run list for 2 to 23 October 2026, the job time-limit annotations, the 22 October manual cancellation, the September push/nightly run records and the Windows job excerpt. Run ids and retrieval times are as saved. |
 
 ## Comparison with the current article
+
+This section compares with an earlier article draft; [`replay-clean/COMPARISON.md`](replay-clean/COMPARISON.md) holds the current container comparison.
 
 The article revision of 25 October 2026 that cites these records at commit `fe561f6` reports the
 second reconstruction (`replay-2026-10-26/`). The "Article" column below quotes it word for word:
@@ -46,7 +57,7 @@ they are historical.
 | Stall hook, unchanged `dev`, JDK 11 | (text) 19/20 with JDK 11 | 19 of 20 failed | `partB.cells.dev-hook-jdk11`: same fields |
 | Stall hook, first reconstruction | (text) versus 20/20 each in the first reconstruction | first reconstruction: 20 of 20 failed on JDK 8 and on JDK 11 | `results.json` at the repository root, `cells` entries `dev-hook-jdk8` and `dev-hook-jdk11`: `failed`, `iterations` |
 | Patched test with stalls | (text) The patch failed 0/20 per JDK under different stalls | 0 of 20 failed on each JDK | `partB.cells.patch-hook-jdk8`, `patch-hook-jdk11`: `per_loop_failed` |
-| Unhooked `dev` under contention | (text) unhooked dev passed 50/50 under CPU contention | 0 of 50 failed on each JDK | `partB.cells.dev-nohook-contention-jdk8`, `-jdk11`: `per_loop_failed`, `iterations_per_loop` |
+| Unhooked `dev` under contention | (text) unhooked dev passed 50/50 under CPU contention (host result; container: 4/50 failed on JDK 8, 2/50 on JDK 11; [comparison](replay-clean/COMPARISON.md)) | Host: 0 of 50 failed on each JDK; container: 4/50 failed on JDK 8 and 2/50 on JDK 11 ([comparison](replay-clean/COMPARISON.md)) | `partB.cells.dev-nohook-contention-jdk8`, `-jdk11`: `per_loop_failed`, `iterations_per_loop` |
 | Other hook positions | (text) No hook position reproduces the PR’s 15/20 and 7/20 | failures per position 35/45/55/65 ms: JDK 8 17, 18, 10, 4 of 20; JDK 11 19, 16, 11, 4 of 20 (first reconstruction: JDK 8 20, 17, 11, 7; JDK 11 20, 18, 11, 2) | `partB.cells.dev-hook-jdk8`, `dev-hook-lead45-jdk8`, ... `dev-hook-lead65-jdk11`: `per_loop_failed` |
 
 ## License
@@ -148,7 +159,9 @@ original evidence, and where the reconstruction had to guess, the guess is liste
   `Attempted read from closed stream`, a wagon-http 3.4.3 429-path defect; it passes only when the
   429 responses carry no body, and then via a checksum-triggered re-download.
 - Part B: hooked `dev` failed 20/20 on both JDKs (article/PR: 15/20 and 7/20); patched test with
-  stalls 0/20 and 0/20 (matches); unhooked `dev` under contention 50/50 passes per JDK (matches).
+  stalls 0/20 and 0/20 (matches); unhooked `dev` under contention passed 50/50 per JDK on the host
+  (matches); in the container it failed 4/50 on JDK 8 and 2/50 on JDK 11
+  ([comparison](replay-clean/COMPARISON.md)).
   The exact rates depend on where the 45 ms stall lands, which the PR text does not pin down; a
   sweep gives 2/20 to 20/20.
 - Part C (rows 6-7, 5 runs per cell): Flink before: teardown threw 5/5, JobManager leaked 5/5,
@@ -249,7 +262,7 @@ in the cell's log.
 | --- | --- | --- | --- | --- | --- |
 | Hook as reconstructed (one 45 ms sleep at the first evaluation of the first Awaitility loop that is <= 35 ms before the test's `idleDeadlineMs`) | `deb16a3c3` + `hook-dev-deb16a3c3-stall45.patch` | 15/20 and 7/20 failed | **20/20 failed** | **20/20 failed** | no (direction yes, rate no) |
 | Patch with stalls (45 ms before close step, 700 ms after close, 700 ms after rediscovery) | `87ed0afe0` + `hook-patch-87ed0afe0-stalls.patch` | 0/20 and 0/20 failed | 0/20 failed | 0/20 failed | yes |
-| No hook, CPU contention (20 busy-loop shell processes) | `deb16a3c3` unchanged | 50/50 passed per JDK | 50/50 passed | 50/50 passed | yes |
+| No hook, CPU contention (20 busy-loop shell processes) | `deb16a3c3` unchanged | 50/50 passed per JDK (host result; container: 4/50 failed on JDK 8, 2/50 on JDK 11; [comparison](replay-clean/COMPARISON.md)) | Host: 50/50 passed; container JDK 8: 4/50 failed ([comparison](replay-clean/COMPARISON.md)) | Host: 50/50 passed; container JDK 11: 2/50 failed ([comparison](replay-clean/COMPARISON.md)) | yes (host only) |
 
 Every failure, in every hooked cell, carried the CI message: `ConditionTimeoutException ...
 expected: <1> but was: <0> within 3 seconds`.
@@ -275,7 +288,9 @@ deadline leaves no scan interval for rediscovery before the append, which is the
 article describes. The PR's 15/20 and 7/20 fall inside the range this sweep spans,
 but no single reconstructed hook position reproduces both numbers, so the reconstruction confirms
 the mechanism and the direction (hooked `dev` fails, patched test survives the stalls, unhooked
-`dev` passes under contention), not the specific rates.
+`dev` passes under contention on the host), not the specific rates; unhooked `dev` in the
+container failed 4/50 on JDK 8 and 2/50 on JDK 11
+([comparison](replay-clean/COMPARISON.md)).
 
 ### Part C: PR 12481, Table 1 rows 6-7 (Docker E2E)
 
@@ -402,8 +417,10 @@ Part B
 10. Both revisions were built and the hooked tests compiled with JDK 8 only; the JDK 11 cells ran
    the JDK 8-compiled classes on JDK 11 (the PR built per JDK).
 11. CPU contention = 20 `bash` busy loops (`while :; do :; done`) for the duration of the run (the
-   PR's stress section names 20 busy-loop processes; the contention used for its 50/50 run is not
-   described further). The load average printed 2 s after starting them understates the load.
+   PR's stress section names 20 busy-loop processes; the contention used for its reported host
+   result of 50/50 passes per JDK is not described further; the container replay failed 4/50 on
+   JDK 8 and 2/50 on JDK 11, [comparison](replay-clean/COMPARISON.md)). The load average printed
+   2 s after starting them understates the load.
 12. The PR's 200/200 stress run and the two mutation checks were outside this reconstruction and were
    not re-run.
 
@@ -481,10 +498,13 @@ Fail-before / pass-after runs of every regression test the article names: the PR
 ## Reconstruction provenance and interpretation
 
 The bundle READMEs document the procedures behind the article. These are retained
-observations, not a validated clean-machine reproduction recipe. No clean-machine
-or independent-host replay was executed. JDKs, images and Maven dependencies were
-reused. Dependency and image identities are recorded but not enforced; the query
-harness uses ambient Rust and an unpinned dependency graph. Hash checks do not
+observations, not a validated clean-machine reproduction recipe. A clean-container replay of
+Parts A and B exists under `replay-clean/`: it used a fresh `ubuntu:24.04` linux/arm64 container
+on the same host, different JDK builds and native aarch64 rather than x86_64 under Rosetta 2,
+and unpinned Ubuntu packages; no independent-host replay was executed
+(see [`replay-clean/COMPARISON.md`](replay-clean/COMPARISON.md)). In the original host runs,
+JDKs, images and Maven dependencies were reused. Dependency and image identities are recorded
+but not enforced for the Java reconstructions; the query harness now declares its toolchain and resolved lockfiles (`model-queries-2026-10-25/README.md`, "Locked replay"). Hash checks do not
 recompile reconstruction Java. Mutable image tags and build drift can alter results.
 
 ### Regression-test transplants
@@ -525,7 +545,9 @@ incomplete. The 2026-10-25 runs predate this check, so their completeness rests 
 
 No hook position reproduces the original 15/20 and 7/20 clock failures; placement is
 ambiguous and original logs are missing. The patch failed 0/20 per JDK under different
-stalls; unhooked dev passed 50/50 under CPU contention. Unequal stalls and waits support
+stalls; unhooked `dev` passed 50/50 per JDK under CPU contention on the host, while the
+container replay failed 4/50 on JDK 8 and 2/50 on JDK 11 with the same assertion
+([comparison](replay-clean/COMPARISON.md)). Unequal stalls and waits support
 a lost-line mechanism, not clock effectiveness or Windows failure rates. The original
 200/200 stress run and mutations removing rediscovery or idle close were not re-run.
 The patched merge includes longer timeouts; its stalls were 45 milliseconds before

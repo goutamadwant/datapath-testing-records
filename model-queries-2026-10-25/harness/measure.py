@@ -1,8 +1,9 @@
 """Classify regex patterns and time planning of every query and control at both builds.
 
 Reads harness/controls.jsonl and queries/*.jsonl. Writes:
-  logs/measure/classify.jsonl  one line per query: scanner output plus pattern classification
-  logs/measure/runs.jsonl      one line per (query, build, repetition) process run
+  logs/<MEASURE_SET>/classify.jsonl  scanner output plus pattern classification
+  logs/<MEASURE_SET>/runs.jsonl      one line per (query, build, repetition) process run
+MEASURE_SET defaults to measure.
 Each repetition is a separate process with a 20 s wall-clock timeout. Repetition-major order;
 the build order alternates by item index. Already recorded (query, build, rep) runs are skipped,
 so an interrupted measurement can be resumed; nothing is overwritten.
@@ -17,13 +18,14 @@ import time
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from sqlscan import scan  # noqa: E402
+from measurement_sets import paths  # noqa: E402
 
 HERE = pathlib.Path(__file__).resolve().parent.parent
 WORK = pathlib.Path(os.environ.get("RUN_WORK", HERE / "work")).resolve()
 BIN = {b: WORK / "target/release" / f"plan_time_{b}" for b in ("before", "after")}
 TIMEOUT_S = 20.0
 REPS = 3
-OUT = HERE / "logs/measure"
+OUT, _, _ = paths(HERE)
 
 
 def now():
