@@ -1,0 +1,23 @@
+# case: df24193
+# side: after
+# before commit (first parent): d5868e683435042aa5fa72465a8a2d667d8cc468
+# after commit (merge): 047f531488f6617e88c76769baf2e2d6ac8e1c0e
+# tree HEAD: 047f531488f6617e88c76769baf2e2d6ac8e1c0e
+# transplant: none (merge commit as is)
+# git status --porcelain:
+# git diff --stat HEAD:
+# host: Darwin 27.0.0 arm64
+# toolchain: rustc 1.97.0 (2d8144b78 2026-07-07) / cargo 1.97.0 (c980f4866 2026-06-30)
+# command: cargo test --locked --profile ci -p datafusion-physical-plan --lib unbounded_input_emits_before_batch_size
+# start: 2026-10-30T05:37:06-0700
+   Compiling datafusion-physical-plan v54.1.0 ($FAILBEFORE_WORK/trees/df/datafusion/physical-plan)
+    Finished `ci` profile [unoptimized] target(s) in 25.15s
+     Running unittests src/lib.rs ($FAILBEFORE_WORK/df-target/ci/deps/datafusion_physical_plan-207e547750ec756b)
+
+running 1 test
+test repartition::tests::unbounded_input_emits_before_batch_size ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 1660 filtered out; finished in 0.01s
+
+# end: 2026-10-30T05:37:33-0700
+# exit code: 0

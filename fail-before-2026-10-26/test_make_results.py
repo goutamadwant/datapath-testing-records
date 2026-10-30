@@ -26,6 +26,13 @@ assert mr.expected_cargo_test(
     "cargo test --locked --profile ci --no-fail-fast -p a -p b --lib my_test"
 ) == "my_test", "several -p values are skipped"
 
+MAVEN_TEST_COMPILE = (
+    "[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ m ---\n"
+    "[ERROR] COMPILATION ERROR :\n"
+    "[ERROR] $FAILBEFORE_WORK/trees/c/m/src/test/java/p/A.java:[12,16] error: cannot find symbol\n"
+)
+assert mr.maven_outcome(MAVEN_TEST_COMPILE, None, "m")[0] == "COMPILE_ERROR"
+
 # SETUP_ERROR: a record with setup_error is never parsed as a test run, whatever its log says
 SETUP_LOG = (
     "# case: c\n# command (not run): cargo test -p x --lib t\n"

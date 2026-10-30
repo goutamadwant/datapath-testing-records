@@ -32,7 +32,7 @@ the per-test lines, or the named test absent from the executed tests); SETUP_ERR
 never run because a setup step (clone, checkout, transplant or patch apply, missing JDK, refusal)
 failed (no recorded run has this outcome).
 
-Parser revision (2026-10-26). The first `make_results.py` would have reported PASS for a cargo run
+Parser revision 2 (2026-10-26). The first `make_results.py` would have reported PASS for a cargo run
 whose only selected test was `ignored`, and did not check that the named test was among the
 executed ones. The revised parser requires the named test to have executed, treats ignored-only
 and skipped-only runs as NO_TESTS_RUN, reports a log whose summary line disagrees with its
@@ -40,9 +40,13 @@ per-test lines as UNKNOWN, and marks a case without both a before and an after r
 `comparison: incomplete` in `results.json`. No recorded run was affected: every outcome, test
 list and log hash in `results.json` is the same under both parsers (the logs are unchanged;
 `results.json` gains the `parser`, `expected_test` and `comparisons` fields). The checks are in
-`test_make_results.py` (`python3 -I test_make_results.py`). A third revision adds the SETUP_ERROR
-outcome and the requested-sides check described under "Run record"; it changes no earlier outcome,
+`test_make_results.py` (`python3 -I test_make_results.py`). The addition of the SETUP_ERROR
+outcome and the requested-sides check described under "Run record" changed no earlier outcome,
 test list, comparison or log hash either.
+
+Parser revision 3 (2026-10-30) recognises the literal `$FAILBEFORE_WORK/` prefix like an
+absolute path for Maven test-source errors; re-running it over all retained logs changes
+none of the 23 historical run outcomes.
 
 | PR | Test | Before commit | After commit | Before outcome | After outcome | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -194,8 +198,9 @@ a failing test is an outcome and does not change the exit status. `make_results.
 requested the case has no record for a requested side (listed under `missing`). The runs of
 2026-10-25 predate this check and have no invocation id; their runner skipped a case whose setup
 failed without writing a record, so for those runs completeness rests on `runs.jsonl` and the
-individual logs, which hold a before and an after record for every case. The only invocation in
-`logs/requested.json` is the `df24917-budget` run; both of its sides are recorded.
+individual logs, which hold a before and an after record for every case. `logs/requested.json`
+now contains the `df24917-budget` invocation and the 2026-10-30 default-matrix invocation; every
+requested side of both invocations is recorded. See the 2026-10-30 run record below.
 
 - `logs/df24917-budget/`: in these two logs the absolute path of the local scratch work directory
   (`FAILBEFORE_WORK`) was replaced by the literal `$FAILBEFORE_WORK` before hashing; nothing else
@@ -216,6 +221,82 @@ individual logs, which hold a before and an after record for every case. The onl
   the other build. The timing figures for PR 24917 above come from the diagnostic run only and are
   descriptive.
 - Raw logs contain local paths of the machine they ran on.
+
+### Run record (2026-10-30, default command)
+
+One recorded invocation, `20261030T123542Z-26639`, covers all 20 requested sides of the
+10-case default matrix of `./run.sh` on 2026-10-30. The runner is unchanged from repository
+commit `af71f397d410c330cf37cf52d7165e63158ec207`. `logs/requested.json` records the request
+at 05:35:42 local time (UTC-7); `logs/runs.jsonl` records each before and after side with that
+invocation id and no setup error. These records satisfy the runner's completeness check,
+whose success exit status is 0.
+
+The new log headers record Darwin 27.0.0 arm64, matching the operating system and architecture
+of the historical Apple M1 Pro host. The Java logs record version 1.8.0_172, the version used
+historically. The new Maven XML reports record its runtime under
+`/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home/jre`.
+The 20 new command logs and nine new XML reports use the literal `$FAILBEFORE_WORK` for the
+work-directory path; their retained bytes match the hashes in `results.json`.
+
+The test and compilation behavior matches the historical runs. Before / after outcomes and
+wall times in seconds (from `results.json`) are:
+
+- `df24193`: FAIL / PASS; 74.9 / 27.0 s.
+- `df24917`: PASS / PASS; 118.7 / 90.0 s.
+- `df24917-diag`: PASS / PASS; 87.7 / 85.7 s.
+- `df24917-budget`: COMPILE_ERROR / PASS; 32.3 / 32.2 s.
+- `st12038`: COMPILE_ERROR / PASS; 71.1 / 76.6 s.
+- `st12038-shim`: FAIL / PASS; 75.3 / 74.9 s. All nine tests ran on both sides:
+  four failures and two errors before, zero failures and zero errors after.
+- `st12038-factory`: COMPILE_ERROR / PASS; 70.4 / 73.3 s.
+- `st12360`: PASS / PASS; 82.4 / 83.6 s.
+- `st12472`: COMPILE_ERROR / PASS; 56.0 / 60.1 s.
+- `st12481`: COMPILE_ERROR / PASS; 94.6 / 105.4 s.
+
+For `st12038`, `st12038-factory`, `st12472` and `st12481`, parser revision 3 recognises the
+substituted `$FAILBEFORE_WORK/` path prefix in Maven test-source errors, so the regenerated
+`results.json` reports COMPILE_ERROR, matching the historical outcomes. All 23 historical
+run outcomes are unchanged. `st12481-shim` was excluded from the
+default matrix and was not run in this invocation; its historical records are retained.
+
+New command logs (paths relative to this bundle):
+
+```text
+logs/df24193/before-2.log
+logs/df24193/after-2.log
+logs/df24917/before-2.log
+logs/df24917/after-2.log
+logs/df24917-diag/before-2.log
+logs/df24917-diag/after-2.log
+logs/df24917-budget/before-2.log
+logs/df24917-budget/after-2.log
+logs/st12038/before-2.log
+logs/st12038/after-2.log
+logs/st12038-shim/before-2.log
+logs/st12038-shim/after-2.log
+logs/st12038-factory/before-2.log
+logs/st12038-factory/after-2.log
+logs/st12360/before-2.log
+logs/st12360/after-2.log
+logs/st12472/before-3.log
+logs/st12472/after-2.log
+logs/st12481/before-2.log
+logs/st12481/after-2.log
+```
+
+New Maven XML reports:
+
+```text
+logs/st12038/after-2.surefire/TEST-org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest.xml
+logs/st12038-shim/before-2.surefire/TEST-org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest.xml
+logs/st12038-shim/after-2.surefire/TEST-org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest.xml
+logs/st12038-factory/after-2.surefire/TEST-org.apache.seatunnel.connectors.seatunnel.amazonsqs.AmazonSqsSourceFactoryTest.xml
+logs/st12360/before-2.surefire/TEST-org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest.xml
+logs/st12360/after-2.surefire/TEST-org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest.xml
+logs/st12472/after-2.surefire/TEST-org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest.xml
+logs/st12481/after-2.surefire/TEST-org.apache.seatunnel.e2e.common.container.AbstractTestContainerTest.xml
+logs/st12481/after-2.surefire/TEST-org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest.xml
+```
 
 ## Files
 

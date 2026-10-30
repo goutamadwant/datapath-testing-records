@@ -25,6 +25,10 @@ a side's latest record is SETUP_ERROR, or when the latest invocation that reques
 (logs/requested.json, written by run.sh before any build) has no record for a requested side
 (listed under "missing").
 
+Parser revision 3 (2026-10-30) recognises the literal $FAILBEFORE_WORK/ prefix like an
+absolute path for Maven test-source errors; re-running it over all retained logs changes
+no historical outcome.
+
 Usage: python3 make_results.py
 """
 import hashlib
@@ -98,7 +102,7 @@ def cargo_outcome(text, expected=None):
 
 def maven_outcome(text, surefire_dir, module, expected=()):
     if "COMPILATION ERROR" in text:
-        errs = re.findall(r"^\[ERROR\] (/\S+\.java:\[\d+,\d+\] .*)$", text, re.M)
+        errs = re.findall(r"^\[ERROR\] ((?:/|\$FAILBEFORE_WORK/)\S+\.java:\[\d+,\d+\] .*)$", text, re.M)
         errs = list(dict.fromkeys(re.sub(r"^.*/trees/[^/]+/", "", e) for e in errs))
         in_test = [e for e in errs if e.startswith(module + "/src/test/")]
         if in_test:
@@ -208,12 +212,14 @@ def main():
         "description": "Fail-before / pass-after runs of the regression tests named in the article. "
         "before = first parent of the merge commit plus only the pull request's test change; "
         "after = merge commit. Outcomes are parsed from the logs listed here.",
-        "parser": "make_results.py rev 3 (2026-10-26): PASS requires the named test to have been "
+        "parser": "make_results.py rev 3 (2026-10-30): PASS requires the named test to have been "
         "executed; ignored-only or skipped-only runs are NO_TESTS_RUN; a summary line that disagrees "
         "with the per-test lines is UNKNOWN; every case needs a before and an after record; a record "
         "with setup_error is SETUP_ERROR and leaves its case incomplete; a case is also incomplete "
         "when the latest invocation in logs/requested.json that requested it has no record for a "
-        "requested side",
+        "requested side. Revision 3 recognises the literal $FAILBEFORE_WORK/ prefix like an "
+        "absolute path for Maven test-source errors; re-running it over all retained logs "
+        "changes no historical outcome.",
         "runs": out,
         "comparisons": comparisons,
         "log_files": {str(p.relative_to(HERE)): sha256(p) for p in files},

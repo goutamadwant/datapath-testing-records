@@ -1,0 +1,72 @@
+# case: df24917-budget
+# side: before
+# before commit (first parent): 408527ae58b5b706f5c02df8c37e096122cd8c78
+# after commit (merge): 3dfa245d61dde362e2c077761783bc735931659c
+# tree HEAD: 408527ae58b5b706f5c02df8c37e096122cd8c78
+# transplant: patches/df24917-budget-tests-only.patch applied (test-module hunks only)
+# git status --porcelain:
+#    M datafusion/optimizer/src/simplify_expressions/expr_simplifier.rs
+#    M datafusion/physical-expr/src/simplifier/mod.rs
+# git diff --stat HEAD:
+#    .../src/simplify_expressions/expr_simplifier.rs    |  54 +++++++++++
+#    datafusion/physical-expr/src/simplifier/mod.rs     | 103 ++++++++++++++++++++-
+#    2 files changed, 156 insertions(+), 1 deletion(-)
+# host: Darwin 27.0.0 arm64
+# toolchain: rustc 1.97.0 (2d8144b78 2026-07-07) / cargo 1.97.0 (c980f4866 2026-06-30)
+# command: cargo test --locked --profile ci --no-fail-fast -p datafusion-optimizer -p datafusion-physical-expr --lib test_constant_regex_respects_planning_budget
+# start: 2026-10-30T05:44:02-0700
+   Compiling serde_json v1.0.151
+   Compiling rand_distr v0.5.1
+   Compiling twox-hash v2.1.4
+   Compiling tokio v1.53.1
+   Compiling sqlparser v0.62.0
+   Compiling uuid v1.26.0
+   Compiling insta v1.48.0
+   Compiling lz4_flex v0.14.0
+   Compiling half v2.7.1
+   Compiling arrow-buffer v59.2.0
+   Compiling ciborium-ll v0.2.2
+   Compiling ciborium v0.2.2
+   Compiling arrow-schema v59.2.0
+   Compiling tinytemplate v1.2.1
+   Compiling criterion v0.8.2
+   Compiling arrow-data v59.2.0
+   Compiling arrow-array v59.2.0
+   Compiling tokio-util v0.7.19
+   Compiling object_store v0.13.2
+   Compiling arrow-select v59.2.0
+   Compiling arrow-row v59.2.0
+   Compiling arrow-arith v59.2.0
+   Compiling arrow-ord v59.2.0
+   Compiling arrow-ipc v59.2.0
+   Compiling arrow-string v59.2.0
+   Compiling arrow-cast v59.2.0
+   Compiling arrow-csv v59.2.0
+   Compiling arrow-json v59.2.0
+   Compiling arrow v59.2.0
+   Compiling datafusion-common v55.0.0 ($FAILBEFORE_WORK/trees/df/datafusion/common)
+   Compiling datafusion-expr-common v55.0.0 ($FAILBEFORE_WORK/trees/df/datafusion/expr-common)
+   Compiling datafusion-physical-expr-common v55.0.0 ($FAILBEFORE_WORK/trees/df/datafusion/physical-expr-common)
+   Compiling datafusion-functions-aggregate-common v55.0.0 ($FAILBEFORE_WORK/trees/df/datafusion/functions-aggregate-common)
+   Compiling datafusion-functions-window-common v55.0.0 ($FAILBEFORE_WORK/trees/df/datafusion/functions-window-common)
+   Compiling datafusion-expr v55.0.0 ($FAILBEFORE_WORK/trees/df/datafusion/expr)
+   Compiling datafusion-execution v55.0.0 ($FAILBEFORE_WORK/trees/df/datafusion/execution)
+   Compiling datafusion-physical-expr v55.0.0 ($FAILBEFORE_WORK/trees/df/datafusion/physical-expr)
+   Compiling datafusion-functions v55.0.0 ($FAILBEFORE_WORK/trees/df/datafusion/functions)
+   Compiling datafusion-functions-aggregate v55.0.0 ($FAILBEFORE_WORK/trees/df/datafusion/functions-aggregate)
+   Compiling datafusion-functions-window v55.0.0 ($FAILBEFORE_WORK/trees/df/datafusion/functions-window)
+error[E0407]: method `should_evaluate_const` is not a member of trait `ScalarUDFImpl`
+   --> datafusion/physical-expr/src/simplifier/mod.rs:590:13
+    |
+590 | /             fn should_evaluate_const(&self, _args: &[&ScalarValue]) -> bool {
+591 | |                 panic!("constant-evaluation hook must only inspect literal arguments")
+592 | |             }
+    | |_____________^ not a member of trait `ScalarUDFImpl`
+
+   Compiling datafusion-functions-nested v55.0.0 ($FAILBEFORE_WORK/trees/df/datafusion/functions-nested)
+   Compiling datafusion-sql v55.0.0 ($FAILBEFORE_WORK/trees/df/datafusion/sql)
+For more information about this error, try `rustc --explain E0407`.
+error: could not compile `datafusion-physical-expr` (lib test) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...
+# end: 2026-10-30T05:44:34-0700
+# exit code: 101

@@ -23,6 +23,32 @@ This repository holds the reconstruction records for the SeaTunnel cases of the 
 | [`replay-clean/`](replay-clean/) | A replay of Parts A and B of `replay-2026-10-26/` (commit `d059baf`) in a fresh linux/arm64 container: pinned base image, Eclipse Temurin 8 and 11 from checksum-verified archives, records cloned from GitHub, empty Maven repository. Part A matched the published results in all 24 cells; in Part B the patched revision again failed 0/20 per JDK, the hooked `dev` counts differed, and unhooked `dev` failed 4/50 (JDK 8) and 2/50 (JDK 11) under CPU contention, against 0/50 and 0/50 published. Logs, regenerated `results.json`, [COMPARISON.md](replay-clean/COMPARISON.md) and a toolchain manifest that `replay.sh --require-toolchain` enforces. |
 | [`ci-evidence/`](ci-evidence/) | Saved GitHub Actions records of apache/seatunnel that the article cites inline: the nightly run list for 2 to 23 October 2026, the job time-limit annotations, the 22 October manual cancellation, the September push/nightly run records and the Windows job excerpt. Run ids and retrieval times are as saved. |
 
+## Provenance notes
+
+- The regex measurement input manifests, [`logs/measure/manifest.json`](model-queries-2026-10-25/logs/measure/manifest.json) and [`logs/measure-locked-2026-10-29/manifest.json`](model-queries-2026-10-25/logs/measure-locked-2026-10-29/manifest.json), were reconstructed on 2026-10-29 from the committed queries and controls. They bind the distributed inputs, not the original as-run bytes. The historical manifest retains binary hashes from the build log but omits lockfile hashes, the compiler line, invocation start/end timestamps and executed/reused counts because it has no retained manifest source for those fields. The locked replay's recorded measurement end is the last process start, not an observed invocation completion. See [the model-query README, “Locked replay (2026-10-29)”](model-queries-2026-10-25/README.md#locked-replay-2026-10-29).
+
+- In the two budget-test logs under [`fail-before-2026-10-26/logs/df24917-budget/`](fail-before-2026-10-26/logs/df24917-budget/), the work-directory path was replaced by the literal `$FAILBEFORE_WORK` before hashing; nothing else changed. See [the copied-test README, “Run record, including failed attempts”](fail-before-2026-10-26/README.md#run-record-including-failed-attempts).
+
+- The clean-replay setup log `replay-clean/out/bundle/logs/setup/setup-partB-20261026T054604.txt` gained its completion line after its hash was recorded in `results.json`. The retained prefix matches the recorded hash. See [the clean-replay README, “Note on one setup log (2026-10-26)”](replay-clean/README.md#note-on-one-setup-log-2026-10-26) and [“Setup log checksum correction” in `replay-clean/CORRECTIONS.md`](replay-clean/CORRECTIONS.md#setup-log-checksum-correction-2026-10-29) for the sizes, hashes and completion trailer.
+
+- The first copied clock-test attempt's after log, [`fail-before-2026-10-26/logs/st12472/after.interrupted.log`](fail-before-2026-10-26/logs/st12472/after.interrupted.log), is retained but has no row in `logs/runs.jsonl`. It was stopped by hand after the first before attempt exposed a build problem: `clean test` did not produce the shaded jar needed by the reactor; the case was rerun with `clean package`. See [the copied-test README, “Run record, including failed attempts”](fail-before-2026-10-26/README.md#run-record-including-failed-attempts).
+
+- The copied-test runner's unchanged default matrix, `./run.sh` in `fail-before-2026-10-26/`, has one recorded invocation on 2026-10-30 covering all 20 requested sides, with the same test and compilation behavior as the historical runs. The runner matches commit `af71f39`; the regenerated results report identical outcomes after parser revision 3, which only recognises the substituted `$FAILBEFORE_WORK/` path prefix in Maven test-source errors. `st12481-shim` remains excluded. The historical results were produced by earlier runner revisions on 2026-10-25 and 2026-10-26. See [the copied-test README, “Run record (2026-10-30, default command)”](fail-before-2026-10-26/README.md#run-record-2026-10-30-default-command).
+
+## Model-written query sub-study (summary)
+
+The question was whether realistic model-written `regexp_like` queries for ordinary text-matching tasks reached the planner's constant-folding path and triggered the planning stall before the fix.
+
+Two generators received the same twenty task themes, including one naming nested groups with counted repetitions. After code fences were unwrapped, each response line that parsed as a JSON object with a string `sql` field was extracted; all extracted queries were measured, including those that later failed to plan.
+
+Across 45 generation calls, 39 unparseable response lines from one generator and none from the other were excluded from extraction. There were 412 extracted query records: 375 planned without error at both builds, and 37 had planning errors with the same status at both builds. There were zero stalls and zero all-literal `regexp_like` calls. Nested counted quantifiers appeared in 47 queries, of which 9 came from the theme naming them.
+
+The pre-registered outcomes covered extraction and classification counts, planning success, planning-time distributions, stalls and timeouts at both builds, including strata by nested counted quantifiers and pattern length. A stall meant median planning time above 1 s or a 20 s timeout. H1, that a stall requires all-literal arguments and a pattern over the planning size limit, was consistent with the data; H2, that nested counted quantifiers would occur mainly under the theme naming them, was not supported; H3, that queries stalling before would not stall after, was not testable because none stalled before. The positive control did not meet the pre-registered expectation of about 1 s or more before the fix. The proposed rule-of-three confidence bound was removed because the queries were batched under selected prompts without a justified independent sampling model.
+
+Only `regexp_like` patterns were classified. Patterns in the seven queries also using `regexp_match` or `regexp_replace` were not analysed. Arguments counted as literals only when they were bare strings, numbers, NULL, TRUE or FALSE; constant expressions such as `lower('X')` counted as non-literal.
+
+The issue-reproducer positive control planned in 61.6 ms before and 2.0 ms after the fix historically, and 63.0 ms before and 2.3 ms after in the locked replay. These are planning measurements, not execution costs. Full methods, results and limits are in [`model-queries-2026-10-25/README.md`](model-queries-2026-10-25/README.md); the original design and outcome definitions are in [`PREREGISTRATION.md`](model-queries-2026-10-25/PREREGISTRATION.md).
+
 ## Comparison with the current article
 
 This section compares with an earlier article draft; [`replay-clean/COMPARISON.md`](replay-clean/COMPARISON.md) holds the current container comparison.
@@ -537,8 +563,10 @@ interrupted after attempt are retained; the interrupted attempt has no registry 
 and is not a completed run. Concurrent builds affect durations, and runner edits
 caused console errors after completed cases. Logs retain workstation paths.
 The first transplant parser could have accepted a missing comparison or an ignored-only
-Rust test; the 2026-10-26 revision of `fail-before-2026-10-26/make_results.py` rejects
-both (see that README, "Parser revision"), and no recorded outcome changed. The revised
+Rust test; revision 2 (2026-10-26) of `fail-before-2026-10-26/make_results.py` rejects
+both (see that README, "Parser revision"), and no recorded outcome changed. Parser revision 3
+(2026-10-30) only recognises the substituted `$FAILBEFORE_WORK/` path prefix in Maven test-source
+errors; re-running it over all retained logs changes none of the 23 historical run outcomes. The revised
 runner writes the requested cases and sides to `logs/requested.json` before any build,
 records a failed clone, checkout, transplant or patch apply as a SETUP_ERROR run with its
 own log instead of skipping the side, and exits non-zero when a requested side has no

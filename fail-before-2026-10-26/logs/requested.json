@@ -15,5 +15,103 @@
         "side": "after"
       }
     ]
+  },
+  {
+    "invocation": "20261030T123542Z-26639",
+    "requested_at": "2026-10-30T05:35:42-0700",
+    "cases": [
+      "df24193",
+      "df24917",
+      "df24917-diag",
+      "df24917-budget",
+      "st12038",
+      "st12038-shim",
+      "st12038-factory",
+      "st12360",
+      "st12472",
+      "st12481"
+    ],
+    "sides": [
+      {
+        "case": "df24193",
+        "side": "before"
+      },
+      {
+        "case": "df24193",
+        "side": "after"
+      },
+      {
+        "case": "df24917",
+        "side": "before"
+      },
+      {
+        "case": "df24917",
+        "side": "after"
+      },
+      {
+        "case": "df24917-diag",
+        "side": "before"
+      },
+      {
+        "case": "df24917-diag",
+        "side": "after"
+      },
+      {
+        "case": "df24917-budget",
+        "side": "before"
+      },
+      {
+        "case": "df24917-budget",
+        "side": "after"
+      },
+      {
+        "case": "st12038",
+        "side": "before"
+      },
+      {
+        "case": "st12038",
+        "side": "after"
+      },
+      {
+        "case": "st12038-shim",
+        "side": "before"
+      },
+      {
+        "case": "st12038-shim",
+        "side": "after"
+      },
+      {
+        "case": "st12038-factory",
+        "side": "before"
+      },
+      {
+        "case": "st12038-factory",
+        "side": "after"
+      },
+      {
+        "case": "st12360",
+        "side": "before"
+      },
+      {
+        "case": "st12360",
+        "side": "after"
+      },
+      {
+        "case": "st12472",
+        "side": "before"
+      },
+      {
+        "case": "st12472",
+        "side": "after"
+      },
+      {
+        "case": "st12481",
+        "side": "before"
+      },
+      {
+        "case": "st12481",
+        "side": "after"
+      }
+    ]
   }
 ]
