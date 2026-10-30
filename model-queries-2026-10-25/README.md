@@ -329,8 +329,11 @@ Log files contain the workstation paths printed by the tools.
 ./run.sh generate   # new queries (needs an LM Studio endpoint and the claude client; refuses to overwrite)
 ```
 
-`measure` skips (query, build, repetition) runs already in `logs/<MEASURE_SET>/runs.jsonl`
-(default `logs/measure/runs.jsonl`). Select a new `MEASURE_SET` for a fresh replay.
+`measure` is fresh by default and refuses a set that already holds records.
+Select a new `MEASURE_SET` for a fresh replay. Set `MEASURE_RESUME=1` explicitly
+to reuse recorded runs in that same set, after manifest and input-identity verification.
+`./run.sh results` analyzes the selected set without running measurements.
+`./run.sh all` runs build, measure and results in fresh mode (`MEASURE_RESUME=0`).
 `explore` refuses to overwrite `logs/exploratory/runs.jsonl`.
 
 ## Revision (2026-10-25, after the runs)
