@@ -20,7 +20,8 @@ import statistics
 import sys
 
 from measurement_sets import (
-    BUILDS, REPS, EXPECTED_ITEMS, EXPECTED_PROCESS_RUNS, paths, write_output,
+    BUILDS, REPS, EXPECTED_ITEMS, EXPECTED_PROCESS_RUNS, InputIdentityError,
+    paths, validate_inputs, write_output,
 )
 
 HERE = pathlib.Path(__file__).resolve().parent.parent
@@ -120,7 +121,7 @@ def outcome(runs):
 def main():
     try:
         return build()
-    except Invalid as e:
+    except (Invalid, InputIdentityError) as e:
         print(f"analyze.py: {e}; {RESULTS.name} not written", file=sys.stderr)
         return 1
 
@@ -130,6 +131,7 @@ def build():
     queries = []
     for f in sorted((HERE / "queries").glob("*.jsonl")):
         queries += jl(f)
+    validate_inputs(OUT, controls + queries)
     if len(controls) + len(queries) != EXPECTED_ITEMS:
         raise Invalid(f"loaded {len(controls) + len(queries)} items; expected {EXPECTED_ITEMS} "
                       "(5 controls plus 412 queries)")

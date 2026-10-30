@@ -90,7 +90,7 @@ def main():
     resume = os.environ.get("MEASURE_RESUME") == "1"
     check_fresh(OUT, resume)
     items = load_items()
-    manifest = prepare_manifest(HERE, OUT, BIN, len(items), started, resume)
+    manifest = prepare_manifest(HERE, OUT, BIN, items, started, resume)
     executed = reused = 0
     try:
         classify_all(items)

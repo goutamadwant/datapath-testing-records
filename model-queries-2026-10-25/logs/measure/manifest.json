@@ -1,0 +1,10 @@
+{
+  "binary_sha256": {
+    "plan_time_before": "37fcd8e719a475bd09153015816e049f1f072c4568673e7ec3d55bee7bac7b1e",
+    "plan_time_after": "50258cfb6f9a044090ec5a6ce288ac01dac92fe2aa3d85016b56d7870317521e"
+  },
+  "item_count": 417,
+  "inputs_sha256": "c35478e9a882e1438a4db0720b1216b717303bef09b279c43f60d04a4e2abbbd",
+  "inputs_file": "inputs.jsonl",
+  "inputs_binding": "reconstructed on 2026-10-29 from the committed queries and controls, which are unchanged since the measurement (query-file sha256 values are listed in results.json; every loaded control field matches results.json, which does not list a controls-file sha256); other build and invocation fields are omitted because this historical set has no retained manifest for them"
+}

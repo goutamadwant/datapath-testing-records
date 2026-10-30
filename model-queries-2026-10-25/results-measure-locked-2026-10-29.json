@@ -19154,10 +19154,15 @@
   "logs/generation-console.txt": "8dd351bca80d38fe65aabbaef4b51c828347d3147b22a4e29680f3ea9b45fc6a",
   "logs/generation-g1-model-info.json": "1a9e84a1a91ee18a62d5eaffed3e912995d7a59053ecb8bc79ee507fe3a4be3a",
   "logs/measure/classify.jsonl": "04ec32c5df697c8743a7a920ce6a40847d4a8a81de05970194b0de7bc72a55bf",
+  "logs/measure/inputs.jsonl": "bc5e152fdd02e3192394e530b75789fd7011d3591f02e1d5c5328dc0e20b51a5",
+  "logs/measure/manifest.json": "097322b79f5cb8d89cf435255a82e42cf4e3511296222fbc23e15c5b5e5fe886",
   "logs/measure/runs.jsonl": "4726d2fe73e8a709ed42b13f4cdbbe4673f921d811160690d30d15a3b93dc0ac",
   "logs/measure-console.txt": "4fc1ea6e1e3a4953143299381a1422f18f5eea21ef2ec015499f791b30200f21",
   "logs/measure-locked-2026-10-29/classify.jsonl": "6db43fef5b57e3386ad672af66517057598131b31772c618b46d7b11d30531a1",
+  "logs/measure-locked-2026-10-29/inputs.jsonl": "bc5e152fdd02e3192394e530b75789fd7011d3591f02e1d5c5328dc0e20b51a5",
+  "logs/measure-locked-2026-10-29/manifest.json": "bda498e25c464dee57de90cdde26ba21d895351231c44655bf3541a700db6763",
   "logs/measure-locked-2026-10-29/runs.jsonl": "f4b642e12d79797d2886190d2559661d46d5182047ac70de1a12ec512fa4e258",
+  "logs/measure-locked-2026-10-29/tables.md": "b1e8a629a8ce47bc10e62f6e1e67f0fe43e948a87808892fd3846a5cd6f79163",
   "logs/preregistration.sha256": "0b47a47bc99e4ff9d990b754dfb26f8dd498b1b2ded52c7c9d32e77e81926158",
   "logs/smoke.txt": "b3b357fddf878bf142de0c8d8e57aad8f8c99a3008d0785bf15d431504f011b3",
   "logs/tables.md": "68fe20067f1de8ff57c7ecde83920a7948dbc8a28651dc968901cfbd7e0ae1eb",
@@ -19176,7 +19181,7 @@
    "path": "harness/analyze.py",
    "sha256_as_run": "d3d460e05a5424b21924a2ec06d1d55b09548c0d82e83c43a13577c33fe4afb2",
    "revised_after_runs": "2026-10-25: rule_of_three_upper_95 removed from the summaries (no justified independent-query sampling model); fail-closed check of REPS repetitions per (query, build). Re-running it over the recorded logs changes no count, time or status; the only difference in results.json is the removed field and this note.",
-   "sha256": "051e2312ac0f3453430af42cd6233af02c27163596bef86c814ee160e03cbf03"
+   "sha256": "de925081be578da813a044e11ad9ee0e42e7945456feb24fe9a9632183ecfe03"
   }
  ],
  "exploratory_not_preregistered": {

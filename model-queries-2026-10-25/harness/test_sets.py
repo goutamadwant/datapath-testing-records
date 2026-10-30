@@ -14,10 +14,18 @@ from unittest.mock import patch
 import analyze
 import compare
 import measure
-from measurement_sets import paths, write_output
+from measurement_sets import inputs_sha256, paths, prepare_manifest, write_output
 
 
 class MeasurementSetsTest(unittest.TestCase):
+    def test_canonical_input_hash_covers_full_records_and_order(self):
+        items = [{"sql": "select 'é'", "query_id": "q", "metadata": {"z": 1, "a": 2}}]
+        canonical = '[{"metadata":{"a":2,"z":1},"query_id":"q","sql":"select \'é\'"}]'
+        self.assertEqual(inputs_sha256(items), hashlib.sha256(canonical.encode("utf-8")).hexdigest())
+        self.assertEqual(inputs_sha256(items), inputs_sha256([dict(reversed(list(items[0].items())))]))
+        other = {"query_id": "other", "sql": "select 1"}
+        self.assertNotEqual(inputs_sha256(items + [other]), inputs_sha256([other] + items))
+
     def test_paths_used_by_measure_and_analyze(self):
         for name in (None, "measure-locked-2026-10-29"):
             with self.subTest(name=name), patch.dict(os.environ, {}, clear=True):
@@ -136,6 +144,12 @@ class MeasurementInvocationTest(unittest.TestCase):
             for b in ("before", "after")})
         self.assertEqual(manifest["toolchain"], "rustc test")
         self.assertEqual(manifest["item_count"], 1)
+        self.assertEqual(manifest["inputs_sha256"], inputs_sha256(self.items))
+        self.assertEqual(manifest["inputs_file"], "inputs.jsonl")
+        self.assertEqual(manifest["inputs_binding"], "recorded at first run")
+        self.assertEqual(json.loads((self.out / "inputs.jsonl").read_text()), {
+            "id": "test-item", "sha256": hashlib.sha256(
+                b'{"query_id":"test-item","sql":"select 1"}').hexdigest(), "position": 0})
         self.assertEqual(manifest["start"], manifest["invocations"][0]["start"])
         retained = {name: (self.out / name).read_bytes() for name in ("runs.jsonl", "classify.jsonl")}
         self.process.reset_mock()
@@ -184,6 +198,25 @@ class MeasurementInvocationTest(unittest.TestCase):
                 self.assertEqual({p: p.read_bytes() for p in self.out.iterdir()}, retained)
                 target.write_bytes(original)
 
+    def test_resume_refuses_changed_sql_without_writing_or_reusing(self):
+        self.invoke()
+        retained = {p: p.read_bytes() for p in self.out.iterdir()}
+        self.items[0]["sql"] = "select 2"
+        self.process.reset_mock()
+        with self.assertRaisesRegex(SystemExit, "input-identity error.*test-item"):
+            self.invoke(resume=True)
+        self.process.assert_not_called()
+        self.assertEqual({p: p.read_bytes() for p in self.out.iterdir()}, retained)
+
+    def test_fresh_set_executes_changed_sql(self):
+        self.invoke()
+        self.items[0]["sql"] = "select 2"
+        self.process.reset_mock()
+        with patch.object(measure, "OUT", self.root / "logs/changed-set"):
+            self.assertIn("executed 6 process runs, reused 0 recorded runs", self.invoke())
+        self.assertEqual(self.process.call_count, 6)
+        self.assertTrue(all(call.args[1] == "select 2" for call in self.process.call_args_list))
+
 
 class SyntheticFilesTest(unittest.TestCase):
     def setUp(self):
@@ -202,6 +235,19 @@ class SyntheticFilesTest(unittest.TestCase):
     def jsonl(self, path, records):
         path.write_text("".join(json.dumps(r) + "\n" for r in records))
 
+    def bind_inputs(self, items):
+        binaries = {}
+        plan_time = self.root / "harness/plan_time"
+        plan_time.mkdir(exist_ok=True)
+        for label in analyze.BUILDS:
+            binary = self.root / f"plan_time_{label}"
+            binary.write_bytes(label.encode())
+            binaries[label] = binary
+            (plan_time / f"Cargo.lock.{label}").write_text(f"lock {label}\n")
+        (plan_time / "TOOLCHAIN.expected").write_text("rustc test\n")
+        prepare_manifest(self.root, self.out, binaries, items, "test start", resume=False)
+        return binaries
+
     def fixture(self):
         # Minimal synthetic SQL and timings; no measurements or real logs.
         controls = [{"query_id": f"control-{i}", "sql": "select 1",
@@ -211,6 +257,7 @@ class SyntheticFilesTest(unittest.TestCase):
         self.jsonl(self.root / "harness/controls.jsonl", controls)
         self.jsonl(self.root / "queries/test.jsonl", queries)
         items = controls + queries
+        self.binaries = self.bind_inputs(items)
         self.jsonl(self.out / "classify.jsonl",
                    [{"query_id": it["query_id"], "regexp_like_calls": [], "other_regex": {}}
                     for it in items])
@@ -233,11 +280,105 @@ class SyntheticFilesTest(unittest.TestCase):
                 self.jsonl(self.root / "harness/controls.jsonl", [])
                 self.jsonl(self.root / "queries/test.jsonl",
                            [{"query_id": str(i)} for i in range(count)])
+                self.bind_inputs([{"query_id": str(i)} for i in range(count)])
                 status, _, error = self.analyze()
                 self.assertEqual(status, 1)
                 self.assertIn(f"loaded {count} items; expected 417", error)
                 self.assertFalse(self.results.exists())
                 self.assertFalse(self.tables.exists())
+                (self.out / "manifest.json").unlink()
+                (self.out / "inputs.jsonl").unlink()
+
+    def measure(self, out=None, resume=True):
+        output = io.StringIO()
+        with patch.multiple(measure, HERE=self.root, OUT=out or self.out, BIN=self.binaries), \
+                patch.dict(os.environ, {"MEASURE_RESUME": "1" if resume else "0"}), \
+                contextlib.redirect_stdout(output):
+            measure.main()
+        return output.getvalue()
+
+    def snapshot(self):
+        return {p: p.read_bytes() for p in self.root.rglob("*") if p.is_file()}
+
+    def test_unchanged_resume_analysis_and_changed_query(self):
+        self.fixture()
+        with patch.object(measure, "run_one") as process:
+            self.assertIn("executed 0 process runs, reused 2502 recorded runs", self.measure())
+            process.assert_not_called()
+        self.assertEqual(self.analyze()[0], 0)
+
+        query_file = self.root / "queries/test.jsonl"
+        queries = [json.loads(line) for line in query_file.read_text().splitlines()]
+        queries[0]["sql"] = "select 2"
+        self.jsonl(query_file, queries)
+        retained = self.snapshot()
+        with patch.object(measure, "run_one") as process, \
+                patch.object(measure, "classify_all") as classify, \
+                contextlib.redirect_stdout(io.StringIO()) as output:
+            with self.assertRaisesRegex(SystemExit, "input-identity error.*query-0"):
+                self.measure()
+            process.assert_not_called()
+            classify.assert_not_called()
+            self.assertNotIn("reused", output.getvalue())
+        status, output, error = self.analyze()
+        self.assertEqual(status, 1)
+        self.assertIn("input-identity error", error)
+        self.assertIn("query-0", error)
+        self.assertEqual(output, "")
+        self.assertEqual(self.snapshot(), retained)
+
+        fresh = self.root / "logs/changed-set"
+        timing = {"status": "ok", "total_ms": 2, "logical_ms": 1, "physical_ms": 1}
+        with patch.object(measure, "run_one", return_value=timing) as process:
+            self.assertIn("executed 2502 process runs, reused 0 recorded runs",
+                          self.measure(out=fresh, resume=False))
+            self.assertEqual(process.call_count, 2502)
+            self.assertEqual(sum(call.args[1] == "select 2" for call in process.call_args_list), 6)
+        self.assertNotEqual(json.loads((fresh / "manifest.json").read_text())["inputs_sha256"],
+                            json.loads((self.out / "manifest.json").read_text())["inputs_sha256"])
+        with patch.multiple(analyze, OUT=fresh, RESULTS=self.root / "results-changed-set.json",
+                            TABLES=fresh / "tables.md"):
+            self.assertEqual(self.analyze()[0], 0)
+        result = json.loads((self.root / "results-changed-set.json").read_text())
+        self.assertEqual(result["queries"][0]["sql"], "select 2")
+        self.assertEqual(result["queries"][0]["before"]["time_ms"], 2)
+
+    def test_control_metadata_and_order_changes_are_rejected(self):
+        self.fixture()
+        path = self.root / "harness/controls.jsonl"
+        original = path.read_bytes()
+        for change in ("sql", "note", "order", "removed"):
+            with self.subTest(change=change):
+                controls = [json.loads(line) for line in original.splitlines()]
+                if change == "order":
+                    controls[0], controls[1] = controls[1], controls[0]
+                elif change == "removed":
+                    controls.pop(0)
+                else:
+                    controls[0][change] = "changed"
+                self.jsonl(path, controls)
+                retained = self.snapshot()
+                with self.assertRaisesRegex(SystemExit, "input-identity error.*control-0"):
+                    self.measure()
+                status, _, error = self.analyze()
+                self.assertEqual(status, 1)
+                self.assertIn("input-identity error", error)
+                self.assertIn("control-0", error)
+                self.assertEqual(self.snapshot(), retained)
+        path.write_bytes(original)
+
+    def test_missing_input_binding_fails_without_writing(self):
+        self.fixture()
+        for filename in ("inputs.jsonl", "manifest.json"):
+            path = self.out / filename
+            original = path.read_bytes()
+            path.unlink()
+            retained = self.snapshot()
+            status, _, error = self.analyze()
+            self.assertEqual(status, 1)
+            self.assertIn("input-identity error", error)
+            self.assertEqual(self.snapshot(), retained)
+            path.write_bytes(original)
 
     def test_analyze_writes_complete_new_outputs(self):
         self.fixture()

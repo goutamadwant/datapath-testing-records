@@ -16,6 +16,15 @@
       "end": "2026-10-29T08:06:06.283-07:00",
       "executed": 2502,
       "reused": 0
+    },
+    {
+      "start": "2026-10-29T21:12:43.591-07:00",
+      "end": "2026-10-29T21:12:43.955-07:00",
+      "executed": 0,
+      "reused": 2502
     }
-  ]
+  ],
+  "inputs_sha256": "c35478e9a882e1438a4db0720b1216b717303bef09b279c43f60d04a4e2abbbd",
+  "inputs_file": "inputs.jsonl",
+  "inputs_binding": "reconstructed on 2026-10-29 from the committed queries and controls, which are unchanged since the measurement (query-file sha256 values are listed in results.json; every loaded control field matches results.json, which does not list a controls-file sha256)"
 }

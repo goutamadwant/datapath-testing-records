@@ -78,7 +78,7 @@ export MEASURE_SET=measure-locked-$(date +%Y%m%d)
 
 Choose a set name that does not already exist under `logs/`; change the example name
 if it has already been used. Measurement defaults to fresh mode and refuses a set
-containing `classify.jsonl`, `runs.jsonl` or `manifest.json`. To continue an interrupted
+containing `classify.jsonl`, `runs.jsonl`, `manifest.json` or `inputs.jsonl`. To continue an interrupted
 set, use `MEASURE_RESUME=1 ./run.sh measure` with the same `MEASURE_SET` and binaries.
 Resume requires a matching `logs/<set>/manifest.json` and reuses existing classification
 and recorded (query, build, repetition) runs.
@@ -92,8 +92,20 @@ aborts the measurement. Each invocation appends its start, end, executed and reu
 counts to `invocations` and prints `executed N process runs, reused M recorded runs`.
 These counts cover planning processes; classification is recorded separately.
 
+Each set also binds the ordered, full loaded control and query records with
+`inputs_sha256`: sha256 of sorted-key JSON with no spaces, encoded as UTF-8. Controls
+come first, followed by queries in file order. `inputs.jsonl` records each item's id,
+record hash and zero-based position. Resume and analysis validate this identity before
+using retained records; a mismatch names the first differing item and writes nothing.
+Changed workloads require a fresh set. The manifests and input lists for `measure`
+and `measure-locked-2026-10-29` were reconstructed on 2026-10-29 from the committed
+inputs: query-file hashes match `results.json`, and every loaded control field matches
+its retained result (that file does not list a controls-file hash). The historical
+manifest includes the binary hashes from `logs/build/build-20261025T153358.txt` and
+omits build and invocation fields without a retained manifest source.
+
 `MEASURE_SET` defaults to `measure`; a named set keeps classification, process runs and
-tables together. The historical measurement in `logs/measure/` and `results.json` is
+tables together. The historical classification, process runs and `results.json` are
 unchanged. The locked replay's records are `logs/measure-locked-2026-10-29/`,
 `results-measure-locked-2026-10-29.json` and `COMPARISON-measure-locked-2026-10-29.md`.
 Its manifest was added from the retained build hashes, committed lockfile hashes and
