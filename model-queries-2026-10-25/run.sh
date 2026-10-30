@@ -19,6 +19,7 @@
 #   RUN_WORK         work directory (default ./work, relative to this script)
 #   MEASURE_SET      measurement log directory name (default measure); named sets write
 #                    results-<set>.json and logs/<set>/tables.md
+#   MEASURE_RESUME   set to 1 to reuse records after manifest verification; default fresh
 #   DATAFUSION_URL   clone URL (default https://github.com/apache/datafusion.git)
 #   G1_ENDPOINT      default http://127.0.0.1:11435/v1
 #   G1_MODEL         default qwen3-coder-30b-a3b-instruct
@@ -34,6 +35,7 @@ mkdir -p "$RUN_WORK" logs/build
 RUN_WORK="$(cd "$RUN_WORK" && pwd)"
 export RUN_WORK
 export MEASURE_SET="${MEASURE_SET-measure}"
+export MEASURE_RESUME="${MEASURE_RESUME:-0}"
 DATAFUSION_URL="${DATAFUSION_URL:-https://github.com/apache/datafusion.git}"
 REV_BEFORE=408527ae58b5b706f5c02df8c37e096122cd8c78   # parent of the PR 24917 merge
 REV_AFTER=3dfa245d61dde362e2c077761783bc735931659c    # PR 24917 squash merge

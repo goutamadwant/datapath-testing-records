@@ -1,0 +1,21 @@
+{
+  "binary_sha256": {
+    "plan_time_before": "1d0a54dcb21d74c83845de1fadce4eaf826db4988294f6ba711c6c6174e020be",
+    "plan_time_after": "0594088038c50088d909af5cda193bf05502bfd3b8d4247901da4ae1c7ade392"
+  },
+  "lockfile_sha256": {
+    "Cargo.lock.before": "5c3739b92cf19cc219db6d9ca318770f8b31493159094120021eae0df3b53694",
+    "Cargo.lock.after": "e310a209d86c67619f7d563b7599bc7abb6ca0e0cf936fd427f044eedcbf8dff"
+  },
+  "toolchain": "rustc 1.99.0-nightly (3d50c25bc 2026-07-16)",
+  "item_count": 417,
+  "start": "2026-10-29T08:05:28.274-07:00",
+  "invocations": [
+    {
+      "start": "2026-10-29T08:05:28.274-07:00",
+      "end": "2026-10-29T08:06:06.283-07:00",
+      "executed": 2502,
+      "reused": 0
+    }
+  ]
+}

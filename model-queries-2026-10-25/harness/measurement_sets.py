@@ -1,6 +1,8 @@
 """Paths for the historical measurement and named replays."""
 import os
 import re
+import hashlib
+import json
 
 
 BUILDS = ("before", "after")
@@ -9,6 +11,52 @@ EXPECTED_CONTROLS = 5
 EXPECTED_QUERIES = 412
 EXPECTED_ITEMS = EXPECTED_CONTROLS + EXPECTED_QUERIES
 EXPECTED_PROCESS_RUNS = EXPECTED_ITEMS * len(BUILDS) * REPS
+
+
+def check_fresh(logs, resume):
+    if not resume and any((logs / name).exists() for name in
+                          ("classify.jsonl", "runs.jsonl", "manifest.json")):
+        raise SystemExit(f"{logs} already contains measurement records; choose a new set name "
+                         "or set MEASURE_RESUME=1")
+
+
+def prepare_manifest(root, logs, binaries, item_count, started, resume):
+    """Bind a set to binary bytes, committed lockfiles and the declared compiler."""
+    check_fresh(logs, resume)
+    manifest_path = logs / "manifest.json"
+    manifest = None
+    if resume:
+        try:
+            manifest = json.loads(manifest_path.read_text())
+            if not isinstance(manifest, dict) or not isinstance(manifest["invocations"], list):
+                raise ValueError("invalid manifest structure")
+        except (OSError, ValueError, KeyError) as error:
+            raise SystemExit(f"cannot resume {logs}: valid manifest.json required ({error})")
+    plan_time = root / "harness/plan_time"
+    try:
+        identity = {
+            "binary_sha256": {f"plan_time_{label}": hashlib.sha256(path.read_bytes()).hexdigest()
+                              for label, path in binaries.items()},
+            "lockfile_sha256": {f"Cargo.lock.{label}": hashlib.sha256(
+                (plan_time / f"Cargo.lock.{label}").read_bytes()).hexdigest() for label in BUILDS},
+            "toolchain": (plan_time / "TOOLCHAIN.expected").read_text().strip(),
+            "item_count": item_count,
+        }
+    except OSError as error:
+        raise SystemExit(f"cannot measure {logs}: {error}; run ./run.sh build first")
+    if resume:
+        for key, value in identity.items():
+            if manifest.get(key) != value:
+                raise SystemExit(f"cannot resume {logs}: {key} mismatch with manifest.json")
+        return manifest
+    manifest = {**identity, "start": started, "invocations": []}
+    logs.mkdir(parents=True, exist_ok=True)
+    save_manifest(logs, manifest)
+    return manifest
+
+
+def save_manifest(logs, manifest):
+    (logs / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
 
 
 def write_output(path, content, preserve=False):

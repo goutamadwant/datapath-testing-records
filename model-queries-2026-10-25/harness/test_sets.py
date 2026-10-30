@@ -1,6 +1,7 @@
 """Small offline checks for measurement paths and process-run completeness."""
 import contextlib
 import copy
+import hashlib
 import importlib
 import io
 import json
@@ -78,6 +79,110 @@ class MeasurementSetsTest(unittest.TestCase):
                 for it in items for b in analyze.BUILDS}
         state, _ = analyze.completeness(items, runs)
         self.assertFalse(state["complete"])
+
+
+class MeasurementInvocationTest(unittest.TestCase):
+    def setUp(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.root = pathlib.Path(temporary.name)
+        self.out = self.root / "logs/test-set"
+        self.plan_time = self.root / "harness/plan_time"
+        self.plan_time.mkdir(parents=True)
+        self.binaries = {}
+        for label in ("before", "after"):
+            binary = self.root / f"plan_time_{label}"
+            binary.write_bytes(label.encode())
+            self.binaries[label] = binary
+            (self.plan_time / f"Cargo.lock.{label}").write_text(f"lock {label}\n")
+        (self.plan_time / "TOOLCHAIN.expected").write_text("rustc test\n")
+        self.items = [{"query_id": "test-item", "sql": "select 1"}]
+        self.enterContext(patch.dict(os.environ, {"MEASURE_RESUME": "0"}))
+        self.enterContext(patch.multiple(measure, HERE=self.root, OUT=self.out, BIN=self.binaries))
+        self.enterContext(patch.object(measure, "load_items", return_value=self.items))
+        self.process = self.enterContext(patch.object(measure, "run_one", return_value={"status": "ok"}))
+
+    def invoke(self, resume=False):
+        output = io.StringIO()
+        with patch.dict(os.environ, {"MEASURE_RESUME": "1" if resume else "0"}), contextlib.redirect_stdout(output):
+            measure.main()
+        return output.getvalue()
+
+    def manifest(self):
+        return json.loads((self.out / "manifest.json").read_text())
+
+    def test_existing_records_refused_by_default(self):
+        self.out.mkdir(parents=True)
+        for filename in ("classify.jsonl", "runs.jsonl"):
+            with self.subTest(filename=filename):
+                record = self.out / filename
+                record.write_bytes(b"retained record\n")
+                with self.assertRaises(SystemExit) as error:
+                    measure.main()
+                self.assertIn(str(self.out), str(error.exception))
+                self.assertIn("choose a new set name or set MEASURE_RESUME=1", str(error.exception))
+                self.assertEqual(record.read_bytes(), b"retained record\n")
+                self.assertFalse((self.out / "manifest.json").exists())
+                record.unlink()
+        self.process.assert_not_called()
+
+    def test_fresh_manifest_and_matching_resume_report(self):
+        self.assertIn("executed 6 process runs, reused 0 recorded runs", self.invoke())
+        manifest = self.manifest()
+        self.assertEqual(manifest["binary_sha256"], {
+            f"plan_time_{b}": hashlib.sha256(p.read_bytes()).hexdigest() for b, p in self.binaries.items()})
+        self.assertEqual(manifest["lockfile_sha256"], {
+            f"Cargo.lock.{b}": hashlib.sha256((self.plan_time / f"Cargo.lock.{b}").read_bytes()).hexdigest()
+            for b in ("before", "after")})
+        self.assertEqual(manifest["toolchain"], "rustc test")
+        self.assertEqual(manifest["item_count"], 1)
+        self.assertEqual(manifest["start"], manifest["invocations"][0]["start"])
+        retained = {name: (self.out / name).read_bytes() for name in ("runs.jsonl", "classify.jsonl")}
+        self.process.reset_mock()
+        self.assertIn("executed 0 process runs, reused 6 recorded runs", self.invoke(resume=True))
+        self.process.assert_not_called()
+        for name, data in retained.items():
+            self.assertEqual((self.out / name).read_bytes(), data)
+        invocations = self.manifest()["invocations"]
+        self.assertEqual([(r["executed"], r["reused"]) for r in invocations], [(6, 0), (0, 6)])
+        for invocation in invocations:
+            self.assertLessEqual(invocation["start"], invocation["end"])
+
+    def test_partial_resume_reports_executed_and_reused(self):
+        self.invoke()
+        runs = self.out / "runs.jsonl"
+        first_record = runs.read_text().splitlines(keepends=True)[0]
+        runs.write_text(first_record)
+        self.process.reset_mock()
+        self.assertIn("executed 5 process runs, reused 1 recorded runs", self.invoke(resume=True))
+        self.assertEqual(self.process.call_count, 5)
+        self.assertEqual(len(runs.read_text().splitlines()), 6)
+        self.assertTrue(runs.read_text().startswith(first_record))
+        self.assertEqual(self.manifest()["invocations"][-1]["executed"], 5)
+
+    def test_resume_requires_manifest(self):
+        self.out.mkdir(parents=True)
+        (self.out / "runs.jsonl").write_text("")
+        with self.assertRaisesRegex(SystemExit, "valid manifest.json required"):
+            self.invoke(resume=True)
+        self.process.assert_not_called()
+
+    def test_resume_refuses_changed_binary_or_lockfile(self):
+        self.invoke()
+        for target, field in ((self.binaries["before"], "binary_sha256"),
+                              (self.binaries["after"], "binary_sha256"),
+                              (self.plan_time / "Cargo.lock.before", "lockfile_sha256"),
+                              (self.plan_time / "Cargo.lock.after", "lockfile_sha256")):
+            with self.subTest(target=target.name):
+                original = target.read_bytes()
+                retained = {p: p.read_bytes() for p in self.out.iterdir()}
+                target.write_bytes(original + b"changed")
+                self.process.reset_mock()
+                with self.assertRaisesRegex(SystemExit, field + " mismatch"):
+                    self.invoke(resume=True)
+                self.process.assert_not_called()
+                self.assertEqual({p: p.read_bytes() for p in self.out.iterdir()}, retained)
+                target.write_bytes(original)
 
 
 class SyntheticFilesTest(unittest.TestCase):

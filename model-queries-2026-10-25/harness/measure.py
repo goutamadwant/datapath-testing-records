@@ -5,8 +5,8 @@ Reads harness/controls.jsonl and queries/*.jsonl. Writes:
   logs/<MEASURE_SET>/runs.jsonl      one line per (query, build, repetition) process run
 MEASURE_SET defaults to measure.
 Each repetition is a separate process with a 20 s wall-clock timeout. Repetition-major order;
-the build order alternates by item index. Already recorded (query, build, rep) runs are skipped,
-so an interrupted measurement can be resumed; nothing is overwritten.
+the build order alternates by item index. Fresh mode refuses existing records.
+MEASURE_RESUME=1 verifies manifest.json before reusing recorded runs and classification.
 """
 import datetime as dt
 import json
@@ -18,7 +18,7 @@ import time
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from sqlscan import scan  # noqa: E402
-from measurement_sets import paths  # noqa: E402
+from measurement_sets import check_fresh, paths, prepare_manifest, save_manifest  # noqa: E402
 
 HERE = pathlib.Path(__file__).resolve().parent.parent
 WORK = pathlib.Path(os.environ.get("RUN_WORK", HERE / "work")).resolve()
@@ -86,32 +86,40 @@ def run_one(build, sql):
 
 
 def main():
-    OUT.mkdir(parents=True, exist_ok=True)
-    for b, path in BIN.items():
-        if not path.exists():
-            raise SystemExit(f"missing {path}; run ./run.sh build first")
+    started = now()
+    resume = os.environ.get("MEASURE_RESUME") == "1"
+    check_fresh(OUT, resume)
     items = load_items()
-    classify_all(items)
-    runs_path = OUT / "runs.jsonl"
-    done = set()
-    if runs_path.exists():
-        for line in runs_path.read_text().splitlines():
-            r = json.loads(line)
-            done.add((r["query_id"], r["build"], r["rep"]))
-    with open(runs_path, "a") as fh:
-        fh.write("")
-        for rep in range(1, REPS + 1):
-            for i, it in enumerate(items):
-                order = ("before", "after") if i % 2 == 0 else ("after", "before")
-                for b in order:
-                    if (it["query_id"], b, rep) in done:
-                        continue
-                    started = now()
-                    rec = {"query_id": it["query_id"], "build": b, "rep": rep, "started": started,
-                           **run_one(b, it["sql"])}
-                    fh.write(json.dumps(rec) + "\n")
-                    fh.flush()
-            print(f"{now()} repetition {rep} done ({len(items)} items)", flush=True)
+    manifest = prepare_manifest(HERE, OUT, BIN, len(items), started, resume)
+    executed = reused = 0
+    try:
+        classify_all(items)
+        runs_path = OUT / "runs.jsonl"
+        done = set()
+        if runs_path.exists():
+            for line in runs_path.read_text().splitlines():
+                r = json.loads(line)
+                done.add((r["query_id"], r["build"], r["rep"]))
+        with open(runs_path, "a") as fh:
+            for rep in range(1, REPS + 1):
+                for i, it in enumerate(items):
+                    order = ("before", "after") if i % 2 == 0 else ("after", "before")
+                    for b in order:
+                        if (it["query_id"], b, rep) in done:
+                            reused += 1
+                            continue
+                        run_started = now()
+                        rec = {"query_id": it["query_id"], "build": b, "rep": rep,
+                               "started": run_started, **run_one(b, it["sql"])}
+                        fh.write(json.dumps(rec) + "\n")
+                        fh.flush()
+                        executed += 1
+                print(f"{now()} repetition {rep} done ({len(items)} items)", flush=True)
+    finally:
+        manifest["invocations"].append({"start": started, "end": now(),
+                                        "executed": executed, "reused": reused})
+        save_manifest(OUT, manifest)
+        print(f"executed {executed} process runs, reused {reused} recorded runs", flush=True)
 
 
 if __name__ == "__main__":

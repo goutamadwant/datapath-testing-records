@@ -70,15 +70,36 @@ by `RUN_WORK`, absent or empty):
 
 ```sh
 ./run.sh build
-MEASURE_SET=measure-locked-2026-10-29 ./run.sh measure
-MEASURE_SET=measure-locked-2026-10-29 ./run.sh results
-./run.sh compare measure-locked-2026-10-29
+export MEASURE_SET=measure-locked-$(date +%Y%m%d)
+./run.sh measure
+./run.sh results
+./run.sh compare "$MEASURE_SET"
 ```
+
+Choose a set name that does not already exist under `logs/`; change the example name
+if it has already been used. Measurement defaults to fresh mode and refuses a set
+containing `classify.jsonl`, `runs.jsonl` or `manifest.json`. To continue an interrupted
+set, use `MEASURE_RESUME=1 ./run.sh measure` with the same `MEASURE_SET` and binaries.
+Resume requires a matching `logs/<set>/manifest.json` and reuses existing classification
+and recorded (query, build, repetition) runs.
+
+The first invocation writes the manifest with sha256 hashes of `plan_time_before`,
+`plan_time_after` and both committed lockfiles, the item count and start timestamp.
+The compiler line is read from `harness/plan_time/TOOLCHAIN.expected`, which `build`
+checks against `rustc --version` in each build directory. Resume verifies the binary
+and lockfile hashes, compiler line and item count before using any records; a mismatch
+aborts the measurement. Each invocation appends its start, end, executed and reused
+counts to `invocations` and prints `executed N process runs, reused M recorded runs`.
+These counts cover planning processes; classification is recorded separately.
 
 `MEASURE_SET` defaults to `measure`; a named set keeps classification, process runs and
 tables together. The historical measurement in `logs/measure/` and `results.json` is
 unchanged. The locked replay's records are `logs/measure-locked-2026-10-29/`,
 `results-measure-locked-2026-10-29.json` and `COMPARISON-measure-locked-2026-10-29.md`.
+Its manifest was added from the retained build hashes, committed lockfile hashes and
+compiler line, with 417 items, 2,502 executed runs and 0 reused runs. Its start and end
+timestamps are the `started` values of the first and last process records; the latter
+is the last process start, rather than a separately recorded invocation completion time.
 Analysis validates all expected process runs: (5 controls + 412 queries) × 2 builds ×
 3 repetitions = 2502, and records the expected count and completeness in the results.
 The comparison reports controls, pooled summaries and agreement of categorical outcomes;
