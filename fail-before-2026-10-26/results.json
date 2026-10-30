@@ -1943,6 +1943,8 @@
     }
   },
   "log_files": {
+    "logs/aborted-invocations-2026-10-30.md": "740ddba43a7dc3aaf310170187b0b5d71bbfe413ec787a327df0efd0a0671ee9",
+    "logs/console/console-20261030T123542Z-26639.txt": "cd373e4384f1626052967aef94b6340f69b5e04e3a495e771dce56dd5bc67062",
     "logs/console/console-df.txt": "6ea23e39b820f52cfcca71d132c2d251fcb36a43d86b77d0a4c2abcac07757c0",
     "logs/console/console-df24917-budget.txt": "f9c689ee4fcd2eba5a0cbed2f862b1cd5681caed349fe53e6397a03bd17f155e",
     "logs/console/console-st-shim.txt": "4de238690dd836952fa29c2f3f5eab2aedf08817b40be8908c2ccceb21ab3dc6",

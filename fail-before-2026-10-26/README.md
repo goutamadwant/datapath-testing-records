@@ -13,7 +13,8 @@ pull request that added it:
 The same command runs on both trees. Every outcome below is parsed by `make_results.py` from a log
 under `logs/` that an executed run wrote; `results.json` lists every run, its outcome, the per-test
 results, the commands, the commit hashes, the durations and the sha256 of every log and patch.
-Failed and interrupted runs are kept.
+Retained failed and interrupted runs are included; two stopped attempts whose records were
+deleted are documented in the [2026-10-30 registry addendum](logs/aborted-invocations-2026-10-30.md).
 
 Runs executed on 2026-10-25 between 19:02 and 19:51 local time (UTC-7) on an Apple M1 Pro,
 16 GB, macOS 27.0 (Darwin 27.0.0 arm64). The directory name gives the bundle date, not the run
@@ -231,6 +232,22 @@ at 05:35:42 local time (UTC-7); `logs/runs.jsonl` records each before and after 
 invocation id and no setup error. These records satisfy the runner's completeness check,
 whose success exit status is 0.
 
+The operator states that this registered invocation was the third attempt of the morning;
+two earlier attempts were stopped and their records were not retained. The
+[registry addendum](logs/aborted-invocations-2026-10-30.md) records the operator's account
+and the only retained console excerpts from those attempts.
+
+For the registered attempt, the operator states that the clean-checkout procedure was a
+fresh `git clone` of this repository, checkout of `af71f39`
+(`af71f397d410c330cf37cf52d7165e63158ec207`), and an empty `FAILBEFORE_WORK` directory,
+with no pre-existing build state, on the same host as the historical runs.
+`JAVA8_HOME` was explicitly set to
+`/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home`.
+The full console is retained in
+[`logs/console/console-20261030T123542Z-26639.txt`](logs/console/console-20261030T123542Z-26639.txt).
+The operator states that the wrapper wrote the first and last lines, `START ...` and
+`RUN_EXIT 0 ...`, and that the scratch path was replaced by the literal `$FAILBEFORE_WORK`.
+
 The new log headers record Darwin 27.0.0 arm64, matching the operating system and architecture
 of the historical Apple M1 Pro host. The Java logs record version 1.8.0_172, the version used
 historically. The new Maven XML reports record its runtime under
@@ -253,9 +270,12 @@ wall times in seconds (from `results.json`) are:
 - `st12472`: COMPILE_ERROR / PASS; 56.0 / 60.1 s.
 - `st12481`: COMPILE_ERROR / PASS; 94.6 / 105.4 s.
 
-For `st12038`, `st12038-factory`, `st12472` and `st12481`, parser revision 3 recognises the
-substituted `$FAILBEFORE_WORK/` path prefix in Maven test-source errors, so the regenerated
-`results.json` reports COMPILE_ERROR, matching the historical outcomes. All 23 historical
+The four SeaTunnel before-side COMPILE_ERROR outcomes (`st12038`, `st12038-factory`,
+`st12472` and `st12481`) are classified by parser revision 3, written on 2026-10-30 after
+the run. For substituted Maven error paths, it recognises only the literal
+`$FAILBEFORE_WORK/` prefix; without that recognition these four outcomes were labelled
+BUILD_ERROR. The regenerated `results.json` reports COMPILE_ERROR, matching the historical
+outcomes. All 23 historical
 run outcomes are unchanged. `st12481-shim` was excluded from the
 default matrix and was not run in this invocation; its historical records are retained.
 
