@@ -128,7 +128,8 @@ in a disposable filesystem environment without host-path mounts. The runner
 refuses if the path exists, checking before cloning and immediately before test
 execution. These checks do not protect files created during the test.
 
-The 2026-10-26 results were produced before this guard and are retained as historical.
+The historical runs of 2026-10-25 and the `df24917-budget` run of 2026-10-26 were produced
+before this guard and are retained as historical.
 Inside a disposable filesystem environment without host-path mounts, run:
 
 ```sh

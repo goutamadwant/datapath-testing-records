@@ -7,10 +7,14 @@
 #                       harness lockfiles and lockfiles.sha256 (release profile, shared target)
 #   ./run.sh generate   generate queries with both generators into queries/ (needs an
 #                       OpenAI-compatible endpoint for G1 and the `claude` client for G2)
-#   ./run.sh measure    classify patterns and time planning of every query and control
-#   ./run.sh results    rebuild the selected set's results and tables
+#   ./run.sh measure    classify patterns and time planning; fresh by default, refuses a set
+#                       holding records; reuse only with MEASURE_RESUME=1 after manifest
+#                       and input-identity verification
+#   ./run.sh results    rebuild selected-set outputs; does not run measure (fresh by default,
+#                       refuses recorded sets; reuse only with MEASURE_RESUME=1 after manifest and input-identity verification)
 #   ./run.sh compare SET  compare results.json with results-SET.json in COMPARISON-SET.md
-#   ./run.sh all        build, measure, results (uses the queries already in queries/)
+#   ./run.sh all        build, measure and results in fresh mode; refuses a set holding records
+#                       (uses the queries already in queries/; sets MEASURE_RESUME=0)
 #   ./run.sh explore    exploratory (not pre-registered): also build at the last main commit
 #                       before issue 22185 was filed and time the controls and a nesting
 #                       series at all three commits (logs/exploratory/)
@@ -19,7 +23,8 @@
 #   RUN_WORK         work directory (default ./work, relative to this script)
 #   MEASURE_SET      measurement log directory name (default measure); named sets write
 #                    results-<set>.json and logs/<set>/tables.md
-#   MEASURE_RESUME   set to 1 to reuse records after manifest verification; default fresh
+#   MEASURE_RESUME   reuse only when set to 1, after manifest and input-identity verification;
+#                    measure is fresh by default and refuses a set holding records; all is fresh
 #   DATAFUSION_URL   clone URL (default https://github.com/apache/datafusion.git)
 #   G1_ENDPOINT      default http://127.0.0.1:11435/v1
 #   G1_MODEL         default qwen3-coder-30b-a3b-instruct
@@ -160,7 +165,8 @@ case "${1:-}" in
   measure) python3 harness/measure.py ;;
   results) python3 harness/analyze.py ;;
   compare) [ "$#" -eq 2 ] || { echo "usage: ./run.sh compare SET" >&2; exit 2; }; python3 harness/compare.py "$2" ;;
-  all) build build && python3 harness/measure.py && python3 harness/analyze.py ;;
+  all) MEASURE_RESUME=0; export MEASURE_RESUME
+       build build && python3 harness/measure.py && python3 harness/analyze.py ;;
   explore) build build "issuedate:$REV_ISSUEDATE" && python3 harness/explore.py ;;
   *) sed -n '2,/^set -u/{ /^set -u/!p; }' "$self"; exit 2 ;;
 esac

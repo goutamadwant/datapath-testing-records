@@ -1,5 +1,7 @@
 # Historical Part C scripts: kept for inspection, not for execution
 
+See [SAFETY.md](../../../SAFETY.md) for destructive commands, their scope and required guards.
+
 This directory holds the scripts of Part C of the 2026-10-26 bundle (PR 12481, killed-container
 teardown, Table 1 rows 6-7). They were moved here from `harness/` on 2026-10-25 (fourth revision
 after the runs; see "Revision (2026-10-25, fourth revision after the runs)" in `../../README.md`).
@@ -48,12 +50,14 @@ reads log files.
 
 ## Files
 
-The files are byte-identical to the ones published at `harness/` before the move (third revision).
+The files retain the versions published at `harness/` before the move (third revision),
+except that `part_c.sh` now requires `REPLAY_HISTORICAL_DESTRUCTIVE=1` before execution.
+The table below records the published hashes before that guard was added.
 Three of them were revised after the runs; the versions that executed the recorded runs are
 identified by `sha256_as_run` in `../../results.json` and are in this repository's history at commit
 `4877661`, under their old paths. Paths inside the scripts (for example `$B/harness/parse_part_c.py`
 and `$B/harness/java/ReplayKillTeardownTest.java` in `part_c.sh`) refer to the layout before the
-move and were left unchanged so that the hashes stay the same.
+move and remain unchanged.
 
 | File | Path before the move (`path_as_run`) | sha256 | sha256_as_run |
 | --- | --- | --- | --- |

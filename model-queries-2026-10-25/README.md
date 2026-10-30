@@ -1,5 +1,11 @@
 # Model-written regexp_like queries and DataFusion planning time (2026-10-25)
 
+`./run.sh measure` is fresh by default and refuses a set that already holds records.
+Records are reused only with `MEASURE_RESUME=1` after manifest and input-identity
+verification. `./run.sh results` derives results and tables from the selected set's
+records; it does not run measurements. `./run.sh all` runs build, measure and results
+in fresh mode, setting `MEASURE_RESUME=0`.
+
 Question: do SQL queries that language models write with `regexp_like`, for ordinary
 text-matching tasks, trigger the planning stall of Apache DataFusion issue 22185 before the fix
 (pull request 24917) and not after?
@@ -43,6 +49,11 @@ and the three builds share one target directory. Resolved versions in all three 
 compiled dependencies) (`logs/build/`).
 
 ## Locked replay (2026-10-29)
+
+`./run.sh measure` is fresh by default and refuses a set that already holds records.
+Reuse requires `MEASURE_RESUME=1` and successful manifest and input-identity verification.
+`./run.sh results` derives outputs from that set's records; `./run.sh all` runs build,
+measure and results in fresh mode, setting `MEASURE_RESUME=0`.
 
 `harness/plan_time/rust-toolchain.toml` declares `nightly-2026-07-17` with the minimal
 profile. Its compiler is `rustc 1.99.0-nightly (3d50c25bc 2026-07-16)`, the same compiler

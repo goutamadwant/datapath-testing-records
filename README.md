@@ -2,10 +2,13 @@
 
 ## Status at this commit
 
+See [SAFETY.md](SAFETY.md) for destructive commands, their scope and required guards.
+
 Reconstruction replays are retained at the root and in [`replay-2026-10-26/`](replay-2026-10-26/).
 The clean-container replay is in [`replay-clean/`](replay-clean/), and saved CI evidence is in [`ci-evidence/`](ci-evidence/).
 [`replay-clean/CORRECTIONS.md`](replay-clean/CORRECTIONS.md) records the one checksum exception.
 The repository also holds the [model-query experiment](model-queries-2026-10-25/) with its locked replay and the [`fail-before-2026-10-26/`](fail-before-2026-10-26/) test transplant records.
+For the model-query experiment, `measure` is fresh by default and refuses a set holding records; reuse requires `MEASURE_RESUME=1` after manifest and input-identity verification. `results` derives outputs from the selected set's records, and `all` runs build, measure and results in fresh mode (`MEASURE_RESUME=0`).
 The "Comparison with the current article" section and the article comparisons under "Results: reconstruction vs article, per cell" are historical.
 The dated access and revision sections and the reconstruction's commands and interpretation choices retain their historical context.
 The current container comparison is in [`replay-clean/COMPARISON.md`](replay-clean/COMPARISON.md).
@@ -491,6 +494,7 @@ Absolute paths in `results.json` and the logs refer to the workstation where the
 ## model-queries-2026-10-25
 
 Model-written `regexp_like` queries planned on Apache DataFusion before and after PR 24917 (issue 22185): pre-registration, prompts, raw generator outputs, harness, logs and `results.json`. See `model-queries-2026-10-25/README.md`.
+`measure` is fresh by default and refuses a set holding records; reuse requires `MEASURE_RESUME=1` after manifest and input-identity verification. `results` derives outputs from the selected set's records; `all` runs build, measure and results in fresh mode (`MEASURE_RESUME=0`).
 
 ## fail-before-2026-10-26
 

@@ -23,6 +23,10 @@
 #     harness). Every container considered and the decision are written to the cell log
 #     (CLEANUP lines).
 set -u
+if [ "${REPLAY_HISTORICAL_DESTRUCTIVE:-}" != 1 ]; then
+  echo "replay-2026-10-26/harness/historical-part-c/part_c.sh: retired historical Part C script that removes Docker containers and deletes directories under its work path; kept for inspection. Set REPLAY_HISTORICAL_DESTRUCTIVE=1 to run it." >&2
+  exit 2
+fi
 B="$REPLAY_BUNDLE"; W="$REPLAY_WORK"
 LOGS="$B/logs/partC"
 WT="$W/wt-e2e"

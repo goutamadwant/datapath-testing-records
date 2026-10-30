@@ -5,6 +5,10 @@
 # teardown classes of the parent 7ba68325c compiled and placed first on the classpath.
 # usage: run_part_c.sh <before|after> <flink118TaskManagerKilled|spark3MasterKilled> <runs>
 set -u
+if [ "${REPLAY_HISTORICAL_DESTRUCTIVE:-}" != 1 ]; then
+  echo "harness/run_part_c.sh: retired historical Part C script that removes Docker containers and deletes directories under its work path; kept for inspection. Set REPLAY_HISTORICAL_DESTRUCTIVE=1 to run it." >&2
+  exit 2
+fi
 HERE="$(cd "$(dirname "$0")" && pwd)"
 LOGS="$HERE/../logs/partC"
 RT=/Users/goutamadwant/Documents/ResearchPaper/runtime/replay
