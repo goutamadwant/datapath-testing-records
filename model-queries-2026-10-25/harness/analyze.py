@@ -20,7 +20,7 @@ import statistics
 import sys
 
 from measurement_sets import (
-    BUILDS, REPS, EXPECTED_ITEMS, EXPECTED_PROCESS_RUNS, InputIdentityError,
+    BUILDS, REPS, InputIdentityError,
     paths, validate_inputs, write_output,
 )
 from classifications import ClassificationError, load_classifications
@@ -69,20 +69,20 @@ def check_reps(items, runs):
     return problems
 
 
-def completeness(items, runs):
+def completeness(items, runs, counts):
     """Count process runs and check their item, build and repetition identities."""
     problems = check_reps(items, runs)
-    if len(items) != EXPECTED_ITEMS:
-        problems.append(f"loaded {len(items)} items; expected {EXPECTED_ITEMS} "
-                        "(5 controls plus 412 queries)")
+    if len({item["query_id"] for item in items}) != counts["item_count"]:
+        problems.append(f"expected {counts['item_count']} distinct item IDs")
+    expected_runs = counts["expected_process_runs"]
     distinct = {(q, b, r.get("rep")) for (q, b), rs in runs.items() for r in rs}
-    if len(distinct) != EXPECTED_PROCESS_RUNS:
+    if len(distinct) != expected_runs:
         problems.append(f"recorded {len(distinct)} distinct process runs; "
-                        f"expected {EXPECTED_PROCESS_RUNS}")
+                        f"expected {expected_runs}")
     known = {(it["query_id"], b) for it in items for b in BUILDS}
     problems += [f"{q} {b}: run records for an item that is not in queries/ or controls"
                  for (q, b) in sorted(set(runs) - known)]
-    return {"expected_process_runs": EXPECTED_PROCESS_RUNS,
+    return {"expected_process_runs": expected_runs,
             "recorded_process_runs": sum(len(rs) for rs in runs.values()),
             "complete": not problems}, problems
 
@@ -132,16 +132,13 @@ def build():
     queries = []
     for f in sorted((HERE / "queries").glob("*.jsonl")):
         queries += jl(f)
-    validate_inputs(OUT, controls + queries)
-    if len(controls) + len(queries) != EXPECTED_ITEMS:
-        raise Invalid(f"loaded {len(controls) + len(queries)} items; expected {EXPECTED_ITEMS} "
-                      "(5 controls plus 412 queries)")
+    counts = validate_inputs(OUT, controls + queries, control_count=len(controls))
     cls = load_classifications(OUT / "classify.jsonl", controls + queries)
     runs = {}
     for r in jl(OUT / "runs.jsonl"):
         runs.setdefault((r["query_id"], r["build"]), []).append(r)
     gen_summary = json.loads((HERE / "logs/generation/summary.json").read_text())
-    complete, problems = completeness(controls + queries, runs)
+    complete, problems = completeness(controls + queries, runs, counts)
     if problems:
         print(f"analyze.py: validation FAILED ({len(problems)} problems); {RESULTS.name} not written", file=sys.stderr)
         for p in problems:
@@ -217,7 +214,7 @@ def build():
            "summary": summary, "strata": strata, "controls": ctl, "slow_queries": slow,
            "status_differs_between_builds": errors_differ, "nested_counted_queries": nested_list,
            "queries": recs, "sha256": hashes,
-           "validation": {**complete, "result": "PASS", "rule": f"{REPS} repetitions (1..{REPS}) per query and control "
+           "validation": {**counts, **complete, "result": "PASS", "rule": f"{REPS} repetitions (1..{REPS}) per query and control "
                                                      "and build; every log line parses"},
            "revisions": [dict(a, sha256=hashlib.sha256((HERE / a["path"]).read_bytes()).hexdigest())
                          for a in AS_RUN]}

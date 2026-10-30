@@ -4,8 +4,7 @@ import pathlib
 import sys
 
 from measurement_sets import (
-    BUILDS, REPS, EXPECTED_CONTROLS, EXPECTED_QUERIES, EXPECTED_ITEMS,
-    EXPECTED_PROCESS_RUNS, paths, set_name,
+    BUILDS, REPS, FROZEN_COUNTS, FROZEN_SETS, paths, set_name,
 )
 
 HERE = pathlib.Path(__file__).resolve().parent.parent
@@ -40,25 +39,32 @@ def categorical_outcomes(result):
     }
 
 
-def completeness_problems(result):
-    # Historical results predate the explicit counts and complete flag. For that
-    # schema, require PASS, the full item set and per-build repetition counts.
+def completeness_problems(result, frozen=False):
+    # Historical results predate explicit counts. Fresh analyses declare all counts.
     problems = []
     queries = result.get("queries", [])
     controls = result.get("controls", [])
-    if len(queries) != EXPECTED_QUERIES:
-        problems.append(f"query count is {len(queries)}; expected {EXPECTED_QUERIES}")
-    if len(controls) != EXPECTED_CONTROLS:
-        problems.append(f"control count is {len(controls)}; expected {EXPECTED_CONTROLS}")
-    records = queries + controls
-    if len({r["query_id"] for r in records}) != EXPECTED_ITEMS:
-        problems.append(f"expected {EXPECTED_ITEMS} distinct item IDs")
     validation = result.get("validation", {})
+    counts = (FROZEN_COUNTS if frozen or "query_count" not in validation else
+              {key: validation.get(key) for key in FROZEN_COUNTS})
+    for records, key, label in ((queries, "query_count", "query"),
+                                (controls, "control_count", "control")):
+        if len(records) != counts[key]:
+            problems.append(f"{label} count is {len(records)}; expected {counts[key]}")
+    records = queries + controls
+    if len({r["query_id"] for r in records}) != counts["item_count"]:
+        problems.append(f"expected {counts['item_count']} distinct item IDs")
+    expected_runs = len(records) * len(BUILDS) * REPS
+    if counts["expected_process_runs"] != expected_runs:
+        problems.append(f"expected_process_runs is {counts['expected_process_runs']}; expected {expected_runs}")
     if validation.get("result") != "PASS" or validation.get("complete", True) is not True:
         problems.append("measurement set is incomplete or validation did not PASS")
     for field in ("expected_process_runs", "recorded_process_runs"):
-        if field in validation and validation[field] != EXPECTED_PROCESS_RUNS:
-            problems.append(f"{field} is {validation[field]}; expected {EXPECTED_PROCESS_RUNS}")
+        if field in validation and validation[field] != counts["expected_process_runs"]:
+            problems.append(f"{field} is {validation[field]}; expected {counts['expected_process_runs']}")
+    for field in ("item_count", "query_count", "control_count"):
+        if field in validation and validation[field] != counts[field]:
+            problems.append(f"{field} is {validation[field]}; expected {counts[field]}")
     if any(r.get(b, {}).get("reps") != REPS for r in records for b in BUILDS):
         problems.append(f"incomplete repetitions; expected {REPS} per item and build")
     return problems
@@ -82,13 +88,14 @@ def slowest(result, build):
 
 
 def report(historical, replay, name):
-    for filename, result in (("results.json", historical), (f"results-{name}.json", replay)):
-        problems = completeness_problems(result)
+    for filename, result, frozen in (("results.json", historical, True),
+                                     (f"results-{name}.json", replay, name in FROZEN_SETS)):
+        problems = completeness_problems(result, frozen=frozen)
         if problems:
             raise ValueError(f"{filename}: " + "; ".join(problems))
     old_controls = {c["query_id"]: c for c in historical["controls"]}
     new_controls = {c["query_id"]: c for c in replay["controls"]}
-    if len(old_controls) != EXPECTED_CONTROLS or old_controls.keys() != new_controls.keys():
+    if len(old_controls) != FROZEN_COUNTS["control_count"] or old_controls.keys() != new_controls.keys():
         raise ValueError("expected the same five controls in both sets")
     lines = [f"# Measurement comparison: measure and {name}", "",
              f"Sources: `results.json` and `results-{name}.json`.", "",
@@ -105,7 +112,8 @@ def report(historical, replay, name):
     lines += ["", "## Pooled queries", "",
               f"| Outcome | measure | {name} |", "|---|---:|---:|"]
     s0, s1 = (r["summary"]["pooled"] for r in (historical, replay))
-    rows = [("Queries planned without error at both builds", s0["plannable_both"], s1["plannable_both"])]
+    rows = [("Queries extracted", s0["queries"], s1["queries"]),
+            ("Queries planned without error at both builds", s0["plannable_both"], s1["plannable_both"])]
     for b in BUILDS:
         rows += [(f"Slowest query {b}", slowest(historical, b), slowest(replay, b)),
                  (f"p95 {b} (ms)", s0[f"dist_{b}"].get("p95_ms", "-"), s1[f"dist_{b}"].get("p95_ms", "-")),
@@ -118,8 +126,9 @@ def report(historical, replay, name):
     timings_equal = all(
         historical["summary"][g][f"dist_{build}"] == replay["summary"][g][f"dist_{build}"]
         for g in historical["summary"] for build in BUILDS)
-    lines += ["", "## Pre-registered outcomes", "",
+    lines += ["", "## Outcome comparison", "",
               f"Categorical outcomes agree between the sets: **{'yes' if agree else 'no'}**. "
+              "Different query inputs represent separate samples; agreement is not expected. "
               "Agreement here requires identical counts, pattern classifications, planning statuses "
               "and stall/timeout outcomes, including controls and strata.", "",
               f"Planning-time distributions (per generator and pooled) are "

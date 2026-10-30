@@ -92,7 +92,7 @@ if it has already been used. Measurement defaults to fresh mode and refuses a se
 containing `classify.jsonl`, `runs.jsonl`, `manifest.json` or `inputs.jsonl`. To continue an interrupted
 set, use `MEASURE_RESUME=1 ./run.sh measure` with the same `MEASURE_SET` and binaries.
 Resume requires a matching `logs/<set>/manifest.json`. Before planning, it validates
-classification against all 417 loaded item ids, rejecting duplicates and malformed
+classification against all loaded item ids, rejecting duplicates and malformed
 lines. Missing or incomplete classification is regenerated completely, with a message;
 classification is written to a temporary file in the set directory and renamed into
 `classify.jsonl` only after validation. Recorded (query, build, repetition) runs are
@@ -102,7 +102,8 @@ Existing results and tables are retained; differing output is written beside the
 with `.regenerated` before the extension.
 
 The first invocation writes the manifest with sha256 hashes of `plan_time_before`,
-`plan_time_after` and both committed lockfiles, the item count and start timestamp.
+`plan_time_after` and both committed lockfiles, query, control and item counts, the
+expected process-run count, `frozen: false` for a new set, and the start timestamp.
 The compiler line is read from `harness/plan_time/TOOLCHAIN.expected`, which `build`
 checks against `rustc --version` in each build directory. Resume verifies the binary
 and lockfile hashes, compiler line and item count before using any records; a mismatch
@@ -130,8 +131,14 @@ Its manifest was added from the retained build hashes, committed lockfile hashes
 compiler line, with 417 items, 2,502 executed runs and 0 reused runs. Its start and end
 timestamps are the `started` values of the first and last process records; the latter
 is the last process start, rather than a separately recorded invocation completion time.
-Analysis validates all expected process runs: (5 controls + 412 queries) × 2 builds ×
-3 repetitions = 2502, and records the expected count and completeness in the results.
+The two historical sets, `measure` and `measure-locked-2026-10-29`, declare
+`frozen: true` and fixed counts in their manifests: 412 queries, 5 controls, 417 items
+and 2502 process runs. Analysis requires those counts and the original input digest;
+changed inputs cannot be analysed as a frozen snapshot. The historical 412-query
+replay keeps its 2502-run expectation: (5 controls + 412 queries) × 2 builds ×
+3 repetitions. For a fresh set, analysis validates its manifest counts against its
+bound `inputs.jsonl` and full loaded inputs, then requires every item at both builds
+with repetitions 1 through 3. Results record the counts and completeness.
 The comparison reports controls, pooled summaries and agreement of categorical outcomes;
 wall-clock values are not expected to be identical across runs or machines.
 
@@ -144,6 +151,40 @@ difference between builds, 0 all-literal calls, 47 nested counted quantifiers); 
 control planned in 63.0 ms before and 2.3 ms after (historical: 61.6 and 2.0 ms), and the
 quoted variant in 57.1 and 2.1 ms (historical: 58.6 and 2.1 ms). Planning-time distributions
 differ between the two runs, as expected for wall-clock measurements.
+
+## Fresh generation
+
+Generate a new sample in a separate directory. The generator writes to `queries/`
+and `logs/generation/` relative to its copy of the scripts. Starting from this
+directory, copy only the scripts, prompts and historical comparison result; leave
+the historical `queries/` and `logs/` in place. Use the same generation configuration
+as for the original run.
+
+```sh
+fresh_dir=$(mktemp -d "${TMPDIR:-/tmp}/model-queries-fresh.XXXXXX")
+cp run.sh results.json "$fresh_dir/"
+cp -R harness prompts "$fresh_dir/"
+mkdir "$fresh_dir/queries"
+cd "$fresh_dir"
+export MEASURE_SET=sample-$(date +%Y%m%d-%H%M%S)
+export MEASURE_RESUME=0
+./run.sh generate
+./run.sh build
+./run.sh measure
+./run.sh results
+./run.sh compare "$MEASURE_SET"
+```
+
+The new directory holds the generated queries, generation logs, builds,
+`logs/<set>/manifest.json`, `inputs.jsonl`, classification and run records,
+`results-<set>.json`, tables and `COMPARISON-<set>.md`. Keep that directory to retain
+the sample. These commands leave the original historical inputs and logs
+byte-identical. The copied `results.json` is the historical comparison baseline.
+A new sample is nondeterministic and is never truncated or padded to 412 queries.
+For example, 400 queries plus 5 controls require 2430 process runs, and the query
+denominator is 400. Comparison reports each sample's counts; categorical agreement
+between different samples is not expected. Replaying the committed historical
+queries still requires 2502 process runs.
 
 ## Generators
 
@@ -326,7 +367,7 @@ Log files contain the workstation paths printed by the tools.
 ./run.sh measure    # classify patterns and time every query in queries/ and every control
 ./run.sh results    # rebuild results.json and print the tables
 ./run.sh explore    # exploratory issue-date build and nesting series
-./run.sh generate   # new queries (needs an LM Studio endpoint and the claude client; refuses to overwrite)
+# For new queries, use the separate Fresh generation workflow above.
 ```
 
 `measure` is fresh by default and refuses a set that already holds records.

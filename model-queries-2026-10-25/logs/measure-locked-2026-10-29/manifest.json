@@ -8,6 +8,10 @@
     "Cargo.lock.after": "e310a209d86c67619f7d563b7599bc7abb6ca0e0cf936fd427f044eedcbf8dff"
   },
   "toolchain": "rustc 1.99.0-nightly (3d50c25bc 2026-07-16)",
+  "frozen": true,
+  "query_count": 412,
+  "control_count": 5,
+  "expected_process_runs": 2502,
   "item_count": 417,
   "start": "2026-10-29T08:05:28.274-07:00",
   "invocations": [

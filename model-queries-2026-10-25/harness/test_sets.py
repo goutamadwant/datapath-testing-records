@@ -17,7 +17,10 @@ import analyze
 import compare
 import measure
 from classifications import load_classifications
-from measurement_sets import inputs_sha256, paths, prepare_manifest, write_output
+from measurement_sets import (
+    FROZEN_COUNTS, FROZEN_SETS, InputIdentityError, inputs_sha256, paths,
+    prepare_manifest, validate_inputs, workload_counts, write_output,
+)
 
 
 class MeasurementSetsTest(unittest.TestCase):
@@ -54,41 +57,43 @@ class MeasurementSetsTest(unittest.TestCase):
         items = [{"query_id": f"item-{i}"} for i in range(417)]
         runs = {(it["query_id"], b): [{"rep": r} for r in (1, 2, 3)]
                 for it in items for b in analyze.BUILDS}
-        state, problems = analyze.completeness(items, runs)
+        state, problems = analyze.completeness(items, runs, workload_counts(items))
         self.assertEqual(state, {"expected_process_runs": 2502,
                                  "recorded_process_runs": 2502, "complete": True})
         self.assertEqual(problems, [])
         runs[("item-0", "before")].pop()
-        state, problems = analyze.completeness(items, runs)
+        state, problems = analyze.completeness(items, runs, workload_counts(items))
         self.assertFalse(state["complete"])
         self.assertEqual(state["recorded_process_runs"], 2501)
         self.assertIn("item-0 before", problems[0])
         # The right total alone does not establish completeness.
         runs[("item-0", "before")].append({"rep": 2})
-        state, problems = analyze.completeness(items, runs)
+        state, problems = analyze.completeness(items, runs, workload_counts(items))
         self.assertEqual(state["recorded_process_runs"], 2502)
         self.assertFalse(state["complete"])
         runs[("item-0", "before")][-1] = {"rep": 3}
         runs[("unknown", "after")] = [{"rep": 1}]
-        state, problems = analyze.completeness(items, runs)
+        state, problems = analyze.completeness(items, runs, workload_counts(items))
         self.assertFalse(state["complete"])
         self.assertTrue(any("unknown after" in p for p in problems))
 
-    def test_reduced_inputs_do_not_reduce_expected_runs(self):
+    def test_fresh_inputs_use_their_own_expected_runs(self):
         items = [{"query_id": "control"}, {"query_id": "query"}]
         runs = {(it["query_id"], b): [{"rep": r} for r in (1, 2, 3)]
                 for it in items for b in analyze.BUILDS}
-        state, problems = analyze.completeness(items, runs)
-        self.assertEqual(state["expected_process_runs"], 2502)
-        self.assertFalse(state["complete"])
-        self.assertTrue(any("expected 417" in p for p in problems))
+        state, problems = analyze.completeness(items, runs, workload_counts(items))
+        self.assertEqual(state["expected_process_runs"], 12)
+        self.assertTrue(state["complete"])
+        self.assertEqual(problems, [])
 
     def test_duplicate_item_ids_are_incomplete(self):
         items = [{"query_id": f"item-{i}"} for i in range(416)]
         items.append(items[0])
         runs = {(it["query_id"], b): [{"rep": r} for r in (1, 2, 3)]
                 for it in items for b in analyze.BUILDS}
-        state, _ = analyze.completeness(items, runs)
+        with self.assertRaisesRegex(InputIdentityError, "duplicate loaded item ids"):
+            workload_counts(items)
+        state, _ = analyze.completeness(items, runs, FROZEN_COUNTS)
         self.assertFalse(state["complete"])
 
 
@@ -261,7 +266,7 @@ class SyntheticFilesTest(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = pathlib.Path(self.temp.name)
-        self.out, self.results, self.tables = paths(self.root, "measure")
+        self.out, self.results, self.tables = paths(self.root, "test-set")
         for directory in (self.root / "harness", self.root / "queries", self.out,
                           self.root / "logs/generation"):
             directory.mkdir(parents=True, exist_ok=True)
@@ -290,12 +295,12 @@ class SyntheticFilesTest(unittest.TestCase):
         prepare_manifest(self.root, self.out, binaries, items, "test start", resume=False)
         return binaries
 
-    def fixture(self):
+    def fixture(self, query_count=412, control_count=5):
         # Minimal synthetic SQL and timings; no measurements or real logs.
         controls = [{"query_id": f"control-{i}", "sql": "select 1",
-                     "kind": "synthetic", "note": "test"} for i in range(5)]
+                     "kind": "synthetic", "note": "test"} for i in range(control_count)]
         queries = [{"query_id": f"query-{i}", "sql": "select 1",
-                    "generator": "g1", "theme_index": 0} for i in range(412)]
+                    "generator": "g1", "theme_index": 0} for i in range(query_count)]
         self.jsonl(self.root / "harness/controls.jsonl", controls)
         self.jsonl(self.root / "queries/test.jsonl", queries)
         items = controls + queries
@@ -316,20 +321,122 @@ class SyntheticFilesTest(unittest.TestCase):
             status = analyze.main()
         return status, stdout.getvalue(), stderr.getvalue()
 
-    def test_analyze_rejects_wrong_item_count_before_loading_logs(self):
-        for count in (0, 2, 416, 418):
-            with self.subTest(count=count):
-                self.jsonl(self.root / "harness/controls.jsonl", [])
-                self.jsonl(self.root / "queries/test.jsonl",
-                           [{"query_id": str(i)} for i in range(count)])
-                self.bind_inputs([{"query_id": str(i)} for i in range(count)])
+    def test_fresh_samples_use_bound_counts_and_compare(self):
+        for query_count in (400, 27):
+            with self.subTest(query_count=query_count):
+                self.fixture(query_count)
+                status, _, error = self.analyze()
+                self.assertEqual((status, error), (0, ""))
+                result = json.loads(self.results.read_text())
+                self.assertEqual(result["summary"]["pooled"]["queries"], query_count)
+                self.assertEqual(len(result["queries"]), query_count)
+                validation = result["validation"]
+                expected = (query_count + 5) * 6
+                self.assertEqual(validation["expected_process_runs"], expected)
+                self.assertEqual(validation["recorded_process_runs"], expected)
+                self.assertEqual(validation["query_count"], query_count)
+                self.assertEqual(validation["control_count"], 5)
+                self.assertTrue(validation["complete"])
+                manifest = json.loads((self.out / "manifest.json").read_text())
+                self.assertFalse(manifest["frozen"])
+                self.assertEqual(manifest["item_count"], query_count + 5)
+                self.assertTrue(compare.complete(result))
+                historical = json.loads((pathlib.Path(__file__).resolve().parent.parent /
+                                         "results.json").read_text())
+                historical["controls"] = copy.deepcopy(result["controls"])
+                self.assertIn(f"| Queries extracted | 412 | {query_count} |",
+                              compare.report(historical, result, "test-set"))
+                for path in (self.out / "manifest.json", self.out / "inputs.jsonl",
+                             self.out / "classify.jsonl", self.out / "runs.jsonl",
+                             self.results, self.tables):
+                    path.unlink()
+
+    def test_fresh_samples_reject_invalid_repetitions_and_unknown_ids(self):
+        self.fixture(400)
+        path = self.out / "runs.jsonl"
+        records = [json.loads(line) for line in path.read_text().splitlines()]
+        for change in ("missing", "duplicate", "unknown"):
+            with self.subTest(change=change):
+                changed = copy.deepcopy(records)
+                if change == "missing":
+                    changed.pop()
+                elif change == "duplicate":
+                    changed.append(changed[-1])
+                else:
+                    changed[-1]["query_id"] = "unknown"
+                self.jsonl(path, changed)
                 status, _, error = self.analyze()
                 self.assertEqual(status, 1)
-                self.assertIn(f"loaded {count} items; expected 417", error)
+                self.assertIn("validation FAILED", error)
+                self.assertIn("unknown" if change == "unknown" else "repetitions", error)
                 self.assertFalse(self.results.exists())
                 self.assertFalse(self.tables.exists())
-                (self.out / "manifest.json").unlink()
-                (self.out / "inputs.jsonl").unlink()
+
+    def test_fresh_sample_rejects_changed_inputs_and_declarations(self):
+        self.fixture(400)
+        path = self.root / "queries/test.jsonl"
+        original = path.read_bytes()
+        records = [json.loads(line) for line in original.splitlines()]
+        for change in ("sql", "duplicate id"):
+            with self.subTest(change=change):
+                changed = copy.deepcopy(records)
+                if change == "sql":
+                    changed[0]["sql"] = "select 2"
+                else:
+                    changed[0]["query_id"] = changed[1]["query_id"]
+                self.jsonl(path, changed)
+                retained = self.snapshot()
+                status, _, error = self.analyze()
+                self.assertEqual(status, 1)
+                self.assertIn("input-identity error", error)
+                self.assertEqual(self.snapshot(), retained)
+        path.write_bytes(original)
+        manifest_path = self.out / "manifest.json"
+        original_manifest = json.loads(manifest_path.read_text())
+        for key in FROZEN_COUNTS:
+            manifest = copy.deepcopy(original_manifest)
+            manifest[key] += 1
+            manifest_path.write_text(json.dumps(manifest))
+            status, _, error = self.analyze()
+            self.assertEqual(status, 1)
+            self.assertIn(key + " mismatch", error)
+
+    def test_frozen_sets_require_historical_counts_and_inputs(self):
+        source = pathlib.Path(__file__).resolve().parent.parent
+        controls = [json.loads(line) for line in (source / "harness/controls.jsonl").read_text().splitlines()]
+        queries = [json.loads(line) for path in sorted((source / "queries").glob("*.jsonl"))
+                   for line in path.read_text().splitlines()]
+        for name in sorted(FROZEN_SETS):
+            with self.subTest(name=name):
+                logs = self.root / "logs" / name
+                logs.mkdir()
+                for filename in ("manifest.json", "inputs.jsonl"):
+                    shutil.copy2(source / "logs" / name / filename, logs / filename)
+                manifest = json.loads((logs / "manifest.json").read_text())
+                self.assertIs(manifest["frozen"], True)
+                self.assertEqual(validate_inputs(logs, controls + queries), FROZEN_COUNTS)
+                for key in FROZEN_COUNTS:
+                    changed = copy.deepcopy(manifest)
+                    changed[key] -= 1
+                    with self.assertRaisesRegex(InputIdentityError, key + " mismatch"):
+                        validate_inputs(logs, controls + queries, changed)
+                changed = copy.deepcopy(manifest)
+                changed["frozen"] = False
+                with self.assertRaisesRegex(InputIdentityError, "must declare frozen"):
+                    validate_inputs(logs, controls + queries, changed)
+                with self.assertRaises(InputIdentityError):
+                    validate_inputs(logs, controls + queries[:-1])
+                altered = copy.deepcopy(controls + queries)
+                altered[-1]["sql"] = "select 2"
+                with self.assertRaises(InputIdentityError):
+                    validate_inputs(logs, altered)
+                # Even rebinding the manifest cannot turn a changed sample into the frozen snapshot.
+                from measurement_sets import write_inputs
+                write_inputs(logs, altered)
+                changed = copy.deepcopy(manifest)
+                changed["inputs_sha256"] = inputs_sha256(altered)
+                with self.assertRaisesRegex(InputIdentityError, "frozen snapshot"):
+                    validate_inputs(logs, altered, changed)
 
     def measure(self, out=None, resume=True):
         output = io.StringIO()
@@ -396,7 +503,7 @@ class SyntheticFilesTest(unittest.TestCase):
         complete = classification.read_text().splitlines(keepends=True)
         runs = self.out / "runs.jsonl"
         retained = runs.read_text().splitlines(keepends=True)[:-2]
-        env = {**os.environ, "MEASURE_SET": "measure", "MEASURE_RESUME": "1",
+        env = {**os.environ, "MEASURE_SET": "test-set", "MEASURE_RESUME": "1",
                "RUN_WORK": str(self.root / "work"), "PYTHONDONTWRITEBYTECODE": "1"}
         for interruption in ("between records", "during record"):
             with self.subTest(interruption=interruption):
@@ -511,10 +618,10 @@ class SyntheticFilesTest(unittest.TestCase):
         self.assertEqual((status, error), (0, ""))
         self.assertEqual(self.results.read_bytes(), b"historical results\r\n")
         self.assertEqual(self.tables.read_bytes(), b"historical tables\r\n")
-        regenerated = self.root / "results.regenerated.json"
+        regenerated = self.results.with_name(f"{self.results.stem}.regenerated.json")
         self.assertTrue(json.loads(regenerated.read_text())["validation"]["complete"])
-        self.assertIn("Queries extracted", (self.root / "logs/tables.regenerated.md").read_text())
-        self.assertIn("Historical results.json was left unchanged", output)
+        self.assertIn("Queries extracted", (self.tables.with_name("tables.regenerated.md")).read_text())
+        self.assertIn(f"Historical {self.results.name} was left unchanged", output)
         self.assertIn("Historical tables.md was left unchanged", output)
 
     def test_identical_historical_bytes_need_no_write(self):
@@ -567,7 +674,7 @@ class SyntheticFilesTest(unittest.TestCase):
                     old = self.comparison_fixture()
                     new = copy.deepcopy(old)
                     mutate(old if filename == "results.json" else new)
-                    self.results.write_text(json.dumps(old))
+                    (self.root / "results.json").write_text(json.dumps(old))
                     (self.root / "results-replay.json").write_text(json.dumps(new))
                     with patch.object(compare, "HERE", self.root), patch("sys.argv", ["compare.py", "replay"]):
                         with self.assertRaises(SystemExit) as error:

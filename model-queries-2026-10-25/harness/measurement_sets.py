@@ -1,4 +1,4 @@
-"""Paths for the historical measurement and named replays."""
+"""Measurement paths, bound workload counts and frozen snapshot validation."""
 import os
 import re
 import hashlib
@@ -7,10 +7,10 @@ import json
 
 BUILDS = ("before", "after")
 REPS = 3
-EXPECTED_CONTROLS = 5
-EXPECTED_QUERIES = 412
-EXPECTED_ITEMS = EXPECTED_CONTROLS + EXPECTED_QUERIES
-EXPECTED_PROCESS_RUNS = EXPECTED_ITEMS * len(BUILDS) * REPS
+FROZEN_SETS = {"measure", "measure-locked-2026-10-29"}
+FROZEN_COUNTS = {"query_count": 412, "control_count": 5, "item_count": 417,
+                 "expected_process_runs": 2502}
+FROZEN_INPUTS_SHA256 = "c35478e9a882e1438a4db0720b1216b717303bef09b279c43f60d04a4e2abbbd"
 
 
 class InputIdentityError(ValueError):
@@ -37,7 +37,38 @@ def write_inputs(logs, items):
         b"".join(canonical_json(record) + b"\n" for record in input_records(items)))
 
 
-def validate_inputs(logs, items, manifest=None):
+def workload_counts(items, control_count=None):
+    """Controls precede queries; measurement controls carry a kind field."""
+    ids = [item.get("query_id") for item in items]
+    if any(not isinstance(item_id, str) or not item_id for item_id in ids):
+        raise InputIdentityError("input-identity error: every item requires a nonempty string query_id")
+    if len(set(ids)) != len(ids):
+        raise InputIdentityError("input-identity error: duplicate loaded item ids")
+    if control_count is None:
+        control_count = sum("kind" in item for item in items)
+    return {"item_count": len(items), "control_count": control_count,
+            "query_count": len(items) - control_count,
+            "expected_process_runs": len(items) * len(BUILDS) * REPS}
+
+
+def validate_counts(logs, manifest, counts):
+    """Counts are declarations, checked against the bound ordered input records."""
+    prefix = f"input-identity error for {logs}"
+    frozen = manifest.get("frozen", False)
+    if not isinstance(frozen, bool):
+        raise InputIdentityError(f"{prefix}: frozen must be a boolean")
+    if logs.name in FROZEN_SETS and frozen is not True:
+        raise InputIdentityError(f"{prefix}: historical set must declare frozen: true")
+    if frozen:
+        if counts != FROZEN_COUNTS or manifest.get("inputs_sha256") != FROZEN_INPUTS_SHA256:
+            raise InputIdentityError(f"{prefix}: frozen snapshot requires the historical inputs and "
+                                     "412 queries, 5 controls, 417 items, 2502 process runs")
+    for key, value in counts.items():
+        if type(manifest.get(key)) is not int or manifest[key] != value:
+            raise InputIdentityError(f"{prefix}: {key} mismatch with manifest.json; expected {value}")
+
+
+def validate_inputs(logs, items, manifest=None, control_count=None):
     """Reject unbound or changed workloads before retained records can be used."""
     prefix = f"input-identity error for {logs}"
     try:
@@ -53,6 +84,7 @@ def validate_inputs(logs, items, manifest=None):
             raise ValueError("invalid inputs.jsonl record")
     except (OSError, ValueError, KeyError) as error:
         raise InputIdentityError(f"{prefix}: {error}") from error
+    counts = workload_counts(items, control_count)
     current_digest = inputs_sha256(items)
     current = input_records(items)
     for position in range(max(len(recorded), len(current))):
@@ -66,6 +98,9 @@ def validate_inputs(logs, items, manifest=None):
     if current_digest != digest:
         raise InputIdentityError(f"{prefix}: inputs_sha256 mismatch with manifest.json; "
                                  "changed workloads require a fresh set")
+
+    validate_counts(logs, manifest, counts)
+    return counts
 
 
 def check_fresh(logs, resume):
@@ -108,8 +143,10 @@ def prepare_manifest(root, logs, binaries, items, started, resume):
             if manifest.get(key) != value:
                 raise SystemExit(f"cannot resume {logs}: {key} mismatch with manifest.json")
         return manifest
-    manifest = {**identity, "inputs_sha256": inputs_sha256(items), "inputs_file": "inputs.jsonl",
+    manifest = {**identity, **workload_counts(items), "frozen": logs.name in FROZEN_SETS,
+                "inputs_sha256": inputs_sha256(items), "inputs_file": "inputs.jsonl",
                 "inputs_binding": "recorded at first run", "start": started, "invocations": []}
+    validate_counts(logs, manifest, workload_counts(items))
     logs.mkdir(parents=True, exist_ok=True)
     write_inputs(logs, items)
     save_manifest(logs, manifest)
