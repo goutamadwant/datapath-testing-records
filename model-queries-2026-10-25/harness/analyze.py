@@ -23,6 +23,7 @@ from measurement_sets import (
     BUILDS, REPS, EXPECTED_ITEMS, EXPECTED_PROCESS_RUNS, InputIdentityError,
     paths, validate_inputs, write_output,
 )
+from classifications import ClassificationError, load_classifications
 
 HERE = pathlib.Path(__file__).resolve().parent.parent
 OUT, RESULTS, TABLES = paths(HERE)
@@ -121,7 +122,7 @@ def outcome(runs):
 def main():
     try:
         return build()
-    except (Invalid, InputIdentityError) as e:
+    except (Invalid, InputIdentityError, ClassificationError) as e:
         print(f"analyze.py: {e}; {RESULTS.name} not written", file=sys.stderr)
         return 1
 
@@ -135,7 +136,7 @@ def build():
     if len(controls) + len(queries) != EXPECTED_ITEMS:
         raise Invalid(f"loaded {len(controls) + len(queries)} items; expected {EXPECTED_ITEMS} "
                       "(5 controls plus 412 queries)")
-    cls = {c["query_id"]: c for c in jl(OUT / "classify.jsonl")}
+    cls = load_classifications(OUT / "classify.jsonl", controls + queries)
     runs = {}
     for r in jl(OUT / "runs.jsonl"):
         runs.setdefault((r["query_id"], r["build"]), []).append(r)
@@ -227,12 +228,11 @@ def build():
                     "b426232b8a13c641a522bba414e932914f3b79f5 (last main commit before issue 22185), "
                     "before, after; median of 3 repetitions in ms",
             "summary": json.loads(exp.read_text())}
-    historical = RESULTS == HERE / "results.json"
-    write_output(RESULTS, json.dumps(out, indent=1), preserve=historical)
+    write_output(RESULTS, json.dumps(out, indent=1), preserve=True)
     tables = io.StringIO()
     with contextlib.redirect_stdout(tables):
         print_tables(out)
-    write_output(TABLES, tables.getvalue(), preserve=historical)
+    write_output(TABLES, tables.getvalue(), preserve=True)
     print(tables.getvalue(), end="")
     return 0
 

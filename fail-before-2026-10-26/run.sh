@@ -4,7 +4,7 @@
 # Usage: ./run.sh [case ...]
 #   cases: df24193 df24917 df24917-diag df24917-budget st12038 st12038-shim st12038-factory st12360
 #          st12472 st12481 st12481-shim
-#   (default: all cases, in that order)
+#   (default: all cases except st12481-shim, in that order)
 #
 # For each case:
 #   before = first parent of the pull request's merge commit, with ONLY the test change of the
@@ -29,6 +29,7 @@
 #                     (default: clone https://github.com/apache/datafusion.git into the work dir)
 #   SEATUNNEL_REPO    existing local clone of apache/seatunnel (default: clone into the work dir)
 #   JAVA8_HOME        JDK 8 used for every SeaTunnel run (default: /usr/libexec/java_home -v 1.8)
+#   FAILBEFORE_DISPOSABLE=1 required for explicitly selected st12481-shim; see README Safety
 set -u -o pipefail
 
 cd "$(dirname "$0")"
@@ -125,6 +126,10 @@ run_one() {
         echo "# command: $*"
         echo "# start: $(date '+%Y-%m-%dT%H:%M:%S%z')"
     } > "$log"
+    if [ "$case" = st12481-shim ] && ! step "st12481-shim safety guard before execution" st12481_guard; then
+        SETUP_ERROR_LOG=$log setup_error "$case" "$side" "$before" "$after" "$transplant" "$@"
+        return 1
+    fi
     start=$(python3 -c 'import time; print(time.time())')
     (cd "$TREE" && "$@") >> "$log" 2>&1
     rc=$?
@@ -148,7 +153,7 @@ run_one() {
 setup_error() {
     local case=$1 side=$2 before=$3 after=$4 transplant=$5 log rel end head=""
     shift 5
-    log=$(next_log "$case" "$side")
+    log=${SETUP_ERROR_LOG:-$(next_log "$case" "$side")}
     rel=${log#"$HERE"/}
     [ -n "$TREE" ] && head=$(git -C "$TREE" rev-parse HEAD 2>/dev/null)
     end=$(now)
@@ -284,12 +289,24 @@ mvn_cmd() { # module test-selector
     echo "./mvnw -B -ntp -pl $1 -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=$2 -DfailIfNoTests=false clean package"
 }
 
-# st_tree <tree> <commit>: JDK 8 present, refusal guard (ST_REFUSE_IF_EXISTS), clone, worktree
+# The parent-side teardown deletes this real host path even with mocked containers.
+st12481_guard() {
+    local hazard="st12481-shim host-deletion hazard: FileUtils.deleteFile(HOST_VOLUME_MOUNT_PATH) deletes $ST_REFUSE_IF_EXISTS on the real host filesystem even with mocked containers. Requires explicit st12481-shim selection and FAILBEFORE_DISPOSABLE=1 in a disposable filesystem environment without host-path mounts."
+    echo "$hazard" >&2
+    if [ "${EXPLICIT_CASES:-0}" -eq 0 ] || [ "${FAILBEFORE_DISPOSABLE:-}" != 1 ]; then
+        return 1
+    fi
+    if [ -e "$ST_REFUSE_IF_EXISTS" ] || [ -L "$ST_REFUSE_IF_EXISTS" ]; then
+        echo "refuse: $ST_REFUSE_IF_EXISTS exists; unfixed teardown would delete it" >&2
+        return 1
+    fi
+}
+
+# st_tree <tree> <commit>: safety guard, JDK 8 present, clone, worktree
 st_tree() {
-    step "find JDK 8 (JAVA8_HOME=$JAVA8_HOME)" test -n "$JAVA8_HOME" -a -x "$JAVA8_HOME/bin/javac" &&
-        { [ -z "${ST_REFUSE_IF_EXISTS:-}" ] ||
-            step "refuse: $ST_REFUSE_IF_EXISTS exists and unfixed teardown would delete it" \
-                test ! -e "$ST_REFUSE_IF_EXISTS"; } &&
+    { [ -z "${ST_REFUSE_IF_EXISTS:-}" ] ||
+        step "st12481-shim safety guard before clone" st12481_guard; } &&
+        step "find JDK 8 (JAVA8_HOME=$JAVA8_HOME)" test -n "$JAVA8_HOME" -a -x "$JAVA8_HOME/bin/javac" &&
         step "clone $ST_URL" ensure_repo "$ST_URL" "$ST_REPO" &&
         step "check out $2" prep_tree "$ST_REPO" "$1" "$2"
 }
@@ -383,19 +400,20 @@ case_st12481() {
 }
 # One-line shim: the Flink test's helper overrides deleteHostVolumeMountPath(), a method the pull
 # request added; dropping the @Override annotation lets the test compile against the unfixed code.
-# Unfixed tearDown() then deletes the host path /tmp/seatunnel_mnt itself, so the run refuses to
-# start while that path exists (recorded as a setup error of both sides).
+# Unfixed tearDown() deletes /tmp/seatunnel_mnt on the host; explicit disposable runs only.
 case_st12481-shim() {
     local ST_REFUSE_IF_EXISTS=/tmp/seatunnel_mnt
+    echo "st12481-shim host-deletion hazard: teardown deletes $ST_REFUSE_IF_EXISTS on the real host filesystem; requires explicit selection and FAILBEFORE_DISPOSABLE=1 in a disposable filesystem environment without host-path mounts." >&2
     st_case st12481-shim st12481 7ba68325cb7ea1bf1a28f56c4f9c20695d221df3 0e4cf52896ee3604a8e7899d7736ffd914ee6ce7 \
         "$E2E" AbstractTestFlinkContainerTest before,after st12481-flink-test-drop-override.patch \
         "$E2E_T/flink/AbstractTestFlinkContainerTest.java"
 }
 
-ALL="df24193 df24917 df24917-diag df24917-budget st12038 st12038-shim st12038-factory st12360 st12472 st12481 st12481-shim"
+ALL="df24193 df24917 df24917-diag df24917-budget st12038 st12038-shim st12038-factory st12360 st12472 st12481"
+EXPLICIT_CASES=$#
 CASES=${*:-$ALL}
 for c in $CASES; do
-    declare -F "case_$c" > /dev/null || { echo "unknown case: $c (cases: $ALL)" >&2; exit 2; }
+    declare -F "case_$c" > /dev/null || { echo "unknown case: $c (cases: $ALL st12481-shim)" >&2; exit 2; }
 done
 
 # Requested cases and sides, written before any build.

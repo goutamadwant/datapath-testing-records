@@ -6,7 +6,7 @@ Reads harness/controls.jsonl and queries/*.jsonl. Writes:
 MEASURE_SET defaults to measure.
 Each repetition is a separate process with a 20 s wall-clock timeout. Repetition-major order;
 the build order alternates by item index. Fresh mode refuses existing records.
-MEASURE_RESUME=1 verifies manifest.json before reusing recorded runs and classification.
+MEASURE_RESUME=1 verifies manifest.json and classification completeness before reusing records.
 """
 import datetime as dt
 import json
@@ -14,11 +14,13 @@ import os
 import pathlib
 import subprocess
 import sys
+import tempfile
 import time
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from sqlscan import scan  # noqa: E402
 from measurement_sets import check_fresh, paths, prepare_manifest, save_manifest  # noqa: E402
+from classifications import ClassificationError, load_classifications  # noqa: E402
 
 HERE = pathlib.Path(__file__).resolve().parent.parent
 WORK = pathlib.Path(os.environ.get("RUN_WORK", HERE / "work")).resolve()
@@ -53,19 +55,32 @@ def classify_pattern(pattern, flags):
 
 def classify_all(items):
     path = OUT / "classify.jsonl"
-    if path.exists():
+    try:
+        load_classifications(path, items)
         return
+    except ClassificationError as error:
+        print(f"{error}; regenerating all {len(items)} classifications before planning", flush=True)
     cache = {}
-    with open(path, "w") as fh:
-        for it in items:
-            sc = scan(it["sql"])
-            for call in sc["regexp_like_calls"]:
-                if call["pattern_is_literal"]:
-                    key = (call["pattern"], call["flags"])
-                    if key not in cache:
-                        cache[key] = classify_pattern(*key)
-                    call["classification"] = cache[key]
-            fh.write(json.dumps({"query_id": it["query_id"], **sc}) + "\n")
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=OUT,
+                                         prefix=".classify-", suffix=".tmp", delete=False) as fh:
+            temporary = pathlib.Path(fh.name)
+            for it in items:
+                sc = scan(it["sql"])
+                for call in sc["regexp_like_calls"]:
+                    if call["pattern_is_literal"]:
+                        key = (call["pattern"], call["flags"])
+                        if key not in cache:
+                            cache[key] = classify_pattern(*key)
+                        call["classification"] = cache[key]
+                fh.write(json.dumps({"query_id": it["query_id"], **sc}) + "\n")
+        load_classifications(temporary, items)
+        os.replace(temporary, path)
+        print(f"published {len(items)} complete classifications", flush=True)
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
 
 
 def run_one(build, sql):

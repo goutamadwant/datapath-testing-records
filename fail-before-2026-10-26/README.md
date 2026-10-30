@@ -116,8 +116,24 @@ Four failures are at assertions on teardown behavior (lines 43, 63, 101, 120). T
 at the `hostVolumeDeleted` flag (line 85), which the unfixed teardown cannot set because it deletes
 the host path itself instead of calling the overridable method the pull request added; every
 behavioral assertion before line 85 passed. That failure is an artifact of the shim, not evidence
-of the defect. Because the unfixed teardown deletes the host path `/tmp/seatunnel_mnt`, `run.sh`
-refuses this case while that path exists; it did not exist before or after the run.
+of the defect. The host path did not exist before or after the historical run.
+
+### Safety
+
+`st12481-shim` has a host-deletion hazard: parent-side Flink teardown calls
+`FileUtils.deleteFile(HOST_VOLUME_MOUNT_PATH)` on the real host path
+`/tmp/seatunnel_mnt`, even with mocked containers. It is excluded from the default
+matrix. Running it requires both explicit selection and `FAILBEFORE_DISPOSABLE=1`
+in a disposable filesystem environment without host-path mounts. The runner
+refuses if the path exists, checking before cloning and immediately before test
+execution. These checks do not protect files created during the test.
+
+The 2026-10-26 results were produced before this guard and are retained as historical.
+Inside a disposable filesystem environment without host-path mounts, run:
+
+```sh
+FAILBEFORE_DISPOSABLE=1 ./run.sh st12481-shim
+```
 
 ## What could not be run, and why
 
@@ -138,7 +154,7 @@ refuses this case while that path exists; it did not exist before or after the r
 ## Exact commands
 
 ```
-./run.sh                       # all cases, in order
+./run.sh                       # default matrix, excluding st12481-shim
 ./run.sh df24193 st12038-shim  # selected cases
 ./run.sh df24917-budget        # the PR 24917 planning-budget tests
 python3 make_results.py        # parse logs/runs.jsonl and the logs, write results.json

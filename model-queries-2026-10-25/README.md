@@ -80,8 +80,15 @@ Choose a set name that does not already exist under `logs/`; change the example 
 if it has already been used. Measurement defaults to fresh mode and refuses a set
 containing `classify.jsonl`, `runs.jsonl`, `manifest.json` or `inputs.jsonl`. To continue an interrupted
 set, use `MEASURE_RESUME=1 ./run.sh measure` with the same `MEASURE_SET` and binaries.
-Resume requires a matching `logs/<set>/manifest.json` and reuses existing classification
-and recorded (query, build, repetition) runs.
+Resume requires a matching `logs/<set>/manifest.json`. Before planning, it validates
+classification against all 417 loaded item ids, rejecting duplicates and malformed
+lines. Missing or incomplete classification is regenerated completely, with a message;
+classification is written to a temporary file in the set directory and renamed into
+`classify.jsonl` only after validation. Recorded (query, build, repetition) runs are
+reused without duplication. Then run `./run.sh results` with the same `MEASURE_SET`;
+analysis refuses incomplete classification with an explicit completeness diagnostic.
+Existing results and tables are retained; differing output is written beside them
+with `.regenerated` before the extension.
 
 The first invocation writes the manifest with sha256 hashes of `plan_time_before`,
 `plan_time_after` and both committed lockfiles, the item count and start timestamp.

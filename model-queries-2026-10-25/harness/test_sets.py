@@ -7,6 +7,8 @@ import io
 import json
 import os
 import pathlib
+import shutil
+import subprocess
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -14,6 +16,7 @@ from unittest.mock import patch
 import analyze
 import compare
 import measure
+from classifications import load_classifications
 from measurement_sets import inputs_sha256, paths, prepare_manifest, write_output
 
 
@@ -217,6 +220,41 @@ class MeasurementInvocationTest(unittest.TestCase):
         self.assertEqual(self.process.call_count, 6)
         self.assertTrue(all(call.args[1] == "select 2" for call in self.process.call_args_list))
 
+    def test_interrupted_classification_never_publishes_partial_file(self):
+        self.items.extend([{"query_id": "second-item", "sql": "select 2"}])
+        original_factory = tempfile.NamedTemporaryFile
+        for during_record in (False, True):
+            with self.subTest(during_record=during_record):
+                self.out.mkdir(parents=True, exist_ok=True)
+                final = self.out / "classify.jsonl"
+                final.write_text("retained partial classification\n")
+
+                @contextlib.contextmanager
+                def interrupted_file(**kwargs):
+                    with original_factory(**kwargs) as fh:
+                        class InterruptedWriter:
+                            name = fh.name
+                            writes = 0
+
+                            def write(self, data):
+                                self.writes += 1
+                                if self.writes == 2:
+                                    if during_record:
+                                        fh.write(data[:len(data) // 2])
+                                    raise KeyboardInterrupt
+                                return fh.write(data)
+                        yield InterruptedWriter()
+
+                with patch.object(measure.tempfile, "NamedTemporaryFile", interrupted_file), \
+                        contextlib.redirect_stdout(io.StringIO()), self.assertRaises(KeyboardInterrupt):
+                    measure.classify_all(self.items)
+                self.assertEqual(final.read_text(), "retained partial classification\n")
+                self.assertEqual(list(self.out.glob(".classify-*.tmp")), [])
+                with contextlib.redirect_stdout(io.StringIO()):
+                    measure.classify_all(self.items)
+                self.assertEqual(len(load_classifications(final, self.items)), 2)
+                self.process.assert_not_called()
+
 
 class SyntheticFilesTest(unittest.TestCase):
     def setUp(self):
@@ -240,8 +278,12 @@ class SyntheticFilesTest(unittest.TestCase):
         plan_time = self.root / "harness/plan_time"
         plan_time.mkdir(exist_ok=True)
         for label in analyze.BUILDS:
-            binary = self.root / f"plan_time_{label}"
-            binary.write_bytes(label.encode())
+            binary = self.root / f"work/target/release/plan_time_{label}"
+            binary.parent.mkdir(parents=True, exist_ok=True)
+            binary.write_text('#!/usr/bin/env python3\nimport json\n'
+                              'print(json.dumps({"status": "ok", "total_ms": 1, '
+                              '"logical_ms": 0.5, "physical_ms": 0.5}))\n')
+            binary.chmod(0o755)
             binaries[label] = binary
             (plan_time / f"Cargo.lock.{label}").write_text(f"lock {label}\n")
         (plan_time / "TOOLCHAIN.expected").write_text("rustc test\n")
@@ -343,6 +385,77 @@ class SyntheticFilesTest(unittest.TestCase):
         self.assertEqual(result["queries"][0]["sql"], "select 2")
         self.assertEqual(result["queries"][0]["before"]["time_ms"], 2)
 
+    def test_partial_classification_resume_and_results_commands(self):
+        self.fixture()
+        # Execute the documented shell commands against a standalone temporary copy.
+        source = pathlib.Path(__file__).resolve().parent
+        for path in source.glob("*.py"):
+            shutil.copy2(path, self.root / "harness" / path.name)
+        shutil.copy2(source.parent / "run.sh", self.root / "run.sh")
+        classification = self.out / "classify.jsonl"
+        complete = classification.read_text().splitlines(keepends=True)
+        runs = self.out / "runs.jsonl"
+        retained = runs.read_text().splitlines(keepends=True)[:-2]
+        env = {**os.environ, "MEASURE_SET": "measure", "MEASURE_RESUME": "1",
+               "RUN_WORK": str(self.root / "work"), "PYTHONDONTWRITEBYTECODE": "1"}
+        for interruption in ("between records", "during record"):
+            with self.subTest(interruption=interruption):
+                partial = complete[0] + (complete[1][:20] if interruption == "during record" else "")
+                classification.write_text(partial)
+                runs.write_text("".join(retained))
+                bad = subprocess.run(["./run.sh", "results"], cwd=self.root, env=env,
+                                     capture_output=True, text=True, timeout=30)
+                self.assertEqual(bad.returncode, 1, bad.stdout + bad.stderr)
+                self.assertIn("classification completeness error", bad.stderr)
+                self.assertNotIn("KeyError", bad.stderr)
+                resumed = subprocess.run(["./run.sh", "measure"], cwd=self.root, env=env,
+                                         capture_output=True, text=True, timeout=30)
+                self.assertEqual(resumed.returncode, 0, resumed.stdout + resumed.stderr)
+                self.assertIn("regenerating all 417 classifications before planning", resumed.stdout)
+                self.assertIn("executed 2 process runs, reused 2500 recorded runs", resumed.stdout)
+                items = [json.loads(line) for path in
+                         (self.root / "harness/controls.jsonl", self.root / "queries/test.jsonl")
+                         for line in path.read_text().splitlines()]
+                self.assertEqual(len(load_classifications(classification, items)), 417)
+                self.assertEqual(len(classification.read_text().splitlines()), 417)
+                lines = runs.read_text().splitlines(keepends=True)
+                self.assertEqual(lines[:2500], retained)
+                records = [json.loads(line) for line in lines]
+                keys = {(r["query_id"], r["build"], r["rep"]) for r in records}
+                self.assertEqual(len(records), 2502)
+                self.assertEqual(len(keys), 2502)
+                results = subprocess.run(["./run.sh", "results"], cwd=self.root, env=env,
+                                         capture_output=True, text=True, timeout=30)
+                self.assertEqual(results.returncode, 0, results.stdout + results.stderr)
+                self.assertTrue(json.loads(self.results.read_text())["validation"]["complete"])
+
+    def test_invalid_classification_is_rejected_and_regenerated(self):
+        self.fixture()
+        path = self.out / "classify.jsonl"
+        original = path.read_text()
+        records = original.splitlines(keepends=True)
+        for invalid in (None, records[0], records[0] + '{"query_id":', original + records[0],
+                        original.replace('"query-0"', '"unexpected"'),
+                        original.replace(records[0], '[]\n'), original + '\n',
+                        original.replace('"regexp_like_calls": []', '"regexp_like_calls": null', 1)):
+            with self.subTest(invalid=invalid[:80] if invalid else "missing"):
+                if invalid is None:
+                    path.unlink()
+                else:
+                    path.write_text(invalid)
+                retained_runs = (self.out / "runs.jsonl").read_bytes()
+                status, _, diagnostic = self.analyze()
+                self.assertEqual(status, 1)
+                self.assertIn("classification completeness error", diagnostic)
+                with patch.object(measure, "run_one") as process:
+                    self.assertIn("regenerating all 417 classifications", self.measure())
+                    process.assert_not_called()
+                with patch.object(measure, "HERE", self.root):
+                    items = measure.load_items()
+                self.assertEqual(len(load_classifications(path, items)), 417)
+                self.assertEqual((self.out / "runs.jsonl").read_bytes(), retained_runs)
+                self.assertEqual(self.analyze()[0], 0)
+
     def test_control_metadata_and_order_changes_are_rejected(self):
         self.fixture()
         path = self.root / "harness/controls.jsonl"
@@ -412,7 +525,7 @@ class SyntheticFilesTest(unittest.TestCase):
                     self.assertEqual(write_output(path, "same bytes\n", preserve=True), path)
                 self.assertFalse(path.with_name(f"{path.stem}.regenerated{path.suffix}").exists())
 
-    def test_named_outputs_can_be_replaced(self):
+    def test_named_outputs_are_preserved(self):
         self.fixture()
         _, results, tables = paths(self.root, "replay")
         results.write_text("old replay")
@@ -421,8 +534,11 @@ class SyntheticFilesTest(unittest.TestCase):
         with patch.multiple(analyze, RESULTS=results, TABLES=tables):
             status, _, error = self.analyze()
         self.assertEqual((status, error), (0, ""))
-        self.assertTrue(json.loads(results.read_text())["validation"]["complete"])
-        self.assertIn("Queries extracted", tables.read_text())
+        self.assertEqual(results.read_text(), "old replay")
+        regenerated = results.with_name("results-replay.regenerated.json")
+        self.assertTrue(json.loads(regenerated.read_text())["validation"]["complete"])
+        self.assertEqual(tables.read_text(), "old tables")
+        self.assertIn("Queries extracted", tables.with_name("tables.regenerated.md").read_text())
         self.assertFalse(self.results.exists())
 
     def comparison_fixture(self):
