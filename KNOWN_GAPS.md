@@ -59,6 +59,7 @@
 
 ## Harness provenance
 
+- The symptom-versus-rule label of every parent-side failure (SQS and Flink) is the author's per-assertion reading of the method tables in `fail-before-2026-10-26/README.md`, with no second rater or blinded check. The labels are interpretations, not measured outcomes.
 - The selected fixes, uncounted candidates and tests written after fixes may favor successful results, and no third-party fixes were tested. The records cannot establish how representative the observed outcomes are of other fixes.
 - Original local harnesses, hooks and raw pull-request logs are unpublished, although reconstructed harnesses, hooks, logs, queries and copied tests are public under Apache-2.0 with attribution. Reuse can inspect the reconstructions but cannot compare them with all original materials.
 - The runner covers the Table 1 downloads and does not cover historical teardown. Running that entry point does not reproduce the historical teardown results.

@@ -156,8 +156,11 @@ failures are not caused by the shim.
 | shouldKeepMessageAfterSuccessfulCollectionWhenDeletionDisabled | PASS | PASS | |
 | shouldNotDeleteMessageWhenCollectionFails | PASS | PASS | |
 
-The first three failures are the behavior the pull request fixed (a failed parse did not raise, so
-the message could be deleted). The next three request `ignoreParseErrors=true`, an option the
+The first three methods stop at `assertThrows` for `AmazonSqsConnectorException`, an exception
+contract the pull request introduced, before reaching their deletion assertions, so these failures
+show the absent exception contract; the deletion-after-failed-parse behavior the pull request fixed
+is established by the issue reproduction recorded in the pull request, not by these failures.
+The next three request `ignoreParseErrors=true`, an option the
 unfixed reader does not have; with the shim they run with the unfixed reader's only behavior, so
 their failures show the absent option and the null row reaching the collector, not a separate
 defect. The three passing methods cover successful collection and collector failure, which the
@@ -394,6 +397,47 @@ applied to its own committed test passed all five (`logs/st12481-shim-both/after
 as the 25 October host run in `logs/st12481-shim/before.log`, as listed in the method
 table above. Outputs were copied out of the container after the run without editing;
 the four sides are recorded in `logs/runs.jsonl` and `results.json`.
+
+**Container procedure**. [`control.sh`](control.sh) is the as-run driver. Build the image
+from the repository root (see [`replay-clean/README.md`](../replay-clean/README.md)):
+
+```sh
+docker build --platform linux/arm64 --pull -t replay-clean:arm64 replay-clean
+```
+
+The run has no `-v` host-path mounts; `$NAME` is the container name and `$OUT` the host
+output directory. These commands show the run and its in-container steps, selecting the
+then-current revision `b9596a33327c07277bb803a0859835a5d40a0a02`:
+
+```sh
+docker run --platform linux/arm64 --name "$NAME" --entrypoint bash \
+  -e FAILBEFORE_DISPOSABLE=1 -e JAVA8_HOME=/opt/jdk8 -e JAVA_HOME=/opt/jdk8 \
+  -e FAILBEFORE_WORK=/work -e MAVEN_OPTS=-Dmaven.repo.local=/work/m2 -e TZ=UTC \
+  replay-clean:arm64 -c '
+set -u
+git clone -q https://github.com/goutamadwant/datapath-testing-records.git /src/records && \
+git -C /src/records checkout -q b9596a33327c07277bb803a0859835a5d40a0a02 && \
+cd /src/records/fail-before-2026-10-26 || exit 3
+mkdir -p /work
+./run.sh st12481-shim st12481-shim-both; rc=$?
+python3 make_results.py
+exit $rc
+'
+```
+
+The host copies the outputs and removes the container:
+
+```sh
+docker cp "$NAME":/src/records/fail-before-2026-10-26/logs "$OUT/logs"
+docker cp "$NAME":/src/records/fail-before-2026-10-26/results.json "$OUT/results.json"
+docker cp "$NAME":/work/setup-* "$OUT/" 2>/dev/null
+docker rm "$NAME" >/dev/null
+```
+
+The console is `logs/console/console-container-20261031T120258Z-26.txt`; host timestamps
+are in `logs/console/console-container-20261031T120258Z-26-host.txt`. Rerunning the driver
+clones the current repository, then selects the pinned revision unless the checkout line
+is changed.
 
 The four SeaTunnel before-side COMPILE_ERROR outcomes (`st12038`, `st12038-factory`,
 `st12472` and `st12481`) are classified by parser revision 3, written on 2026-10-30 after

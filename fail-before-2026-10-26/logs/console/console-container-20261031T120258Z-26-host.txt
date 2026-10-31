@@ -1,0 +1,3 @@
+container failbefore-control-20261031T120251Z start 2026-10-31T12:02:51Z
+container exit 0 2026-10-31T12:08:04Z
+copied 2026-10-31T12:08:05Z

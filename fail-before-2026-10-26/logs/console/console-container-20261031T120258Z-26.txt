@@ -1,0 +1,84 @@
+# 2026-10-31T12:02:52Z uname: Linux 7.0.14-linuxkit aarch64
+ls: cannot access '/tmp/seatunnel_mnt': No such file or directory
+# records HEAD b9596a33327c07277bb803a0859835a5d40a0a02
+invocation 20261031T120258Z-26: st12481-shim st12481-shim-both
+st12481-shim host-deletion hazard: teardown deletes /tmp/seatunnel_mnt on the real host filesystem; requires explicit selection and FAILBEFORE_DISPOSABLE=1 in a disposable filesystem environment without host-path mounts.
+[st12481-shim/before] exit 1 in 184 s -> logs/st12481-shim/before-2.log
+[st12481-shim/after] exit 0 in 38 s -> logs/st12481-shim/after-2.log
+[st12481-shim-both/before] exit 1 in 32 s -> logs/st12481-shim-both/before-2.log
+[st12481-shim-both/after] exit 0 in 32 s -> logs/st12481-shim-both/after-2.log
+invocation 20261031T120258Z-26: 4/4 requested sides ran
+# run.sh exit 0 2026-10-31T12:08:03Z
+st12472            before BUILD_ERROR        66.6 s  logs/st12472/before.log
+df24193            before FAIL              150.3 s  logs/df24193/before.log
+df24193            after  PASS               43.8 s  logs/df24193/after.log
+st12472            before COMPILE_ERROR     270.0 s  logs/st12472/before-2.log
+df24917            before PASS              297.6 s  logs/df24917/before.log
+st12472            after  PASS              127.6 s  logs/st12472/after.log
+df24917            after  PASS              145.9 s  logs/df24917/after.log
+st12481            before COMPILE_ERROR     145.0 s  logs/st12481/before.log
+st12481            after  PASS              144.9 s  logs/st12481/after.log
+st12481-shim       before FAIL              196.7 s  logs/st12481-shim/before.log
+df24917-diag       before PASS              190.1 s  logs/df24917-diag/before.log
+st12481-shim       after  PASS              292.8 s  logs/st12481-shim/after.log
+df24917-diag       after  PASS              140.0 s  logs/df24917-diag/after.log
+st12038            before COMPILE_ERROR     120.0 s  logs/st12038/before.log
+st12038            after  PASS              183.6 s  logs/st12038/after.log
+st12038-factory    before COMPILE_ERROR     332.8 s  logs/st12038-factory/before.log
+st12038-factory    after  PASS              185.9 s  logs/st12038-factory/after.log
+st12038-shim       before FAIL              363.4 s  logs/st12038-shim/before.log
+st12360            before PASS              478.2 s  logs/st12360/before.log
+st12038-shim       after  PASS              297.8 s  logs/st12038-shim/after.log
+st12360            after  PASS              221.0 s  logs/st12360/after.log
+df24917-budget     before COMPILE_ERROR      53.4 s  logs/df24917-budget/before.log
+df24917-budget     after  PASS               31.1 s  logs/df24917-budget/after.log
+df24193            before FAIL               74.9 s  logs/df24193/before-2.log
+df24193            after  PASS               27.0 s  logs/df24193/after-2.log
+df24917            before PASS              118.7 s  logs/df24917/before-2.log
+df24917            after  PASS               90.0 s  logs/df24917/after-2.log
+df24917-diag       before PASS               87.7 s  logs/df24917-diag/before-2.log
+df24917-diag       after  PASS               85.7 s  logs/df24917-diag/after-2.log
+df24917-budget     before COMPILE_ERROR      32.3 s  logs/df24917-budget/before-2.log
+df24917-budget     after  PASS               32.2 s  logs/df24917-budget/after-2.log
+st12038            before COMPILE_ERROR      71.1 s  logs/st12038/before-2.log
+st12038            after  PASS               76.6 s  logs/st12038/after-2.log
+st12038-shim       before FAIL               75.3 s  logs/st12038-shim/before-2.log
+st12038-shim       after  PASS               74.9 s  logs/st12038-shim/after-2.log
+st12038-factory    before COMPILE_ERROR      70.4 s  logs/st12038-factory/before-2.log
+st12038-factory    after  PASS               73.3 s  logs/st12038-factory/after-2.log
+st12360            before PASS               82.4 s  logs/st12360/before-2.log
+st12360            after  PASS               83.6 s  logs/st12360/after-2.log
+st12472            before COMPILE_ERROR      56.0 s  logs/st12472/before-3.log
+st12472            after  PASS               60.1 s  logs/st12472/after-2.log
+st12481            before COMPILE_ERROR      94.6 s  logs/st12481/before-2.log
+st12481            after  PASS              105.4 s  logs/st12481/after-2.log
+df24917-budget-nohook before FAIL               72.9 s  logs/df24917-budget-nohook/before.log
+df24917-budget-nohook after  PASS               34.6 s  logs/df24917-budget-nohook/after.log
+df24193            before FAIL               86.8 s  logs/df24193/before-3.log
+df24193            after  PASS               28.0 s  logs/df24193/after-3.log
+df24917            before PASS              131.3 s  logs/df24917/before-3.log
+df24917            after  PASS               96.1 s  logs/df24917/after-3.log
+df24917-diag       before PASS              116.9 s  logs/df24917-diag/before-3.log
+df24917-diag       after  PASS              103.1 s  logs/df24917-diag/after-3.log
+df24917-budget     before COMPILE_ERROR      43.5 s  logs/df24917-budget/before-3.log
+df24917-budget     after  PASS               37.8 s  logs/df24917-budget/after-3.log
+st12038            before COMPILE_ERROR      92.8 s  logs/st12038/before-3.log
+st12038            after  PASS              101.1 s  logs/st12038/after-3.log
+st12038-shim       before FAIL              193.9 s  logs/st12038-shim/before-3.log
+st12038-shim       after  PASS              173.3 s  logs/st12038-shim/after-3.log
+st12038-factory    before COMPILE_ERROR     182.9 s  logs/st12038-factory/before-3.log
+st12038-factory    after  PASS              198.7 s  logs/st12038-factory/after-3.log
+st12360            before PASS              154.8 s  logs/st12360/before-3.log
+st12360            after  PASS              112.9 s  logs/st12360/after-3.log
+st12472            before COMPILE_ERROR      61.8 s  logs/st12472/before-4.log
+st12472            after  PASS               61.3 s  logs/st12472/after-3.log
+st12481            before COMPILE_ERROR      97.3 s  logs/st12481/before-3.log
+st12481            after  PASS              104.1 s  logs/st12481/after-3.log
+st12481-shim-both  before SETUP_ERROR         0.0 s  logs/st12481-shim-both/before.log
+st12481-shim-both  after  SETUP_ERROR         0.0 s  logs/st12481-shim-both/after.log
+st12481-shim       before FAIL              184.4 s  logs/st12481-shim/before-2.log
+st12481-shim       after  PASS               38.1 s  logs/st12481-shim/after-2.log
+st12481-shim-both  before FAIL               32.1 s  logs/st12481-shim-both/before-2.log
+st12481-shim-both  after  PASS               31.8 s  logs/st12481-shim-both/after-2.log
+# make_results exit 0 2026-10-31T12:08:04Z
+ls: cannot access '/tmp/seatunnel_mnt': No such file or directory
