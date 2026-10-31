@@ -66,9 +66,20 @@ class RunGuardTest(unittest.TestCase):
         request = json.loads((self.root / "logs/requested.json").read_text())[0]
         self.assertEqual(len(request["cases"]), 10)
         self.assertNotIn("st12481-shim", request["cases"])
+        self.assertNotIn("st12481-shim-both", request["cases"])
         self.assertNotIn("df24917-budget-nohook", request["cases"])
-        self.assertFalse(any(r["case"] in ("st12481-shim", "df24917-budget-nohook")
+        self.assertFalse(any(r["case"] in ("st12481-shim", "st12481-shim-both", "df24917-budget-nohook")
                              for r in self.records()))
+
+    def test_shim_both_without_disposable_refuses_both_sides_before_clone(self):
+        result = self.run_script("st12481-shim-both")
+        self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+        records = self.records()
+        self.assertEqual([r["side"] for r in records], ["before", "after"])
+        for record in records:
+            self.assertIn("safety guard before clone", record["setup_error"])
+        self.assertIn("applied on the after side", records[1]["transplant"])
+        self.assertFalse(self.trace.exists(), "clone or build command reached")
 
     def test_nohook_explicit_setup_failure_records_both_sides(self):
         result = self.run_script("df24917-budget-nohook")
@@ -129,6 +140,31 @@ case_df24917-budget-nohook
                                        f"FAILBEFORE_DISPOSABLE={shlex.quote(disposable)}\nst12481_guard\n")
                 self.assertEqual(result.returncode, expected, result.stderr)
                 self.assertIn("host-deletion hazard", result.stderr)
+
+    def test_shim_both_copies_only_before_and_patches_both_commits(self):
+        result = self.isolated('''
+st_tree() { echo "tree $*"; }
+st_copy() { echo "copy $*"; }
+step() { echo "step $*"; }
+run_one() { printf 'run %s\\n' "$*"; }
+setup_error() { exit 9; }
+case_st12481-shim-both
+''')
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        lines = result.stdout.splitlines()
+        self.assertEqual(len(lines), 7)
+        self.assertEqual(lines[0], "tree st12481 7ba68325cb7ea1bf1a28f56c4f9c20695d221df3")
+        self.assertEqual(lines[1], "copy 0e4cf52896ee3604a8e7899d7736ffd914ee6ce7 "
+                         "seatunnel-e2e/seatunnel-e2e-common/src/test/java/org/apache/"
+                         "seatunnel/e2e/common/container/flink/AbstractTestFlinkContainerTest.java")
+        self.assertEqual(lines[4], "tree st12481 0e4cf52896ee3604a8e7899d7736ffd914ee6ce7")
+        self.assertEqual(lines[2], lines[5])
+        self.assertIn("apply patches/st12481-flink-test-drop-override.patch", lines[2])
+        self.assertIn("run st12481-shim-both before", lines[3])
+        self.assertIn("run st12481-shim-both after", lines[6])
+        self.assertIn("applied on the after side to the merge commit's own committed test", lines[6])
+        self.assertEqual(lines[3].split(" ./mvnw ", 1)[1], lines[6].split(" ./mvnw ", 1)[1])
+        self.assertFalse(self.trace.exists(), "external command reached")
 
     def test_path_created_after_initial_guard_refuses_before_execution(self):
         hazard = shlex.quote(str(self.root / "host-path"))

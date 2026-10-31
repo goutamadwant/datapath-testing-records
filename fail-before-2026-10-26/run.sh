@@ -3,15 +3,15 @@
 #
 # Usage: ./run.sh [case ...]
 #   cases: df24193 df24917 df24917-diag df24917-budget st12038 st12038-shim st12038-factory st12360
-#          st12472 st12481 st12481-shim df24917-budget-nohook
-#   (default: all cases except st12481-shim and df24917-budget-nohook, in that order)
+#          st12472 st12481 st12481-shim st12481-shim-both df24917-budget-nohook
+#   (default: all cases except st12481-shim, st12481-shim-both and df24917-budget-nohook)
 #
 # For each case:
 #   before = first parent of the pull request's merge commit, with ONLY the test change of the
 #            pull request applied on top (whole test files, or the test-module hunks of a file that
 #            also holds production code; see patches/)
-#   after  = the pull request's merge commit, unmodified except for df24917-budget-nohook,
-#            which adds a separate hook-free test function on both sides
+#   after  = the pull request's merge commit, except df24917-budget-nohook adds a separate
+#            hook-free test function and st12481-shim-both applies the annotation shim
 # The same test command runs on both trees. Every run writes a full log under logs/<case>/ and
 # appends one record to logs/runs.jsonl; logs are never overwritten (a repeated run gets a suffix).
 # python3 make_results.py then derives the outcome of every run from its log and writes results.json.
@@ -30,7 +30,7 @@
 #                     (default: clone https://github.com/apache/datafusion.git into the work dir)
 #   SEATUNNEL_REPO    existing local clone of apache/seatunnel (default: clone into the work dir)
 #   JAVA8_HOME        JDK 8 used for every SeaTunnel run (default: /usr/libexec/java_home -v 1.8)
-#   FAILBEFORE_DISPOSABLE=1 required for explicitly selected st12481-shim; see README Safety
+#   FAILBEFORE_DISPOSABLE=1 required for explicit st12481-shim or st12481-shim-both; see README Safety
 set -u -o pipefail
 
 cd "$(dirname "$0")"
@@ -127,7 +127,8 @@ run_one() {
         echo "# command: $*"
         echo "# start: $(date '+%Y-%m-%dT%H:%M:%S%z')"
     } > "$log"
-    if [ "$case" = st12481-shim ] && ! step "st12481-shim safety guard before execution" st12481_guard; then
+    if [[ "$case" = st12481-shim || "$case" = st12481-shim-both ]] &&
+        ! step "$case safety guard before execution" st12481_guard; then
         SETUP_ERROR_LOG=$log setup_error "$case" "$side" "$before" "$after" "$transplant" "$@"
         return 1
     fi
@@ -319,7 +320,7 @@ mvn_cmd() { # module test-selector
 
 # The parent-side teardown deletes this real host path even with mocked containers.
 st12481_guard() {
-    local hazard="st12481-shim host-deletion hazard: FileUtils.deleteFile(HOST_VOLUME_MOUNT_PATH) deletes $ST_REFUSE_IF_EXISTS on the real host filesystem even with mocked containers. Requires explicit st12481-shim selection and FAILBEFORE_DISPOSABLE=1 in a disposable filesystem environment without host-path mounts."
+    local hazard="st12481-shim / st12481-shim-both host-deletion hazard: FileUtils.deleteFile(HOST_VOLUME_MOUNT_PATH) deletes $ST_REFUSE_IF_EXISTS on the real host filesystem even with mocked containers. Requires explicit case selection and FAILBEFORE_DISPOSABLE=1 in a disposable filesystem environment without host-path mounts."
     echo "$hazard" >&2
     if [ "${EXPLICIT_CASES:-0}" -eq 0 ] || [ "${FAILBEFORE_DISPOSABLE:-}" != 1 ]; then
         return 1
@@ -437,11 +438,36 @@ case_st12481-shim() {
         "$E2E_T/flink/AbstractTestFlinkContainerTest.java"
 }
 
+# Apply the shim to the merge commit's own test, without copying test files.
+st12481_patched_after() {
+    local before=7ba68325cb7ea1bf1a28f56c4f9c20695d221df3 after=0e4cf52896ee3604a8e7899d7736ffd914ee6ce7
+    local patch=st12481-flink-test-drop-override.patch cmd text
+    cmd=$(mvn_cmd "$E2E" AbstractTestFlinkContainerTest)
+    text="patches/$patch applied on the after side to the merge commit's own committed test"
+    begin_side
+    if st_tree st12481 "$after" && step "apply patches/$patch" git -C "$TREE" apply "$PATCHES/$patch"; then
+        # shellcheck disable=SC2086
+        run_one st12481-shim-both after "$before" "$after" "$text" "$E2E" $cmd
+    else
+        # shellcheck disable=SC2086
+        setup_error st12481-shim-both after "$before" "$after" "$text" $cmd
+    fi
+}
+
+# Explicit control: the same annotation shim on both revisions; not in the default matrix.
+case_st12481-shim-both() {
+    local ST_REFUSE_IF_EXISTS=/tmp/seatunnel_mnt
+    st_case st12481-shim-both st12481 7ba68325cb7ea1bf1a28f56c4f9c20695d221df3 0e4cf52896ee3604a8e7899d7736ffd914ee6ce7 \
+        "$E2E" AbstractTestFlinkContainerTest before st12481-flink-test-drop-override.patch \
+        "$E2E_T/flink/AbstractTestFlinkContainerTest.java"
+    st12481_patched_after
+}
+
 ALL="df24193 df24917 df24917-diag df24917-budget st12038 st12038-shim st12038-factory st12360 st12472 st12481"
 EXPLICIT_CASES=$#
 CASES=${*:-$ALL}
 for c in $CASES; do
-    declare -F "case_$c" > /dev/null || { echo "unknown case: $c (cases: $ALL st12481-shim df24917-budget-nohook)" >&2; exit 2; }
+    declare -F "case_$c" > /dev/null || { echo "unknown case: $c (cases: $ALL st12481-shim st12481-shim-both df24917-budget-nohook)" >&2; exit 2; }
 done
 
 # Requested cases and sides, written before any build.

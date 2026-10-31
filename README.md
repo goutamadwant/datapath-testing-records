@@ -2,6 +2,8 @@
 
 ## Status at this commit
 
+See [KNOWN_GAPS.md](KNOWN_GAPS.md) for evidence limits and their implications for reuse.
+
 See [SAFETY.md](SAFETY.md) for destructive commands, their scope and required guards.
 
 Reconstruction replays are retained at the root and in [`replay-2026-10-26/`](replay-2026-10-26/).

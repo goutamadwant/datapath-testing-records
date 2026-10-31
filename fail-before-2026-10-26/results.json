@@ -2829,6 +2829,60 @@
         "AbstractTestFlinkContainerTest"
       ],
       "log_sha256": "2f7d519681c174cbcd28a8795705dc330462bf6768f8d8c0e08f4681572ad58e"
+    },
+    {
+      "case": "st12481-shim-both",
+      "side": "before",
+      "before_commit": "7ba68325cb7ea1bf1a28f56c4f9c20695d221df3",
+      "after_commit": "0e4cf52896ee3604a8e7899d7736ffd914ee6ce7",
+      "tree_head": "",
+      "transplant": "seatunnel-e2e/seatunnel-e2e-common/src/test/java/org/apache/seatunnel/e2e/common/container/flink/AbstractTestFlinkContainerTest.java copied from 0e4cf52896ee3604a8e7899d7736ffd914ee6ce7; then patches/st12481-flink-test-drop-override.patch applied",
+      "command": "./mvnw -B -ntp -pl seatunnel-e2e/seatunnel-e2e-common -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=AbstractTestFlinkContainerTest -DfailIfNoTests=false clean package",
+      "exit_code": 1,
+      "started_epoch": 1793431325.3296409,
+      "ended_epoch": 1793431325.3595579,
+      "duration_s": 0.0,
+      "log": "logs/st12481-shim-both/before.log",
+      "invocation": "20261031T072205Z-46328",
+      "setup_error": "st12481-shim safety guard before clone",
+      "outcome": "SETUP_ERROR",
+      "tests": [],
+      "detail": [
+        "setup step failed: st12481-shim safety guard before clone",
+        "$ st12481-shim safety guard before clone",
+        "st12481-shim / st12481-shim-both host-deletion hazard: FileUtils.deleteFile(HOST_VOLUME_MOUNT_PATH) deletes /tmp/seatunnel_mnt on the real host filesystem even with mocked containers. Requires explicit case selection and FAILBEFORE_DISPOSABLE=1 in a disposable filesystem environment without host-path mounts."
+      ],
+      "expected_test": [
+        "AbstractTestFlinkContainerTest"
+      ],
+      "log_sha256": "2103105a553946b752e3e719fffc91aaa268c0e5bdc29a7108980bf79bcbf7cf"
+    },
+    {
+      "case": "st12481-shim-both",
+      "side": "after",
+      "before_commit": "7ba68325cb7ea1bf1a28f56c4f9c20695d221df3",
+      "after_commit": "0e4cf52896ee3604a8e7899d7736ffd914ee6ce7",
+      "tree_head": "",
+      "transplant": "patches/st12481-flink-test-drop-override.patch applied on the after side to the merge commit's own committed test",
+      "command": "./mvnw -B -ntp -pl seatunnel-e2e/seatunnel-e2e-common -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=AbstractTestFlinkContainerTest -DfailIfNoTests=false clean package",
+      "exit_code": 1,
+      "started_epoch": 1793431325.422573,
+      "ended_epoch": 1793431325.4515,
+      "duration_s": 0.0,
+      "log": "logs/st12481-shim-both/after.log",
+      "invocation": "20261031T072205Z-46328",
+      "setup_error": "st12481-shim safety guard before clone",
+      "outcome": "SETUP_ERROR",
+      "tests": [],
+      "detail": [
+        "setup step failed: st12481-shim safety guard before clone",
+        "$ st12481-shim safety guard before clone",
+        "st12481-shim / st12481-shim-both host-deletion hazard: FileUtils.deleteFile(HOST_VOLUME_MOUNT_PATH) deletes /tmp/seatunnel_mnt on the real host filesystem even with mocked containers. Requires explicit case selection and FAILBEFORE_DISPOSABLE=1 in a disposable filesystem environment without host-path mounts."
+      ],
+      "expected_test": [
+        "AbstractTestFlinkContainerTest"
+      ],
+      "log_sha256": "8bef5819591015bb0ab3b068a1248a4135595e88dae5aeea34647e57f355588a"
     }
   ],
   "comparisons": {
@@ -2891,6 +2945,11 @@
       "before": "FAIL",
       "after": "PASS",
       "comparison": "complete"
+    },
+    "st12481-shim-both": {
+      "before": "SETUP_ERROR",
+      "after": "SETUP_ERROR",
+      "comparison": "incomplete"
     }
   },
   "log_files": {
@@ -2928,8 +2987,8 @@
     "logs/df24917-diag/before-2.log": "e48e4004f38dbc9ea49c789266fa32658183d982279cb8db3c8795d00d43d237",
     "logs/df24917-diag/before-3.log": "d72397b8096bc9b10539d62efcf6122935728b2356ab73f22b870cb6598242bf",
     "logs/df24917-diag/before.log": "8bdfdfa778f6ed95eebbbbba8c3781657ebac3258b147b4acc040620c8eebf90",
-    "logs/requested.json": "8be0d4e5969b967dfe0b29643ea6e83ed976f356838a8976671cf1a5a9be2e1d",
-    "logs/runs.jsonl": "4c344609528f2be76c8d1d854e1d19dbdef8a73d32d871783fe4fb1fa6292a2a",
+    "logs/requested.json": "820e9ebff84000be2c88402638bccf12f4a97b7b9dacc1c011b2283f6fba92fb",
+    "logs/runs.jsonl": "fda58235073170377e58d8314f411353d68ddb5c4556d331600181e7e7051fb4",
     "logs/st12038/after-2.log": "37a6cc9bef92d09b0b7f1e35bfd146f93771dbcecb6fbab17f26842baa8ade64",
     "logs/st12038/after-2.surefire/TEST-org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest.xml": "cd7b57880b9459709ca981aface1905dc488d2b4e60cb648c70bcb9e54e925f3",
     "logs/st12038/after-3.log": "47b65b0d079f470f9fcc0797f9ad278524e77c02ac6e571dff10a2a9ff7574eb",
@@ -2998,7 +3057,9 @@
     "logs/st12481-shim/after.log": "9f920315b1a74452aa67b0cb8fce8ebff5612151514d4617fbcd1c97a6e0967c",
     "logs/st12481-shim/after.surefire/TEST-org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest.xml": "313b6cdcfead0f3e027ed19651f95305ac69125b77c52334396473216330ed4a",
     "logs/st12481-shim/before.log": "b5fdcafa12f8b5723ff0dc57518e4d5886030c20b135997221dfd81b87ec073d",
-    "logs/st12481-shim/before.surefire/TEST-org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest.xml": "4f6dce02cce583124bf9b0036ee21093f39ee708970646efa56891d8db00be6d"
+    "logs/st12481-shim/before.surefire/TEST-org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest.xml": "4f6dce02cce583124bf9b0036ee21093f39ee708970646efa56891d8db00be6d",
+    "logs/st12481-shim-both/after.log": "8bef5819591015bb0ab3b068a1248a4135595e88dae5aeea34647e57f355588a",
+    "logs/st12481-shim-both/before.log": "2103105a553946b752e3e719fffc91aaa268c0e5bdc29a7108980bf79bcbf7cf"
   },
   "patches": {
     "patches/df24193-tests-only.patch": "7f5606b3d3357fee8c12d86cd1e73911a79d2fef03aa1fb5f0e2f878ac7f445b",

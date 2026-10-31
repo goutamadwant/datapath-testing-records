@@ -1,0 +1,15 @@
+# case: st12481-shim-both
+# side: before
+# before commit (first parent): 7ba68325cb7ea1bf1a28f56c4f9c20695d221df3
+# after commit (merge): 0e4cf52896ee3604a8e7899d7736ffd914ee6ce7
+# tree HEAD: none
+# transplant: seatunnel-e2e/seatunnel-e2e-common/src/test/java/org/apache/seatunnel/e2e/common/container/flink/AbstractTestFlinkContainerTest.java copied from 0e4cf52896ee3604a8e7899d7736ffd914ee6ce7; then patches/st12481-flink-test-drop-override.patch applied
+# host: Darwin 27.0.0 arm64
+# command (not run): ./mvnw -B -ntp -pl seatunnel-e2e/seatunnel-e2e-common -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=AbstractTestFlinkContainerTest -DfailIfNoTests=false clean package
+# start: 2026-10-31T00:22:05-0700
+# setup error: step failed: st12481-shim safety guard before clone (exit 1)
+# setup output:
+#   $ st12481-shim safety guard before clone
+#   st12481-shim / st12481-shim-both host-deletion hazard: FileUtils.deleteFile(HOST_VOLUME_MOUNT_PATH) deletes /tmp/seatunnel_mnt on the real host filesystem even with mocked containers. Requires explicit case selection and FAILBEFORE_DISPOSABLE=1 in a disposable filesystem environment without host-path mounts.
+# end: 2026-10-31T00:22:05-0700
+# exit code: 1

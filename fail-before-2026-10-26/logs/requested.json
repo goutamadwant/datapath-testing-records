@@ -228,5 +228,22 @@
         "side": "after"
       }
     ]
+  },
+  {
+    "invocation": "20261031T072205Z-46328",
+    "requested_at": "2026-10-31T00:22:05-0700",
+    "cases": [
+      "st12481-shim-both"
+    ],
+    "sides": [
+      {
+        "case": "st12481-shim-both",
+        "side": "before"
+      },
+      {
+        "case": "st12481-shim-both",
+        "side": "after"
+      }
+    ]
   }
 ]

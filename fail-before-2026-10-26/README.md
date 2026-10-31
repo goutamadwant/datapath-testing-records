@@ -113,6 +113,28 @@ They are reported separately from the unmodified runs above; the shim is in `pat
 (before = `9ebb27e8f920` + test + shim; after = `1e450e11f7c8` unmodified; the same applies to the
 12481 shim below)
 
+**What the shims do and do not show**. In both `st12038-shim` and `st12481-shim`, the patch is
+applied only to the test copied onto the parent (unfixed) revision. The fixed (merge) revision runs
+its own committed test unchanged, recorded as `transplant` = "none (merge commit as is)". The SQS
+shim (`patches/st12038-reader-test-drop-ignore-arg.patch`) removes the `ignoreParseErrors` argument
+that the fix added to the config constructor call. The patch context shows the fixed test passing
+this required argument and shows no overload accepting the shimmed call. The shimmed test cannot
+compile on the fixed revision, so a shim-on-fixed control is not possible for this case; the only
+fixed-side evidence is the unchanged committed test passing, 9 of 9, in
+`logs/st12038-shim/after-3.log`. On the parent, three of the six failing methods in
+`logs/st12038-shim/before-3.log`—`shouldNotDeleteMessageWhenDeserializationThrows` (line 74),
+`shouldNotDeleteMessageWhenDeserializerReturnsNull` (line 95), and
+`shouldStopBatchAtFailedMessageWithoutDeletingItOrLaterMessages` (line 166)—fail at their first
+assertion, "expected AmazonSqsConnectorException to be thrown, but nothing was thrown", so their
+later deletion assertions never executed. `shouldKeepIgnoredNullMessageWhenDeletionDisabled`
+executed its assertion at line 213 and failed on it (`expected: <true> but was: <false>`).
+`shouldSkipFailedMessageAndContinueWhenParseErrorsIgnored` errors with a `NullPointerException` at
+line 196, and `shouldApplyIgnoreParseErrorsToJsonMessagesCreatedByFactory` errors with a JSON parse
+exception at line 249, because the parent has no ignore-parse-errors option. The Flink shim
+(`patches/st12481-flink-test-drop-override.patch`) removes only an `@Override` annotation, so the
+shimmed test can compile on the fixed revision as well. The shim-on-fixed control
+`st12481-shim-both` is defined below and has not been run.
+
 | Method | Before | After | Failing line before |
 | --- | --- | --- | --- |
 | shouldNotDeleteMessageWhenDeserializationThrows | FAIL: expected `AmazonSqsConnectorException`, nothing thrown | PASS | 74 (`assertThrows`) |
@@ -195,9 +217,11 @@ python3 make_results.py        # parse logs/runs.jsonl and the logs, write resul
 ```
 
 Cases: `df24193`, `df24917`, `df24917-diag`, `df24917-budget`, `df24917-budget-nohook`, `st12038`, `st12038-shim`, `st12038-factory`,
-`st12360`, `st12472`, `st12481`, `st12481-shim`. Per run the script prepares a git worktree at the
+`st12360`, `st12472`, `st12481`, `st12481-shim`, `st12481-shim-both`. Per run the script prepares a git worktree at the
 commit (hard reset, `git clean -fdx`), applies the transplant, writes a log header (commits,
 `git status`, `git diff --stat`, toolchain, command, start/end, exit code) and runs:
+
+`st12481-shim-both`: unrun control applying the Flink annotation shim on both sides, copying the same test as `st12481-shim` only onto the parent; excluded from the default matrix and subject to the same disposable-filesystem guards.
 
 - DataFusion: `cargo test --locked --profile ci -p datafusion-physical-plan --lib unbounded_input_emits_before_batch_size`
   and `cargo test --locked --profile ci -p datafusion --test core_integration expensive_regexp_like_is_deferred_to_execution`
@@ -330,6 +354,8 @@ was changed.
 This second campaign is the complete accounting that the morning campaign lacks: the request,
 every side, every log and the console of the single attempt are retained.
 
+A further invocation on 2026-10-31 (`20261031T072205Z-46328`, 00:22 local) requested the control case `st12481-shim-both` without `FAILBEFORE_DISPOSABLE=1`; both sides stopped at the host-deletion safety guard before any clone or build (`logs/st12481-shim-both/before.log` and `after.log`, SETUP_ERROR). The records are retained; the control remains unrun because that test deletes a host path and is run only in a disposable environment.
+
 The four SeaTunnel before-side COMPILE_ERROR outcomes (`st12038`, `st12038-factory`,
 `st12472` and `st12481`) are classified by parser revision 3, written on 2026-10-30 after
 the run. For substituted Maven error paths, it recognises only the literal
@@ -342,41 +368,43 @@ default matrix and was not run in this invocation; its historical records are re
 New command logs (paths relative to this bundle):
 
 ```text
-logs/df24193/before-2.log
-logs/df24193/after-2.log
-logs/df24917/before-2.log
-logs/df24917/after-2.log
-logs/df24917-diag/before-2.log
-logs/df24917-diag/after-2.log
-logs/df24917-budget/before-2.log
-logs/df24917-budget/after-2.log
-logs/st12038/before-2.log
-logs/st12038/after-2.log
-logs/st12038-shim/before-2.log
-logs/st12038-shim/after-2.log
-logs/st12038-factory/before-2.log
-logs/st12038-factory/after-2.log
-logs/st12360/before-2.log
-logs/st12360/after-2.log
-logs/st12472/before-3.log
-logs/st12472/after-2.log
-logs/st12481/before-2.log
-logs/st12481/after-2.log
+logs/df24193/before-3.log
+logs/df24193/after-3.log
+logs/df24917/before-3.log
+logs/df24917/after-3.log
+logs/df24917-diag/before-3.log
+logs/df24917-diag/after-3.log
+logs/df24917-budget/before-3.log
+logs/df24917-budget/after-3.log
+logs/st12038/before-3.log
+logs/st12038/after-3.log
+logs/st12038-shim/before-3.log
+logs/st12038-shim/after-3.log
+logs/st12038-factory/before-3.log
+logs/st12038-factory/after-3.log
+logs/st12360/before-3.log
+logs/st12360/after-3.log
+logs/st12472/before-4.log
+logs/st12472/after-3.log
+logs/st12481/before-3.log
+logs/st12481/after-3.log
 ```
 
 New Maven XML reports:
 
 ```text
-logs/st12038/after-2.surefire/TEST-org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest.xml
-logs/st12038-shim/before-2.surefire/TEST-org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest.xml
-logs/st12038-shim/after-2.surefire/TEST-org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest.xml
-logs/st12038-factory/after-2.surefire/TEST-org.apache.seatunnel.connectors.seatunnel.amazonsqs.AmazonSqsSourceFactoryTest.xml
-logs/st12360/before-2.surefire/TEST-org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest.xml
-logs/st12360/after-2.surefire/TEST-org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest.xml
-logs/st12472/after-2.surefire/TEST-org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest.xml
-logs/st12481/after-2.surefire/TEST-org.apache.seatunnel.e2e.common.container.AbstractTestContainerTest.xml
-logs/st12481/after-2.surefire/TEST-org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest.xml
+logs/st12038-factory/after-3.surefire/TEST-org.apache.seatunnel.connectors.seatunnel.amazonsqs.AmazonSqsSourceFactoryTest.xml
+logs/st12038-shim/after-3.surefire/TEST-org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest.xml
+logs/st12038-shim/before-3.surefire/TEST-org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest.xml
+logs/st12038/after-3.surefire/TEST-org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest.xml
+logs/st12360/after-3.surefire/TEST-org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest.xml
+logs/st12360/before-3.surefire/TEST-org.apache.seatunnel.connectors.cdc.base.source.reader.IncrementalSourceReaderTest.xml
+logs/st12472/after-3.surefire/TEST-org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest.xml
+logs/st12481/after-3.surefire/TEST-org.apache.seatunnel.e2e.common.container.AbstractTestContainerTest.xml
+logs/st12481/after-3.surefire/TEST-org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest.xml
 ```
+
+The lists were corrected on 2026-10-31; they previously pointed to the morning logs.
 
 ## Files
 
