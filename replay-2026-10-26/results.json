@@ -16143,10 +16143,12 @@
   },
   {
    "path": "harness/make_results.py",
-   "bytes": 29441,
-   "sha256": "7e521ed6928cddc0ea03490d9a2791d1d10b12d2c30d61048a6008b566c54def",
+   "bytes": 30201,
+   "sha256": "4865f2efcb506d6c0ae75907e4e8d3db5db6d26fbc8f88bde63d3aac871e2c44",
    "sha256_as_run": "0176e7b397d565bf75e5b7fcde44bf6b1872512032c303e29ce5513d8f9527b8",
-   "revised_after_runs": "2026-10-25 (third revision): fail-closed validation of the requested matrix and per-cell runs_requested, runs_recorded, runs_valid; as-run hashes kept here. Re-running it over the recorded logs left every count and summary unchanged. 2026-10-25 (fourth revision): imports parse_part_c from harness/historical-part-c; --part all requests Parts A and B only; harness entries of moved files carry path_as_run. Re-running it over the recorded logs left every count, summary and log hash unchanged. 2026-10-26 (fifth revision): the replay.sh note below records the --require-toolchain option; re-running it over the recorded logs left every count, summary and log hash unchanged."
+   "revised_after_runs": "2026-10-25 (third revision): fail-closed validation of the requested matrix and per-cell runs_requested, runs_recorded, runs_valid; as-run hashes kept here. Re-running it over the recorded logs left every count and summary unchanged. 2026-10-25 (fourth revision): imports parse_part_c from harness/historical-part-c; --part all requests Parts A and B only; harness entries of moved files carry path_as_run. Re-running it over the recorded logs left every count, summary and log hash unchanged. 2026-10-26 (fifth revision): the replay.sh note below records the --require-toolchain option; re-running it over the recorded logs left every count, summary and log hash unchanged.",
+   "sha256_at_result": "7e521ed6928cddc0ea03490d9a2791d1d10b12d2c30d61048a6008b566c54def",
+   "bytes_at_result": 29441
   },
   {
    "path": "harness/part_a.py",
@@ -16187,8 +16189,10 @@
   },
   {
    "path": "harness/historical-part-c/README.md",
-   "bytes": 4642,
-   "sha256": "ef0b37461e1f1b479e37f6e7c965dc295f763de45cf3c8bc9595fd2a34d11f66"
+   "bytes": 4854,
+   "sha256": "a1bfc8a1aecf925b981ee69875ef6bff482147dd762e29007565008e6e5532de",
+   "sha256_at_result": "ef0b37461e1f1b479e37f6e7c965dc295f763de45cf3c8bc9595fd2a34d11f66",
+   "bytes_at_result": 4642
   },
   {
    "path": "harness/historical-part-c/parse_part_c.py",
@@ -16200,11 +16204,13 @@
   },
   {
    "path": "harness/historical-part-c/part_c.sh",
-   "bytes": 13032,
-   "sha256": "b7757fbd63600d4715781317cf49fbaba5f66de619a178e99453661a252aa865",
+   "bytes": 13344,
+   "sha256": "409b35644dc8e8fbc301a78f0125cb9e073e47f646cae90316937f50a8105dd8",
    "path_as_run": "harness/part_c.sh",
    "sha256_as_run": "a75658e64990ce934935601d2c3f380003e049f84bd80d52a3243e9844835cdb",
-   "revised_after_runs": "2026-10-25 (first revision): cleanup scoped to containers that appeared during the cell. 2026-10-25 (second revision): refuses to start when /tmp/seatunnel_mnt exists. 2026-10-25 (third revision): refuses to start a cell while any container of the Flink, Spark or Zeta images exists; removes a leftover only if it did not exist before the cell, was created after the cell start, runs the cell's engine image and carries the cell JVM's Testcontainers session label, logging every container considered; a cell fails and the script stops when a cell-level check fails, including /tmp/seatunnel_mnt present after the cell. The executed runs used the as-run version; its cleanup loop wrote no logs/partC/*.cleanup.txt file, i.e. it removed nothing (no engine container remained after any cell). 2026-10-25 (fourth revision): moved from harness/part_c.sh to harness/historical-part-c/part_c.sh with its content unchanged (same sha256); replay.sh no longer runs Part C. Kept for inspection, not for execution; see harness/historical-part-c/README.md."
+   "revised_after_runs": "2026-10-25 (first revision): cleanup scoped to containers that appeared during the cell. 2026-10-25 (second revision): refuses to start when /tmp/seatunnel_mnt exists. 2026-10-25 (third revision): refuses to start a cell while any container of the Flink, Spark or Zeta images exists; removes a leftover only if it did not exist before the cell, was created after the cell start, runs the cell's engine image and carries the cell JVM's Testcontainers session label, logging every container considered; a cell fails and the script stops when a cell-level check fails, including /tmp/seatunnel_mnt present after the cell. The executed runs used the as-run version; its cleanup loop wrote no logs/partC/*.cleanup.txt file, i.e. it removed nothing (no engine container remained after any cell). 2026-10-25 (fourth revision): moved from harness/part_c.sh to harness/historical-part-c/part_c.sh with its content unchanged (same sha256); replay.sh no longer runs Part C. Kept for inspection, not for execution; see harness/historical-part-c/README.md.",
+   "sha256_at_result": "b7757fbd63600d4715781317cf49fbaba5f66de619a178e99453661a252aa865",
+   "bytes_at_result": 13032
   },
   {
    "path": "harness/historical-part-c/selftest_part_c_guards.sh",

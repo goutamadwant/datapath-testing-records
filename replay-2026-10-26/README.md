@@ -75,6 +75,8 @@ cell; Part C: runs added per cell). A missing or unparsable run log, a record th
 its log, or fewer recorded or valid runs than requested is listed on stderr, `results.json` is left
 unchanged, and `replay.sh` exits 1. Each cell in `results.json` has `runs_requested`,
 `runs_recorded` and `runs_valid`.
+The historical harness inventory describes earlier file versions; the current inventory's
+`sha256` and `bytes` describe the distributed files (see "Provenance notes").
 
 The invocations that produced this bundle, in order (consoles in `logs/setup/` and
 `logs/partA/console.txt`). The two Part C invocations ran with the replay script of that time;
@@ -481,6 +483,24 @@ the bundle's `work/` directory. `results.json` stores only bundle-relative paths
   interpretation 25), build and compile logs.
 - `results.json`: per-run records, per-cell summaries, and sha256 of every log and harness file.
 - `.gitignore`: excludes `work/`.
+
+## Provenance notes
+
+- 2026-10-31: After the result was produced, `harness/historical-part-c/part_c.sh`
+  gained the destructive-command guard requiring `REPLAY_HISTORICAL_DESTRUCTIVE=1`, and
+  `harness/historical-part-c/README.md` gained the paragraph documenting that guard.
+  Their inventory entries in `results.json` now list the distributed files' current
+  `sha256` and `bytes`, preserving the values recorded when the result file was written as
+  `sha256_at_result` and `bytes_at_result`. `harness/make_results.py` now preserves these
+  fields when regenerating the inventory; its own entry also lists current and at-result
+  values. Existing `sha256_as_run` values are unchanged: they identify executed bytes
+  (for aggregation scripts, the version that produced the earlier published records),
+  which can differ from the bytes inventoried when this result file was written. The
+  historical README has no as-run value. Compare `sha256` and `bytes` with the distributed
+  files at the cited revision, `_at_result` values with the historical result inventory
+  and the file versions it recorded, and `_as_run` values with the historical versions
+  that executed or produced the records, using `path_as_run` where present. No recorded
+  run, result cell or log hash changed.
 
 ## Revision after the runs (2026-10-25)
 

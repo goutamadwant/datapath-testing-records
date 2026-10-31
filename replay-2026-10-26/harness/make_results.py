@@ -136,6 +136,21 @@ AS_RUN = {
 }
 
 
+# Inventory values recorded when the retained results.json was written, before later edits.
+# Keep these separate from AS_RUN: the executed files can predate the result inventory.
+AT_RESULT = {
+    "harness/historical-part-c/README.md": {
+        "sha256_at_result": "ef0b37461e1f1b479e37f6e7c965dc295f763de45cf3c8bc9595fd2a34d11f66",
+        "bytes_at_result": 4642},
+    "harness/historical-part-c/part_c.sh": {
+        "sha256_at_result": "b7757fbd63600d4715781317cf49fbaba5f66de619a178e99453661a252aa865",
+        "bytes_at_result": 13032},
+    "harness/make_results.py": {
+        "sha256_at_result": "7e521ed6928cddc0ea03490d9a2791d1d10b12d2c30d61048a6008b566c54def",
+        "bytes_at_result": 29441},
+}
+
+
 def sha(p):
     h = hashlib.sha256()
     with open(p, "rb") as f:
@@ -492,6 +507,7 @@ def main():
          "sha256": sha(os.path.join(B, "replay.sh"))}]
     for h in harness:
         h.update(AS_RUN.get(h["path"], {}))
+        h.update(AT_RESULT.get(h["path"], {}))
     res = {
         "bundle": "replay-2026-10-26",
         "generated": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
