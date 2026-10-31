@@ -127,7 +127,11 @@ fixed-side evidence is the unchanged committed test passing, 9 of 9, in
 `shouldStopBatchAtFailedMessageWithoutDeletingItOrLaterMessages` (line 166)—fail at their first
 assertion, "expected AmazonSqsConnectorException to be thrown, but nothing was thrown", so their
 later deletion assertions never executed. `shouldKeepIgnoredNullMessageWhenDeletionDisabled`
-executed its assertion at line 213 and failed on it (`expected: <true> but was: <false>`).
+failed at its first assertion, line 213, that the collector received no record (`expected: <true> but
+was: <false>`); its deletion assertion at line 214 therefore never executed either. On the parent, no
+deletion assertion executed in any of the six methods: the parent-side failures show that the parent
+throws no exception and emits a record for a message whose deserialization failed, not whether it
+deleted that message.
 `shouldSkipFailedMessageAndContinueWhenParseErrorsIgnored` errors with a `NullPointerException` at
 line 196, and `shouldApplyIgnoreParseErrorsToJsonMessagesCreatedByFactory` errors with a JSON parse
 exception at line 249, because the parent has no ignore-parse-errors option. The Flink shim

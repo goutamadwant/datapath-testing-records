@@ -34,7 +34,7 @@
 - Added methods and helpers prevent the unchanged copied teardown tests from compiling on the parent revision. Compilation failures do not establish the parent's runtime teardown behavior.
 - The teardown timeout discrepancy remains unexplained. Reuse cannot assume that the different timeout observations have the same cause.
 - Row-filtering and PostgreSQL change-data-capture failures were judged unrelated without causal proof. Their independence from teardown behavior remains an interpretation rather than an established result.
-- The shared-base test's twelve methods, the unmerged Flink-only revision and local Linux teardown were not run. Results from other tests and revisions do not validate these cases.
+- The shared-base test's twelve methods passed on the fixed revision (`fail-before-2026-10-26/logs/st12481/after-3.log`) but were not run on the parent, where the copied tests did not compile, and no parent-compatible adaptation of them was run; the unmerged Flink-only revision and local Linux teardown were not run at all. Fixed-side passes do not establish the parent's behavior, and results from other tests and revisions do not validate the unrun cases.
 - Windows permissions prevented testing non-writability. The records do not establish cleanup behavior for non-writable Windows paths.
 
 ## CI download retries and nightly runs
