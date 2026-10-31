@@ -37,7 +37,7 @@ This repository holds the reconstruction records for the SeaTunnel cases of the 
 
 - The first copied clock-test attempt's after log, [`fail-before-2026-10-26/logs/st12472/after.interrupted.log`](fail-before-2026-10-26/logs/st12472/after.interrupted.log), is retained but has no row in `logs/runs.jsonl`. It was stopped by hand after the first before attempt exposed a build problem: `clean test` did not produce the shaded jar needed by the reactor; the case was rerun with `clean package`. See [the copied-test README, “Run record, including failed attempts”](fail-before-2026-10-26/README.md#run-record-including-failed-attempts).
 
-- The copied-test runner's unchanged default matrix, `./run.sh` in `fail-before-2026-10-26/`, has one recorded invocation on 2026-10-30 covering all 20 requested sides, with the same test and compilation behavior as the historical runs. The runner matches commit `af71f39`; the regenerated results report identical outcomes after parser revision 3, which only recognises the substituted `$FAILBEFORE_WORK/` path prefix in Maven test-source errors. `st12481-shim` remains excluded. The historical results were produced by earlier runner revisions on 2026-10-25 and 2026-10-26. See [the copied-test README, “Run record (2026-10-30, default command)”](fail-before-2026-10-26/README.md#run-record-2026-10-30-default-command). The operator states that the registered run was the third attempt that morning; two earlier attempts were stopped and their records were not retained, as recorded in the [registry addendum](fail-before-2026-10-26/logs/aborted-invocations-2026-10-30.md).
+- The copied-test runner's unchanged default matrix, `./run.sh` in `fail-before-2026-10-26/`, has one recorded invocation on 2026-10-30 covering all 20 requested sides, with the same test and compilation behavior as the historical runs. The runner matches commit `af71f39`; the regenerated results report identical outcomes after parser revision 3, which only recognises the substituted `$FAILBEFORE_WORK/` path prefix in Maven test-source errors. `st12481-shim` remains excluded. The two guarded cases excluded from the default matrix, `st12481-shim` and `st12481-shim-both`, were run once on 2026-10-31 inside a disposable container; see [the copied-test README run record](fail-before-2026-10-26/README.md#run-record-2026-10-30-evening-hook-free-case-then-a-second-complete-default-matrix-campaign), invocation `20261031T120258Z-26`. The historical results were produced by earlier runner revisions on 2026-10-25 and 2026-10-26. See [the copied-test README, “Run record (2026-10-30, default command)”](fail-before-2026-10-26/README.md#run-record-2026-10-30-default-command). The operator states that the registered run was the third attempt that morning; two earlier attempts were stopped and their records were not retained, as recorded in the [registry addendum](fail-before-2026-10-26/logs/aborted-invocations-2026-10-30.md).
 
 ## Model-written query sub-study (summary)
 
@@ -555,8 +555,11 @@ failures concern parse behavior; three exercise the absent skip option. SeaTunne
 12360 passes 14/14 both and changes no production code. SeaTunnel 12472 cannot
 compile before without the new clock constructor and passes after. Neither 12481
 class compiles before; dropping `@Override` lets the Flink tests run, with 5/5 failing
-before and 5/5 passing after. Four failures concern teardown; the fifth is a
-shim-only `hostVolumeDeleted` flag. The 12 base-container tests pass after only.
+before and 5/5 passing after. Line 63 observes the reported `IllegalStateException`;
+lines 43, 101 and 120 assert teardown order and failure recording introduced by the
+pull request, while line 85 asserts its new `hostVolumeDeleted` hook. The 31 October
+container control passes all five methods with the annotation shim on the fixed
+revision, so the parent-side failures are not caused by the shim. The 12 base-container tests pass after only.
 SeaTunnel 12467/12468 have no committed regression tests.
 
 These interface shims do not make mocked containers validate real Docker. Unfixed

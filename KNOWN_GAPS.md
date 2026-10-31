@@ -32,6 +32,7 @@
 ## Flink teardown
 
 - Added methods and helpers prevent the unchanged copied teardown tests from compiling on the parent revision. Compilation failures do not establish the parent's runtime teardown behavior.
+- The shim-on-fixed control was run once on 31 October 2026 inside a disposable container and shows that removing the `@Override` annotation causes no failure on the fixed revision. Whether each parent-side failure observes the reported symptom or a teardown rule the pull request introduced is a per-assertion reading of the method table in `fail-before-2026-10-26/README.md`, not a measured outcome.
 - The teardown timeout discrepancy remains unexplained. Reuse cannot assume that the different timeout observations have the same cause.
 - Row-filtering and PostgreSQL change-data-capture failures were judged unrelated without causal proof. Their independence from teardown behavior remains an interpretation rather than an established result.
 - The shared-base test's twelve methods passed on the fixed revision (`fail-before-2026-10-26/logs/st12481/after-3.log`) but were not run on the parent, where the copied tests did not compile, and no parent-compatible adaptation of them was run; the unmerged Flink-only revision and local Linux teardown were not run at all. Fixed-side passes do not establish the parent's behavior, and results from other tests and revisions do not validate the unrun cases.
@@ -75,6 +76,6 @@
 - JDK 11 retry smoke tests have no retained logs and were excluded from analysis. Their reported behavior cannot serve as independently inspectable execution evidence.
 - Rust is pinned, JDKs are not pinned, and Maven dependencies resolve live. A later run can use different Java toolchains or resolved dependencies.
 - Lock effectiveness has not been validated. The presence of a lock does not establish that concurrent trials were isolated.
-- Retired teardown and the excluded Flink shim can delete host data, and the 25 October results predate deletion authorization. Those historical results do not establish that execution was authorized or that repeating the deletion paths is safe.
+- Retired teardown and the excluded Flink shim can delete host data. The 25 October results predate deletion authorization; the 31 October 2026 rerun explicitly selected the two guarded Flink cases under the guard inside a disposable container and reproduced the same parent-side failures. Neither establishes that repeating the deletion paths on a host is safe.
 - Guarded replacements lack validation with real engines. Guard behavior does not establish real-engine teardown behavior.
 - Trial isolation is asserted rather than enforced, and newly created files remain exposed. Reuse cannot assume complete isolation or protection for files created during a trial.

@@ -30,6 +30,7 @@ Its `st12481_guard` at line 293 requires explicit `st12481-shim` selection and
 mounts. That case invokes teardown that deletes `/tmp/seatunnel_mnt` on the host,
 outside `FAILBEFORE_WORK`. The runner refuses an existing path before cloning and
 again before execution; it cannot protect files created there during the test.
+The two guarded cases were executed once under the guard on 2026-10-31 in a disposable container with no host-path mounts.
 
 Run the offline checks with:
 

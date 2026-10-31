@@ -136,8 +136,13 @@ deleted that message.
 line 196, and `shouldApplyIgnoreParseErrorsToJsonMessagesCreatedByFactory` errors with a JSON parse
 exception at line 249, because the parent has no ignore-parse-errors option. The Flink shim
 (`patches/st12481-flink-test-drop-override.patch`) removes only an `@Override` annotation, so the
-shimmed test can compile on the fixed revision as well. The shim-on-fixed control
-`st12481-shim-both` is defined below and has not been run.
+shimmed test can compile on the fixed revision as well. On 2026-10-31, `st12481-shim`
+and the shim-on-fixed control `st12481-shim-both` each failed all five methods on the
+parent and passed all five on the fixed revision inside a disposable container
+(`logs/st12481-shim/before-2.log`, `logs/st12481-shim/after-2.log`,
+`logs/st12481-shim-both/before-2.log`, `logs/st12481-shim-both/after-2.log`).
+Removing `@Override` causes no failure on the fixed revision, so the five parent-side
+failures are not caused by the shim.
 
 | Method | Before | After | Failing line before |
 | --- | --- | --- | --- |
@@ -168,11 +173,17 @@ pull request did not change.
 | shouldKeepFirstFailureAndSuppressLaterOnes | FAIL: `array lengths differ, expected: <1> but was: <0>` (JobManager stop failure not recorded; JobManager stop not reached) | PASS | 120 |
 | shouldNotFailWhenVolumeCleanupExitsWithError | FAIL: `expected: <true> but was: <false>` | PASS | 85 (`hostVolumeDeleted`) |
 
-Four failures are at assertions on teardown behavior (lines 43, 63, 101, 120). The fifth fails only
-at the `hostVolumeDeleted` flag (line 85), which the unfixed teardown cannot set because it deletes
-the host path itself instead of calling the overridable method the pull request added; every
-behavioral assertion before line 85 passed. That failure is an artifact of the shim, not evidence
-of the defect. The host path did not exist before or after the historical run.
+At line 43, cleanup was attempted on a stopped TaskManager; at line 63, teardown threw
+the `IllegalStateException: container is not running` reported by the issue; at line 101,
+the expected TaskManager `stop()` was not called; at line 120, the JobManager stop failure
+was not recorded because JobManager stop was not reached; and at line 85,
+`hostVolumeDeleted` was false. Lines 43, 101 and 120 assert the teardown order and failure
+recording the pull request introduced. Line 85 asserts the new overridable cleanup hook,
+which the unfixed teardown never calls and therefore cannot use to set the flag; every
+behavioral assertion before line 85 passed. This hook assertion is not evidence of the
+reported defect, and the 2026-10-31 control shows that its failure is not caused by the shim.
+The host path did not exist before or after the historical run, and it did not exist in
+the container before or after the 2026-10-31 run.
 
 ### Safety
 
@@ -186,6 +197,8 @@ execution. These checks do not protect files created during the test.
 
 The historical runs of 2026-10-25 and the `df24917-budget` run of 2026-10-26 were produced
 before this guard and are retained as historical.
+The two guarded cases were executed once under the guard on 2026-10-31 inside a disposable
+container with no host-path mounts; the 25 October host runs remain historical.
 Inside a disposable filesystem environment without host-path mounts, run:
 
 ```sh
@@ -213,7 +226,7 @@ FAILBEFORE_DISPOSABLE=1 ./run.sh st12481-shim
 ## Exact commands
 
 ```
-./run.sh                       # default matrix, excluding st12481-shim and df24917-budget-nohook
+./run.sh                       # default matrix, excluding st12481-shim, st12481-shim-both and df24917-budget-nohook
 ./run.sh df24193 st12038-shim  # selected cases
 ./run.sh df24917-budget        # the PR 24917 planning-budget tests
 ./run.sh df24917-budget-nohook # the separate hook-free tests on both commits
@@ -225,7 +238,7 @@ Cases: `df24193`, `df24917`, `df24917-diag`, `df24917-budget`, `df24917-budget-n
 commit (hard reset, `git clean -fdx`), applies the transplant, writes a log header (commits,
 `git status`, `git diff --stat`, toolchain, command, start/end, exit code) and runs:
 
-`st12481-shim-both`: unrun control applying the Flink annotation shim on both sides, copying the same test as `st12481-shim` only onto the parent; excluded from the default matrix and subject to the same disposable-filesystem guards.
+`st12481-shim-both`: control run once on 2026-10-31 inside a disposable container, applying the Flink annotation shim on both sides and copying the same test as `st12481-shim` only onto the parent; it remains excluded from the default matrix and subject to the same disposable-filesystem guards.
 
 - DataFusion: `cargo test --locked --profile ci -p datafusion-physical-plan --lib unbounded_input_emits_before_batch_size`
   and `cargo test --locked --profile ci -p datafusion --test core_integration expensive_regexp_like_is_deferred_to_execution`
@@ -358,7 +371,29 @@ was changed.
 This second campaign is the complete accounting that the morning campaign lacks: the request,
 every side, every log and the console of the single attempt are retained.
 
-A further invocation on 2026-10-31 (`20261031T072205Z-46328`, 00:22 local) requested the control case `st12481-shim-both` without `FAILBEFORE_DISPOSABLE=1`; both sides stopped at the host-deletion safety guard before any clone or build (`logs/st12481-shim-both/before.log` and `after.log`, SETUP_ERROR). The records are retained; the control remains unrun because that test deletes a host path and is run only in a disposable environment.
+A further invocation on 2026-10-31 (`20261031T072205Z-46328`, 00:22 local) requested the control case `st12481-shim-both` without `FAILBEFORE_DISPOSABLE=1`; both sides stopped at the host-deletion safety guard before any clone or build (`logs/st12481-shim-both/before.log` and `after.log`, SETUP_ERROR). These refused-attempt records are retained separately from the completed container run below.
+
+Invocation `20261031T120258Z-26` ran `./run.sh st12481-shim st12481-shim-both` on
+2026-10-31, 12:02–12:08 UTC, inside a disposable linux/arm64 container with no host-path
+mounts. Both cases were selected explicitly with `FAILBEFORE_DISPOSABLE=1`, and the
+host-deletion guard passed; `/tmp/seatunnel_mnt` did not exist in the container before or
+after the run. The container used the image built by `replay-clean/Dockerfile` at the
+repository root, with its digest-pinned ubuntu:24.04 base and Eclipse Temurin JDK
+`1.8.0_504`; the logs record `# host: Linux 7.0.14-linuxkit aarch64` and the JDK in
+their `# toolchain` lines. Docker Desktop 29.9.2 ran on the same Apple-silicon host as
+the earlier runs. Apache SeaTunnel was cloned fresh and the Maven repository was empty
+at the start, so the first side includes dependency downloads. For `st12481-shim`, the
+parent `7ba68325` with `AbstractTestFlinkContainerTest` copied from `0e4cf528` and
+`patches/st12481-flink-test-drop-override.patch` applied failed all five methods
+(`logs/st12481-shim/before-2.log`, 184.4 s, including the first Maven build); the fixed
+revision with its own committed test passed all five (`logs/st12481-shim/after-2.log`,
+38.1 s). For `st12481-shim-both`, the same parent-side setup failed all five
+(`logs/st12481-shim-both/before-2.log`, 32.1 s); the fixed revision with the same patch
+applied to its own committed test passed all five (`logs/st12481-shim-both/after-2.log`,
+31.8 s). Both parent sides failed the same five methods at lines 43, 63, 85, 101 and 120
+as the 25 October host run in `logs/st12481-shim/before.log`, as listed in the method
+table above. Outputs were copied out of the container after the run without editing;
+the four sides are recorded in `logs/runs.jsonl` and `results.json`.
 
 The four SeaTunnel before-side COMPILE_ERROR outcomes (`st12038`, `st12038-factory`,
 `st12472` and `st12481`) are classified by parser revision 3, written on 2026-10-30 after
@@ -367,7 +402,8 @@ the run. For substituted Maven error paths, it recognises only the literal
 BUILD_ERROR. The regenerated `results.json` reports COMPILE_ERROR, matching the historical
 outcomes. All 23 historical
 run outcomes are unchanged. `st12481-shim` was excluded from the
-default matrix and was not run in this invocation; its historical records are retained.
+default matrix and was not run in `20261031T014130Z-77153`; its historical records and
+the separate 2026-10-31 container run are retained.
 
 New command logs (paths relative to this bundle):
 

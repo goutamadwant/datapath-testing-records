@@ -245,5 +245,31 @@
         "side": "after"
       }
     ]
+  },
+  {
+    "invocation": "20261031T120258Z-26",
+    "requested_at": "2026-10-31T12:02:58+0000",
+    "cases": [
+      "st12481-shim",
+      "st12481-shim-both"
+    ],
+    "sides": [
+      {
+        "case": "st12481-shim",
+        "side": "before"
+      },
+      {
+        "case": "st12481-shim",
+        "side": "after"
+      },
+      {
+        "case": "st12481-shim-both",
+        "side": "before"
+      },
+      {
+        "case": "st12481-shim-both",
+        "side": "after"
+      }
+    ]
   }
 ]

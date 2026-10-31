@@ -2883,6 +2883,208 @@
         "AbstractTestFlinkContainerTest"
       ],
       "log_sha256": "8bef5819591015bb0ab3b068a1248a4135595e88dae5aeea34647e57f355588a"
+    },
+    {
+      "case": "st12481-shim",
+      "side": "before",
+      "before_commit": "7ba68325cb7ea1bf1a28f56c4f9c20695d221df3",
+      "after_commit": "0e4cf52896ee3604a8e7899d7736ffd914ee6ce7",
+      "tree_head": "7ba68325cb7ea1bf1a28f56c4f9c20695d221df3",
+      "transplant": "seatunnel-e2e/seatunnel-e2e-common/src/test/java/org/apache/seatunnel/e2e/common/container/flink/AbstractTestFlinkContainerTest.java copied from 0e4cf52896ee3604a8e7899d7736ffd914ee6ce7; then patches/st12481-flink-test-drop-override.patch applied",
+      "command": "./mvnw -B -ntp -pl seatunnel-e2e/seatunnel-e2e-common -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=AbstractTestFlinkContainerTest -DfailIfNoTests=false clean package",
+      "exit_code": 1,
+      "started_epoch": 1793448194.9697397,
+      "ended_epoch": 1793448379.3720067,
+      "duration_s": 184.4,
+      "log": "logs/st12481-shim/before-2.log",
+      "invocation": "20261031T120258Z-26",
+      "outcome": "FAIL",
+      "tests": [
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldNotFailWhenVolumeCleanupExitsWithError",
+          "result": "FAIL",
+          "time_s": 2.29,
+          "failure": "org.opentest4j.AssertionFailedError: expected: <true> but was: <false>"
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldNotFailWhenTaskManagerStopsBeforeVolumeCleanup",
+          "result": "FAIL",
+          "time_s": 0.011,
+          "failure": "org.opentest4j.AssertionFailedError: Unexpected exception thrown: java.lang.IllegalStateException: container is not running"
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldKeepFirstFailureAndSuppressLaterOnes",
+          "result": "FAIL",
+          "time_s": 0.006,
+          "failure": "org.opentest4j.AssertionFailedError: array lengths differ, expected: <1> but was: <0>"
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldStopJobManagerWhenTaskManagerIsNotRunning",
+          "result": "FAIL",
+          "time_s": 0.068,
+          "failure": "org.mockito.exceptions.verification.NeverWantedButInvoked: \ngenericContainer.execInContainer(\n    \"rm\",\n    \"-rf\",\n    \"/tmp/seatunnel_mnt\"\n);\nNever wanted here:\n-> at org.testcontainers.containers.ContainerState.execInContainer(ContainerState.java:252)\nBut invoked here:\n-> at org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainer.tearDown(AbstractTestFlinkContainer.java:163) with arguments: [rm, -rf, /tmp/seatunnel_mnt]\n"
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldStopJobManagerAndRethrowWhenVolumeCleanupIsInterrupted",
+          "result": "FAIL",
+          "time_s": 0.005,
+          "failure": "org.mockito.exceptions.verification.WantedButNotInvoked: \nWanted but not invoked:\ngenericContainer.stop();\n-> at org.testcontainers.containers.GenericContainer.stop(GenericContainer.java:643)\n\nHowever, there was exactly 1 interaction with this mock:\ngenericContainer.execInContainer(\n    \"rm\",\n    \"-rf\",\n    \"/tmp/seatunnel_mnt\"\n);\n-> at org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainer.tearDown(AbstractTestFlinkContainer.java:16"
+        }
+      ],
+      "detail": [],
+      "expected_test": [
+        "AbstractTestFlinkContainerTest"
+      ],
+      "log_sha256": "e326148560d50c9939a732b8028b4de9aa8e5eb339b2c112a93f5652b77608d4"
+    },
+    {
+      "case": "st12481-shim",
+      "side": "after",
+      "before_commit": "7ba68325cb7ea1bf1a28f56c4f9c20695d221df3",
+      "after_commit": "0e4cf52896ee3604a8e7899d7736ffd914ee6ce7",
+      "tree_head": "0e4cf52896ee3604a8e7899d7736ffd914ee6ce7",
+      "transplant": "none (merge commit as is)",
+      "command": "./mvnw -B -ntp -pl seatunnel-e2e/seatunnel-e2e-common -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=AbstractTestFlinkContainerTest -DfailIfNoTests=false clean package",
+      "exit_code": 0,
+      "started_epoch": 1793448380.580368,
+      "ended_epoch": 1793448418.6428668,
+      "duration_s": 38.1,
+      "log": "logs/st12481-shim/after-2.log",
+      "invocation": "20261031T120258Z-26",
+      "outcome": "PASS",
+      "tests": [
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldNotFailWhenVolumeCleanupExitsWithError",
+          "result": "PASS",
+          "time_s": 1.608
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldNotFailWhenTaskManagerStopsBeforeVolumeCleanup",
+          "result": "PASS",
+          "time_s": 0.026
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldKeepFirstFailureAndSuppressLaterOnes",
+          "result": "PASS",
+          "time_s": 0.007
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldStopJobManagerWhenTaskManagerIsNotRunning",
+          "result": "PASS",
+          "time_s": 0.003
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldStopJobManagerAndRethrowWhenVolumeCleanupIsInterrupted",
+          "result": "PASS",
+          "time_s": 0.002
+        }
+      ],
+      "detail": [],
+      "expected_test": [
+        "AbstractTestFlinkContainerTest"
+      ],
+      "log_sha256": "ce6175698ad07f74b8a638d26e517b67631770fff9c47b6eddc73453348aecaa"
+    },
+    {
+      "case": "st12481-shim-both",
+      "side": "before",
+      "before_commit": "7ba68325cb7ea1bf1a28f56c4f9c20695d221df3",
+      "after_commit": "0e4cf52896ee3604a8e7899d7736ffd914ee6ce7",
+      "tree_head": "7ba68325cb7ea1bf1a28f56c4f9c20695d221df3",
+      "transplant": "seatunnel-e2e/seatunnel-e2e-common/src/test/java/org/apache/seatunnel/e2e/common/container/flink/AbstractTestFlinkContainerTest.java copied from 0e4cf52896ee3604a8e7899d7736ffd914ee6ce7; then patches/st12481-flink-test-drop-override.patch applied",
+      "command": "./mvnw -B -ntp -pl seatunnel-e2e/seatunnel-e2e-common -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=AbstractTestFlinkContainerTest -DfailIfNoTests=false clean package",
+      "exit_code": 1,
+      "started_epoch": 1793448419.333649,
+      "ended_epoch": 1793448451.4567664,
+      "duration_s": 32.1,
+      "log": "logs/st12481-shim-both/before-2.log",
+      "invocation": "20261031T120258Z-26",
+      "outcome": "FAIL",
+      "tests": [
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldNotFailWhenVolumeCleanupExitsWithError",
+          "result": "FAIL",
+          "time_s": 1.786,
+          "failure": "org.opentest4j.AssertionFailedError: expected: <true> but was: <false>"
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldNotFailWhenTaskManagerStopsBeforeVolumeCleanup",
+          "result": "FAIL",
+          "time_s": 0.004,
+          "failure": "org.opentest4j.AssertionFailedError: Unexpected exception thrown: java.lang.IllegalStateException: container is not running"
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldKeepFirstFailureAndSuppressLaterOnes",
+          "result": "FAIL",
+          "time_s": 0.008,
+          "failure": "org.opentest4j.AssertionFailedError: array lengths differ, expected: <1> but was: <0>"
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldStopJobManagerWhenTaskManagerIsNotRunning",
+          "result": "FAIL",
+          "time_s": 0.016,
+          "failure": "org.mockito.exceptions.verification.NeverWantedButInvoked: \ngenericContainer.execInContainer(\n    \"rm\",\n    \"-rf\",\n    \"/tmp/seatunnel_mnt\"\n);\nNever wanted here:\n-> at org.testcontainers.containers.ContainerState.execInContainer(ContainerState.java:252)\nBut invoked here:\n-> at org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainer.tearDown(AbstractTestFlinkContainer.java:163) with arguments: [rm, -rf, /tmp/seatunnel_mnt]\n"
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldStopJobManagerAndRethrowWhenVolumeCleanupIsInterrupted",
+          "result": "FAIL",
+          "time_s": 0.004,
+          "failure": "org.mockito.exceptions.verification.WantedButNotInvoked: \nWanted but not invoked:\ngenericContainer.stop();\n-> at org.testcontainers.containers.GenericContainer.stop(GenericContainer.java:643)\n\nHowever, there was exactly 1 interaction with this mock:\ngenericContainer.execInContainer(\n    \"rm\",\n    \"-rf\",\n    \"/tmp/seatunnel_mnt\"\n);\n-> at org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainer.tearDown(AbstractTestFlinkContainer.java:16"
+        }
+      ],
+      "detail": [],
+      "expected_test": [
+        "AbstractTestFlinkContainerTest"
+      ],
+      "log_sha256": "61891896c6211e28cfd0fc8526ee7fbbde2048266457f70121131addcb0f83aa"
+    },
+    {
+      "case": "st12481-shim-both",
+      "side": "after",
+      "before_commit": "7ba68325cb7ea1bf1a28f56c4f9c20695d221df3",
+      "after_commit": "0e4cf52896ee3604a8e7899d7736ffd914ee6ce7",
+      "tree_head": "0e4cf52896ee3604a8e7899d7736ffd914ee6ce7",
+      "transplant": "patches/st12481-flink-test-drop-override.patch applied on the after side to the merge commit's own committed test",
+      "command": "./mvnw -B -ntp -pl seatunnel-e2e/seatunnel-e2e-common -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=AbstractTestFlinkContainerTest -DfailIfNoTests=false clean package",
+      "exit_code": 0,
+      "started_epoch": 1793448452.0703967,
+      "ended_epoch": 1793448483.902882,
+      "duration_s": 31.8,
+      "log": "logs/st12481-shim-both/after-2.log",
+      "invocation": "20261031T120258Z-26",
+      "outcome": "PASS",
+      "tests": [
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldNotFailWhenVolumeCleanupExitsWithError",
+          "result": "PASS",
+          "time_s": 1.568
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldNotFailWhenTaskManagerStopsBeforeVolumeCleanup",
+          "result": "PASS",
+          "time_s": 0.021
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldKeepFirstFailureAndSuppressLaterOnes",
+          "result": "PASS",
+          "time_s": 0.006
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldStopJobManagerWhenTaskManagerIsNotRunning",
+          "result": "PASS",
+          "time_s": 0.002
+        },
+        {
+          "name": "org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest#shouldStopJobManagerAndRethrowWhenVolumeCleanupIsInterrupted",
+          "result": "PASS",
+          "time_s": 0.003
+        }
+      ],
+      "detail": [],
+      "expected_test": [
+        "AbstractTestFlinkContainerTest"
+      ],
+      "log_sha256": "5ce3c3bb58cfb803aca1333094cae3f44076897392437f632d2785133087206a"
     }
   ],
   "comparisons": {
@@ -2947,9 +3149,9 @@
       "comparison": "complete"
     },
     "st12481-shim-both": {
-      "before": "SETUP_ERROR",
-      "after": "SETUP_ERROR",
-      "comparison": "incomplete"
+      "before": "FAIL",
+      "after": "PASS",
+      "comparison": "complete"
     }
   },
   "log_files": {
@@ -2987,8 +3189,8 @@
     "logs/df24917-diag/before-2.log": "e48e4004f38dbc9ea49c789266fa32658183d982279cb8db3c8795d00d43d237",
     "logs/df24917-diag/before-3.log": "d72397b8096bc9b10539d62efcf6122935728b2356ab73f22b870cb6598242bf",
     "logs/df24917-diag/before.log": "8bdfdfa778f6ed95eebbbbba8c3781657ebac3258b147b4acc040620c8eebf90",
-    "logs/requested.json": "820e9ebff84000be2c88402638bccf12f4a97b7b9dacc1c011b2283f6fba92fb",
-    "logs/runs.jsonl": "fda58235073170377e58d8314f411353d68ddb5c4556d331600181e7e7051fb4",
+    "logs/requested.json": "4ccef4ec5fc3e0e7b48b2a77bc17b8f55c5d918afc5fbf6f0708f73130dce67c",
+    "logs/runs.jsonl": "9ac27bc5afd6dba25bd17a56c052b75c461f189208f04588c249f1e0fe8f5967",
     "logs/st12038/after-2.log": "37a6cc9bef92d09b0b7f1e35bfd146f93771dbcecb6fbab17f26842baa8ade64",
     "logs/st12038/after-2.surefire/TEST-org.apache.seatunnel.connectors.seatunnel.amazonsqs.source.AmazonSqsSourceReaderTest.xml": "cd7b57880b9459709ca981aface1905dc488d2b4e60cb648c70bcb9e54e925f3",
     "logs/st12038/after-3.log": "47b65b0d079f470f9fcc0797f9ad278524e77c02ac6e571dff10a2a9ff7574eb",
@@ -3054,11 +3256,19 @@
     "logs/st12481/before-2.log": "b52768368f948ed2de3437757e530f6400e4c0950e32f40ff735d7d101ce824b",
     "logs/st12481/before-3.log": "4fd5f5e07bbc9df8e9a35dd624e357c9f9c734749bb1f73aac994fd904aec111",
     "logs/st12481/before.log": "0bee847bb45a349de2b7cb20878111ffc33d5254e60d98c8a81b4cadcb7f899d",
+    "logs/st12481-shim/after-2.log": "ce6175698ad07f74b8a638d26e517b67631770fff9c47b6eddc73453348aecaa",
+    "logs/st12481-shim/after-2.surefire/TEST-org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest.xml": "cdeb9523a706171535e2a0b3e02f789086f590e90922eb0f33085f4b21306ccf",
     "logs/st12481-shim/after.log": "9f920315b1a74452aa67b0cb8fce8ebff5612151514d4617fbcd1c97a6e0967c",
     "logs/st12481-shim/after.surefire/TEST-org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest.xml": "313b6cdcfead0f3e027ed19651f95305ac69125b77c52334396473216330ed4a",
+    "logs/st12481-shim/before-2.log": "e326148560d50c9939a732b8028b4de9aa8e5eb339b2c112a93f5652b77608d4",
+    "logs/st12481-shim/before-2.surefire/TEST-org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest.xml": "850418b43d9fab0ccc531ca128b0ed379c7e9098d9c3cda23c861229714e5d18",
     "logs/st12481-shim/before.log": "b5fdcafa12f8b5723ff0dc57518e4d5886030c20b135997221dfd81b87ec073d",
     "logs/st12481-shim/before.surefire/TEST-org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest.xml": "4f6dce02cce583124bf9b0036ee21093f39ee708970646efa56891d8db00be6d",
+    "logs/st12481-shim-both/after-2.log": "5ce3c3bb58cfb803aca1333094cae3f44076897392437f632d2785133087206a",
+    "logs/st12481-shim-both/after-2.surefire/TEST-org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest.xml": "686459d7fd1f235057483db7d5cfbaaad057c18be2efaa933726e57c13eb922c",
     "logs/st12481-shim-both/after.log": "8bef5819591015bb0ab3b068a1248a4135595e88dae5aeea34647e57f355588a",
+    "logs/st12481-shim-both/before-2.log": "61891896c6211e28cfd0fc8526ee7fbbde2048266457f70121131addcb0f83aa",
+    "logs/st12481-shim-both/before-2.surefire/TEST-org.apache.seatunnel.e2e.common.container.flink.AbstractTestFlinkContainerTest.xml": "221b465ab4e9307eb2d7f3a182468b5436c33fe8443a87278813aaec9bd104dc",
     "logs/st12481-shim-both/before.log": "2103105a553946b752e3e719fffc91aaa268c0e5bdc29a7108980bf79bcbf7cf"
   },
   "patches": {
