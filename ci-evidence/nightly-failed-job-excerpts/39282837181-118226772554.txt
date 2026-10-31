@@ -1,0 +1,15 @@
+{
+ "run_id": "39282837181",
+ "job_id": 118226772554,
+ "job_name": "Run / engine-resource-managers-it (17, ubuntu-latest)",
+ "started_at": "2026-10-19T19:06:35Z",
+ "completed_at": "2026-10-19T19:09:23Z",
+ "conclusion": "failure",
+ "html_url": "https://github.com/apache/seatunnel/actions/runs/39282837181/job/118226772554",
+ "log_lines": 1687,
+ "log_sha256": "fe8a930f9f9a31a332fec06104c7aa9bebd1d826d138004b4e0162f63fd1b266",
+ "first_pass_sha256": "edd6eec75804048595a744cd2480f60f6499081b04634e6aba2af0d544e9b3c0",
+ "fetch_error": null,
+ "retrieved_at": "2026-10-31T01:51:08.574902Z"
+}
+1573	exit code	2026-10-19T19:09:19.3970817Z ##[error]Process completed with exit code 1.

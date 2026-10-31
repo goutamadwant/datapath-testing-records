@@ -1,0 +1,27 @@
+# Context lines 10925-10950 of the log of job 111895225539 (run 37338260777), https://api.github.com/repos/apache/seatunnel/actions/jobs/111895225539/logs, retrieved 2026-10-31T01:58:54Z; line numbers as in the scan
+ 10925	2026-10-05T18:12:27.1151015Z [INFO] SeaTunnel : Connectors V2 : Kafka .................. SUCCESS [  4.770 s]
+ 10926	2026-10-05T18:12:27.1151574Z [INFO] SeaTunnel : Connectors V2 : Assert ................. SUCCESS [  1.080 s]
+ 10927	2026-10-05T18:12:27.1152091Z [INFO] SeaTunnel : E2E : Connector V2 : ................... SKIPPED
+ 10928	2026-10-05T18:12:27.1152747Z [INFO] SeaTunnel : E2E : Connector V2 : Kafka ............. SKIPPED
+ 10929	2026-10-05T18:12:27.1153400Z [INFO] ------------------------------------------------------------------------
+ 10930	2026-10-05T18:12:27.1153754Z [INFO] BUILD FAILURE
+ 10931	2026-10-05T18:12:27.1154162Z [INFO] ------------------------------------------------------------------------
+ 10932	2026-10-05T18:12:27.1154571Z [INFO] Total time:  04:12 min
+ 10933	2026-10-05T18:12:27.1155033Z [INFO] Finished at: 2026-10-05T18:12:27Z
+ 10934	2026-10-05T18:12:27.1155391Z [INFO] ------------------------------------------------------------------------
+ 10935	2026-10-05T18:12:27.1157793Z [ERROR] Failed to execute goal on project seatunnel-flink-13-starter: Could not resolve dependencies for project org.apache.seatunnel:seatunnel-flink-13-starter:jar:3.0.0-SNAPSHOT: Could not transfer artifact com.ververica:frocksdbjni:jar:5.17.2-ververica-2.1 from/to central (https://repo.maven.apache.org/maven2): transfer failed for https://repo.maven.apache.org/maven2/com/ververica/frocksdbjni/5.17.2-ververica-2.1/frocksdbjni-5.17.2-ververica-2.1.jar: Connection reset -> [Help 1]
+ 10936	2026-10-05T18:12:27.1159856Z [ERROR] 
+ 10937	2026-10-05T18:12:27.1160196Z [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+ 10938	2026-10-05T18:12:27.1160828Z [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+ 10939	2026-10-05T18:12:27.1161202Z [ERROR] 
+ 10940	2026-10-05T18:12:27.1161678Z [ERROR] For more information about the errors and possible solutions, please read the following articles:
+ 10941	2026-10-05T18:12:27.1162392Z [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/DependencyResolutionException
+ 10942	2026-10-05T18:12:27.1162882Z [ERROR] 
+ 10943	2026-10-05T18:12:27.1163212Z [ERROR] After correcting the problems, you can resume the build with the command
+ 10944	2026-10-05T18:12:27.1163695Z [ERROR]   mvn <args> -rf :seatunnel-flink-13-starter
+ 10945	2026-10-05T18:12:27.1577125Z ##[error]Process completed with exit code 1.
+ 10946	2026-10-05T18:12:27.1696933Z Prepare all required actions
+ 10947	2026-10-05T18:12:27.1697415Z Getting action download info
+ 10948	2026-10-05T18:12:27.5004743Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+ 10949	2026-10-05T18:12:27.6494737Z ##[group]Run ./.github/actions/upload-test-reports
+ 10950	2026-10-05T18:12:27.6495009Z with:

@@ -1,0 +1,39 @@
+{
+ "run_id": "38929296111",
+ "job_id": 117076660376,
+ "job_name": "Run / all-connectors-it-6 (17, ubuntu-latest)",
+ "started_at": "2026-10-16T16:33:48Z",
+ "completed_at": "2026-10-16T17:32:11Z",
+ "conclusion": "failure",
+ "html_url": "https://github.com/apache/seatunnel/actions/runs/38929296111/job/117076660376",
+ "log_lines": 117587,
+ "log_sha256": "6f343816bbf675a9664a8839ea4e8578c526d3cc444b1a0e64e6503e844c33a5",
+ "first_pass_sha256": "6f343816bbf675a9664a8839ea4e8578c526d3cc444b1a0e64e6503e844c33a5",
+ "fetch_error": null,
+ "retrieved_at": "2026-10-31T01:50:45.375571Z"
+}
+25746	missing slots	2026-10-16T16:48:55.0896103Z [] 2026-10-16 16:48:55,088 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+27026	missing slots	2026-10-16T16:49:44.9244074Z [] 2026-10-16 16:49:44,922 INFO  tc.seatunnel-e2e-jdk11-tyrantlucifer-flink-1.20.1-scala_2.12_hadoop27:latest:jobmanager - STDOUT: Missing resources:
+39776	missing slots	2026-10-16T16:53:49.9418332Z [] 2026-10-16 16:53:49,940 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+41095	missing slots	2026-10-16T16:54:20.1575581Z [] 2026-10-16 16:54:20,156 INFO  tc.seatunnel-e2e-jdk11-tyrantlucifer-flink-1.20.1-scala_2.12_hadoop27:latest:jobmanager - STDOUT: Missing resources:
+47964	condition timeout	2026-10-16T16:59:57.7691422Z org.awaitility.core.ConditionTimeoutException: Assertion condition defined as a org.apache.seatunnel.e2e.connector.databend.DatabendCDCSinkIT Expected 3 records in sink_table ==> expected: <3> but was: <0> within 3 minutes.
+50406	missing slots	2026-10-16T17:00:46.9243349Z [] 2026-10-16 17:00:46,923 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+51975	missing slots	2026-10-16T17:01:21.8810922Z [] 2026-10-16 17:01:21,880 INFO  tc.seatunnel-e2e-jdk11-tyrantlucifer-flink-1.20.1-scala_2.12_hadoop27:latest:jobmanager - STDOUT: Missing resources:
+55768	failing test	2026-10-16T17:03:38.7869473Z [ERROR] Tests run: 9, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 495.991 s <<< FAILURE! - in org.apache.seatunnel.e2e.connector.databend.DatabendCDCSinkIT
+55769	failing test	2026-10-16T17:03:38.7871143Z [ERROR] testDatabendSinkCDC{TestContainer}[3]  Time elapsed: 205.15 s  <<< ERROR!
+55770	condition timeout	2026-10-16T17:03:38.7872483Z org.awaitility.core.ConditionTimeoutException: Assertion condition defined as a org.apache.seatunnel.e2e.connector.databend.DatabendCDCSinkIT Expected 3 records in sink_table ==> expected: <3> but was: <0> within 3 minutes.
+62782	missing slots	2026-10-16T17:06:04.5384924Z [] 2026-10-16 17:06:04,537 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+64319	missing slots	2026-10-16T17:06:33.6585876Z [] 2026-10-16 17:06:33,657 INFO  tc.seatunnel-e2e-jdk11-tyrantlucifer-flink-1.20.1-scala_2.12_hadoop27:latest:jobmanager - STDOUT: Missing resources:
+73581	missing slots	2026-10-16T17:10:48.3502240Z [] 2026-10-16 17:10:48,349 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+74921	missing slots	2026-10-16T17:11:18.8536159Z [] 2026-10-16 17:11:18,853 INFO  tc.seatunnel-e2e-jdk11-tyrantlucifer-flink-1.20.1-scala_2.12_hadoop27:latest:jobmanager - STDOUT: Missing resources:
+83828	missing slots	2026-10-16T17:15:37.2590641Z [] 2026-10-16 17:15:37,258 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+85150	missing slots	2026-10-16T17:16:07.4880195Z [] 2026-10-16 17:16:07,486 INFO  tc.seatunnel-e2e-jdk11-tyrantlucifer-flink-1.20.1-scala_2.12_hadoop27:latest:jobmanager - STDOUT: Missing resources:
+93717	missing slots	2026-10-16T17:20:14.4859157Z [] 2026-10-16 17:20:14,484 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+94966	missing slots	2026-10-16T17:20:42.5319517Z [] 2026-10-16 17:20:42,531 INFO  tc.seatunnel-e2e-jdk11-tyrantlucifer-flink-1.20.1-scala_2.12_hadoop27:latest:jobmanager - STDOUT: Missing resources:
+103765	missing slots	2026-10-16T17:24:57.4700923Z [] 2026-10-16 17:24:57,469 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+105078	missing slots	2026-10-16T17:25:28.5788075Z [] 2026-10-16 17:25:28,577 INFO  tc.seatunnel-e2e-jdk11-tyrantlucifer-flink-1.20.1-scala_2.12_hadoop27:latest:jobmanager - STDOUT: Missing resources:
+113513	missing slots	2026-10-16T17:29:37.7682691Z [] 2026-10-16 17:29:37,766 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+114740	missing slots	2026-10-16T17:30:05.3678501Z [] 2026-10-16 17:30:05,367 INFO  tc.seatunnel-e2e-jdk11-tyrantlucifer-flink-1.20.1-scala_2.12_hadoop27:latest:jobmanager - STDOUT: Missing resources:
+117299	condition timeout	2026-10-16T17:32:04.6656231Z [ERROR]   DatabendCDCSinkIT.testDatabendSinkCDC:88 » ConditionTimeout Assertion conditio...
+117301	failing test	2026-10-16T17:32:04.6657166Z [ERROR] Tests run: 69, Failures: 0, Errors: 1, Skipped: 0
+117450	exit code	2026-10-16T17:32:04.7139060Z ##[error]Process completed with exit code 1.

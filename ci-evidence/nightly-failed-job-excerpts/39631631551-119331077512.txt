@@ -1,0 +1,15 @@
+{
+ "run_id": "39631631551",
+ "job_id": 119331077512,
+ "job_name": "Run / Code style",
+ "started_at": "2026-10-21T20:16:56Z",
+ "completed_at": "2026-10-21T20:18:40Z",
+ "conclusion": "failure",
+ "html_url": "https://github.com/apache/seatunnel/actions/runs/39631631551/job/119331077512",
+ "log_lines": 589,
+ "log_sha256": "b3807544f41f482ff6bb1e35168c1e5718dbbeb3f18d93c77c9b2a550296f705",
+ "first_pass_sha256": "894262f7aeda8725791573441113c43fa918bf2495a90beb74dd23f8bd68f48e",
+ "fetch_error": null,
+ "retrieved_at": "2026-10-31T01:51:45.369542Z"
+}
+561	exit code	2026-10-21T20:18:38.6027049Z ##[error]Process completed with exit code 1.

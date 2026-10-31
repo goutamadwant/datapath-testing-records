@@ -13,6 +13,8 @@ The "Comparison with the current article" section and the article comparisons un
 The dated access and revision sections and the reconstruction's commands and interpretation choices retain their historical context.
 The current container comparison is in [`replay-clean/COMPARISON.md`](replay-clean/COMPARISON.md).
 
+Additions of 2026-10-30 (evening) and 2026-10-31 (UTC): the [hook-free DataFusion planning-budget case](fail-before-2026-10-26/README.md) (`df24917-budget-nohook`: the budget assertions, isolated from the hook that blocked compilation, fail on the parent and pass on the fix), a [second complete default-matrix campaign](fail-before-2026-10-26/README.md) with every attempt retained and all outcome categories matching, the [failed-job signature scan](ci-evidence/nightly-failed-jobs-2026-10-02_2026-10-23.md) of the 58 failed jobs in the 13 failed nightly runs (three download failures that outlasted the retries; no file-collect, teardown, slot or 409 failure), and the [corrected manifest checksums](model-queries-2026-10-25/README.md) of the locked model-query result (both values recorded).
+
 This repository holds the reconstruction records for the SeaTunnel cases of the article
 (Table 1 and the PR 12472 stall records) and the saved CI records it cites.
 

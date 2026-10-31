@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
 """Checks for the outcome parser: python3 -I test_make_results.py"""
+import contextlib
+import io
+import json
 import pathlib
 import sys
+import tempfile
+from unittest.mock import patch
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import make_results as mr  # noqa: E402
@@ -89,6 +94,45 @@ c = mr.compare(
     [req("i1", "a"), req("i2", "a")],
 )
 assert c["a"]["comparison"] == "complete" and "missing" not in c["a"]
+
+# The hook-free case uses the generic cargo parser, including both package summaries.
+NOHOOK = "test_constant_regex_planning_budget_without_hook"
+NOHOOK_COMMAND = (
+    "cargo test --locked --profile ci --no-fail-fast -p datafusion-optimizer "
+    f"-p datafusion-physical-expr --lib {NOHOOK}"
+)
+NOHOOK_OK = OK.replace("a::b", f"simplify_expressions::expr_simplifier::tests::{NOHOOK}")
+NOHOOK_OK += OK.replace("a::b", f"simplifier::tests::{NOHOOK}")
+NOHOOK_FAIL = FAILED.replace("a::b", f"simplify_expressions::expr_simplifier::tests::{NOHOOK}")
+NOHOOK_FAIL += FAILED.replace("a::b", f"simplifier::tests::{NOHOOK}")
+for log, want in ((NOHOOK_OK, "PASS"), (NOHOOK_FAIL, "FAIL"),
+                  ("error[E0433]: failed\nerror: could not compile `x`\n", "COMPILE_ERROR")):
+    outcome, _, _, expected = mr.derive(
+        {"case": "df24917-budget-nohook", "command": NOHOOK_COMMAND}, log, None
+    )
+    assert (outcome, expected) == (want, NOHOOK)
+
+# Exercise results.json output in a temporary bundle, leaving retained results untouched.
+with tempfile.TemporaryDirectory() as temporary:
+    bundle = pathlib.Path(temporary)
+    logs = bundle / "logs"
+    logs.mkdir()
+    (bundle / "patches").mkdir()
+    records = []
+    for side, text in (("before", NOHOOK_FAIL), ("after", NOHOOK_OK)):
+        log = f"logs/{side}.log"
+        (bundle / log).write_text(text)
+        records.append({"case": "df24917-budget-nohook", "side": side,
+                        "command": NOHOOK_COMMAND, "log": log, "duration_s": 0.01})
+    (logs / "runs.jsonl").write_text("".join(json.dumps(r) + "\n" for r in records))
+    with patch.object(mr, "HERE", bundle), patch.object(mr, "LOGS", logs):
+        with contextlib.redirect_stdout(io.StringIO()):
+            mr.main()
+    result = json.loads((bundle / "results.json").read_text())
+    assert result["comparisons"]["df24917-budget-nohook"] == {
+        "before": "FAIL", "after": "PASS", "comparison": "complete"
+    }
+    assert [r["expected_test"] for r in result["runs"]] == [NOHOOK, NOHOOK]
 
 skipped = pathlib.Path(__file__).resolve().parent / "_tmp_surefire"
 skipped.mkdir(exist_ok=True)

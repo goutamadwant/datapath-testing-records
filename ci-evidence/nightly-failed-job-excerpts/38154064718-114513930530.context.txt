@@ -1,0 +1,72 @@
+# Context lines 1530-1600 of the log of job 114513930530 (run 38154064718), https://api.github.com/repos/apache/seatunnel/actions/jobs/114513930530/logs, retrieved 2026-10-31T01:58:52Z; line numbers as in the scan
+  1530	2026-10-11T16:11:51.8604786Z efivarfs        128M   32K  128M   1% /sys/firmware/efi/efivars
+  1531	2026-10-11T16:11:51.8605422Z /dev/sda16      881M   64M  756M   8% /boot
+  1532	2026-10-11T16:11:51.8606316Z /dev/sda15      105M  6.2M   99M   6% /boot/efi
+  1533	2026-10-11T16:11:51.8606885Z tmpfs           1.6G   12K  1.6G   1% /run/user/1001
+  1534	2026-10-11T16:11:51.8649458Z ##[group]Run ./mvnw -B -T 1 verify -DskipUT=true -DskipIT=false -D"license.skipAddThirdParty"=true -D"skip.ui"=true --no-snapshot-updates -pl :connector-jdbc-e2e-part-5 -am -Pci
+  1535	2026-10-11T16:11:51.8650983Z [36;1m./mvnw -B -T 1 verify -DskipUT=true -DskipIT=false -D"license.skipAddThirdParty"=true -D"skip.ui"=true --no-snapshot-updates -pl :connector-jdbc-e2e-part-5 -am -Pci[0m
+  1536	2026-10-11T16:11:51.8693590Z shell: /usr/bin/bash -e {0}
+  1537	2026-10-11T16:11:51.8693860Z env:
+  1538	2026-10-11T16:11:51.8694056Z   TEST_IN_PR: false
+  1539	2026-10-11T16:11:51.8694289Z   TESTCONTAINERS_RYUK_DISABLED: true
+  1540	2026-10-11T16:11:51.8694569Z   RUN_ALL_CONTAINER: true
+  1541	2026-10-11T16:11:51.8694815Z   RUN_ZETA_CONTAINER: false
+  1542	2026-10-11T16:11:51.8695169Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.20-1/x64
+  1543	2026-10-11T16:11:51.8695681Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.20-1/x64
+  1544	2026-10-11T16:11:51.8696100Z   MAVEN_OPTS: -Xmx4096m
+  1545	2026-10-11T16:11:51.8696372Z ##[endgroup]
+  1546	2026-10-11T16:11:51.9044739Z --2026-10-11 16:11:51--  https://repo.maven.apache.org/maven2/org/apache/maven/wrapper/maven-wrapper/3.1.0/maven-wrapper-3.1.0.jar
+  1547	2026-10-11T16:11:51.9588934Z Resolving repo.maven.apache.org (repo.maven.apache.org)... 104.18.19.12, 104.18.18.12, 2606:4700::6812:130c, ...
+  1548	2026-10-11T16:11:51.9644394Z Connecting to repo.maven.apache.org (repo.maven.apache.org)|104.18.19.12|:443... connected.
+  1549	2026-10-11T16:11:52.0306321Z HTTP request sent, awaiting response... 403 Forbidden
+  1550	2026-10-11T16:11:52.0307002Z 2026-10-11 16:11:52 ERROR 403: Forbidden.
+  1551	2026-10-11T16:11:52.0307254Z 
+  1552	2026-10-11T16:11:52.0327566Z Maven wrapper download failed, retrying in 5 seconds ...
+  1553	2026-10-11T16:11:57.0389569Z --2026-10-11 16:11:57--  https://repo.maven.apache.org/maven2/org/apache/maven/wrapper/maven-wrapper/3.1.0/maven-wrapper-3.1.0.jar
+  1554	2026-10-11T16:11:57.0591599Z Resolving repo.maven.apache.org (repo.maven.apache.org)... 104.18.18.12, 104.18.19.12, 2606:4700::6812:130c, ...
+  1555	2026-10-11T16:11:57.0653515Z Connecting to repo.maven.apache.org (repo.maven.apache.org)|104.18.18.12|:443... connected.
+  1556	2026-10-11T16:11:57.1340555Z HTTP request sent, awaiting response... 403 Forbidden
+  1557	2026-10-11T16:11:57.1341362Z 2026-10-11 16:11:57 ERROR 403: Forbidden.
+  1558	2026-10-11T16:11:57.1341672Z 
+  1559	2026-10-11T16:11:57.1360588Z Maven wrapper download failed, retrying in 10 seconds ...
+  1560	2026-10-11T16:12:07.1413064Z --2026-10-11 16:12:07--  https://repo.maven.apache.org/maven2/org/apache/maven/wrapper/maven-wrapper/3.1.0/maven-wrapper-3.1.0.jar
+  1561	2026-10-11T16:12:07.1614183Z Resolving repo.maven.apache.org (repo.maven.apache.org)... 104.18.19.12, 104.18.18.12, 2606:4700::6812:130c, ...
+  1562	2026-10-11T16:12:07.1671567Z Connecting to repo.maven.apache.org (repo.maven.apache.org)|104.18.19.12|:443... connected.
+  1563	2026-10-11T16:12:07.2352233Z HTTP request sent, awaiting response... 403 Forbidden
+  1564	2026-10-11T16:12:07.2352786Z 2026-10-11 16:12:07 ERROR 403: Forbidden.
+  1565	2026-10-11T16:12:07.2353028Z 
+  1566	2026-10-11T16:12:07.2374751Z Maven wrapper download failed, retrying in 20 seconds ...
+  1567	2026-10-11T16:12:27.2432311Z --2026-10-11 16:12:27--  https://repo.maven.apache.org/maven2/org/apache/maven/wrapper/maven-wrapper/3.1.0/maven-wrapper-3.1.0.jar
+  1568	2026-10-11T16:12:27.2634482Z Resolving repo.maven.apache.org (repo.maven.apache.org)... 104.18.19.12, 104.18.18.12, 2606:4700::6812:130c, ...
+  1569	2026-10-11T16:12:27.2693152Z Connecting to repo.maven.apache.org (repo.maven.apache.org)|104.18.19.12|:443... connected.
+  1570	2026-10-11T16:12:27.3458287Z HTTP request sent, awaiting response... 403 Forbidden
+  1571	2026-10-11T16:12:27.3459401Z 2026-10-11 16:12:27 ERROR 403: Forbidden.
+  1572	2026-10-11T16:12:27.3459808Z 
+  1573	2026-10-11T16:12:27.3479294Z Maven wrapper download failed, retrying in 40 seconds ...
+  1574	2026-10-11T16:13:07.3538460Z --2026-10-11 16:13:07--  https://repo.maven.apache.org/maven2/org/apache/maven/wrapper/maven-wrapper/3.1.0/maven-wrapper-3.1.0.jar
+  1575	2026-10-11T16:13:07.3745425Z Resolving repo.maven.apache.org (repo.maven.apache.org)... 104.18.19.12, 104.18.18.12, 2606:4700::6812:120c, ...
+  1576	2026-10-11T16:13:07.3802606Z Connecting to repo.maven.apache.org (repo.maven.apache.org)|104.18.19.12|:443... connected.
+  1577	2026-10-11T16:13:07.4475381Z HTTP request sent, awaiting response... 403 Forbidden
+  1578	2026-10-11T16:13:07.4476625Z 2026-10-11 16:13:07 ERROR 403: Forbidden.
+  1579	2026-10-11T16:13:07.4477013Z 
+  1580	2026-10-11T16:13:08.9496628Z Error: Could not find or load main class org.apache.maven.wrapper.MavenWrapperMain
+  1581	2026-10-11T16:13:08.9497660Z Caused by: java.lang.ClassNotFoundException: org.apache.maven.wrapper.MavenWrapperMain
+  1582	2026-10-11T16:13:08.9659830Z ##[error]Process completed with exit code 1.
+  1583	2026-10-11T16:13:08.9813162Z Prepare all required actions
+  1584	2026-10-11T16:13:08.9813729Z Getting action download info
+  1585	2026-10-11T16:13:09.0903702Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+  1586	2026-10-11T16:13:09.2624893Z ##[group]Run ./.github/actions/upload-test-reports
+  1587	2026-10-11T16:13:09.2625216Z with:
+  1588	2026-10-11T16:13:09.2625408Z   id: 17-ubuntu-latest
+  1589	2026-10-11T16:13:09.2625630Z   retention-days: 7
+  1590	2026-10-11T16:13:09.2625828Z env:
+  1591	2026-10-11T16:13:09.2626003Z   TEST_IN_PR: false
+  1592	2026-10-11T16:13:09.2626225Z   TESTCONTAINERS_RYUK_DISABLED: true
+  1593	2026-10-11T16:13:09.2626505Z   RUN_ALL_CONTAINER: true
+  1594	2026-10-11T16:13:09.2626735Z   RUN_ZETA_CONTAINER: false
+  1595	2026-10-11T16:13:09.2627078Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.20-1/x64
+  1596	2026-10-11T16:13:09.2627570Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.20-1/x64
+  1597	2026-10-11T16:13:09.2627948Z ##[endgroup]
+  1598	2026-10-11T16:13:09.2686735Z ##[start-action display=List failed tests in the job summary;id=__self.__run]
+  1599	2026-10-11T16:13:09.2712171Z ##[group]Run import glob, html, os
+  1600	2026-10-11T16:13:09.2712557Z [36;1mimport glob, html, os[0m

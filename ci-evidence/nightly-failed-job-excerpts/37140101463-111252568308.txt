@@ -1,0 +1,15 @@
+{
+ "run_id": "37140101463",
+ "job_id": 111252568308,
+ "job_name": "Run / Dead links",
+ "started_at": "2026-10-03T17:19:47Z",
+ "completed_at": "2026-10-03T17:27:18Z",
+ "conclusion": "failure",
+ "html_url": "https://github.com/apache/seatunnel/actions/runs/37140101463/job/111252568308",
+ "log_lines": 4626,
+ "log_sha256": "5059bcf98a43dbcb594205cc90ec86876a110322b2f22269ce6ccf0105926a74",
+ "first_pass_sha256": "5059bcf98a43dbcb594205cc90ec86876a110322b2f22269ce6ccf0105926a74",
+ "fetch_error": null,
+ "retrieved_at": "2026-10-31T01:46:26.678753Z"
+}
+4610	exit code	2026-10-03T17:27:16.2244952Z ##[error]Process completed with exit code 1.

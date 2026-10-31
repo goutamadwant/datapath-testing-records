@@ -1,0 +1,35 @@
+{
+ "run_id": "38066284030",
+ "job_id": 114255062740,
+ "job_name": "Run / engine-v2-it (11, ubuntu-latest)",
+ "started_at": "2026-10-10T16:09:09Z",
+ "completed_at": "2026-10-10T17:47:57Z",
+ "conclusion": "failure",
+ "html_url": "https://github.com/apache/seatunnel/actions/runs/38066284030/job/114255062740",
+ "log_lines": 396425,
+ "log_sha256": "0c26113940646dfb967f9d47acec6291882e84fa938d3517d319d53ebf76a2df",
+ "first_pass_sha256": "0c26113940646dfb967f9d47acec6291882e84fa938d3517d319d53ebf76a2df",
+ "fetch_error": null,
+ "retrieved_at": "2026-10-31T01:49:08.601444Z"
+}
+158253	missing slots	2026-10-10T16:45:32.0899839Z [] 2026-10-10 16:45:32,089 INFO  [t.t.1.0.12_hadoop27:jobmanager] [docker-java-stream--1222846073] - STDOUT: Missing resources:
+159629	missing slots	2026-10-10T16:46:19.9896063Z [] 2026-10-10 16:46:19,989 INFO  [.12_hadoop27:latest:jobmanager] [docker-java-stream--576453733] - STDOUT: Missing resources:
+168696	missing slots	2026-10-10T16:50:30.6809033Z [] 2026-10-10 16:50:30,680 INFO  [t.t.1.0.12_hadoop27:jobmanager] [docker-java-stream--72051972] - STDOUT: Missing resources:
+170010	missing slots	2026-10-10T16:51:03.4359285Z [] 2026-10-10 16:51:03,434 INFO  [.12_hadoop27:latest:jobmanager] [docker-java-stream--342098262] - STDOUT: Missing resources:
+174684	failing test	2026-10-10T16:54:25.5037358Z [ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 135.954 s <<< FAILURE! - in org.apache.seatunnel.engine.e2e.BackpressureSlowSinkIT
+174685	failing test	2026-10-10T16:54:25.5039182Z [ERROR] testCheckpointsKeepCompletingUnderSustainedBackpressure  Time elapsed: 135.954 s  <<< FAILURE!
+256383	maven transfer error	2026-10-10T17:13:54.5482410Z [] 2026-10-10 17:13:54,545 INFO  [-engine:eclipse-temurin:11-jdk] [docker-java-stream-710713134] - STDERR: java.io.IOException: Connection reset by peer
+341934	missing slots	2026-10-10T17:32:17.6613678Z [] 2026-10-10 17:32:17,660 INFO  [t.t.1.0.12_hadoop27:jobmanager] [docker-java-stream-1868237749] - STDOUT: Missing resources:
+342280	missing slots	2026-10-10T17:32:21.4449266Z Missing resources:
+343467	missing slots	2026-10-10T17:32:50.1013813Z [] 2026-10-10 17:32:50,100 INFO  [.12_hadoop27:latest:jobmanager] [docker-java-stream-1831607007] - STDOUT: Missing resources:
+343871	missing slots	2026-10-10T17:32:53.8548117Z Missing resources:
+351014	missing slots	2026-10-10T17:35:57.7468745Z [] 2026-10-10 17:35:57,745 INFO  [t.t.1.0.12_hadoop27:jobmanager] [docker-java-stream-1374928727] - STDOUT: Missing resources:
+351389	missing slots	2026-10-10T17:36:07.2138877Z Missing resources:
+352600	missing slots	2026-10-10T17:36:40.3234009Z [] 2026-10-10 17:36:40,322 INFO  [.12_hadoop27:latest:jobmanager] [docker-java-stream-1050536132] - STDOUT: Missing resources:
+353015	missing slots	2026-10-10T17:36:47.4637859Z Missing resources:
+360173	missing slots	2026-10-10T17:39:59.5638401Z [] 2026-10-10 17:39:59,563 INFO  [t.t.1.0.12_hadoop27:jobmanager] [docker-java-stream--2144500897] - STDOUT: Missing resources:
+360548	missing slots	2026-10-10T17:40:09.3097985Z Missing resources:
+361761	missing slots	2026-10-10T17:40:43.4383559Z [] 2026-10-10 17:40:43,437 INFO  [.12_hadoop27:latest:jobmanager] [docker-java-stream-1530392351] - STDOUT: Missing resources:
+362189	missing slots	2026-10-10T17:40:50.4096215Z Missing resources:
+396203	failing test	2026-10-10T17:47:44.7747552Z [ERROR] Tests run: 213, Failures: 1, Errors: 0, Skipped: 8
+396297	exit code	2026-10-10T17:47:44.8192353Z ##[error]Process completed with exit code 1.

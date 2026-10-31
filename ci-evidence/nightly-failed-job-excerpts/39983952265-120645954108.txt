@@ -1,0 +1,15 @@
+{
+ "run_id": "39983952265",
+ "job_id": 120645954108,
+ "job_name": "Run / unit-test (11, windows-latest)",
+ "started_at": "2026-10-23T20:41:57Z",
+ "completed_at": "2026-10-23T20:44:14Z",
+ "conclusion": "failure",
+ "html_url": "https://github.com/apache/seatunnel/actions/runs/39983952265/job/120645954108",
+ "log_lines": 389,
+ "log_sha256": "6231eb3d7510ff088b91c86bdc9280deb9cc317ffe357df8d83a573570000bed",
+ "first_pass_sha256": "6231eb3d7510ff088b91c86bdc9280deb9cc317ffe357df8d83a573570000bed",
+ "fetch_error": null,
+ "retrieved_at": "2026-10-31T01:51:48.410682Z"
+}
+275	exit code	2026-10-23T20:44:02.7671361Z ##[error]Process completed with exit code 1.

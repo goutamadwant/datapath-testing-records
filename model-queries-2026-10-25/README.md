@@ -377,6 +377,15 @@ to reuse recorded runs in that same set, after manifest and input-identity verif
 `./run.sh all` runs build, measure and results in fresh mode (`MEASURE_RESUME=0`).
 `explore` refuses to overwrite `logs/exploratory/runs.jsonl`.
 
+## Provenance notes
+
+- 2026-10-30: `frozen`, `query_count`, `control_count` and `expected_process_runs`
+  were added to `logs/measure/manifest.json` and
+  `logs/measure-locked-2026-10-29/manifest.json`; their contents otherwise match
+  the earlier files. In `results-measure-locked-2026-10-29.json`, both manifest
+  inventory entries now list the distributed file's `sha256` and the earlier
+  `sha256_as_run`. Both 2,502-process datasets still rederive their saved numerical results.
+
 ## Revision (2026-10-25, after the runs)
 
 The analysis no longer reports a confidence bound, and `harness/analyze.py` now refuses

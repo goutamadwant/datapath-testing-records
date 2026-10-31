@@ -1,0 +1,24 @@
+{
+ "run_id": "39143363034",
+ "job_id": 117722745538,
+ "job_name": "Run / unit-test (17, windows-latest)",
+ "started_at": "2026-10-18T16:07:30Z",
+ "completed_at": "2026-10-18T16:22:23Z",
+ "conclusion": "failure",
+ "html_url": "https://github.com/apache/seatunnel/actions/runs/39143363034/job/117722745538",
+ "log_lines": 16766,
+ "log_sha256": "a4a269c1cd182b52aec36ad80479872de0ea6cc53db6e65fa99db4e36a2cecc1",
+ "first_pass_sha256": "a4a269c1cd182b52aec36ad80479872de0ea6cc53db6e65fa99db4e36a2cecc1",
+ "fetch_error": null,
+ "retrieved_at": "2026-10-31T01:51:02.606216Z"
+}
+8195	file collect test	2026-10-18T16:15:22.9039809Z [INFO] Running org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest
+8196	file collect test	2026-10-18T16:15:23.0144953Z [INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.109 s - in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest
+8197	file collect test	2026-10-18T16:15:23.0146568Z [INFO] Running org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderMultilineTest
+8198	file collect test	2026-10-18T16:15:23.1165382Z [WARNING] Tests run: 8, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 0.099 s - in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderMultilineTest
+8199	file collect test	2026-10-18T16:15:23.1167446Z [INFO] Running org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderPositionTest
+8200	file collect test	2026-10-18T16:15:23.1310013Z [INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 s - in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderPositionTest
+15837	failing test	2026-10-18T16:22:02.5754614Z [ERROR] Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.01 s <<< FAILURE! - in org.apache.seatunnel.connectors.seatunnel.jdbc.JdbcOptionRuleCompletenessTest
+15838	failing test	2026-10-18T16:22:02.5755133Z [ERROR] testSinkRuleDeclaresAllSinkOptions  Time elapsed: 0.01 s  <<< FAILURE!
+15909	failing test	2026-10-18T16:22:11.0169916Z [ERROR] Tests run: 1096, Failures: 1, Errors: 0, Skipped: 10
+16638	exit code	2026-10-18T16:22:11.2535477Z ##[error]Process completed with exit code 1.

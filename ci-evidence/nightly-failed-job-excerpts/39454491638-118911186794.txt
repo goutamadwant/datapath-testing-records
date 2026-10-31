@@ -1,0 +1,24 @@
+{
+ "run_id": "39454491638",
+ "job_id": 118911186794,
+ "job_name": "Run / unit-test (11, ubuntu-latest)",
+ "started_at": "2026-10-20T23:54:33Z",
+ "completed_at": "2026-10-21T00:02:16Z",
+ "conclusion": "failure",
+ "html_url": "https://github.com/apache/seatunnel/actions/runs/39454491638/job/118911186794",
+ "log_lines": 9255,
+ "log_sha256": "0827ebff51f8074714e93228871fdd566429c65d36de5bb9c78b22a4f7f6b51e",
+ "first_pass_sha256": "0827ebff51f8074714e93228871fdd566429c65d36de5bb9c78b22a4f7f6b51e",
+ "fetch_error": null,
+ "retrieved_at": "2026-10-31T01:51:24.345496Z"
+}
+4859	file collect test	2026-10-20T23:58:44.1760506Z [INFO] Running org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderPositionTest
+4860	file collect test	2026-10-20T23:58:44.5441191Z [INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.367 s - in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderPositionTest
+4861	file collect test	2026-10-20T23:58:44.5461904Z [INFO] Running org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest
+4862	file collect test	2026-10-20T23:58:44.5766246Z [INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.031 s - in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest
+4865	file collect test	2026-10-20T23:58:44.5896136Z [INFO] Running org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderMultilineTest
+4866	file collect test	2026-10-20T23:58:44.7050751Z [INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.117 s - in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderMultilineTest
+8345	failing test	2026-10-21T00:02:06.0610654Z [ERROR] Tests run: 42, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.332 s <<< FAILURE! - in org.apache.seatunnel.transform.llm.LLMBooleanOutputTest
+8346	failing test	2026-10-21T00:02:06.0614809Z [ERROR] readsLegacyFactoryWrapperWithValidationDisabled  Time elapsed: 0.007 s  <<< ERROR!
+8398	failing test	2026-10-21T00:02:10.4659716Z [ERROR] Tests run: 1453, Failures: 0, Errors: 1, Skipped: 0
+9127	exit code	2026-10-21T00:02:10.5496249Z ##[error]Process completed with exit code 1.

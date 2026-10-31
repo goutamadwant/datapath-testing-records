@@ -1,0 +1,48 @@
+{
+ "run_id": "37338260777",
+ "job_id": 111895226290,
+ "job_name": "Run / paimon-connector-it (11, ubuntu-latest)",
+ "started_at": "2026-10-05T18:18:47Z",
+ "completed_at": "2026-10-05T19:36:25Z",
+ "conclusion": "failure",
+ "html_url": "https://github.com/apache/seatunnel/actions/runs/37338260777/job/111895226290",
+ "log_lines": 187259,
+ "log_sha256": "44c64a611cff59dfaa405a35d7d7bb24dbc4028c20e4e2c651ffb45fa48bb067",
+ "first_pass_sha256": "44c64a611cff59dfaa405a35d7d7bb24dbc4028c20e4e2c651ffb45fa48bb067",
+ "fetch_error": null,
+ "retrieved_at": "2026-10-31T01:47:45.836099Z"
+}
+28470	missing slots	2026-10-05T18:29:02.5723043Z [] 2026-10-05 18:29:02,571 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+30043	missing slots	2026-10-05T18:29:20.8957355Z Missing resources:
+31846	missing slots	2026-10-05T18:30:03.6166565Z [] 2026-10-05 18:30:03,616 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+33257	missing slots	2026-10-05T18:30:20.0543095Z Missing resources:
+48005	missing slots	2026-10-05T18:37:07.5334244Z [] 2026-10-05 18:37:07,532 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+48681	missing slots	2026-10-05T18:37:42.3620649Z [] 2026-10-05 18:37:42,361 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+49284	missing slots	2026-10-05T18:37:56.7623911Z [] 2026-10-05 18:37:56,761 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+50493	missing slots	2026-10-05T18:38:34.1755023Z [] 2026-10-05 18:38:34,174 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+51142	missing slots	2026-10-05T18:38:55.3860176Z [] 2026-10-05 18:38:55,384 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+51761	missing slots	2026-10-05T18:39:10.3258748Z [] 2026-10-05 18:39:10,325 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+67365	missing slots	2026-10-05T18:46:36.9727053Z [] 2026-10-05 18:46:36,972 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+68023	missing slots	2026-10-05T18:47:11.2726710Z [] 2026-10-05 18:47:11,272 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+68688	missing slots	2026-10-05T18:47:25.8011669Z [] 2026-10-05 18:47:25,800 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+69898	missing slots	2026-10-05T18:48:04.3989290Z [] 2026-10-05 18:48:04,398 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+70525	missing slots	2026-10-05T18:48:25.3036858Z [] 2026-10-05 18:48:25,303 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+71163	missing slots	2026-10-05T18:48:40.5440457Z [] 2026-10-05 18:48:40,543 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+83805	missing slots	2026-10-05T18:54:03.9703250Z [] 2026-10-05 18:54:03,968 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+84446	missing slots	2026-10-05T18:54:19.5478998Z [] 2026-10-05 18:54:19,547 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+85793	missing slots	2026-10-05T18:54:56.6036972Z [] 2026-10-05 18:54:56,603 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+86407	missing slots	2026-10-05T18:55:13.0529540Z [] 2026-10-05 18:55:13,052 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+94845	missing slots	2026-10-05T19:00:10.7407734Z [] 2026-10-05 19:00:10,740 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+96122	missing slots	2026-10-05T19:01:06.6957785Z [] 2026-10-05 19:01:06,694 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+107261	failing test	2026-10-05T19:09:03.4511574Z [ERROR] Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 408.543 s <<< FAILURE! - in org.apache.seatunnel.e2e.connector.paimon.PaimonWithS3IT
+107262	failing test	2026-10-05T19:09:03.4513153Z [ERROR] privilegeEnabledPaimonSourceUnAuthorized  Time elapsed: 314.309 s  <<< FAILURE!
+166771	missing slots	2026-10-05T19:27:59.0969608Z [] 2026-10-05 19:27:59,094 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+167973	missing slots	2026-10-05T19:28:35.6167774Z [] 2026-10-05 19:28:35,616 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+178946	missing slots	2026-10-05T19:33:19.5554282Z [] 2026-10-05 19:33:19,554 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+179531	missing slots	2026-10-05T19:33:31.9241013Z [] 2026-10-05 19:33:31,923 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+180120	missing slots	2026-10-05T19:33:44.0462520Z [] 2026-10-05 19:33:44,043 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+181317	missing slots	2026-10-05T19:34:20.7998913Z [] 2026-10-05 19:34:20,799 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+181919	missing slots	2026-10-05T19:34:33.8189926Z [] 2026-10-05 19:34:33,818 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+182524	missing slots	2026-10-05T19:34:46.5593185Z [] 2026-10-05 19:34:46,558 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+187033	failing test	2026-10-05T19:36:16.3386629Z [ERROR] Tests run: 86, Failures: 1, Errors: 0, Skipped: 2
+187131	exit code	2026-10-05T19:36:16.3798525Z ##[error]Process completed with exit code 1.

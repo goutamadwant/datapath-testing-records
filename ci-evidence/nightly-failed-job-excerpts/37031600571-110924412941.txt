@@ -1,0 +1,26 @@
+{
+ "run_id": "37031600571",
+ "job_id": 110924412941,
+ "job_name": "Run / unit-test (8, ubuntu-latest)",
+ "started_at": "2026-10-02T16:22:21Z",
+ "completed_at": "2026-10-02T17:12:46Z",
+ "conclusion": "failure",
+ "html_url": "https://github.com/apache/seatunnel/actions/runs/37031600571/job/110924412941",
+ "log_lines": 80160,
+ "log_sha256": "e59e3fe2e44392da51e70c97579d569b08258e13351a1dc58474239b159ff143",
+ "first_pass_sha256": "e59e3fe2e44392da51e70c97579d569b08258e13351a1dc58474239b159ff143",
+ "fetch_error": null,
+ "retrieved_at": "2026-10-31T01:45:22.899652Z"
+}
+4814	file collect test	2026-10-02T16:30:18.5892869Z [INFO] Running org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderPositionTest
+4815	file collect test	2026-10-02T16:30:18.6174143Z [INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.027 s - in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderPositionTest
+4816	file collect test	2026-10-02T16:30:18.6184422Z [INFO] Running org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderMultilineTest
+4817	file collect test	2026-10-02T16:30:18.7552114Z [INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.137 s - in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderMultilineTest
+4818	file collect test	2026-10-02T16:30:18.7561743Z [INFO] Running org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest
+4819	file collect test	2026-10-02T16:30:19.3263188Z [INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.571 s - in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest
+59957	failing test	2026-10-02T17:02:06.1295000Z [ERROR] Tests run: 6, Failures: 0, Errors: 1, Skipped: 1, Time elapsed: 179.769 s <<< FAILURE! - in org.apache.seatunnel.engine.server.checkpoint.SavePointTest
+59958	failing test	2026-10-02T17:02:06.1296801Z [ERROR] testSavePointButJobGoingToFail  Time elapsed: 127.095 s  <<< ERROR!
+59959	condition timeout	2026-10-02T17:02:06.1298966Z org.awaitility.core.ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.engine.server.checkpoint.SavePointTest expected: <RUNNING> but was: <FAILED> within 2 minutes.
+79679	condition timeout	2026-10-02T17:12:35.6926317Z [ERROR]   SavePointTest.testSavePointButJobGoingToFail:87 » ConditionTimeout Assertion c...
+79681	failing test	2026-10-02T17:12:35.6927474Z [ERROR] Tests run: 556, Failures: 0, Errors: 1, Skipped: 5
+80032	exit code	2026-10-02T17:12:35.7565410Z ##[error]Process completed with exit code 1.

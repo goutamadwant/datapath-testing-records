@@ -8,7 +8,8 @@ pull request that added it:
   24193, whose test lives in the same file as the fix, only the hunks inside `mod tests`, see
   `patches/df24193-tests-only.patch`; likewise for the PR 24917 planning-budget tests,
   `patches/df24917-budget-tests-only.patch`). Production code is the unfixed code.
-- **after**: the merge commit as is.
+- **after**: the merge commit as is, except `df24917-budget-nohook`, which adds the separate
+  hook-free test function to both commits.
 
 The same command runs on both trees. Every outcome below is parsed by `make_results.py` from a log
 under `logs/` that an executed run wrote; `results.json` lists every run, its outcome, the per-test
@@ -54,6 +55,7 @@ none of the 23 historical run outcomes.
 | DataFusion 24193 | `repartition::tests::unbounded_input_emits_before_batch_size` (`datafusion-physical-plan`) | `d5868e683435` | `047f531488f6` | **FAIL** (1/1): panicked `unbounded repartition withheld a partial batch: Elapsed(())` after the 5 s timeout (`finished in 5.01s`) | **PASS** (1/1) | Fails before, passes after. Only the test-module hunks were applied on the parent |
 | DataFusion 24917 | `optimizer::expensive_regexp_like_is_deferred_to_execution` (`datafusion`, `--test core_integration`) | `408527ae58b5` | `3dfa245d61dd` | **PASS** (1/1) | **PASS** (1/1) | The test does not fail on the unfixed code. A diagnostic run (`df24917-diag`, same test with the plans and the planning time printed, 3 runs per tree) shows identical logical plans on both trees: `Projection: Utf8("aaaaa") ~ Utf8("a{5}{5}{5}{5}{5}{5}{5}{5}")` and `Projection: Boolean(NULL)`. Only the planning time of the literal query differs: 550.5 / 488.2 / 478.7 ms before, 31.6 / 12.1 / 10.0 ms after (unoptimized `ci` profile). The test asserts the plan shape, which the fix does not change; it does not assert time |
 | DataFusion 24917 | `test_constant_regex_respects_planning_budget` in `simplify_expressions::expr_simplifier::tests` (`datafusion-optimizer`) and in `simplifier::tests` (`datafusion-physical-expr`), `--lib` | `408527ae58b5` | `3dfa245d61dd` | **COMPILE_ERROR**, 2 errors: `error[E0407]: method should_evaluate_const is not a member of trait ScalarUDFImpl`, once in each package (the test UDFs implement the hook the pull request added) | **PASS** (2/2: 1/1 per package) | Not runnable against the unfixed code; no shim. Only the hunks that add the two tests (and the physical test's imports) were applied on the parent. See below |
+| DataFusion 24917 (hook-free variant) | `test_constant_regex_planning_budget_without_hook` in both simplifier test modules (`datafusion-optimizer`, `datafusion-physical-expr`), `--lib` | `408527ae58b5` | `3dfa245d61dd` | **FAIL** (0/1 in each package; six-level assertion) | **PASS** (1/1 in each package) | Explicit case `df24917-budget-nohook`; separate test functions applied on both sides. See the hook-free variant paragraph below |
 | SeaTunnel 12038 | `AmazonSqsSourceReaderTest` (9 methods, `connector-amazonsqs`) | `9ebb27e8f920` | `1e450e11f7c8` | **COMPILE_ERROR**: `no suitable constructor found for AmazonSqsSourceConfig(String,String,<null>,<null>,<null>,boolean,boolean,<null>)` (the pull request added `ignoreParseErrors` to the all-arguments constructor) | **PASS** (9/9) | Not runnable unmodified against the unfixed code. With a one-line shim (`patches/st12038-reader-test-drop-ignore-arg.patch`, drops that constructor argument): before **FAIL 6/9**, after **PASS 9/9**; see below |
 | SeaTunnel 12038 | `AmazonSqsSourceFactoryTest#testOptionRule` (extended by the same PR) | `9ebb27e8f920` | `1e450e11f7c8` | **COMPILE_ERROR**: `cannot find symbol` for `AmazonSqsSourceOptions.IGNORE_PARSE_ERRORS` (and the reader-test error above) | **PASS** (1/1) | The test checks the new option itself; not runnable against the unfixed code. No shim |
 | SeaTunnel 12360 | `IncrementalSourceReaderTest` (14 methods, `connector-cdc-base`) | `4648c9956ec8` | `eb76f81c823a` | **PASS** (14/14) | **PASS** (14/14) | The pull request changed only this test file (415 insertions), so before-with-test and after are the same source tree. No production change exists that the test could detect; this matches the article's negative result. A fail-before comparison is not applicable |
@@ -78,6 +80,29 @@ were therefore never executed against the unfixed code; this run establishes nei
 nor a pass for them before the fix. No shim was applied: the missing member is the extension point
 the fix introduces, and removing it would mean deleting a three-line method from each test, not a
 one-line adaptation.
+
+**Hook-free variant**. The explicit case `df24917-budget-nohook` adds a separate test
+function, `test_constant_regex_planning_budget_without_hook`, to each simplifier test module
+on both the parent `408527ae58b5b706f5c02df8c37e096122cd8c78` and merge commit
+`3dfa245d61dde362e2c077761783bc735931659c`. The logical test retains the small `^a+$`
+regex folding to `lit(true)`, the six-level `a{5}{5}{5}{5}{5}{5}` regex operator remaining
+unchanged, and the aliased six-level expression remaining unchanged. The physical test retains
+the ordinary `^a+$` expression folding to a Boolean(true) literal, the six-level `BinaryExpr`
+remaining unchanged, and `regexp_like(lit("aaaaa"), pattern, "m")` as a `ScalarFunctionExpr`
+remaining unchanged. It excludes both custom UDF implementations, the `should_evaluate_const`
+hook, and the physical column-argument case. The assertions and literals are copied from the
+fix-time tests. This is a separate test function in each module, more than the one-line
+adaptations used elsewhere. The before patch adds only the missing physical-test imports
+(`ScalarFunctionExpr`, `ConfigOptions`, `regexp_like`); the after patch uses the existing imports.
+Both patches change only test modules. This comparison establishes whether the budget
+assertions themselves fail on the parent. Select it with `./run.sh df24917-budget-nohook`;
+it is excluded from the default matrix. The exact test command on each side is:
+
+```sh
+cargo test --locked --profile ci --no-fail-fast -p datafusion-optimizer -p datafusion-physical-expr --lib test_constant_regex_planning_budget_without_hook
+```
+
+Outcome (invocation 20261031T013734Z-71073, 30 October 2026, rustc 1.97.0): on the parent both hook-free tests **FAIL** (exit 101): the small `^a+$` assertion passes and the six-level `a{5}{5}{5}{5}{5}{5}` assertion fails in each package (`expr_simplifier.rs:3470`, `simplifier/mod.rs:546`), because the unfixed simplifier evaluates the expensive constant pattern during planning; the alias and `regexp_like` assertions were not reached. On the merge commit both tests **PASS** (1/1 per package). The budget assertions therefore detect the unfixed behavior once isolated from the hook; the original transplanted tests could not show this because they did not compile. Logs: `logs/df24917-budget-nohook/before.log`, `logs/df24917-budget-nohook/after.log`; registry rows in `logs/runs.jsonl`.
 
 ### Shimmed runs, per method
 
@@ -145,7 +170,9 @@ FAILBEFORE_DISPOSABLE=1 ./run.sh st12481-shim
 
 - **Fail-before for the DataFusion 24917 planning-budget tests**: both tests implement the
   `should_evaluate_const` hook the pull request added and do not compile against the unfixed code;
-  no shim, for the reason given above.
+  no shim, for the reason given above. The hook-free variant was run separately. Its outcome:
+
+  both hook-free tests fail on the parent (six-level assertion) and pass on the merge commit; details above.
 - **Unmodified fail-before for SeaTunnel 12038, 12472 and 12481**: the transplanted tests do not
   compile against the unfixed code because they call constructors, options or methods the pull
   requests added. These tests are not runnable against the unfixed code as written. One-line shims
@@ -160,13 +187,14 @@ FAILBEFORE_DISPOSABLE=1 ./run.sh st12481-shim
 ## Exact commands
 
 ```
-./run.sh                       # default matrix, excluding st12481-shim
+./run.sh                       # default matrix, excluding st12481-shim and df24917-budget-nohook
 ./run.sh df24193 st12038-shim  # selected cases
 ./run.sh df24917-budget        # the PR 24917 planning-budget tests
+./run.sh df24917-budget-nohook # the separate hook-free tests on both commits
 python3 make_results.py        # parse logs/runs.jsonl and the logs, write results.json
 ```
 
-Cases: `df24193`, `df24917`, `df24917-diag`, `df24917-budget`, `st12038`, `st12038-shim`, `st12038-factory`,
+Cases: `df24193`, `df24917`, `df24917-diag`, `df24917-budget`, `df24917-budget-nohook`, `st12038`, `st12038-shim`, `st12038-factory`,
 `st12360`, `st12472`, `st12481`, `st12481-shim`. Per run the script prepares a git worktree at the
 commit (hard reset, `git clean -fdx`), applies the transplant, writes a log header (commits,
 `git status`, `git diff --stat`, toolchain, command, start/end, exit code) and runs:
@@ -200,8 +228,9 @@ requested the case has no record for a requested side (listed under `missing`). 
 2026-10-25 predate this check and have no invocation id; their runner skipped a case whose setup
 failed without writing a record, so for those runs completeness rests on `runs.jsonl` and the
 individual logs, which hold a before and an after record for every case. `logs/requested.json`
-now contains the `df24917-budget` invocation and the 2026-10-30 default-matrix invocation; every
-requested side of both invocations is recorded. See the 2026-10-30 run record below.
+now contains the `df24917-budget` invocation, the 2026-10-30 default-matrix invocation, the
+hook-free `df24917-budget-nohook` invocation and the second default-matrix invocation of the same
+evening; every requested side of all four is recorded. See the run records below.
 
 - `logs/df24917-budget/`: in these two logs the absolute path of the local scratch work directory
   (`FAILBEFORE_WORK`) was replaced by the literal `$FAILBEFORE_WORK` before hashing; nothing else
@@ -270,6 +299,37 @@ wall times in seconds (from `results.json`) are:
 - `st12472`: COMPILE_ERROR / PASS; 56.0 / 60.1 s.
 - `st12481`: COMPILE_ERROR / PASS; 94.6 / 105.4 s.
 
+### Run record (2026-10-30 evening: hook-free case, then a second complete default-matrix campaign)
+
+Two further invocations ran on the same host on the evening of 2026-10-30 (local time, UTC-7),
+each in a fresh, empty `FAILBEFORE_WORK` directory, with `JAVA8_HOME` set explicitly to
+`/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home`. Every attempt of that evening
+is recorded; no attempt was stopped or discarded. The scratch path was replaced by the literal
+`$FAILBEFORE_WORK` in the new logs, XML reports and consoles before hashing; nothing else in them
+was changed.
+
+- `20261031T013734Z-71073` (18:37 local): the explicit case `df24917-budget-nohook` only, with the
+  DataFusion worktrees added from an existing local clone of apache/datafusion. Outcomes
+  FAIL / PASS; 72.9 / 34.6 s. Console: [`logs/console/console-nohook-20261031T013734Z-71073.txt`](logs/console/console-nohook-20261031T013734Z-71073.txt).
+- `20261031T014130Z-77153` (18:41 local): the full 10-case default command, with apache/datafusion
+  and apache/seatunnel cloned by the runner into the work directory. All 20 requested sides ran
+  (runner exit 0). Console: [`logs/console/console-20261031T014130Z-77153.txt`](logs/console/console-20261031T014130Z-77153.txt).
+  Every outcome category matches the 2026-10-30 morning run and the historical runs. Before / after
+  outcomes and wall times in seconds (from `results.json`):
+  - `df24193`: FAIL / PASS; 86.8 / 28.0 s.
+  - `df24917`: PASS / PASS; 131.3 / 96.1 s.
+  - `df24917-diag`: PASS / PASS; 116.9 / 103.1 s.
+  - `df24917-budget`: COMPILE_ERROR / PASS; 43.5 / 37.8 s.
+  - `st12038`: COMPILE_ERROR / PASS; 92.8 / 101.1 s.
+  - `st12038-shim`: FAIL / PASS; 193.9 / 173.3 s.
+  - `st12038-factory`: COMPILE_ERROR / PASS; 182.9 / 198.7 s.
+  - `st12360`: PASS / PASS; 154.8 / 112.9 s.
+  - `st12472`: COMPILE_ERROR / PASS; 61.8 / 61.3 s.
+  - `st12481`: COMPILE_ERROR / PASS; 97.3 / 104.1 s.
+
+This second campaign is the complete accounting that the morning campaign lacks: the request,
+every side, every log and the console of the single attempt are retained.
+
 The four SeaTunnel before-side COMPILE_ERROR outcomes (`st12038`, `st12038-factory`,
 `st12472` and `st12481`) are classified by parser revision 3, written on 2026-10-30 after
 the run. For substituted Maven error paths, it recognises only the literal
@@ -328,6 +388,8 @@ logs/st12481/after-2.surefire/TEST-org.apache.seatunnel.e2e.common.container.fli
 - `patches/df24917-diagnostic-print-plan.patch`: prints the plans and planning time (diagnostic).
 - `patches/df24917-budget-tests-only.patch`: the hunks of PR 24917 that add the two
   planning-budget tests (and the physical test's imports).
+- `patches/df24917-budget-nohook-before.patch`, `patches/df24917-budget-nohook-after.patch`:
+  separate hook-free planning-budget test functions, selected by side.
 - `patches/st12038-reader-test-drop-ignore-arg.patch`, `patches/st12481-flink-test-drop-override.patch`: the one-line shims.
 - `logs/<case>/<side>.log` (+ `.surefire/` for Maven), `logs/runs.jsonl`, `logs/console/`,
   `logs/requested.json` (requested cases and sides per invocation).

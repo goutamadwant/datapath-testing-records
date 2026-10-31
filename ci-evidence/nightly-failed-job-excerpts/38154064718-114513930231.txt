@@ -1,0 +1,39 @@
+{
+ "run_id": "38154064718",
+ "job_id": 114513930231,
+ "job_name": "Run / engine-v2-it (17, ubuntu-latest)",
+ "started_at": "2026-10-11T16:09:41Z",
+ "completed_at": "2026-10-11T17:54:10Z",
+ "conclusion": "failure",
+ "html_url": "https://github.com/apache/seatunnel/actions/runs/38154064718/job/114513930231",
+ "log_lines": 573999,
+ "log_sha256": "60e3a497aca6f9419f07b2ed854ea6c4b670bb51ac36e2e6525a570e6ba5134f",
+ "first_pass_sha256": "60e3a497aca6f9419f07b2ed854ea6c4b670bb51ac36e2e6525a570e6ba5134f",
+ "fetch_error": null,
+ "retrieved_at": "2026-10-31T01:50:12.211094Z"
+}
+148419	missing slots	2026-10-11T16:42:19.8341082Z [] 2026-10-11 16:42:19,833 INFO  [t.t.1.0.12_hadoop27:jobmanager] [docker-java-stream--575922045] - STDOUT: Missing resources:
+149792	missing slots	2026-10-11T16:43:11.8587322Z [] 2026-10-11 16:43:11,856 INFO  [.12_hadoop27:latest:jobmanager] [docker-java-stream--1810838438] - STDOUT: Missing resources:
+158766	missing slots	2026-10-11T16:47:19.6768241Z [] 2026-10-11 16:47:19,676 INFO  [t.t.1.0.12_hadoop27:jobmanager] [docker-java-stream-1843998717] - STDOUT: Missing resources:
+160065	missing slots	2026-10-11T16:47:48.7525555Z [] 2026-10-11 16:47:48,751 INFO  [.12_hadoop27:latest:jobmanager] [docker-java-stream-1156709155] - STDOUT: Missing resources:
+350663	missing slots	2026-10-11T17:01:00.2539387Z [] 2026-10-11 17:01:00,253 INFO  [t.t.1.0.12_hadoop27:jobmanager] [docker-java-stream-658380459] - STDOUT: Missing resources:
+352018	missing slots	2026-10-11T17:01:46.7340670Z [] 2026-10-11 17:01:46,733 INFO  [.12_hadoop27:latest:jobmanager] [docker-java-stream--2043123209] - STDOUT: Missing resources:
+434646	maven transfer error	2026-10-11T17:21:52.4407147Z [] 2026-10-11 17:21:52,440 INFO  [-engine:eclipse-temurin:11-jdk] [docker-java-stream-1160469743] - STDERR: java.io.IOException: Connection reset by peer
+512502	failing test	2026-10-11T17:37:42.6573490Z [ERROR] Tests run: 11, Failures: 0, Errors: 1, Skipped: 2, Time elapsed: 526.986 s <<< FAILURE! - in org.apache.seatunnel.engine.e2e.SplitClusterFaultToleranceIT
+512503	failing test	2026-10-11T17:37:42.6574835Z [ERROR] testStreamJobCancelResolvesWhenWorkerCrashesBeforeCancelAck  Time elapsed: 67.183 s  <<< ERROR!
+512504	condition timeout	2026-10-11T17:37:42.6576554Z org.awaitility.core.ConditionTimeoutException: Assertion condition defined as a org.apache.seatunnel.engine.e2e.SplitClusterFaultToleranceIT expected: <CANCELED> but was: <FAILED> within 1 minutes.
+519157	missing slots	2026-10-11T17:39:37.3094858Z [] 2026-10-11 17:39:37,308 INFO  [t.t.1.0.12_hadoop27:jobmanager] [docker-java-stream--515232965] - STDOUT: Missing resources:
+519502	missing slots	2026-10-11T17:39:41.7281815Z Missing resources:
+520673	missing slots	2026-10-11T17:40:04.8516065Z [] 2026-10-11 17:40:04,851 INFO  [.12_hadoop27:latest:jobmanager] [docker-java-stream-2089436899] - STDOUT: Missing resources:
+521011	missing slots	2026-10-11T17:40:05.9075855Z Missing resources:
+528072	missing slots	2026-10-11T17:42:51.4331477Z [] 2026-10-11 17:42:51,432 INFO  [t.t.1.0.12_hadoop27:jobmanager] [docker-java-stream--238704512] - STDOUT: Missing resources:
+528449	missing slots	2026-10-11T17:43:02.1490640Z Missing resources:
+529644	missing slots	2026-10-11T17:43:28.9557092Z [] 2026-10-11 17:43:28,955 INFO  [.12_hadoop27:latest:jobmanager] [docker-java-stream--283821144] - STDOUT: Missing resources:
+530060	missing slots	2026-10-11T17:43:37.5571214Z Missing resources:
+537139	missing slots	2026-10-11T17:46:24.8851388Z [] 2026-10-11 17:46:24,884 INFO  [t.t.1.0.12_hadoop27:jobmanager] [docker-java-stream-2122973705] - STDOUT: Missing resources:
+537516	missing slots	2026-10-11T17:46:35.9304641Z Missing resources:
+538712	missing slots	2026-10-11T17:47:03.5158186Z [] 2026-10-11 17:47:03,515 INFO  [.12_hadoop27:latest:jobmanager] [docker-java-stream--2131757595] - STDOUT: Missing resources:
+539146	missing slots	2026-10-11T17:47:15.3561021Z Missing resources:
+573775	condition timeout	2026-10-11T17:54:01.8259720Z [ERROR]   SplitClusterFaultToleranceIT.testStreamJobCancelResolvesWhenWorkerCrashesBeforeCancelAck:449->assertEventuallyCanceled:557 » ConditionTimeout
+573777	failing test	2026-10-11T17:54:01.8260761Z [ERROR] Tests run: 224, Failures: 0, Errors: 1, Skipped: 7
+573871	exit code	2026-10-11T17:54:01.8765774Z ##[error]Process completed with exit code 1.

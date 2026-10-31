@@ -211,7 +211,8 @@ def main():
     result = {
         "description": "Fail-before / pass-after runs of the regression tests named in the article. "
         "before = first parent of the merge commit plus only the pull request's test change; "
-        "after = merge commit. Outcomes are parsed from the logs listed here.",
+        "after = merge commit. The df24917-budget-nohook case adds separate hook-free test "
+        "functions to both commits. Outcomes are parsed from the logs listed here.",
         "parser": "make_results.py rev 3 (2026-10-30): PASS requires the named test to have been "
         "executed; ignored-only or skipped-only runs are NO_TESTS_RUN; a summary line that disagrees "
         "with the per-test lines is UNKNOWN; every case needs a before and an after record; a record "

@@ -1,0 +1,45 @@
+{
+ "run_id": "37140101463",
+ "job_id": 111253104192,
+ "job_name": "Run / engine-v2-it (8, ubuntu-latest)",
+ "started_at": "2026-10-03T17:22:44Z",
+ "completed_at": "2026-10-03T19:16:00Z",
+ "conclusion": "failure",
+ "html_url": "https://github.com/apache/seatunnel/actions/runs/37140101463/job/111253104192",
+ "log_lines": 579907,
+ "log_sha256": "c37bc1cad0d0d1bbcfb97dc7a06d786c06598f627614895b6adf49492f5a2217",
+ "first_pass_sha256": "c37bc1cad0d0d1bbcfb97dc7a06d786c06598f627614895b6adf49492f5a2217",
+ "fetch_error": null,
+ "retrieved_at": "2026-10-31T01:46:46.481063Z"
+}
+40345	maven transfer error	2026-10-03T17:37:26.6000988Z java.io.IOException: Connection reset by peer
+43138	maven transfer error	2026-10-03T17:37:47.0873671Z java.io.IOException: Connection reset by peer
+124629	maven transfer error	2026-10-03T17:48:49.3982263Z java.io.IOException: Connection reset by peer
+136008	maven transfer error	2026-10-03T17:51:57.2569680Z java.io.IOException: Connection reset by peer
+146201	missing slots	2026-10-03T17:57:42.0174500Z [] 2026-10-03 17:57:42,016 INFO  [t.t.1.0.12_hadoop27:jobmanager] [docker-java-stream-582276552] - STDOUT: Missing resources:
+147585	missing slots	2026-10-03T17:58:23.7127344Z [] 2026-10-03 17:58:23,710 INFO  [t.t.2.1.12_hadoop27:jobmanager] [docker-java-stream--362539809] - STDOUT: Missing resources:
+156623	missing slots	2026-10-03T18:02:21.1199491Z [] 2026-10-03 18:02:21,119 INFO  [t.t.1.0.12_hadoop27:jobmanager] [docker-java-stream--818556471] - STDOUT: Missing resources:
+157924	missing slots	2026-10-03T18:02:51.7788219Z [] 2026-10-03 18:02:51,778 INFO  [t.t.2.1.12_hadoop27:jobmanager] [docker-java-stream-1742488980] - STDOUT: Missing resources:
+353033	missing slots	2026-10-03T18:17:12.1529551Z [] 2026-10-03 18:17:12,152 INFO  [t.t.1.0.12_hadoop27:jobmanager] [docker-java-stream--852713196] - STDOUT: Missing resources:
+354394	missing slots	2026-10-03T18:18:01.6462942Z [] 2026-10-03 18:18:01,645 INFO  [t.t.2.1.12_hadoop27:jobmanager] [docker-java-stream-1137404252] - STDOUT: Missing resources:
+355574	failing test	2026-10-03T18:20:36.9079933Z [ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 135.939 s <<< FAILURE! - in org.apache.seatunnel.engine.e2e.BackpressureSlowSinkIT
+355576	failing test	2026-10-03T18:20:36.9082666Z [ERROR] testCheckpointsKeepCompletingUnderSustainedBackpressure  Time elapsed: 135.939 s  <<< FAILURE!
+458956	failing test	2026-10-03T18:45:21.3976743Z [ERROR] Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 163.821 s <<< FAILURE! - in org.apache.seatunnel.engine.e2e.CheckpointRestoreWithStopIT
+458960	failing test	2026-10-03T18:45:21.3978455Z [ERROR] testRestoreFromCheckpointAfterStop  Time elapsed: 133.318 s  <<< ERROR!
+458961	condition timeout	2026-10-03T18:45:21.3980042Z org.awaitility.core.ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.engine.e2e.CheckpointRestoreWithStopIT Expected restored run to continue from checkpoint boundary 72 ==> expected: <true> but was: <false> within 2 minutes.
+526123	missing slots	2026-10-03T18:59:55.9955334Z [] 2026-10-03 18:59:55,994 INFO  [t.t.1.0.12_hadoop27:jobmanager] [docker-java-stream-1365607272] - STDOUT: Missing resources:
+526468	missing slots	2026-10-03T18:59:59.7357434Z Missing resources:
+527644	missing slots	2026-10-03T19:00:26.1936700Z [] 2026-10-03 19:00:26,192 INFO  [t.t.2.1.12_hadoop27:jobmanager] [docker-java-stream-1823122569] - STDOUT: Missing resources:
+528032	missing slots	2026-10-03T19:00:29.9225720Z Missing resources:
+535162	missing slots	2026-10-03T19:03:52.3227167Z [] 2026-10-03 19:03:52,322 INFO  [t.t.1.0.12_hadoop27:jobmanager] [docker-java-stream--890813072] - STDOUT: Missing resources:
+535542	missing slots	2026-10-03T19:04:05.2326439Z Missing resources:
+536740	missing slots	2026-10-03T19:04:36.5166852Z [] 2026-10-03 19:04:36,516 INFO  [t.t.2.1.12_hadoop27:jobmanager] [docker-java-stream-1929864276] - STDOUT: Missing resources:
+537148	missing slots	2026-10-03T19:04:49.3888736Z Missing resources:
+544267	missing slots	2026-10-03T19:08:00.4764064Z [] 2026-10-03 19:08:00,475 INFO  [t.t.1.0.12_hadoop27:jobmanager] [docker-java-stream--633992979] - STDOUT: Missing resources:
+544647	missing slots	2026-10-03T19:08:13.1114380Z Missing resources:
+545846	missing slots	2026-10-03T19:08:44.1688053Z [] 2026-10-03 19:08:44,168 INFO  [t.t.2.1.12_hadoop27:jobmanager] [docker-java-stream-1506681320] - STDOUT: Missing resources:
+546267	missing slots	2026-10-03T19:08:57.4009653Z Missing resources:
+574894	maven transfer error	2026-10-03T19:14:34.1168376Z java.io.IOException: Connection reset by peer
+579682	condition timeout	2026-10-03T19:15:50.2359594Z [ERROR]   CheckpointRestoreWithStopIT.testRestoreFromCheckpointAfterStop:167->assertRestoreContinuesAfterCheckpoint:544 » ConditionTimeout
+579684	failing test	2026-10-03T19:15:50.2361683Z [ERROR] Tests run: 223, Failures: 1, Errors: 1, Skipped: 7
+579778	exit code	2026-10-03T19:15:50.2768757Z ##[error]Process completed with exit code 1.

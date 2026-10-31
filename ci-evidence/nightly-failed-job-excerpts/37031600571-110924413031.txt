@@ -1,0 +1,46 @@
+{
+ "run_id": "37031600571",
+ "job_id": 110924413031,
+ "job_name": "Run / engine-v2-it (8, ubuntu-latest)",
+ "started_at": "2026-10-02T16:22:29Z",
+ "completed_at": "2026-10-02T18:08:11Z",
+ "conclusion": "failure",
+ "html_url": "https://github.com/apache/seatunnel/actions/runs/37031600571/job/110924413031",
+ "log_lines": 615832,
+ "log_sha256": "0f233acfa4f0f8be4e48f05c6384ac879815df447eb363522eccb16ce8997535",
+ "first_pass_sha256": "0f233acfa4f0f8be4e48f05c6384ac879815df447eb363522eccb16ce8997535",
+ "fetch_error": null,
+ "retrieved_at": "2026-10-31T01:45:45.687250Z"
+}
+144044	missing slots	2026-10-02T16:56:09.2076213Z [] 2026-10-02 16:56:09,207 INFO  [t.t.1.0.12_hadoop27:jobmanager] [docker-java-stream--361040170] - STDOUT: Missing resources:
+145430	missing slots	2026-10-02T16:56:52.9429322Z [] 2026-10-02 16:56:52,942 INFO  [t.t.2.1.12_hadoop27:jobmanager] [docker-java-stream-412596179] - STDOUT: Missing resources:
+154466	missing slots	2026-10-02T17:00:31.0487065Z [] 2026-10-02 17:00:31,048 INFO  [t.t.1.0.12_hadoop27:jobmanager] [docker-java-stream--540987909] - STDOUT: Missing resources:
+155759	missing slots	2026-10-02T17:00:57.6473037Z [] 2026-10-02 17:00:57,646 INFO  [t.t.2.1.12_hadoop27:jobmanager] [docker-java-stream--911347264] - STDOUT: Missing resources:
+389538	missing slots	2026-10-02T17:14:34.7218930Z [] 2026-10-02 17:14:34,721 INFO  [t.t.1.0.12_hadoop27:jobmanager] [docker-java-stream--1863525260] - STDOUT: Missing resources:
+390890	missing slots	2026-10-02T17:15:17.6168101Z [] 2026-10-02 17:15:17,616 INFO  [t.t.2.1.12_hadoop27:jobmanager] [docker-java-stream--1188272487] - STDOUT: Missing resources:
+473909	maven transfer error	2026-10-02T17:35:33.4752363Z [] 2026-10-02 17:35:33,474 INFO  [ine:seatunnelhub/openjdk:8u342] [docker-java-stream--1227376596] - STDERR: java.io.IOException: Connection reset by peer
+541693	maven transfer error	2026-10-02T17:46:53.9685399Z java.io.IOException: Connection reset by peer
+545096	maven transfer error	2026-10-02T17:48:44.4843838Z java.io.IOException: Connection reset by peer
+553829	failing test	2026-10-02T17:51:28.4671800Z [ERROR] Tests run: 11, Failures: 0, Errors: 1, Skipped: 2, Time elapsed: 527.08 s <<< FAILURE! - in org.apache.seatunnel.engine.e2e.SplitClusterFaultToleranceIT
+553830	failing test	2026-10-02T17:51:28.4676300Z [ERROR] testStreamJobCancelResolvesWhenWorkerCrashesBeforeCancelAck  Time elapsed: 67.357 s  <<< ERROR!
+553831	condition timeout	2026-10-02T17:51:28.4678311Z org.awaitility.core.ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.engine.e2e.SplitClusterFaultToleranceIT that uses java.util.concurrent.CompletableFuture expected: <CANCELED> but was: <FAILED> within 1 minutes.
+560482	missing slots	2026-10-02T17:53:28.7393852Z [] 2026-10-02 17:53:28,739 INFO  [t.t.1.0.12_hadoop27:jobmanager] [docker-java-stream--1458968077] - STDOUT: Missing resources:
+560829	missing slots	2026-10-02T17:53:33.6454503Z Missing resources:
+561996	missing slots	2026-10-02T17:53:51.8360977Z [] 2026-10-02 17:53:51,835 INFO  [t.t.2.1.12_hadoop27:jobmanager] [docker-java-stream--1984206397] - STDOUT: Missing resources:
+562387	missing slots	2026-10-02T17:53:56.9902754Z Missing resources:
+569485	missing slots	2026-10-02T17:56:51.6744520Z [] 2026-10-02 17:56:51,674 INFO  [t.t.1.0.12_hadoop27:jobmanager] [docker-java-stream-1719938411] - STDOUT: Missing resources:
+569868	missing slots	2026-10-02T17:57:06.3221122Z Missing resources:
+571059	missing slots	2026-10-02T17:57:29.1526901Z [] 2026-10-02 17:57:29,152 INFO  [t.t.2.1.12_hadoop27:jobmanager] [docker-java-stream--1343341142] - STDOUT: Missing resources:
+571455	missing slots	2026-10-02T17:57:34.5860599Z Missing resources:
+574748	maven transfer error	2026-10-02T17:59:05.0308690Z [] 2026-10-02 17:59:05,029 INFO  [t.t.1.3.12_hadoop27:jobmanager] [docker-java-stream--1758990139] - STDOUT: 2026-10-02 17:59:05,029 WARN  akka.remote.transport.netty.NettyTransport                   [] - Remote connection to [/172.18.0.3:41216] failed with java.io.IOException: Connection reset by peer
+574979	maven transfer error	2026-10-02T17:59:07.0262728Z 2026-10-02 17:59:05,029 WARN  akka.remote.transport.netty.NettyTransport                   [] - Remote connection to [/172.18.0.3:41216] failed with java.io.IOException: Connection reset by peer
+578564	missing slots	2026-10-02T18:00:34.3280665Z [] 2026-10-02 18:00:34,326 INFO  [t.t.1.0.12_hadoop27:jobmanager] [docker-java-stream-312576071] - STDOUT: Missing resources:
+578937	missing slots	2026-10-02T18:00:42.6363147Z Missing resources:
+580129	missing slots	2026-10-02T18:01:06.2988722Z [] 2026-10-02 18:01:06,298 INFO  [t.t.2.1.12_hadoop27:jobmanager] [docker-java-stream--745360817] - STDOUT: Missing resources:
+580540	missing slots	2026-10-02T18:01:13.4543797Z Missing resources:
+607529	maven transfer error	2026-10-02T18:05:26.9906173Z java.io.IOException: Connection reset by peer
+609177	maven transfer error	2026-10-02T18:06:21.8919093Z java.io.IOException: Connection reset by peer
+611172	maven transfer error	2026-10-02T18:07:01.3774028Z java.io.IOException: Connection reset by peer
+615608	condition timeout	2026-10-02T18:07:59.8952112Z [ERROR]   SplitClusterFaultToleranceIT.testStreamJobCancelResolvesWhenWorkerCrashesBeforeCancelAck:449->assertEventuallyCanceled:557 » ConditionTimeout
+615610	failing test	2026-10-02T18:07:59.8953029Z [ERROR] Tests run: 223, Failures: 0, Errors: 1, Skipped: 7
+615704	exit code	2026-10-02T18:08:00.1192401Z ##[error]Process completed with exit code 1.

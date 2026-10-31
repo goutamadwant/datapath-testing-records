@@ -1,0 +1,30 @@
+# Context lines 9262-9290 of the log of job 118226773412 (run 39282837181), https://api.github.com/repos/apache/seatunnel/actions/jobs/118226773412/logs, retrieved 2026-10-31T01:58:56Z; line numbers as in the scan
+  9262	2026-10-19T19:14:23.3814475Z [INFO] SeaTunnel : Connectors V2 : CDC : MySql ............ SUCCESS [  6.174 s]
+  9263	2026-10-19T19:14:23.3815112Z [INFO] SeaTunnel : Connectors V2 : Redis .................. SUCCESS [  3.034 s]
+  9264	2026-10-19T19:14:23.3815724Z [INFO] SeaTunnel : E2E : Connector V2 : ................... SKIPPED
+  9265	2026-10-19T19:14:23.3816311Z [INFO] SeaTunnel : E2E : Connector V2 : Redis ............. SKIPPED
+  9266	2026-10-19T19:14:23.3816828Z [INFO] ------------------------------------------------------------------------
+  9267	2026-10-19T19:14:23.3817170Z [INFO] BUILD FAILURE
+  9268	2026-10-19T19:14:23.3817774Z [INFO] ------------------------------------------------------------------------
+  9269	2026-10-19T19:14:23.3818127Z [INFO] Total time:  05:22 min
+  9270	2026-10-19T19:14:23.3818393Z [INFO] Finished at: 2026-10-19T19:14:23Z
+  9271	2026-10-19T19:14:23.3818742Z [INFO] ------------------------------------------------------------------------
+  9272	2026-10-19T19:14:23.3821801Z [ERROR] Failed to execute goal on project seatunnel-translation-flink-13: Could not resolve dependencies for project org.apache.seatunnel:seatunnel-translation-flink-13:jar:3.0.1-SNAPSHOT: The following artifacts could not be resolved: org.apache.flink:flink-shaded-netty:jar:4.1.49.Final-13.0, com.typesafe.akka:akka-actor_2.12:jar:2.5.21: Could not transfer artifact org.apache.flink:flink-shaded-netty:jar:4.1.49.Final-13.0 from/to central (https://repo.maven.apache.org/maven2): GET request of: org/apache/flink/flink-shaded-netty/4.1.49.Final-13.0/flink-shaded-netty-4.1.49.Final-13.0.jar from central failed: Connection reset -> [Help 1]
+  9273	2026-10-19T19:14:23.3825042Z [ERROR] 
+  9274	2026-10-19T19:14:23.3825542Z [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+  9275	2026-10-19T19:14:23.3826282Z [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+  9276	2026-10-19T19:14:23.3826814Z [ERROR] 
+  9277	2026-10-19T19:14:23.3827577Z [ERROR] For more information about the errors and possible solutions, please read the following articles:
+  9278	2026-10-19T19:14:23.3828624Z [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/DependencyResolutionException
+  9279	2026-10-19T19:14:23.3829505Z [ERROR] 
+  9280	2026-10-19T19:14:23.3829916Z [ERROR] After correcting the problems, you can resume the build with the command
+  9281	2026-10-19T19:14:23.3830573Z [ERROR]   mvn <args> -rf :seatunnel-translation-flink-13
+  9282	2026-10-19T19:14:23.4454416Z ##[error]Process completed with exit code 1.
+  9283	2026-10-19T19:14:23.4597593Z Prepare all required actions
+  9284	2026-10-19T19:14:23.4598172Z Getting action download info
+  9285	2026-10-19T19:14:23.8146673Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+  9286	2026-10-19T19:14:24.0938101Z ##[group]Run ./.github/actions/upload-test-reports
+  9287	2026-10-19T19:14:24.0938452Z with:
+  9288	2026-10-19T19:14:24.0938695Z   id: 17-ubuntu-latest
+  9289	2026-10-19T19:14:24.0939125Z   retention-days: 7
+  9290	2026-10-19T19:14:24.0939350Z env:

@@ -1,0 +1,16 @@
+{
+ "run_id": "37338260777",
+ "job_id": 111895225539,
+ "job_name": "Run / kafka-connector-it (8, ubuntu-latest)",
+ "started_at": "2026-10-05T18:06:45Z",
+ "completed_at": "2026-10-05T18:12:32Z",
+ "conclusion": "failure",
+ "html_url": "https://github.com/apache/seatunnel/actions/runs/37338260777/job/111895225539",
+ "log_lines": 11069,
+ "log_sha256": "02b7bbccf046eb02f7d014ba149dc09efd7ebf161d6b64cbd028909f97dbab1d",
+ "first_pass_sha256": "02b7bbccf046eb02f7d014ba149dc09efd7ebf161d6b64cbd028909f97dbab1d",
+ "fetch_error": null,
+ "retrieved_at": "2026-10-31T01:47:15.570885Z"
+}
+10935	maven transfer error	2026-10-05T18:12:27.1157793Z [ERROR] Failed to execute goal on project seatunnel-flink-13-starter: Could not resolve dependencies for project org.apache.seatunnel:seatunnel-flink-13-starter:jar:3.0.0-SNAPSHOT: Could not transfer artifact com.ververica:frocksdbjni:jar:5.17.2-ververica-2.1 from/to central (https://repo.maven.apache.org/maven2): transfer failed for https://repo.maven.apache.org/maven
+10945	exit code	2026-10-05T18:12:27.1577125Z ##[error]Process completed with exit code 1.

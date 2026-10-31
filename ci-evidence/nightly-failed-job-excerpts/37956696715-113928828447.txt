@@ -1,0 +1,53 @@
+{
+ "run_id": "37956696715",
+ "job_id": 113928828447,
+ "job_name": "Run / elasticsearch-connector-it (11, ubuntu-latest)",
+ "started_at": "2026-10-09T17:40:49Z",
+ "completed_at": "2026-10-09T20:13:21Z",
+ "conclusion": "failure",
+ "html_url": "https://github.com/apache/seatunnel/actions/runs/37956696715/job/113928828447",
+ "log_lines": 204729,
+ "log_sha256": "6a8066f0849b2cf97506f6f72c7265773fded0ff10a37a301037476454f599c2",
+ "first_pass_sha256": "6a8066f0849b2cf97506f6f72c7265773fded0ff10a37a301037476454f599c2",
+ "fetch_error": null,
+ "retrieved_at": "2026-10-31T01:48:51.776630Z"
+}
+22254	missing slots	2026-10-09T17:54:57.4992418Z [] 2026-10-09 17:54:57,498 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+23684	missing slots	2026-10-09T17:56:21.5125117Z [] 2026-10-09 17:56:21,512 INFO  tc.seatunnel-e2e-jdk11-tyrantlucifer-flink-1.20.1-scala_2.12_hadoop27:latest:jobmanager - STDOUT: Missing resources:
+34108	missing slots	2026-10-09T18:06:48.1164929Z [] 2026-10-09 18:06:48,115 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+35540	missing slots	2026-10-09T18:07:57.8607903Z [] 2026-10-09 18:07:57,860 INFO  tc.seatunnel-e2e-jdk11-tyrantlucifer-flink-1.20.1-scala_2.12_hadoop27:latest:jobmanager - STDOUT: Missing resources:
+51574	missing slots	2026-10-09T18:20:54.0978447Z [] 2026-10-09 18:20:54,096 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+53031	missing slots	2026-10-09T18:21:57.7793935Z [] 2026-10-09 18:21:57,778 INFO  tc.seatunnel-e2e-jdk11-tyrantlucifer-flink-1.20.1-scala_2.12_hadoop27:latest:jobmanager - STDOUT: Missing resources:
+63773	missing slots	2026-10-09T18:29:42.1642308Z [] 2026-10-09 18:29:42,163 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+65312	missing slots	2026-10-09T18:30:47.6031497Z [] 2026-10-09 18:30:47,602 INFO  tc.seatunnel-e2e-jdk11-tyrantlucifer-flink-1.20.1-scala_2.12_hadoop27:latest:jobmanager - STDOUT: Missing resources:
+75835	missing slots	2026-10-09T18:38:52.5119824Z [] 2026-10-09 18:38:52,510 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+77262	missing slots	2026-10-09T18:39:56.6142051Z [] 2026-10-09 18:39:56,613 INFO  tc.seatunnel-e2e-jdk11-tyrantlucifer-flink-1.20.1-scala_2.12_hadoop27:latest:jobmanager - STDOUT: Missing resources:
+87661	missing slots	2026-10-09T18:47:49.7363084Z [] 2026-10-09 18:47:49,735 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+89167	missing slots	2026-10-09T18:48:52.7016367Z [] 2026-10-09 18:48:52,700 INFO  tc.seatunnel-e2e-jdk11-tyrantlucifer-flink-1.20.1-scala_2.12_hadoop27:latest:jobmanager - STDOUT: Missing resources:
+99792	missing slots	2026-10-09T18:56:47.7539451Z [] 2026-10-09 18:56:47,752 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+101275	missing slots	2026-10-09T18:57:51.3092393Z [] 2026-10-09 18:57:51,308 INFO  tc.seatunnel-e2e-jdk11-tyrantlucifer-flink-1.20.1-scala_2.12_hadoop27:latest:jobmanager - STDOUT: Missing resources:
+112201	missing slots	2026-10-09T19:05:37.0945566Z [] 2026-10-09 19:05:37,093 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+113741	missing slots	2026-10-09T19:06:42.4495565Z [] 2026-10-09 19:06:42,448 INFO  tc.seatunnel-e2e-jdk11-tyrantlucifer-flink-1.20.1-scala_2.12_hadoop27:latest:jobmanager - STDOUT: Missing resources:
+124872	missing slots	2026-10-09T19:14:37.3741162Z [] 2026-10-09 19:14:37,373 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+126340	missing slots	2026-10-09T19:15:43.6867501Z [] 2026-10-09 19:15:43,685 INFO  tc.seatunnel-e2e-jdk11-tyrantlucifer-flink-1.20.1-scala_2.12_hadoop27:latest:jobmanager - STDOUT: Missing resources:
+136648	missing slots	2026-10-09T19:23:36.6760556Z [] 2026-10-09 19:23:36,675 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+138100	missing slots	2026-10-09T19:24:40.9632657Z [] 2026-10-09 19:24:40,963 INFO  tc.seatunnel-e2e-jdk11-tyrantlucifer-flink-1.20.1-scala_2.12_hadoop27:latest:jobmanager - STDOUT: Missing resources:
+149935	missing slots	2026-10-09T19:34:00.5479875Z [] 2026-10-09 19:34:00,547 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+151422	missing slots	2026-10-09T19:35:04.9616843Z [] 2026-10-09 19:35:04,961 INFO  tc.seatunnel-e2e-jdk11-tyrantlucifer-flink-1.20.1-scala_2.12_hadoop27:latest:jobmanager - STDOUT: Missing resources:
+162242	missing slots	2026-10-09T19:43:09.2146568Z [] 2026-10-09 19:43:09,213 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+163868	missing slots	2026-10-09T19:44:12.7181434Z [] 2026-10-09 19:44:12,717 INFO  tc.seatunnel-e2e-jdk11-tyrantlucifer-flink-1.20.1-scala_2.12_hadoop27:latest:jobmanager - STDOUT: Missing resources:
+174239	missing slots	2026-10-09T19:51:57.6867265Z [] 2026-10-09 19:51:57,684 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+175676	missing slots	2026-10-09T19:53:06.4039356Z [] 2026-10-09 19:53:06,403 INFO  tc.seatunnel-e2e-jdk11-tyrantlucifer-flink-1.20.1-scala_2.12_hadoop27:latest:jobmanager - STDOUT: Missing resources:
+186114	missing slots	2026-10-09T20:00:46.4474848Z [] 2026-10-09 20:00:46,446 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+187618	missing slots	2026-10-09T20:01:49.7673327Z [] 2026-10-09 20:01:49,765 INFO  tc.seatunnel-e2e-jdk11-tyrantlucifer-flink-1.20.1-scala_2.12_hadoop27:latest:jobmanager - STDOUT: Missing resources:
+199152	missing slots	2026-10-09T20:09:38.7435377Z [] 2026-10-09 20:09:38,742 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+199498	missing slots	2026-10-09T20:09:43.5610740Z Missing resources:
+200854	missing slots	2026-10-09T20:10:41.9792809Z [] 2026-10-09 20:10:41,977 INFO  tc.seatunnel-e2e-jdk11-tyrantlucifer-flink-1.20.1-scala_2.12_hadoop27:latest:jobmanager - STDOUT: Missing resources:
+201261	missing slots	2026-10-09T20:10:46.4644976Z Missing resources:
+204474	failing test	2026-10-09T20:13:12.2355109Z [ERROR] Tests run: 133, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 7,096.733 s <<< FAILURE! - in org.apache.seatunnel.e2e.connector.elasticsearch.ElasticsearchIT
+204475	failing test	2026-10-09T20:13:12.2356901Z [ERROR] testElasticsearchWithPITSliceQueued{TestContainer}[4]  Time elapsed: 53.976 s  <<< FAILURE!
+204479	failing test	2026-10-09T20:13:12.2361105Z [ERROR] testElasticsearchWithPITSliceQueued{TestContainer}[6]  Time elapsed: 55.311 s  <<< FAILURE!
+204483	failing test	2026-10-09T20:13:12.2363927Z [ERROR] testElasticsearchWithScrollSlice{TestContainer}[9]  Time elapsed: 45.744 s  <<< FAILURE!
+204487	failing test	2026-10-09T20:13:12.2372019Z [ERROR] testElasticsearchWithScrollSlice{TestContainer}[10]  Time elapsed: 46.92 s  <<< FAILURE!
+204500	failing test	2026-10-09T20:13:12.9180596Z [ERROR] Tests run: 161, Failures: 4, Errors: 0, Skipped: 0
+204598	exit code	2026-10-09T20:13:12.9692610Z ##[error]Process completed with exit code 1.

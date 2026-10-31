@@ -1,0 +1,43 @@
+# case: df24917-budget-nohook
+# side: after
+# before commit (first parent): 408527ae58b5b706f5c02df8c37e096122cd8c78
+# after commit (merge): 3dfa245d61dde362e2c077761783bc735931659c
+# tree HEAD: 3dfa245d61dde362e2c077761783bc735931659c
+# transplant: patches/df24917-budget-nohook-after.patch applied (hook-free test-module hunks only)
+# git status --porcelain:
+#    M datafusion/optimizer/src/simplify_expressions/expr_simplifier.rs
+#    M datafusion/physical-expr/src/simplifier/mod.rs
+# git diff --stat HEAD:
+#    .../src/simplify_expressions/expr_simplifier.rs    | 17 +++++++++
+#    datafusion/physical-expr/src/simplifier/mod.rs     | 42 ++++++++++++++++++++++
+#    2 files changed, 59 insertions(+)
+# host: Darwin 27.0.0 arm64
+# toolchain: rustc 1.97.0 (2d8144b78 2026-07-07) / cargo 1.97.0 (c980f4866 2026-06-30)
+# command: cargo test --locked --profile ci --no-fail-fast -p datafusion-optimizer -p datafusion-physical-expr --lib test_constant_regex_planning_budget_without_hook
+# start: 2026-10-30T18:38:50-0700
+   Compiling datafusion-expr v55.0.0 ($FAILBEFORE_WORK/trees/df/datafusion/expr)
+   Compiling datafusion-execution v55.0.0 ($FAILBEFORE_WORK/trees/df/datafusion/execution)
+   Compiling datafusion-physical-expr v55.0.0 ($FAILBEFORE_WORK/trees/df/datafusion/physical-expr)
+   Compiling datafusion-functions v55.0.0 ($FAILBEFORE_WORK/trees/df/datafusion/functions)
+   Compiling datafusion-functions-aggregate v55.0.0 ($FAILBEFORE_WORK/trees/df/datafusion/functions-aggregate)
+   Compiling datafusion-functions-window v55.0.0 ($FAILBEFORE_WORK/trees/df/datafusion/functions-window)
+   Compiling datafusion-functions-nested v55.0.0 ($FAILBEFORE_WORK/trees/df/datafusion/functions-nested)
+   Compiling datafusion-sql v55.0.0 ($FAILBEFORE_WORK/trees/df/datafusion/sql)
+   Compiling datafusion-optimizer v55.0.0 ($FAILBEFORE_WORK/trees/df/datafusion/optimizer)
+    Finished `ci` profile [unoptimized] target(s) in 31.83s
+     Running unittests src/lib.rs ($FAILBEFORE_WORK/df-target/ci/deps/datafusion_optimizer-2437e140c2367bf9)
+
+running 1 test
+test simplify_expressions::expr_simplifier::tests::test_constant_regex_planning_budget_without_hook ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 776 filtered out; finished in 0.01s
+
+     Running unittests src/lib.rs ($FAILBEFORE_WORK/df-target/ci/deps/datafusion_physical_expr-dbf47a2201bf05e6)
+
+running 1 test
+test simplifier::tests::test_constant_regex_planning_budget_without_hook ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 1641 filtered out; finished in 0.01s
+
+# end: 2026-10-30T18:39:24-0700
+# exit code: 0

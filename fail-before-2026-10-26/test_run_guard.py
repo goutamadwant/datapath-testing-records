@@ -66,12 +66,60 @@ class RunGuardTest(unittest.TestCase):
         request = json.loads((self.root / "logs/requested.json").read_text())[0]
         self.assertEqual(len(request["cases"]), 10)
         self.assertNotIn("st12481-shim", request["cases"])
-        self.assertFalse(any(r["case"] == "st12481-shim" for r in self.records()))
+        self.assertNotIn("df24917-budget-nohook", request["cases"])
+        self.assertFalse(any(r["case"] in ("st12481-shim", "df24917-budget-nohook")
+                             for r in self.records()))
+
+    def test_nohook_explicit_setup_failure_records_both_sides(self):
+        result = self.run_script("df24917-budget-nohook")
+        self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+        request = json.loads((self.root / "logs/requested.json").read_text())[0]
+        self.assertEqual(request["cases"], ["df24917-budget-nohook"])
+        records = self.records()
+        self.assertEqual([r["side"] for r in records], ["before", "after"])
+        for record in records:
+            self.assertIn("clone", record["setup_error"])
+            self.assertIn(f"df24917-budget-nohook-{record['side']}.patch applied",
+                          record["transplant"])
+            self.assertNotIn("merge commit as is", record["transplant"])
+        self.assertNotIn("cargo", self.trace.read_text())
+
+    def test_unknown_case_lists_nohook(self):
+        result = self.run_script("unknown")
+        self.assertEqual(result.returncode, 2, result.stderr)
+        self.assertIn("df24917-budget-nohook", result.stderr)
+        self.assertIn("st12481-shim", result.stderr)
 
     def isolated(self, body):
         # Load definitions only, in a temporary runner directory; never touch the real host path.
         self.runner.write_text(SOURCE.split('\nALL="', 1)[0] + "\n" + body)
         return self.run_script()
+
+    def test_nohook_applies_patch_and_runs_same_command_on_each_commit(self):
+        result = self.isolated('''
+df_tree() { echo "tree $*"; }
+df_transplant() { echo "transplant $*"; }
+run_one() { printf 'run %s\\n' "$*"; }
+setup_error() { exit 9; }
+case_df24917-budget-nohook
+''')
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        before = "408527ae58b5b706f5c02df8c37e096122cd8c78"
+        after = "3dfa245d61dde362e2c077761783bc735931659c"
+        command = ("cargo test --locked --profile ci --no-fail-fast "
+                   "-p datafusion-optimizer -p datafusion-physical-expr --lib "
+                   "test_constant_regex_planning_budget_without_hook")
+        expected = []
+        for side, commit in (("before", before), ("after", after)):
+            patch = f"df24917-budget-nohook-{side}.patch"
+            expected.extend([
+                f"tree {commit}",
+                f"transplant patch {patch} {after}",
+                f"run df24917-budget-nohook {side} {before} {after} patches/{patch} "
+                f"applied (hook-free test-module hunks only) - {command}",
+            ])
+        self.assertEqual(result.stdout.splitlines(), expected)
+        self.assertFalse(self.trace.exists(), "external command reached")
 
     def test_guard_requires_both_conditions(self):
         hazard = shlex.quote(str(self.root / "host-path"))

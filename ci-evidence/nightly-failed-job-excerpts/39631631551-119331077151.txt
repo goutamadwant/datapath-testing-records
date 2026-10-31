@@ -1,0 +1,15 @@
+{
+ "run_id": "39631631551",
+ "job_id": 119331077151,
+ "job_name": "Run / changes",
+ "started_at": "2026-10-21T20:16:56Z",
+ "completed_at": "2026-10-21T20:17:07Z",
+ "conclusion": "failure",
+ "html_url": "https://github.com/apache/seatunnel/actions/runs/39631631551/job/119331077151",
+ "log_lines": 185,
+ "log_sha256": "bae956ea85c450297442f7ce36385a46356ff107971120401d1245ba25d4973f",
+ "first_pass_sha256": "bae956ea85c450297442f7ce36385a46356ff107971120401d1245ba25d4973f",
+ "fetch_error": null,
+ "retrieved_at": "2026-10-31T01:51:43.899923Z"
+}
+

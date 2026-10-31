@@ -3,14 +3,15 @@
 #
 # Usage: ./run.sh [case ...]
 #   cases: df24193 df24917 df24917-diag df24917-budget st12038 st12038-shim st12038-factory st12360
-#          st12472 st12481 st12481-shim
-#   (default: all cases except st12481-shim, in that order)
+#          st12472 st12481 st12481-shim df24917-budget-nohook
+#   (default: all cases except st12481-shim and df24917-budget-nohook, in that order)
 #
 # For each case:
 #   before = first parent of the pull request's merge commit, with ONLY the test change of the
 #            pull request applied on top (whole test files, or the test-module hunks of a file that
 #            also holds production code; see patches/)
-#   after  = the pull request's merge commit, unmodified
+#   after  = the pull request's merge commit, unmodified except for df24917-budget-nohook,
+#            which adds a separate hook-free test function on both sides
 # The same test command runs on both trees. Every run writes a full log under logs/<case>/ and
 # appends one record to logs/runs.jsonl; logs are never overwritten (a repeated run gets a suffix).
 # python3 make_results.py then derives the outcome of every run from its log and writes results.json.
@@ -282,6 +283,33 @@ case_df24917-budget() {
         patch df24917-budget-tests-only.patch
 }
 
+# Apply a test patch on either side, including the merge commit.
+df_patched_side() { # case side before after patch cmd...
+    local case=$1 side=$2 before=$3 after=$4 patch=$5 commit text
+    shift 5
+    commit=$before
+    [ "$side" = before ] || commit=$after
+    text="patches/$patch applied (hook-free test-module hunks only)"
+    begin_side
+    if df_tree "$commit" && df_transplant patch "$patch" "$after"; then
+        run_one "$case" "$side" "$before" "$after" "$text" - "$@"
+    else
+        setup_error "$case" "$side" "$before" "$after" "$text" "$@"
+    fi
+}
+
+# Separate functions retain only the original regex assertions, without a UDF hook or column case.
+case_df24917-budget-nohook() {
+    local side
+    for side in before after; do
+        df_patched_side df24917-budget-nohook "$side" \
+            408527ae58b5b706f5c02df8c37e096122cd8c78 3dfa245d61dde362e2c077761783bc735931659c \
+            "df24917-budget-nohook-$side.patch" \
+            cargo test --locked --profile ci --no-fail-fast -p datafusion-optimizer \
+            -p datafusion-physical-expr --lib test_constant_regex_planning_budget_without_hook
+    done
+}
+
 # ---------------------------------------------------------------- SeaTunnel
 mvn_cmd() { # module test-selector
     # package, not test: upstream modules such as seatunnel-config-shade are only usable by the
@@ -413,7 +441,7 @@ ALL="df24193 df24917 df24917-diag df24917-budget st12038 st12038-shim st12038-fa
 EXPLICIT_CASES=$#
 CASES=${*:-$ALL}
 for c in $CASES; do
-    declare -F "case_$c" > /dev/null || { echo "unknown case: $c (cases: $ALL st12481-shim)" >&2; exit 2; }
+    declare -F "case_$c" > /dev/null || { echo "unknown case: $c (cases: $ALL st12481-shim df24917-budget-nohook)" >&2; exit 2; }
 done
 
 # Requested cases and sides, written before any build.

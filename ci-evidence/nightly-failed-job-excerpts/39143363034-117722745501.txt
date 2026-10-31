@@ -1,0 +1,24 @@
+{
+ "run_id": "39143363034",
+ "job_id": 117722745501,
+ "job_name": "Run / unit-test (11, windows-latest)",
+ "started_at": "2026-10-18T16:07:31Z",
+ "completed_at": "2026-10-18T16:22:04Z",
+ "conclusion": "failure",
+ "html_url": "https://github.com/apache/seatunnel/actions/runs/39143363034/job/117722745501",
+ "log_lines": 16768,
+ "log_sha256": "6ac63e3cb1dac9a5c2b3aaeb9429dee988afa7ab2e300652d025e2f79999e726",
+ "first_pass_sha256": "6ac63e3cb1dac9a5c2b3aaeb9429dee988afa7ab2e300652d025e2f79999e726",
+ "fetch_error": null,
+ "retrieved_at": "2026-10-31T01:50:55.803252Z"
+}
+8197	file collect test	2026-10-18T16:15:52.0476248Z [INFO] Running org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest
+8198	file collect test	2026-10-18T16:15:52.1648423Z [INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.117 s - in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderBehaviorTest
+8199	file collect test	2026-10-18T16:15:52.1649619Z [INFO] Running org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderMultilineTest
+8200	file collect test	2026-10-18T16:15:52.3014424Z [WARNING] Tests run: 8, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 0.128 s - in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderMultilineTest
+8201	file collect test	2026-10-18T16:15:52.3017025Z [INFO] Running org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderPositionTest
+8202	file collect test	2026-10-18T16:15:52.3141323Z [INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s - in org.apache.seatunnel.edge.agent.connector.file.FileCollectReaderPositionTest
+15839	failing test	2026-10-18T16:21:43.7428007Z [ERROR] Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.012 s <<< FAILURE! - in org.apache.seatunnel.connectors.seatunnel.jdbc.JdbcOptionRuleCompletenessTest
+15840	failing test	2026-10-18T16:21:43.7428462Z [ERROR] testSinkRuleDeclaresAllSinkOptions  Time elapsed: 0.011 s  <<< FAILURE!
+15911	failing test	2026-10-18T16:21:52.1538719Z [ERROR] Tests run: 1096, Failures: 1, Errors: 0, Skipped: 10
+16640	exit code	2026-10-18T16:21:52.4064544Z ##[error]Process completed with exit code 1.

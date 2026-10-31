@@ -1,0 +1,27 @@
+Fri Oct 30 18:41:30 PDT 2026
+invocation 20261031T014130Z-77153: df24193 df24917 df24917-diag df24917-budget st12038 st12038-shim st12038-factory st12360 st12472 st12481
+/dev/disk3s5   926Gi   871Gi    13Gi    99%     23M  140M   14%   /System/Volumes/Data
+[df24193/before] exit 101 in 87 s -> logs/df24193/before-3.log
+[df24193/after] exit 0 in 28 s -> logs/df24193/after-3.log
+/dev/disk3s5   926Gi   872Gi    12Gi    99%     23M  128M   15%   /System/Volumes/Data
+[df24917/before] exit 0 in 131 s -> logs/df24917/before-3.log
+[df24917/after] exit 0 in 96 s -> logs/df24917/after-3.log
+[df24917-diag/before] exit 0 in 117 s -> logs/df24917-diag/before-3.log
+[df24917-diag/after] exit 0 in 103 s -> logs/df24917-diag/after-3.log
+/dev/disk3s5   926Gi   874Gi    10Gi    99%     23M  106M   18%   /System/Volumes/Data
+[df24917-budget/before] exit 101 in 43 s -> logs/df24917-budget/before-3.log
+[df24917-budget/after] exit 0 in 38 s -> logs/df24917-budget/after-3.log
+[st12038/before] exit 1 in 93 s -> logs/st12038/before-3.log
+[st12038/after] exit 0 in 101 s -> logs/st12038/after-3.log
+[st12038-shim/before] exit 1 in 194 s -> logs/st12038-shim/before-3.log
+[st12038-shim/after] exit 0 in 173 s -> logs/st12038-shim/after-3.log
+[st12038-factory/before] exit 1 in 183 s -> logs/st12038-factory/before-3.log
+[st12038-factory/after] exit 0 in 199 s -> logs/st12038-factory/after-3.log
+[st12360/before] exit 0 in 155 s -> logs/st12360/before-3.log
+[st12360/after] exit 0 in 113 s -> logs/st12360/after-3.log
+[st12472/before] exit 1 in 62 s -> logs/st12472/before-4.log
+[st12472/after] exit 0 in 61 s -> logs/st12472/after-3.log
+[st12481/before] exit 1 in 97 s -> logs/st12481/before-3.log
+[st12481/after] exit 0 in 104 s -> logs/st12481/after-3.log
+invocation 20261031T014130Z-77153: 20/20 requested sides ran
+exit 0

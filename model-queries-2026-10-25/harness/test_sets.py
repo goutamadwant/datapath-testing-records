@@ -610,6 +610,34 @@ class SyntheticFilesTest(unittest.TestCase):
         self.assertTrue(validation["complete"])
         self.assertTrue(self.tables.exists())
 
+    def test_inventory_preserves_manifest_hashes_before_freezing(self):
+        self.fixture(27)
+        source = pathlib.Path(__file__).resolve().parent.parent
+        earlier_hashes = {}
+        for name in sorted(FROZEN_SETS):
+            relative = f"logs/{name}/manifest.json"
+            manifest = self.root / relative
+            manifest.parent.mkdir(parents=True)
+            shutil.copy2(source / relative, manifest)
+            earlier = b"".join(line for line in manifest.read_bytes().splitlines(keepends=True)
+                               if not any(line.startswith(f'  "{key}":'.encode()) for key in
+                                          ("frozen", "query_count", "control_count",
+                                           "expected_process_runs")))
+            earlier_hashes[relative] = hashlib.sha256(earlier).hexdigest()
+        status, _, error = self.analyze()
+        self.assertEqual((status, error), (0, ""))
+        inventory = json.loads(self.results.read_text())["sha256"]
+        for relative, earlier in earlier_hashes.items():
+            with self.subTest(path=relative):
+                current = hashlib.sha256((self.root / relative).read_bytes()).hexdigest()
+                self.assertNotEqual(current, earlier)
+                self.assertEqual(inventory[relative], {"sha256": current, "sha256_as_run": earlier})
+        for relative, entry in inventory.items():
+            current = entry["sha256"] if isinstance(entry, dict) else entry
+            self.assertEqual(current, hashlib.sha256((self.root / relative).read_bytes()).hexdigest())
+            if relative not in earlier_hashes:
+                self.assertIsInstance(entry, str)
+
     def test_analyze_preserves_historical_outputs(self):
         self.fixture()
         self.results.write_bytes(b"historical results\r\n")

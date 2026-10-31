@@ -1,0 +1,20 @@
+{
+ "run_id": "38154064718",
+ "job_id": 114513930530,
+ "job_name": "Run / jdbc-connectors-it-part-5 (17, ubuntu-latest)",
+ "started_at": "2026-10-11T16:09:41Z",
+ "completed_at": "2026-10-11T16:13:13Z",
+ "conclusion": "failure",
+ "html_url": "https://github.com/apache/seatunnel/actions/runs/38154064718/job/114513930530",
+ "log_lines": 1702,
+ "log_sha256": "fcc833de121ae9c72812804abc26f519d681f564391abea74bc94629bc12b7d9",
+ "first_pass_sha256": "fcc833de121ae9c72812804abc26f519d681f564391abea74bc94629bc12b7d9",
+ "fetch_error": null,
+ "retrieved_at": "2026-10-31T01:50:22.951118Z"
+}
+1549	maven transfer error	2026-10-11T16:11:52.0306321Z HTTP request sent, awaiting response... 403 Forbidden
+1556	maven transfer error	2026-10-11T16:11:57.1340555Z HTTP request sent, awaiting response... 403 Forbidden
+1563	maven transfer error	2026-10-11T16:12:07.2352233Z HTTP request sent, awaiting response... 403 Forbidden
+1570	maven transfer error	2026-10-11T16:12:27.3458287Z HTTP request sent, awaiting response... 403 Forbidden
+1577	maven transfer error	2026-10-11T16:13:07.4475381Z HTTP request sent, awaiting response... 403 Forbidden
+1582	exit code	2026-10-11T16:13:08.9659830Z ##[error]Process completed with exit code 1.

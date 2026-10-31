@@ -1,0 +1,5 @@
+invocation 20261031T013734Z-71073: df24917-budget-nohook
+[df24917-budget-nohook/before] exit 101 in 73 s -> logs/df24917-budget-nohook/before.log
+[df24917-budget-nohook/after] exit 0 in 35 s -> logs/df24917-budget-nohook/after.log
+invocation 20261031T013734Z-71073: 2/2 requested sides ran
+exit 0

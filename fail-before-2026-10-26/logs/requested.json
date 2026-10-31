@@ -113,5 +113,120 @@
         "side": "after"
       }
     ]
+  },
+  {
+    "invocation": "20261031T013734Z-71073",
+    "requested_at": "2026-10-30T18:37:34-0700",
+    "cases": [
+      "df24917-budget-nohook"
+    ],
+    "sides": [
+      {
+        "case": "df24917-budget-nohook",
+        "side": "before"
+      },
+      {
+        "case": "df24917-budget-nohook",
+        "side": "after"
+      }
+    ]
+  },
+  {
+    "invocation": "20261031T014130Z-77153",
+    "requested_at": "2026-10-30T18:41:30-0700",
+    "cases": [
+      "df24193",
+      "df24917",
+      "df24917-diag",
+      "df24917-budget",
+      "st12038",
+      "st12038-shim",
+      "st12038-factory",
+      "st12360",
+      "st12472",
+      "st12481"
+    ],
+    "sides": [
+      {
+        "case": "df24193",
+        "side": "before"
+      },
+      {
+        "case": "df24193",
+        "side": "after"
+      },
+      {
+        "case": "df24917",
+        "side": "before"
+      },
+      {
+        "case": "df24917",
+        "side": "after"
+      },
+      {
+        "case": "df24917-diag",
+        "side": "before"
+      },
+      {
+        "case": "df24917-diag",
+        "side": "after"
+      },
+      {
+        "case": "df24917-budget",
+        "side": "before"
+      },
+      {
+        "case": "df24917-budget",
+        "side": "after"
+      },
+      {
+        "case": "st12038",
+        "side": "before"
+      },
+      {
+        "case": "st12038",
+        "side": "after"
+      },
+      {
+        "case": "st12038-shim",
+        "side": "before"
+      },
+      {
+        "case": "st12038-shim",
+        "side": "after"
+      },
+      {
+        "case": "st12038-factory",
+        "side": "before"
+      },
+      {
+        "case": "st12038-factory",
+        "side": "after"
+      },
+      {
+        "case": "st12360",
+        "side": "before"
+      },
+      {
+        "case": "st12360",
+        "side": "after"
+      },
+      {
+        "case": "st12472",
+        "side": "before"
+      },
+      {
+        "case": "st12472",
+        "side": "after"
+      },
+      {
+        "case": "st12481",
+        "side": "before"
+      },
+      {
+        "case": "st12481",
+        "side": "after"
+      }
+    ]
   }
 ]

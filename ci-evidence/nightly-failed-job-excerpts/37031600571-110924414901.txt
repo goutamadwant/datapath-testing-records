@@ -1,0 +1,119 @@
+{
+ "run_id": "37031600571",
+ "job_id": 110924414901,
+ "job_name": "Run / all-connectors-it-7 (8, ubuntu-latest)",
+ "started_at": "2026-10-02T16:24:25Z",
+ "completed_at": "2026-10-02T18:21:57Z",
+ "conclusion": "failure",
+ "html_url": "https://github.com/apache/seatunnel/actions/runs/37031600571/job/110924414901",
+ "log_lines": 248777,
+ "log_sha256": "85978afacd4e55b550c39381721084de5ee58f2b4d1a045aaecac633c8fda70f",
+ "first_pass_sha256": "85978afacd4e55b550c39381721084de5ee58f2b4d1a045aaecac633c8fda70f",
+ "fetch_error": null,
+ "retrieved_at": "2026-10-31T01:46:24.993997Z"
+}
+25190	maven transfer error	2026-10-02T16:35:01.6796088Z WARNING: ConnectionID:1 ClientConnectionId: b81ea606-3407-47b7-9194-a49fe4af04e7 Prelogin error: host localhost port 32771 Error reading prelogin response: Connection reset ClientConnectionId:b81ea606-3407-47b7-9194-a49fe4af04e7
+25194	maven transfer error	2026-10-02T16:35:02.8850448Z WARNING: ConnectionID:1 ClientConnectionId: 26a7437c-872f-4845-a018-464028d9a170 Prelogin error: host localhost port 32771 Error reading prelogin response: Connection reset ClientConnectionId:26a7437c-872f-4845-a018-464028d9a170
+32908	missing slots	2026-10-02T16:40:08.1053803Z [] 2026-10-02 16:40:08,104 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+33353	missing slots	2026-10-02T16:40:15.7066298Z Missing resources:
+34558	missing slots	2026-10-02T16:41:06.6877998Z [] 2026-10-02 16:41:06,687 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+35049	missing slots	2026-10-02T16:41:16.4585749Z Missing resources:
+43545	missing slots	2026-10-02T16:45:56.2712396Z [] 2026-10-02 16:45:56,270 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+43959	missing slots	2026-10-02T16:46:05.9502743Z Missing resources:
+45122	missing slots	2026-10-02T16:46:44.2454802Z [] 2026-10-02 16:46:44,244 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+45583	missing slots	2026-10-02T16:46:53.5580395Z Missing resources:
+49287	maven transfer error	2026-10-02T16:50:31.3057590Z [] 2026-10-02 16:50:31,305 INFO  tc.tyrantlucifer/flink:1.13.6-scala_2.11_hadoop27:jobmanager - STDOUT: 2026-10-02 16:50:31,300 WARN  akka.remote.transport.netty.NettyTransport                   [] - Remote connection to [/172.18.0.4:37238] failed with java.io.IOException: Connection reset by peer
+49577	maven transfer error	2026-10-02T16:50:31.5417945Z 2026-10-02 16:50:31,300 WARN  akka.remote.transport.netty.NettyTransport                   [] - Remote connection to [/172.18.0.4:37238] failed with java.io.IOException: Connection reset by peer
+56805	missing slots	2026-10-02T17:01:08.7377267Z [] 2026-10-02 17:01:08,737 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+57455	missing slots	2026-10-02T17:02:56.4245113Z Missing resources:
+58682	missing slots	2026-10-02T17:03:34.8582775Z [] 2026-10-02 17:03:34,856 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+59406	missing slots	2026-10-02T17:05:29.3821887Z Missing resources:
+68900	missing slots	2026-10-02T17:11:32.6921613Z [] 2026-10-02 17:11:32,691 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+69317	missing slots	2026-10-02T17:11:42.7396952Z Missing resources:
+70479	missing slots	2026-10-02T17:12:21.5282565Z [] 2026-10-02 17:12:21,527 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+70940	missing slots	2026-10-02T17:12:30.9935799Z Missing resources:
+80824	missing slots	2026-10-02T17:17:40.2913399Z [] 2026-10-02 17:17:40,291 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+81239	missing slots	2026-10-02T17:17:50.3952699Z Missing resources:
+82409	missing slots	2026-10-02T17:18:29.7595243Z [] 2026-10-02 17:18:29,758 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+82873	missing slots	2026-10-02T17:18:38.0194267Z Missing resources:
+85106	maven transfer error	2026-10-02T17:19:55.7015272Z [] 2026-10-02 17:19:55,701 INFO  tc.tyrantlucifer/flink:1.13.6-scala_2.11_hadoop27:jobmanager - STDOUT: 2026-10-02 17:19:55,697 WARN  akka.remote.transport.netty.NettyTransport                   [] - Remote connection to [/172.18.0.4:59270] failed with java.io.IOException: Connection reset by peer
+85307	maven transfer error	2026-10-02T17:19:56.1710917Z 2026-10-02 17:19:55,697 WARN  akka.remote.transport.netty.NettyTransport                   [] - Remote connection to [/172.18.0.4:59270] failed with java.io.IOException: Connection reset by peer
+91119	missing slots	2026-10-02T17:23:44.8002701Z [] 2026-10-02 17:23:44,799 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+91498	missing slots	2026-10-02T17:23:49.4163956Z Missing resources:
+92654	missing slots	2026-10-02T17:24:37.8742176Z [] 2026-10-02 17:24:37,873 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+93076	missing slots	2026-10-02T17:24:43.0752597Z Missing resources:
+101512	missing slots	2026-10-02T17:29:23.4492823Z [] 2026-10-02 17:29:23,448 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+101928	missing slots	2026-10-02T17:29:33.1390997Z Missing resources:
+103091	missing slots	2026-10-02T17:30:11.6687431Z [] 2026-10-02 17:30:11,668 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+103551	missing slots	2026-10-02T17:30:20.7311458Z Missing resources:
+112554	missing slots	2026-10-02T17:34:33.4994860Z [] 2026-10-02 17:34:33,498 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+113807	missing slots	2026-10-02T17:35:06.2134476Z [] 2026-10-02 17:35:06,212 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+133019	missing slots	2026-10-02T17:42:40.6367768Z [] 2026-10-02 17:42:40,636 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+133793	missing slots	2026-10-02T17:42:54.4111674Z [] 2026-10-02 17:42:54,410 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+134422	missing slots	2026-10-02T17:43:05.7633581Z [] 2026-10-02 17:43:05,762 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+135189	missing slots	2026-10-02T17:43:17.2105212Z [] 2026-10-02 17:43:17,209 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+136429	missing slots	2026-10-02T17:43:52.9263252Z [] 2026-10-02 17:43:52,925 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+137229	missing slots	2026-10-02T17:44:07.6139587Z [] 2026-10-02 17:44:07,612 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+137870	missing slots	2026-10-02T17:44:21.8737920Z [] 2026-10-02 17:44:21,873 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+138663	missing slots	2026-10-02T17:44:34.1729535Z [] 2026-10-02 17:44:34,172 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+156143	missing slots	2026-10-02T17:51:05.8193956Z [] 2026-10-02 17:51:05,818 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+157388	missing slots	2026-10-02T17:51:34.4139405Z [] 2026-10-02 17:51:34,413 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+165127	maven transfer error	2026-10-02T17:54:50.3285332Z [] 2026-10-02 17:54:50,327 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 17:54:50.326 GMT [771] LOG:  could not receive data from client: Connection reset by peer
+166552	maven transfer error	2026-10-02T17:55:19.2237285Z [] 2026-10-02 17:55:19,221 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 17:55:19.220 GMT [1084] LOG:  could not receive data from client: Connection reset by peer
+168004	maven transfer error	2026-10-02T17:55:48.3423902Z [] 2026-10-02 17:55:48,339 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 17:55:48.337 GMT [1376] LOG:  could not receive data from client: Connection reset by peer
+169527	maven transfer error	2026-10-02T17:56:16.8396560Z [] 2026-10-02 17:56:16,839 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 17:56:16.837 GMT [1671] LOG:  could not receive data from client: Connection reset by peer
+170970	missing slots	2026-10-02T17:56:42.9506049Z [] 2026-10-02 17:56:42,949 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+171149	maven transfer error	2026-10-02T17:56:48.0763326Z [] 2026-10-02 17:56:48,075 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 17:56:48.072 GMT [1960] LOG:  could not receive data from client: Connection reset by peer
+171519	missing slots	2026-10-02T17:56:48.7963500Z Missing resources:
+172764	missing slots	2026-10-02T17:57:19.9111179Z [] 2026-10-02 17:57:19,909 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+172962	maven transfer error	2026-10-02T17:57:27.3002295Z [] 2026-10-02 17:57:27,298 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 17:57:27.295 GMT [2371] LOG:  could not receive data from client: Connection reset by peer
+173372	missing slots	2026-10-02T17:57:28.0429993Z Missing resources:
+174939	maven transfer error	2026-10-02T17:57:52.1451670Z [] 2026-10-02 17:57:52,069 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 17:57:52.066 GMT [2509] LOG:  could not receive data from client: Connection reset by peer
+176039	maven transfer error	2026-10-02T17:58:20.8725435Z [] 2026-10-02 17:58:20,858 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 17:58:20.858 GMT [2923] LOG:  could not receive data from client: Connection reset by peer
+176041	maven transfer error	2026-10-02T17:58:20.8776809Z [] 2026-10-02 17:58:20,860 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 17:58:20.859 GMT [2924] LOG:  could not receive data from client: Connection reset by peer
+185863	maven transfer error	2026-10-02T18:00:27.0789147Z [] 2026-10-02 18:00:26,922 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:00:26.920 GMT [3016] LOG:  could not receive data from client: Connection reset by peer
+187802	maven transfer error	2026-10-02T18:01:12.6103353Z [] 2026-10-02 18:01:12,530 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:01:12.529 GMT [3047] LOG:  could not receive data from client: Connection reset by peer
+188933	maven transfer error	2026-10-02T18:01:45.0728036Z [] 2026-10-02 18:01:45,071 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:01:45.069 GMT [3682] LOG:  could not receive data from client: Connection reset by peer
+190365	maven transfer error	2026-10-02T18:02:15.9326838Z [] 2026-10-02 18:02:15,926 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:02:15.922 GMT [4333] LOG:  could not receive data from client: Connection reset by peer
+191841	maven transfer error	2026-10-02T18:02:48.5348247Z [] 2026-10-02 18:02:48,530 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:02:48.529 GMT [4929] LOG:  could not receive data from client: Connection reset by peer
+194922	maven transfer error	2026-10-02T18:03:53.4696866Z [] 2026-10-02 18:03:53,467 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:03:53.465 GMT [6133] LOG:  could not receive data from client: Connection reset by peer
+196368	missing slots	2026-10-02T18:04:18.8952628Z [] 2026-10-02 18:04:18,894 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+196584	maven transfer error	2026-10-02T18:04:23.9950895Z [] 2026-10-02 18:04:23,994 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:04:23.992 GMT [6805] LOG:  could not receive data from client: Connection reset by peer
+196955	missing slots	2026-10-02T18:04:24.7022478Z Missing resources:
+198199	missing slots	2026-10-02T18:04:56.0060309Z [] 2026-10-02 18:04:56,005 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+198437	maven transfer error	2026-10-02T18:05:04.0747190Z [] 2026-10-02 18:05:04,074 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:05:04.068 GMT [7425] LOG:  could not receive data from client: Connection reset by peer
+198847	missing slots	2026-10-02T18:05:04.9943704Z Missing resources:
+200058	maven transfer error	2026-10-02T18:05:29.5440932Z [] 2026-10-02 18:05:29,522 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:05:29.521 GMT [7777] LOG:  could not receive data from client: Connection reset by peer
+206042	maven transfer error	2026-10-02T18:09:50.1168071Z [] 2026-10-02 18:09:50,115 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:09:50.114 GMT [8417] LOG:  could not receive data from client: Connection reset by peer
+206052	condition timeout	2026-10-02T18:09:50.4354502Z org.awaitility.core.ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT expected: <1> but was: <0> within 3 minutes.
+207235	maven transfer error	2026-10-02T18:10:19.3611329Z [] 2026-10-02 18:10:19,358 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:10:19.354 GMT [10439] LOG:  could not receive data from client: Connection reset by peer
+218381	maven transfer error	2026-10-02T18:12:37.4954958Z [] 2026-10-02 18:12:37,367 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:12:37.361 GMT [10911] LOG:  could not receive data from client: Connection reset by peer
+219445	maven transfer error	2026-10-02T18:13:04.0615864Z [] 2026-10-02 18:13:04,061 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:13:04.060 GMT [11355] LOG:  could not receive data from client: Connection reset by peer
+222251	maven transfer error	2026-10-02T18:14:03.8927293Z [] 2026-10-02 18:14:03,891 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:14:03.888 GMT [11948] LOG:  could not receive data from client: Connection reset by peer
+223701	maven transfer error	2026-10-02T18:14:34.5318540Z [] 2026-10-02 18:14:34,526 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:14:34.525 GMT [12296] LOG:  could not receive data from client: Connection reset by peer
+225211	maven transfer error	2026-10-02T18:15:04.6606352Z [] 2026-10-02 18:15:04,658 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:15:04.655 GMT [12568] LOG:  could not receive data from client: Connection reset by peer
+226643	missing slots	2026-10-02T18:15:30.2766327Z [] 2026-10-02 18:15:30,276 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+226821	maven transfer error	2026-10-02T18:15:33.2559144Z [] 2026-10-02 18:15:33,255 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:15:33.252 GMT [12890] LOG:  could not receive data from client: Connection reset by peer
+227191	missing slots	2026-10-02T18:15:34.2789267Z Missing resources:
+228426	missing slots	2026-10-02T18:16:06.0720103Z [] 2026-10-02 18:16:06,070 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+228611	maven transfer error	2026-10-02T18:16:12.7427313Z [] 2026-10-02 18:16:12,742 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:16:12.739 GMT [13197] LOG:  could not receive data from client: Connection reset by peer
+229021	missing slots	2026-10-02T18:16:13.5284546Z Missing resources:
+230600	maven transfer error	2026-10-02T18:16:37.9110558Z [] 2026-10-02 18:16:37,840 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:16:37.837 GMT [13394] LOG:  could not receive data from client: Connection reset by peer
+233846	maven transfer error	2026-10-02T18:17:15.4633639Z [] 2026-10-02 18:17:15,398 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:17:15.397 GMT [13853] LOG:  could not receive data from client: Connection reset by peer
+235736	maven transfer error	2026-10-02T18:17:46.2699645Z [] 2026-10-02 18:17:46,268 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:17:46.267 GMT [14258] LOG:  could not receive data from client: Connection reset by peer
+237124	maven transfer error	2026-10-02T18:18:15.3053625Z [] 2026-10-02 18:18:15,304 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:18:15.300 GMT [14613] LOG:  could not receive data from client: Connection reset by peer
+238540	maven transfer error	2026-10-02T18:18:45.2380214Z [] 2026-10-02 18:18:45,234 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:18:45.233 GMT [14910] LOG:  could not receive data from client: Connection reset by peer
+239991	maven transfer error	2026-10-02T18:19:16.8192714Z [] 2026-10-02 18:19:16,818 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:19:16.814 GMT [15221] LOG:  could not receive data from client: Connection reset by peer
+242943	missing slots	2026-10-02T18:20:12.8696742Z [] 2026-10-02 18:20:12,868 INFO  tc.tyrantlucifer/flink:1.18.0-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+243126	maven transfer error	2026-10-02T18:20:20.0281379Z [] 2026-10-02 18:20:20,027 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:20:20.026 GMT [15873] LOG:  could not receive data from client: Connection reset by peer
+243496	missing slots	2026-10-02T18:20:20.5596940Z Missing resources:
+244738	missing slots	2026-10-02T18:20:52.2026465Z [] 2026-10-02 18:20:52,201 INFO  tc.tyrantlucifer/flink:1.20.1-scala_2.12_hadoop27:jobmanager - STDOUT: Missing resources:
+245346	missing slots	2026-10-02T18:20:59.8699954Z Missing resources:
+246903	maven transfer error	2026-10-02T18:21:24.5346546Z [] 2026-10-02 18:21:24,464 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:21:24.461 GMT [16462] LOG:  could not receive data from client: Connection reset by peer
+248460	maven transfer error	2026-10-02T18:21:49.5603291Z [] 2026-10-02 18:21:49,559 INFO  org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT - STDERR: 2026-10-02 18:21:49.374 GMT [16744] LOG:  could not receive data from client: Connection reset by peer
+248473	failing test	2026-10-02T18:21:49.9811006Z [ERROR] Tests run: 55, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1,716.396 s <<< FAILURE! - in org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT
+248474	failing test	2026-10-02T18:21:49.9812159Z [ERROR] testPostgresCdcSnapshotOnlyAndCommittedOffsetStartupModes{TestContainer}[1]  Time elapsed: 260.588 s  <<< ERROR!
+248475	condition timeout	2026-10-02T18:21:49.9813411Z org.awaitility.core.ConditionTimeoutException: Assertion condition defined as a lambda expression in org.apache.seatunnel.connectors.seatunnel.cdc.postgres.PostgresCDCIT expected: <1> but was: <0> within 3 minutes.
+248484	condition timeout	2026-10-02T18:21:50.6476062Z [ERROR]   PostgresCDCIT.testPostgresCdcSnapshotOnlyAndCommittedOffsetStartupModes:625 » ConditionTimeout
+248486	failing test	2026-10-02T18:21:50.6477373Z [ERROR] Tests run: 55, Failures: 0, Errors: 1, Skipped: 0
+248643	exit code	2026-10-02T18:21:50.6900704Z ##[error]Process completed with exit code 1.

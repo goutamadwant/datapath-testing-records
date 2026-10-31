@@ -1,0 +1,15 @@
+{
+ "run_id": "39454491638",
+ "job_id": 118911187227,
+ "job_name": "Run / engine-v2-it (11, ubuntu-latest)",
+ "started_at": "2026-10-20T23:59:09Z",
+ "completed_at": "2026-10-21T00:01:05Z",
+ "conclusion": "failure",
+ "html_url": "https://github.com/apache/seatunnel/actions/runs/39454491638/job/118911187227",
+ "log_lines": 2369,
+ "log_sha256": "2428e847c0fe5d766586956b313b2bccb90be139a559885b88630396ece17f31",
+ "first_pass_sha256": "2428e847c0fe5d766586956b313b2bccb90be139a559885b88630396ece17f31",
+ "fetch_error": null,
+ "retrieved_at": "2026-10-31T01:51:40.552836Z"
+}
+2245	exit code	2026-10-21T00:00:59.8060814Z ##[error]Process completed with exit code 1.

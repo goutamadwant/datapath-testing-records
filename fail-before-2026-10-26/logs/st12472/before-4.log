@@ -1,0 +1,415 @@
+# case: st12472
+# side: before
+# before commit (first parent): e1a7e64b6733d2b2cd4682190c753a81fac93bc2
+# after commit (merge): 87ed0afe0f783eda1b1f3ac6f0ac9fadedcb4f98
+# tree HEAD: e1a7e64b6733d2b2cd4682190c753a81fac93bc2
+# transplant: seatunnel-edge-agent/seatunnel-edge-agent-connector/src/test/java/org/apache/seatunnel/edge/agent/connector/file/FileCollectReaderBehaviorTest.java copied from 87ed0afe0f783eda1b1f3ac6f0ac9fadedcb4f98; 
+# git status --porcelain:
+#   M  seatunnel-edge-agent/seatunnel-edge-agent-connector/src/test/java/org/apache/seatunnel/edge/agent/connector/file/FileCollectReaderBehaviorTest.java
+# git diff --stat HEAD:
+#    .../file/FileCollectReaderBehaviorTest.java        | 43 +++++++++-------------
+#    1 file changed, 18 insertions(+), 25 deletions(-)
+# host: Darwin 27.0.0 arm64
+# toolchain: java version "1.8.0_172"
+# command: ./mvnw -B -ntp -pl seatunnel-edge-agent/seatunnel-edge-agent-connector -am -DskipUT=false -DskipIT=true -Dskip.spotless=true -Dspotless.check.skip=true -Dspotless.apply.skip=true -Dlicense.skipAddThirdParty=true -Dtest=FileCollectReaderBehaviorTest#rediscoversFileAfterInactiveCursorClosed -DfailIfNoTests=false clean package
+# start: 2026-10-30T19:13:25-0700
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 58727  100 58727    0     0   173k      0 --:--:-- --:--:-- --:--:--  173k
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] SeaTunnel :                                                        [pom]
+[INFO] SeaTunnel : Config :                                               [pom]
+[INFO] SeaTunnel : Config : Base                                          [jar]
+[INFO] SeaTunnel : Config : Shade                                         [jar]
+[INFO] SeaTunnel : Common                                                 [jar]
+[INFO] SeaTunnel : Api                                                    [jar]
+[INFO] SeaTunnel : Edge Agent :                                           [pom]
+[INFO] SeaTunnel : Edge Agent : Connector                                 [jar]
+[INFO] 
+[INFO] -------------------< org.apache.seatunnel:seatunnel >-------------------
+[INFO] Building SeaTunnel : 3.0.0-SNAPSHOT                                [1/8]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ seatunnel ---
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:clean (flatten.clean) @ seatunnel ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ seatunnel ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ seatunnel ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] 
+[INFO] --- spotless-maven-plugin:2.29.0:check (spotless-check) @ seatunnel ---
+[INFO] Spotless check skipped
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ seatunnel ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel ---
+[INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel:pom:3.0.0-SNAPSHOT...
+[INFO] 
+[INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel ---
+[INFO] No site descriptor found: nothing to attach.
+[INFO] 
+[INFO] ---------------< org.apache.seatunnel:seatunnel-config >----------------
+[INFO] Building SeaTunnel : Config : 3.0.0-SNAPSHOT                       [2/8]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ seatunnel-config ---
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:clean (flatten.clean) @ seatunnel-config ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ seatunnel-config ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ seatunnel-config ---
+[INFO] 
+[INFO] --- spotless-maven-plugin:2.29.0:check (spotless-check) @ seatunnel-config ---
+[INFO] Spotless check skipped
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ seatunnel-config ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-config ---
+[INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-config:pom:3.0.0-SNAPSHOT...
+[INFO] 
+[INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-config ---
+[INFO] No site descriptor found: nothing to attach.
+[INFO] 
+[INFO] -------------< org.apache.seatunnel:seatunnel-config-base >-------------
+[INFO] Building SeaTunnel : Config : Base 3.0.0-SNAPSHOT                  [3/8]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ seatunnel-config-base ---
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:clean (flatten.clean) @ seatunnel-config-base ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ seatunnel-config-base ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ seatunnel-config-base ---
+[INFO] 
+[INFO] --- spotless-maven-plugin:2.29.0:check (spotless-check) @ seatunnel-config-base ---
+[INFO] Spotless check skipped
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ seatunnel-config-base ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-config-base ---
+[INFO] skip non existing resourceDirectory $FAILBEFORE_WORK/trees/st12472/seatunnel-config/seatunnel-config-base/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-config-base ---
+[INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-config-base:jar:3.0.0-SNAPSHOT...
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-config-base ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-config-base ---
+[INFO] skip non existing resourceDirectory $FAILBEFORE_WORK/trees/st12472/seatunnel-config/seatunnel-config-base/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-config-base ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-config-base ---
+[INFO] 
+[INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-config-base ---
+[INFO] Building jar: $FAILBEFORE_WORK/trees/st12472/seatunnel-config/seatunnel-config-base/target/seatunnel-config-base-3.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-config-base ---
+[INFO] Skipping because packaging 'jar' is not pom.
+[INFO] 
+[INFO] --- maven-shade-plugin:3.5.1:shade (default) @ seatunnel-config-base ---
+[INFO] Including com.typesafe:config:jar:1.3.3 in the shaded jar.
+[INFO] Including io.prometheus:simpleclient:jar:0.16.0 in the shaded jar.
+[INFO] Including io.prometheus:simpleclient_tracer_otel:jar:0.16.0 in the shaded jar.
+[INFO] Including io.prometheus:simpleclient_tracer_common:jar:0.16.0 in the shaded jar.
+[INFO] Including io.prometheus:simpleclient_tracer_otel_agent:jar:0.16.0 in the shaded jar.
+[INFO] Including io.prometheus:simpleclient_hotspot:jar:0.16.0 in the shaded jar.
+[INFO] Including io.prometheus:simpleclient_httpserver:jar:0.16.0 in the shaded jar.
+[INFO] Including io.prometheus:simpleclient_common:jar:0.16.0 in the shaded jar.
+[INFO] Excluding org.slf4j:slf4j-api:jar:1.7.36 from the shaded jar.
+[INFO] Excluding org.apache.logging.log4j:log4j-slf4j-impl:jar:2.17.1 from the shaded jar.
+[INFO] Excluding org.apache.logging.log4j:log4j-api:jar:2.17.1 from the shaded jar.
+[INFO] Excluding org.apache.logging.log4j:log4j-core:jar:2.17.1 from the shaded jar.
+[INFO] Excluding org.slf4j:jcl-over-slf4j:jar:1.7.36 from the shaded jar.
+[INFO] Excluding org.apache.logging.log4j:log4j-1.2-api:jar:2.17.1 from the shaded jar.
+[INFO] Minimizing jar org.apache.seatunnel:seatunnel-config-base:jar:3.0.0-SNAPSHOT
+[WARNING] seatunnel-config-base-3.0.0-SNAPSHOT.jar, simpleclient-0.16.0.jar, simpleclient_common-0.16.0.jar, simpleclient_hotspot-0.16.0.jar, simpleclient_httpserver-0.16.0.jar, simpleclient_tracer_common-0.16.0.jar, simpleclient_tracer_otel-0.16.0.jar, simpleclient_tracer_otel_agent-0.16.0.jar define 1 overlapping resource: 
+[WARNING]   - META-INF/MANIFEST.MF
+[WARNING] maven-shade-plugin has detected that some files are
+[WARNING] present in two or more JARs. When this happens, only one
+[WARNING] single version of the file is copied to the uber jar.
+[WARNING] Usually this is not harmful and you can skip these warnings,
+[WARNING] otherwise try to manually exclude artifacts based on
+[WARNING] mvn dependency:tree -Ddetail=true and the above output.
+[WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
+[INFO] Minimized 265 -> 175 (66%)
+[WARNING] simpleclient-0.16.0-sources.jar, simpleclient_common-0.16.0-sources.jar, simpleclient_hotspot-0.16.0-sources.jar, simpleclient_httpserver-0.16.0-sources.jar, simpleclient_tracer_common-0.16.0-sources.jar, simpleclient_tracer_otel-0.16.0-sources.jar, simpleclient_tracer_otel_agent-0.16.0-sources.jar define 1 overlapping resource: 
+[WARNING]   - META-INF/MANIFEST.MF
+[WARNING] maven-shade-plugin has detected that some files are
+[WARNING] present in two or more JARs. When this happens, only one
+[WARNING] single version of the file is copied to the uber jar.
+[WARNING] Usually this is not harmful and you can skip these warnings,
+[WARNING] otherwise try to manually exclude artifacts based on
+[WARNING] mvn dependency:tree -Ddetail=true and the above output.
+[WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
+[INFO] Minimized 424 -> 334 (78%)
+[INFO] Replacing original artifact with shaded artifact.
+[INFO] Replacing $FAILBEFORE_WORK/trees/st12472/seatunnel-config/seatunnel-config-base/target/seatunnel-config-base-3.0.0-SNAPSHOT.jar with $FAILBEFORE_WORK/trees/st12472/seatunnel-config/seatunnel-config-base/target/seatunnel-config-base-3.0.0-SNAPSHOT-shaded.jar
+[INFO] Replacing original source artifact with shaded source artifact.
+[INFO] Replacing $FAILBEFORE_WORK/trees/st12472/seatunnel-config/seatunnel-config-base/target/seatunnel-config-base-3.0.0-SNAPSHOT-sources.jar with $FAILBEFORE_WORK/trees/st12472/seatunnel-config/seatunnel-config-base/target/seatunnel-config-base-3.0.0-SNAPSHOT-shaded-sources.jar
+[INFO] 
+[INFO] --- build-helper-maven-plugin:3.2.0:attach-artifact (compile) @ seatunnel-config-base ---
+[INFO] 
+[INFO] ------------< org.apache.seatunnel:seatunnel-config-shade >-------------
+[INFO] Building SeaTunnel : Config : Shade 3.0.0-SNAPSHOT                 [4/8]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ seatunnel-config-shade ---
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:clean (flatten.clean) @ seatunnel-config-shade ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ seatunnel-config-shade ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ seatunnel-config-shade ---
+[INFO] 
+[INFO] --- spotless-maven-plugin:2.29.0:check (spotless-check) @ seatunnel-config-shade ---
+[INFO] Spotless check skipped
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ seatunnel-config-shade ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-config-shade ---
+[INFO] skip non existing resourceDirectory $FAILBEFORE_WORK/trees/st12472/seatunnel-config/seatunnel-config-shade/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-config-shade ---
+[INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-config-shade:jar:3.0.0-SNAPSHOT...
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-config-shade ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 10 source files to $FAILBEFORE_WORK/trees/st12472/seatunnel-config/seatunnel-config-shade/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-config-shade ---
+[INFO] Copying 8 resources from src/test/resources to target/test-classes
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-config-shade ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 7 source files to $FAILBEFORE_WORK/trees/st12472/seatunnel-config/seatunnel-config-shade/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-config-shade ---
+[INFO] 
+[INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-config-shade ---
+[INFO] Building jar: $FAILBEFORE_WORK/trees/st12472/seatunnel-config/seatunnel-config-shade/target/seatunnel-config-shade-3.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-config-shade ---
+[INFO] Skipping because packaging 'jar' is not pom.
+[INFO] 
+[INFO] --- build-helper-maven-plugin:3.2.0:attach-artifact (compile) @ seatunnel-config-shade ---
+[INFO] 
+[INFO] ---------------< org.apache.seatunnel:seatunnel-common >----------------
+[INFO] Building SeaTunnel : Common 3.0.0-SNAPSHOT                         [5/8]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ seatunnel-common ---
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:clean (flatten.clean) @ seatunnel-common ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ seatunnel-common ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ seatunnel-common ---
+[INFO] 
+[INFO] --- spotless-maven-plugin:2.29.0:check (spotless-check) @ seatunnel-common ---
+[INFO] Spotless check skipped
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ seatunnel-common ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-common ---
+[INFO] skip non existing resourceDirectory $FAILBEFORE_WORK/trees/st12472/seatunnel-common/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-common ---
+[INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-common:jar:3.0.0-SNAPSHOT...
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-common ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 44 source files to $FAILBEFORE_WORK/trees/st12472/seatunnel-common/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-common ---
+[INFO] skip non existing resourceDirectory $FAILBEFORE_WORK/trees/st12472/seatunnel-common/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-common ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 19 source files to $FAILBEFORE_WORK/trees/st12472/seatunnel-common/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-common ---
+[INFO] 
+[INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-common ---
+[INFO] Building jar: $FAILBEFORE_WORK/trees/st12472/seatunnel-common/target/seatunnel-common-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] 
+[INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-common ---
+[INFO] Skipping because packaging 'jar' is not pom.
+[INFO] 
+[INFO] -----------------< org.apache.seatunnel:seatunnel-api >-----------------
+[INFO] Building SeaTunnel : Api 3.0.0-SNAPSHOT                            [6/8]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ seatunnel-api ---
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:clean (flatten.clean) @ seatunnel-api ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ seatunnel-api ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ seatunnel-api ---
+[INFO] 
+[INFO] --- spotless-maven-plugin:2.29.0:check (spotless-check) @ seatunnel-api ---
+[INFO] Spotless check skipped
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ seatunnel-api ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-api ---
+[INFO] skip non existing resourceDirectory $FAILBEFORE_WORK/trees/st12472/seatunnel-api/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-api ---
+[INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-api:jar:3.0.0-SNAPSHOT...
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-api ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 273 source files to $FAILBEFORE_WORK/trees/st12472/seatunnel-api/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-api ---
+[INFO] Copying 20 resources from src/test/resources to target/test-classes
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-api ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 37 source files to $FAILBEFORE_WORK/trees/st12472/seatunnel-api/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ seatunnel-api ---
+[INFO] 
+[INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ seatunnel-api ---
+[INFO] Building jar: $FAILBEFORE_WORK/trees/st12472/seatunnel-api/target/seatunnel-api-3.0.0-SNAPSHOT-2.12.15.jar
+[INFO] 
+[INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-api ---
+[INFO] Skipping because packaging 'jar' is not pom.
+[INFO] 
+[INFO] -------------< org.apache.seatunnel:seatunnel-edge-agent >--------------
+[INFO] Building SeaTunnel : Edge Agent : 3.0.0-SNAPSHOT                   [7/8]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ seatunnel-edge-agent ---
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:clean (flatten.clean) @ seatunnel-edge-agent ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ seatunnel-edge-agent ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ seatunnel-edge-agent ---
+[INFO] 
+[INFO] --- spotless-maven-plugin:2.29.0:check (spotless-check) @ seatunnel-edge-agent ---
+[INFO] Spotless check skipped
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ seatunnel-edge-agent ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-edge-agent ---
+[INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-edge-agent:pom:3.0.0-SNAPSHOT...
+[INFO] 
+[INFO] --- maven-site-plugin:3.12.1:attach-descriptor (attach-descriptor) @ seatunnel-edge-agent ---
+[INFO] No site descriptor found: nothing to attach.
+[INFO] 
+[INFO] --------< org.apache.seatunnel:seatunnel-edge-agent-connector >---------
+[INFO] Building SeaTunnel : Edge Agent : Connector 3.0.0-SNAPSHOT         [8/8]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ seatunnel-edge-agent-connector ---
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:clean (flatten.clean) @ seatunnel-edge-agent-connector ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-maven-version) @ seatunnel-edge-agent-connector ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.4.1:enforce (enforce-java-version) @ seatunnel-edge-agent-connector ---
+[INFO] 
+[INFO] --- spotless-maven-plugin:2.29.0:check (spotless-check) @ seatunnel-edge-agent-connector ---
+[INFO] Spotless check skipped
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:3.1.0:process (process-resource-bundles) @ seatunnel-edge-agent-connector ---
+[INFO] Preparing remote bundle org.apache.apache.resources:apache-jar-resource-bundle:1.5
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ seatunnel-edge-agent-connector ---
+[INFO] skip non existing resourceDirectory $FAILBEFORE_WORK/trees/st12472/seatunnel-edge-agent/seatunnel-edge-agent-connector/src/main/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/classes
+[INFO] 
+[INFO] --- flatten-maven-plugin:1.3.0:flatten (flatten) @ seatunnel-edge-agent-connector ---
+[INFO] Generating flattened POM of project org.apache.seatunnel:seatunnel-edge-agent-connector:jar:3.0.0-SNAPSHOT...
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ seatunnel-edge-agent-connector ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 18 source files to $FAILBEFORE_WORK/trees/st12472/seatunnel-edge-agent/seatunnel-edge-agent-connector/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ seatunnel-edge-agent-connector ---
+[INFO] skip non existing resourceDirectory $FAILBEFORE_WORK/trees/st12472/seatunnel-edge-agent/seatunnel-edge-agent-connector/src/test/resources
+[INFO] Copying 3 resources from target/maven-shared-archive-resources to target/test-classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ seatunnel-edge-agent-connector ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 8 source files to $FAILBEFORE_WORK/trees/st12472/seatunnel-edge-agent/seatunnel-edge-agent-connector/target/test-classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] $FAILBEFORE_WORK/trees/st12472/seatunnel-edge-agent/seatunnel-edge-agent-connector/src/test/java/org/apache/seatunnel/edge/agent/connector/file/FileCollectReaderBehaviorTest.java:[68,16] error: constructor FileCollectReader in class FileCollectReader cannot be applied to given types;
+  required: FileCollectConfig,EdgeSourcePositionStore
+  found: FileCollectConfig,NoOpPositionStore,clock::get
+  reason: actual and formal argument lists differ in length
+[INFO] 1 error
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for SeaTunnel : 3.0.0-SNAPSHOT:
+[INFO] 
+[INFO] SeaTunnel : ........................................ SUCCESS [  5.812 s]
+[INFO] SeaTunnel : Config : ............................... SUCCESS [  0.605 s]
+[INFO] SeaTunnel : Config : Base .......................... SUCCESS [  5.075 s]
+[INFO] SeaTunnel : Config : Shade ......................... SUCCESS [  8.370 s]
+[INFO] SeaTunnel : Common ................................. SUCCESS [  8.653 s]
+[INFO] SeaTunnel : Api .................................... SUCCESS [ 16.491 s]
+[INFO] SeaTunnel : Edge Agent : ........................... SUCCESS [  0.498 s]
+[INFO] SeaTunnel : Edge Agent : Connector ................. FAILURE [  6.533 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  57.993 s
+[INFO] Finished at: 2026-10-30T19:14:27-07:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.10.1:testCompile (default-testCompile) on project seatunnel-edge-agent-connector: Compilation failure
+[ERROR] $FAILBEFORE_WORK/trees/st12472/seatunnel-edge-agent/seatunnel-edge-agent-connector/src/test/java/org/apache/seatunnel/edge/agent/connector/file/FileCollectReaderBehaviorTest.java:[68,16] error: constructor FileCollectReader in class FileCollectReader cannot be applied to given types;
+[ERROR]   required: FileCollectConfig,EdgeSourcePositionStore
+[ERROR]   found: FileCollectConfig,NoOpPositionStore,clock::get
+[ERROR]   reason: actual and formal argument lists differ in length
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :seatunnel-edge-agent-connector
+# end: 2026-10-30T19:14:27-0700
+# exit code: 1

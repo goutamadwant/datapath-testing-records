@@ -1,0 +1,79 @@
+diff --git a/datafusion/optimizer/src/simplify_expressions/expr_simplifier.rs b/datafusion/optimizer/src/simplify_expressions/expr_simplifier.rs
+--- a/datafusion/optimizer/src/simplify_expressions/expr_simplifier.rs
++++ b/datafusion/optimizer/src/simplify_expressions/expr_simplifier.rs
+@@ -3585,6 +3585,23 @@
+     }
+ 
+     #[test]
++    fn test_constant_regex_planning_budget_without_hook() {
++        // Small regexes retain the common-case constant folding behavior.
++        assert_eq!(simplify(regex_match(lit("aaaaa"), lit("^a+$"))), lit(true));
++
++        // Six nested repetitions fit under the runtime regex limit, but exceed
++        // the smaller planning budget and therefore remain for execution.
++        let pattern = "a{5}{5}{5}{5}{5}{5}";
++        let binary_expr = regex_match(lit("aaaaa"), lit(pattern));
++        assert_eq!(simplify(binary_expr.clone()), binary_expr);
++
++        // Deferring a subtree must also prevent an evaluatable parent from
++        // invoking it indirectly during constant folding.
++        let aliased = regex_match(lit("aaaaa"), lit(pattern)).alias("matched");
++        assert_eq!(simplify(aliased.clone()), aliased);
++    }
++
++    #[test]
+     fn test_simplify_regex() {
+         // malformed regex
+         assert_contains!(
+diff --git a/datafusion/physical-expr/src/simplifier/mod.rs b/datafusion/physical-expr/src/simplifier/mod.rs
+--- a/datafusion/physical-expr/src/simplifier/mod.rs
++++ b/datafusion/physical-expr/src/simplifier/mod.rs
+@@ -617,6 +617,48 @@
+     }
+ 
+     #[test]
++    fn test_constant_regex_planning_budget_without_hook() {
++        let schema = Schema::empty();
++        let simplifier = PhysicalExprSimplifier::new(&schema);
++
++        let ordinary: Arc<dyn PhysicalExpr> = Arc::new(BinaryExpr::new(
++            lit("aaaaa"),
++            Operator::RegexMatch,
++            lit("^a+$"),
++        ));
++        let result = simplifier.simplify(ordinary).unwrap();
++        assert_eq!(
++            as_literal(&result).value(),
++            &ScalarValue::Boolean(Some(true))
++        );
++
++        // This pattern is valid under the runtime limit, but is deliberately
++        // too large for constant evaluation during physical simplification.
++        let pattern = "a{5}{5}{5}{5}{5}{5}";
++        let binary: Arc<dyn PhysicalExpr> = Arc::new(BinaryExpr::new(
++            lit("aaaaa"),
++            Operator::RegexMatch,
++            lit(pattern),
++        ));
++        let result = simplifier.simplify(Arc::clone(&binary)).unwrap();
++        assert_eq!(&result, &binary);
++
++        // A regexp_like call with non-operator flags exercises the physical
++        // scalar-UDF path used after literal substitution.
++        let function = Arc::new(
++            ScalarFunctionExpr::try_new(
++                regexp_like(),
++                vec![lit("aaaaa"), lit(pattern), lit("m")],
++                &schema,
++                Arc::new(ConfigOptions::default()),
++            )
++            .unwrap(),
++        ) as Arc<dyn PhysicalExpr>;
++        let result = simplifier.simplify(Arc::clone(&function)).unwrap();
++        assert_eq!(&result, &function);
++    }
++
++    #[test]
+     fn test_simplify_nested_literal_expr() {
+         let schema = Schema::empty();
+         let simplifier = PhysicalExprSimplifier::new(&schema);

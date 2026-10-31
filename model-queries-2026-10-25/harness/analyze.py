@@ -39,6 +39,11 @@ AS_RUN = [
                            "(query, build). Re-running it over the recorded logs changes no count, time or "
                            "status; the only difference in results.json is the removed field and this note."},
 ]
+# Manifest hashes recorded in the locked result before frozen counts were added.
+MANIFEST_AS_RUN = {
+    "logs/measure/manifest.json": "097322b79f5cb8d89cf435255a82e42cf4e3511296222fbc23e15c5b5e5fe886",
+    "logs/measure-locked-2026-10-29/manifest.json": "bda498e25c464dee57de90cdde26ba21d895351231c44655bf3541a700db6763",
+}
 
 
 class Invalid(Exception):
@@ -209,6 +214,9 @@ def build():
               for p in sorted((HERE / "logs").rglob("*")) if p.is_file()}
     hashes.update({str(p.relative_to(HERE)): hashlib.sha256(p.read_bytes()).hexdigest()
                    for p in sorted((HERE / "queries").glob("*.jsonl"))})
+    for path, sha256_as_run in MANIFEST_AS_RUN.items():
+        if path in hashes:
+            hashes[path] = {"sha256": hashes[path], "sha256_as_run": sha256_as_run}
     out = {"stall_threshold_ms": STALL_MS, "timeout_ms": TIMEOUT_MS,
            "generation": {k: v for k, v in gen_summary.items() if k != "g1_models_listing"},
            "summary": summary, "strata": strata, "controls": ctl, "slow_queries": slow,
