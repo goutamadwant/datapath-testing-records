@@ -16,7 +16,7 @@ after. No query passed `regexp_like` only literal arguments, which constant fold
 before it compiles a pattern during planning. 47 queries contained a nested counted quantifier,
 all of depth 2 (for example `([0-9]{1,3}\.){3}`). None of those patterns exceeded the fix's
 256 KiB compiled-size limit. The positive control, the issue's own reproducer, planned in 61.6 ms
-before and 2.0 ms after. That shows the mechanism, but the planning time stays well under the
+before and 2.0 ms after. That is an observed planning-time contrast, not a demonstrated mechanism; planning stays under the
 issue's "about 1 s" on this machine in a release build.
 
 The design, hypotheses and outcome definitions were fixed in `PREREGISTRATION.md` before the
@@ -266,27 +266,25 @@ Five queries also used `regexp_match` and two used `regexp_replace`.
 | positive: issue reproducer, `SELECT regexp_like('aaaaa', 'a{5}{5}{5}{5}{5}{5}{5}{5}');` | 61.6 ms (reps 119.2, 61.6, 59.9) | 2.0 ms (reps 10.9, 2.0, 2.0) |
 | positive: 18-nesting fuzzer statement as printed in the issue (pattern's closing quote missing) | tokenizer error, unterminated string | same error |
 | positive: the same 18-nesting statement with the closing quote added | 58.6 ms (reps 58.7, 58.5, 58.6) | 2.1 ms (reps 2.0, 2.1, 2.1) |
-| mechanism: 8-nesting pattern on a column, `... WHERE regexp_like(message, 'a{5}...{5}')` | 1.5 ms (reps 9.7, 1.4, 1.5) | 1.4 ms (reps 2.7, 1.4, 1.3) |
+| column control: 8-nesting pattern on a column, `... WHERE regexp_like(message, 'a{5}...{5}')` | 1.5 ms (reps 9.7, 1.4, 1.5) | 1.4 ms (reps 2.7, 1.4, 1.3) |
 | negative: `SELECT regexp_like('E123-456', '^E[0-9]{3}-[0-9]{3}$');` | 1.5 ms | 1.4 ms |
 
-The positive control shows the mechanism. When every argument is a literal and the pattern nests
-counted repetitions eight or more deep, planning before the fix took about 58-62 ms, and after
-the fix it took 2 ms, about 30 times less. The pre-registered expectation of "about 1 s or more
-before" was not met on this machine in a release build. Under the pre-registered 1 s threshold,
-the positive control itself does not count as a stall. The pattern alone fails the 10 MiB
-compile in 6.1 ms (`compile_10m_ms` in `classify.jsonl`), so most of the 58-62 ms comes from the
-planner and not from one compilation. The same pattern applied to a column planned in 1.4-1.5 ms
-at both builds.
+The positive control records a planning-time contrast, not its causal mechanism. With all-literal
+arguments and eight nested counted repetitions, historical planning medians were 61.6 ms before
+and 2.0 ms after; the locked replay gave 63.0 ms and 2.3 ms. The pre-registered expectation of
+about one second before was not met in these release builds. Under the one-second threshold,
+the positive control itself was not a stall. Standalone compilation failed in 6.1 ms, but
+compilation inside planning was neither counted nor timed; subtracting that separate
+measurement cannot isolate the planner's work. The column control planned in 1.4–1.5 ms.
+These measurements do not reproduce the reported one-second slowdown or establish a causal
+explanation.
 
 ### Hypotheses
 
-* H1 (stall requires all-literal arguments): consistent with the data. No model-written call had
-  all-literal arguments, and no query stalled. The mechanism control on a column did not slow
-  down. The pre-registration says a column-argument pattern "is not folded". That is correct, but
-  the optimizer's `simplify_expressions` rule still parses the pattern of `column ~ 'literal'`
-  with `regex_syntax::Parser`, to rewrite simple regexes as LIKE. This is why 22 queries fail
-  planning with "Invalid regex". Parsing does not expand counted repetitions into an automaton,
-  and the mechanism control measures it at 1.4-1.5 ms.
+* H1 (stall requires all-literal arguments): not established. No model-written call had
+  all-literal arguments and none stalled, so this sample does not exercise the target path.
+  The column control's observed planning time does not isolate parsing or compilation costs;
+  no causal claim follows from its 1.4–1.5 ms median.
 * H2 (nested counted quantifiers mainly under the theme that names them): not supported. Of 47
   queries, 9 came from the "nested groups with counted repetitions" theme (all G2, 0 G1). 18 came
   from IPv4 addresses, 15 from MAC addresses, 3 from card numbers and secrets, 1 from UUIDs and 1
@@ -385,6 +383,9 @@ to reuse recorded runs in that same set, after manifest and input-identity verif
   the earlier files. In `results-measure-locked-2026-10-29.json`, both manifest
   inventory entries now list the distributed file's `sha256` and the earlier
   `sha256_as_run`. Both 2,502-process datasets still rederive their saved numerical results.
+- 2026-10-31: the summary and the positive-control discussion describe the before/after
+  planning-time contrast and no longer attribute it to a mechanism; the H1 note no longer
+  offers a parsing explanation. No run, log, query or count changed.
 
 ## Revision (2026-10-25, after the runs)
 
